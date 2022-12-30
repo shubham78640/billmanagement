@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState, useEffect}from 'react'
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -9,30 +9,99 @@ import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { Link } from 'react-router-dom';
 function MainForm() {
 
-    const [value, setValue] = React.useState(null);
-    const [invoiceNumber,setInvoiceNumber] = React.useState("")
+const[empcode,setEmpCode]= useState("");
+const[empName,setEmpName]=useState("");
+const[empEmail,setEmail]=useState("");
+const[invoiceNumber,setInvoiceNumber]=useState("");
+const [ brand, setBrand] = React.useState("");
+const [value, setValue] = React.useState(null);
+const [brandDD,setBrandDD]=useState([]);
+const[payDirectCardDetails, setPayDirectCardDetails]=useState("");
+const[expenseCategory,setExpenseCategory]=useState("");
+const[ customerCode,setCustomerCode] =useState("");
+const[ customerName,setCustomerName] =useState("");
+const[invoiceDescription,setInvoiceDescription]=useState("");
+const[serviceCategory,setServiceCategory]=useState("");
+const[invoiceAttachment,setInvoiceAttachment]=useState("");
+const[paymentStatus,setPaymentStatus]=useState("");
+const[tDSType,setTDSType]=useState("");
+const[tDSAmount,setTDSAmount]=useState("");
+const[preTaxAmount, setPreTaxAmount]=useState("");
+const[totalAmount , setTotalAmount]=useState("");
+const[invoiceDate,setInvoiceDate]=useState("");
+const [subbrandDD,setSubBrandDD]=useState([]);
+const [locationDD,setLocationDD]=useState([]);
+const [departmentDD,setDepartmentDD]=useState([]);
+const [categoryDD,setCategoryDD]=useState([]);
+const [subCategory1DD,setSubCategory1DD]=useState([]);
+const [subCategory2DD,setSubCategory2DD]=useState([]);
+const [expenseTypeDD,setExpenseTypeDD]=useState([]);
+const [gSTApplicableDD,setGSTApplicableDD]=useState([]);
+const [paymentMode,setPaymentMode]=useState([]);
+const [paymentMethod,setPaymentMethod]=useState([]);
+
+const handleSubmit =()=>{
+    alert("hii")
+
+  console.log("data ",empcode,
+  empName,
+  empEmail,
+  invoiceNumber,
+  payDirectCardDetails,
+  expenseCategory,
+  customerCode,
+  customerName,
+  serviceCategory,
+  invoiceDescription,
+  invoiceAttachment,
+  paymentStatus,
+  tDSType,
+  tDSAmount,
+  preTaxAmount,
+  totalAmount,
+  invoiceDate
+  )
+
+
+}
+// useEffect(() => {
+//   const getData = async()=>{
+//   let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
+//   let data2 = await response2.json()
+//   setBrandDD(data2)
+//   console.log("data2",data2)
+//   }
+//   getData()
+//  }, [])
+
   return (
     <>
     <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', }}> 
 
-    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" />
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" onChange={(e) => setEmpCode(e.target.value)}
+ value={empcode} />
 
-    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Name" variant="outlined" />
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Name" variant="outlined" onChange={(e) => setEmpName(e.target.value)}
+ value={empName}
+  />
 
-    <TextField sx={{ width: 300 }} id="outlined-basic" label="Email" variant="outlined" />
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)}
+ value={empEmail} />
 
-    <TextField onChange={(e)=>{setInvoiceNumber(e.target.value)}} sx={{ width: 300 }} id="outlined-basic" label="Invoice Number" variant="outlined" />
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Number" variant="outlined"  onChange={(e) => setInvoiceNumber(e.target.value)}
+ value={invoiceNumber}
+ />
      
 
     <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
-              label="DOB"
-              // value={birthday}
-             //   onChange={(newValue) => {
-            //     (newValue);
-           // }}
+              label="Invoice Date"
+             value={invoiceDate}
+              onChange={(newValue) => {
+               setInvoiceDate(newValue);
+              }}
               renderInput={(params) => (
-                <TextField required {...params} size="medium" sx={{ width: 300 }} />
+                <TextField required {...params} size="medium" sx={{ width: 300, color:"black" }} />
               )}
             />
           </LocalizationProvider>
@@ -41,7 +110,11 @@ function MainForm() {
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={brandDD}
+ getOptionLabel={(option) => option}
+ onChange={(event, newValue) => {
+ setBrand(newValue.brand);
+ }}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Brand" />}
     />
@@ -95,8 +168,10 @@ function MainForm() {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Expense Type" />}
     />
-
-     <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" />
+   <TextField sx={{ width: 300 }} id="outlined-basic" label="Pre Tax Amount" variant="outlined" onChange={(e) => setPreTaxAmount(e.target.value)}
+ value={preTaxAmount} />
+     <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" onChange={(e) => setTotalAmount(e.target.value)}
+ value={totalAmount} />
     
 
      <Link to={`/mainform/addItem/${invoiceNumber}`}><Button sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button></Link>
