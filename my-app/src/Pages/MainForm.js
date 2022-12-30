@@ -1,34 +1,85 @@
 import React from 'react'
-import ComponentAutoComplete from '../Component/ComponentAutoComplete'
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Button from '@mui/material/Button';
 
 function MainForm() {
   return (
     <>
     <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', }}> 
-    <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-<TextField id="filled-basic" label="Filled" variant="filled" />
-<TextField id="standard-basic" label="Standard" variant="standard" />
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-<TextField id="filled-basic" label="Filled" variant="filled" />
-<TextField id="standard-basic" label="Standard" variant="standard" />
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <ComponentAutoComplete/>
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-<TextField id="filled-basic" label="Filled" variant="filled" />
-<TextField id="standard-basic" label="Standard" variant="standard" />
+
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" />
+
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Name" variant="outlined" />
+
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Email" variant="outlined" />
+
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Number" variant="outlined" />
+
+    <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Brand" />}
+    />
+     
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Sub Brand" />}
+    />
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Location" />}
+    />
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Department" />}
+    />
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Category" />}
+    />
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Sub Category1" />}
+    />
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Sub Category2" />}
+    />
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Expense Type" />}
+    />
+     
+     <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" />
+    
+
+     <Button sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button>
+
     </Box>
     
     </>
