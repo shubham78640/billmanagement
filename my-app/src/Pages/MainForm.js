@@ -15,24 +15,52 @@ const[InvoiceNumber,setInvoiceNumber]=useState("");
 const [ brand, setBrand] = React.useState("");
 const [value, setValue] = React.useState(null);
 const [brandDD,setBrandDD]=useState([]);
+const[payDirectCardDetails, setPayDirectCardDetails]=useState("");
+const[expenseCategory,setExpenseCategory]=useState("");
+const[ customerCode,setCustomerCode] =useState("");
+const[ customerName,setCustomerName] =useState("");
+const[invoiceDescription,setInvoiceDescription]=useState("");
+const[serviceCategory,setServiceCategory]=useState("");
+const[invoiceAttachment,setInvoiceAttachment]=useState("");
+const[paymentStatus,setPaymentStatus]=useState("");
+const[tDSType,setTDSType]=useState("");
+const[tDSAmount,setTDSAmount]=useState("");
+const[preTaxAmount, setPreTaxAmount]=useState("");
+const[totalAmount , setTotalAmount]=useState("");
+const[invoiceDate,setInvoiceDate]=useState("");
 
 const handleSubmit =()=>{
+    alert("hii")
 
-  console.log("data ",empcode,empName,empEmail,InvoiceNumber)
+  console.log("data ",empcode,empName,empEmail,InvoiceNumber,
+  payDirectCardDetails,
+  expenseCategory,
+  customerCode,
+  customerName,
+  serviceCategory,
+  invoiceDescription,
+  invoiceAttachment,
+  paymentStatus,
+  tDSType,
+  tDSAmount,
+  preTaxAmount,
+  totalAmount,
+  invoiceDate
+  )
 
 
 
 
 }
-useEffect(() => {
-  const getData = async()=>{
-  let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
-  let data2 = await response2.json()
-  setBrandDD(data2)
-  console.log("data2",data2)
-  }
-  getData()
- }, [])
+// useEffect(() => {
+//   const getData = async()=>{
+//   let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
+//   let data2 = await response2.json()
+//   setBrandDD(data2)
+//   console.log("data2",data2)
+//   }
+//   getData()
+//  }, [])
 
   return (
     <>
@@ -56,12 +84,12 @@ useEffect(() => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
               label="Invoice Date"
-             // value={birthday}
-            //   onChange={(newValue) => {
-            //     (newValue);
-            //   }}
+             value={invoiceDate}
+              onChange={(newValue) => {
+               setInvoiceDate(newValue);
+              }}
               renderInput={(params) => (
-                <TextField required {...params} size="medium" sx={{ width: 300 }} />
+                <TextField required {...params} size="medium" sx={{ width: 300, color:"black" }} />
               )}
             />
           </LocalizationProvider>
@@ -128,10 +156,11 @@ useEffect(() => {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Expense Type" />}
     />
-   <TextField sx={{ width: 300 }} id="outlined-basic" label="Pre Tax Amount" variant="outlined" />
-     <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" />
+   <TextField sx={{ width: 300 }} id="outlined-basic" label="Pre Tax Amount" variant="outlined" onChange={(e) => setPreTaxAmount(e.target.value)}
+ value={preTaxAmount} />
+     <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" onChange={(e) => setTotalAmount(e.target.value)}
+ value={totalAmount} />
     
-<<<<<<< HEAD
      <Autocomplete
       disablePortal
       id="combo-box-demo"
@@ -139,8 +168,10 @@ useEffect(() => {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="GST Applicable" />}
     />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Type" variant="outlined" />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Amount" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
+ value={tDSType} />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+ value={tDSAmount}/>
       <Autocomplete
       disablePortal
       id="combo-box-demo"
@@ -155,18 +186,23 @@ useEffect(() => {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Payment Method" />}
     />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="Pay Direct Card Details" variant="outlined" />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="Expense Category" variant="outlined" />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Code" variant="outlined" />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Name" variant="outlined" />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Description" variant="outlined" />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="Service Category" variant="outlined" />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Attachment" variant="outlined" />
-      <TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" />
-     <Button sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button>
-=======
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Pay Direct Card Details" variant="outlined" onChange={(e) => setPayDirectCardDetails(e.target.value)}
+ value={payDirectCardDetails}/>
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Expense Category" variant="outlined" onChange={(e) => setExpenseCategory(e.target.value)}
+ value={expenseCategory}/>
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Code" variant="outlined" onChange={(e) => setCustomerCode(e.target.value)}
+ value={customerCode} />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Name" variant="outlined" onChange={(e) => setCustomerName(e.target.value)}
+ value={customerName} />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Description" variant="outlined" onChange={(e) => setInvoiceDescription(e.target.value)}
+ value={invoiceDescription} />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Service Category" variant="outlined" onChange={(e) => setServiceCategory(e.target.value)}
+ value={serviceCategory}/>
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Attachment" variant="outlined" onChange={(e) => setInvoiceAttachment(e.target.value)}
+ value={invoiceAttachment}/>
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
+ value={paymentStatus} />
      <Button onClick={handleSubmit} sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button>
->>>>>>> 6622b55c1b49f16109d54355b80f707d2fe3670c
 
     </Box>
     
