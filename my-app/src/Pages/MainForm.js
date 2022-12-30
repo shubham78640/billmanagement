@@ -12,6 +12,16 @@ function MainForm() {
 const[empcode,setEmpCode]= useState("");
 const[empName,setEmpName]=useState("");
 const[empEmail,setEmail]=useState("");
+const [subrand, setSubrand] = useState("")
+const [location, setLocation] = useState("")
+const [department, setDepartment] = useState("")
+const [category, setCategory] = useState("")
+const [subCategory1, setSubCategory1] = useState("")
+const [subCategory2, setSubCategory2] = useState("")
+const [expenseType, setExpenseType] = useState("")
+const [paymentMethod, setPaymentMethod] = useState("")
+const [paymentMode, setPaymentMode] = useState("")
+const [] = useState("")
 const[invoiceNumber,setInvoiceNumber]=useState("");
 const [ brand, setBrand] = React.useState("");
 const [value, setValue] = React.useState(null);
@@ -37,14 +47,14 @@ const [subCategory1DD,setSubCategory1DD]=useState([]);
 const [subCategory2DD,setSubCategory2DD]=useState([]);
 const [expenseTypeDD,setExpenseTypeDD]=useState([]);
 const [gSTApplicableDD,setGSTApplicableDD]=useState([]);
-const [paymentMode,setPaymentMode]=useState([]);
-const [paymentMethod,setPaymentMethod]=useState([]);
+const [paymentModeDD,setPaymentModeDD]=useState([]);
+const [paymentMethodDD,setPaymentMethodDD]=useState([]);
 
 const handleSubmit =()=>{
     alert("hii")
 
   console.log("data ",empcode,
-  empName,
+{  empName,
   empEmail,
   invoiceNumber,
   payDirectCardDetails,
@@ -59,7 +69,19 @@ const handleSubmit =()=>{
   tDSAmount,
   preTaxAmount,
   totalAmount,
-  invoiceDate
+  invoiceDate,
+paymentMethod,
+paymentMode,
+subrand,
+brand,
+location,
+department,
+category,
+subCategory1,
+subCategory2,
+expenseType
+
+}
   )
 
 
@@ -124,6 +146,7 @@ const handleSubmit =()=>{
       id="combo-box-demo"
       options={top100Films}
       sx={{ width: 300 }}
+      onChange={(event, newValue)=>{setSubrand(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Sub Brand" />}
     />
      <Autocomplete
@@ -131,6 +154,7 @@ const handleSubmit =()=>{
       id="combo-box-demo"
       options={top100Films}
       sx={{ width: 300 }}
+      onChange={(event, newValue)=>{setLocation(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Location" />}
     />
      <Autocomplete
@@ -138,6 +162,7 @@ const handleSubmit =()=>{
       id="combo-box-demo"
       options={top100Films}
       sx={{ width: 300 }}
+      onChange={(event, newValue)=>{setDepartment(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Department" />}
     />
      <Autocomplete
@@ -145,13 +170,14 @@ const handleSubmit =()=>{
       id="combo-box-demo"
       options={top100Films}
       sx={{ width: 300 }}
+      onChange={(event, newValue)=>{setCategory(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Category" />}
     />
      <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={top100Films}
-      sx={{ width: 300 }}
+      sx={{ width: 300 }}onChange={(event, newValue)=>{setSubCategory1(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Sub Category1" />}
     />
      <Autocomplete
@@ -159,6 +185,7 @@ const handleSubmit =()=>{
       id="combo-box-demo"
       options={top100Films}
       sx={{ width: 300 }}
+      onChange={(event, newValue)=>{setSubCategory2(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Sub Category2" />}
     />
      <Autocomplete
@@ -166,6 +193,7 @@ const handleSubmit =()=>{
       id="combo-box-demo"
       options={top100Films}
       sx={{ width: 300 }}
+      onChange={(event, newValue)=>{setExpenseType(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Expense Type" />}
     />
    <TextField sx={{ width: 300 }} id="outlined-basic" label="Pre Tax Amount" variant="outlined" onChange={(e) => setPreTaxAmount(e.target.value)}
@@ -178,6 +206,7 @@ const handleSubmit =()=>{
  id="combo-box-demo"
  options={top100Films}
  sx={{ width: 300 }}
+ onChange={(event, newValue)=>{setPaymentMode(newValue.label)}}
  renderInput={(params) => <TextField {...params} label="Payment Mode" />}
  />
  <Autocomplete
@@ -185,6 +214,7 @@ const handleSubmit =()=>{
  id="combo-box-demo"
  options={top100Films}
  sx={{ width: 300 }}
+ onChange={(event, newValue)=>{setPaymentMethod(newValue.label)}}
  renderInput={(params) => <TextField {...params} label="Payment Method" />}
  />
  <TextField sx={{ width: 300 }} id="outlined-basic" label="Pay Direct Card Details" variant="outlined" onChange={(e) => setPayDirectCardDetails(e.target.value)}
