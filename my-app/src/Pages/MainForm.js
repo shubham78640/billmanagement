@@ -27,7 +27,7 @@ function MainForm() {
               label="DOB"
              // value={birthday}
             //   onChange={(newValue) => {
-            //     setBirthday(newValue);
+            //     (newValue);
             //   }}
               renderInput={(params) => (
                 <TextField required {...params} size="medium" sx={{ width: 300 }} />
