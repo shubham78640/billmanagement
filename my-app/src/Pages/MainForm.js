@@ -24,7 +24,7 @@ function MainForm() {
 
     <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
-              label="DOB"
+              label="Invoice Date"
              // value={birthday}
             //   onChange={(newValue) => {
             //     (newValue);
@@ -93,9 +93,40 @@ function MainForm() {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Expense Type" />}
     />
-
+   <TextField sx={{ width: 300 }} id="outlined-basic" label="Pre Tax Amount" variant="outlined" />
      <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" />
     
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="GST Applicable" />}
+    />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Type" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Amount" variant="outlined" />
+      <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Payment Mode" />}
+    />
+     <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Payment Method" />}
+    />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Pay Direct Card Details" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Expense Category" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Code" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Name" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Description" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Service Category" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Attachment" variant="outlined" />
+      <TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" />
      <Button sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button>
 
     </Box>
