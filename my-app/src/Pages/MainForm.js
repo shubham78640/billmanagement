@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState, useEffect}from 'react'
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -8,18 +8,49 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 function MainForm() {
 
-    const [value, setValue] = React.useState(null);
+const[empcode,setEmpCode]= useState("");
+const[empName,setEmpName]=useState("");
+const[empEmail,setEmail]=useState("");
+const[InvoiceNumber,setInvoiceNumber]=useState("");
+const [ brand, setBrand] = React.useState("");
+const [value, setValue] = React.useState(null);
+const [brandDD,setBrandDD]=useState([]);
+
+const handleSubmit =()=>{
+
+  console.log("data ",empcode,empName,empEmail,InvoiceNumber)
+
+
+
+
+}
+useEffect(() => {
+  const getData = async()=>{
+  let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
+  let data2 = await response2.json()
+  setBrandDD(data2)
+  console.log("data2",data2)
+  }
+  getData()
+ }, [])
+
   return (
     <>
     <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', }}> 
 
-    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" />
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" onChange={(e) => setEmpCode(e.target.value)}
+ value={empcode} />
 
-    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Name" variant="outlined" />
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Name" variant="outlined" onChange={(e) => setEmpName(e.target.value)}
+ value={empName}
+  />
 
-    <TextField sx={{ width: 300 }} id="outlined-basic" label="Email" variant="outlined" />
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)}
+ value={empEmail} />
 
-    <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Number" variant="outlined" />
+    <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Number" variant="outlined"  onChange={(e) => setInvoiceNumber(e.target.value)}
+ value={InvoiceNumber}
+ />
      
 
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -39,7 +70,11 @@ function MainForm() {
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={brandDD}
+ getOptionLabel={(option) => option}
+ onChange={(event, newValue) => {
+ setBrand(newValue.brand);
+ }}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Brand" />}
     />
@@ -96,7 +131,7 @@ function MainForm() {
 
      <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" />
     
-     <Button sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button>
+     <Button onClick={handleSubmit} sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button>
 
     </Box>
     
