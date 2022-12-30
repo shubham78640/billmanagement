@@ -1,9 +1,10 @@
-
+import MainForm from "./Pages/MainForm";
+import React from "react";
 
 function App() {
   return (
     <div>
-     Hello
+  <MainForm/>
     </div>
   );
 }
