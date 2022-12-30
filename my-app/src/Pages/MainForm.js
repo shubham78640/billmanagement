@@ -172,9 +172,44 @@ const handleSubmit =()=>{
  value={preTaxAmount} />
      <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" onChange={(e) => setTotalAmount(e.target.value)}
  value={totalAmount} />
+
+<Autocomplete
+ disablePortal
+ id="combo-box-demo"
+ options={top100Films}
+ sx={{ width: 300 }}
+ renderInput={(params) => <TextField {...params} label="Payment Mode" />}
+ />
+ <Autocomplete
+ disablePortal
+ id="combo-box-demo"
+ options={top100Films}
+ sx={{ width: 300 }}
+ renderInput={(params) => <TextField {...params} label="Payment Method" />}
+ />
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Pay Direct Card Details" variant="outlined" onChange={(e) => setPayDirectCardDetails(e.target.value)}
+ value={payDirectCardDetails}/>
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Expense Category" variant="outlined" onChange={(e) => setExpenseCategory(e.target.value)}
+ value={expenseCategory}/>
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Code" variant="outlined" onChange={(e) => setCustomerCode(e.target.value)}
+ value={customerCode} />
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Name" variant="outlined" onChange={(e) => setCustomerName(e.target.value)}
+ value={customerName} />
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Description" variant="outlined" onChange={(e) => setInvoiceDescription(e.target.value)}
+ value={invoiceDescription} />
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Service Category" variant="outlined" onChange={(e) => setServiceCategory(e.target.value)}
+ value={serviceCategory}/>
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Attachment" variant="outlined" onChange={(e) => setInvoiceAttachment(e.target.value)}
+ value={invoiceAttachment}/>
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
+ value={paymentStatus} />
     
 
-     <Link to={`/mainform/addItem/${invoiceNumber}`}><Button sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button></Link>
+     {/* <Link to={`/mainform/addItem/${invoiceNumber}`}> */}
+      
+      <Button sx={{ width: 300 }} onClick={handleSubmit}  variant="contained" color="success">Add Items</Button>
+      
+      {/* </Link> */}
 
     </Box>
     
