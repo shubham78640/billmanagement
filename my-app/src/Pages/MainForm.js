@@ -3,8 +3,12 @@ import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
-
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DesktopDatePicker } from "@mui/x-date-pickers";
 function MainForm() {
+
+    const [value, setValue] = React.useState(null);
   return (
     <>
     <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', }}> 
@@ -16,6 +20,21 @@ function MainForm() {
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Email" variant="outlined" />
 
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Number" variant="outlined" />
+     
+
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              label="DOB"
+             // value={birthday}
+            //   onChange={(newValue) => {
+            //     setBirthday(newValue);
+            //   }}
+              renderInput={(params) => (
+                <TextField required {...params} size="medium" sx={{ width: 300 }} />
+              )}
+            />
+          </LocalizationProvider>
+
 
     <Autocomplete
       disablePortal
@@ -74,10 +93,9 @@ function MainForm() {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Expense Type" />}
     />
-     
+
      <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" />
     
-
      <Button sx={{ width: 300 }}  variant="contained" color="success">Add Items</Button>
 
     </Box>
@@ -87,7 +105,6 @@ function MainForm() {
 }
 
 export default MainForm ;
-
 
 const top100Films = [
     { label: 'The Shawshank Redemption', year: 1994 },
