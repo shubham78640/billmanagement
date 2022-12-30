@@ -28,11 +28,24 @@ const[tDSAmount,setTDSAmount]=useState("");
 const[preTaxAmount, setPreTaxAmount]=useState("");
 const[totalAmount , setTotalAmount]=useState("");
 const[invoiceDate,setInvoiceDate]=useState("");
+const [subbrandDD,setSubBrandDD]=useState([]);
+const [locationDD,setLocationDD]=useState([]);
+const [departmentDD,setDepartmentDD]=useState([]);
+const [categoryDD,setCategoryDD]=useState([]);
+const [subCategory1DD,setSubCategory1DD]=useState([]);
+const [subCategory2DD,setSubCategory2DD]=useState([]);
+const [expenseTypeDD,setExpenseTypeDD]=useState([]);
+const [gSTApplicableDD,setGSTApplicableDD]=useState([]);
+const [paymentMode,setPaymentMode]=useState([]);
+const [paymentMethod,setPaymentMethod]=useState([]);
 
 const handleSubmit =()=>{
     alert("hii")
 
-  console.log("data ",empcode,empName,empEmail,InvoiceNumber,
+  console.log("data ",empcode,
+  empName,
+  empEmail,
+  InvoiceNumber,
   payDirectCardDetails,
   expenseCategory,
   customerCode,
@@ -47,8 +60,6 @@ const handleSubmit =()=>{
   totalAmount,
   invoiceDate
   )
-
-
 
 
 }
