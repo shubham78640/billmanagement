@@ -1,5 +1,5 @@
 import React from 'react'
-import Form from '../Component/Form'
+import ComponentAutoComplete from '../Component/ComponentAutoComplete'
 import Box from "@mui/material/Box";
 
 
@@ -8,19 +8,19 @@ function MainForm() {
     <>
     <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', }}> 
     
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
-      <Form/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
+      <ComponentAutoComplete/>
     </Box>
     
     </>
