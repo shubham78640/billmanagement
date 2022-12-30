@@ -7,6 +7,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 function MainForm() {
 
 const[empcode,setEmpCode]= useState("");
@@ -40,7 +41,7 @@ const [gSTApplicableDD,setGSTApplicableDD]=useState([]);
 const [paymentMode,setPaymentMode]=useState([]);
 const [paymentMethod,setPaymentMethod]=useState([]);
 
-const handleSubmit =()=>{
+const handleSubmit = async()=>{
     alert("hii")
 
   console.log("data ",empcode,
@@ -61,9 +62,49 @@ const handleSubmit =()=>{
   totalAmount,
   invoiceDate
   )
+ 
+  try {
+  let response = await axios.post(
+  "http://localhost:8082/bill/bill/save", {
+  "brand": "abc",
+  "catagory": "abc",
+  "department": "string",
+  "email": empEmail,
+  "employeeCode": empcode,
+  "employeeName": empName,
+  "expensesCategory": expenseCategory,
+  "expensesType": "string",
+  "gstapplicaiton": "string",
+  "invoiceAttachment": "string",
+  "invoiceDate": invoiceDate,
+  "invoiceDescription": invoiceDescription,
+  "invoiceNumber": invoiceNumber,
+  "location": "string",
+  "partnerCode": customerCode,
+  "partnerName": customerName,
+  "partnerStatus": paymentStatus,
+  "payDirectCardDetails": payDirectCardDetails,
+  "paymentMethod": "string",
+  "paymentMode": "string",
+  "preTaxAmount": preTaxAmount,
+  "serviceCategory": "string",
+  "subBrand": "string",
+  "subCatagory1": "string",
+  "subCatagory2": "string",
+  "tdsamount": tDSAmount,
+  "tdstpye": tDSType,
+  "totalAmount": totalAmount
+  }
+  );
+  alert("worker save successfully")
+  console.log(response)
+  
+  
+  } catch (error) {
+  alert(error)
+  }
+  }
 
-
-}
 // useEffect(() => {
 //   const getData = async()=>{
 //   let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
@@ -172,7 +213,17 @@ const handleSubmit =()=>{
  value={preTaxAmount} />
      <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" onChange={(e) => setTotalAmount(e.target.value)}
  value={totalAmount} />
-
+<Autocomplete
+ disablePortal
+ id="combo-box-demo"
+ options={top100Films}
+ sx={{ width: 300 }}
+ renderInput={(params) => <TextField {...params} label="GST Applicable" />}
+ />
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
+ value={tDSType}/>
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+ value={tDSAmount}/>
 <Autocomplete
  disablePortal
  id="combo-box-demo"
