@@ -40,6 +40,7 @@ const[tDSAmount,setTDSAmount]=useState("");
 const[preTaxAmount, setPreTaxAmount]=useState("");
 const[totalAmount , setTotalAmount]=useState("");
 const[invoiceDate,setInvoiceDate]=useState("");
+const [gSTApplicable,setGSTApplicable]=useState("");
 const [subbrandDD,setSubBrandDD]=useState([]);
 const [locationDD,setLocationDD]=useState([]);
 const [departmentDD,setDepartmentDD]=useState([]);
@@ -80,7 +81,8 @@ department,
 category,
 subCategory1,
 subCategory2,
-expenseType
+expenseType,
+gSTApplicable
 
 }
   )
@@ -88,31 +90,31 @@ expenseType
   try {
   let response = await axios.post(
   "http://localhost:8082/bill/bill/save", {
-  "brand": "abc",
-  "catagory": "abc",
-  "department": "string",
+  "brand": brand,
+  "catagory": category,
+  "department": department,
   "email": empEmail,
   "employeeCode": empcode,
   "employeeName": empName,
   "expensesCategory": expenseCategory,
-  "expensesType": "string",
-  "gstapplicaiton": "string",
-  "invoiceAttachment": "string",
+  "expensesType": expenseType,
+  "gstapplicaiton": gSTApplicable,
+  "invoiceAttachment": invoiceAttachment,
   "invoiceDate": invoiceDate,
   "invoiceDescription": invoiceDescription,
   "invoiceNumber": invoiceNumber,
-  "location": "string",
+  "location": location,
   "partnerCode": customerCode,
   "partnerName": customerName,
   "partnerStatus": paymentStatus,
   "payDirectCardDetails": payDirectCardDetails,
-  "paymentMethod": "string",
-  "paymentMode": "string",
+  "paymentMethod": paymentMethod,
+  "paymentMode": paymentMode,
   "preTaxAmount": preTaxAmount,
-  "serviceCategory": "string",
-  "subBrand": "string",
-  "subCatagory1": "string",
-  "subCatagory2": "string",
+  "serviceCategory": serviceCategory,
+  "subBrand": subrand,
+  "subCatagory1": subCategory1,
+  "subCatagory2": subCategory2,
   "tdsamount": tDSAmount,
   "tdstpye": tDSType,
   "totalAmount": totalAmount
@@ -127,15 +129,15 @@ expenseType
   }
   }
 
-// useEffect(() => {
-//   const getData = async()=>{
-//   let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
-//   let data2 = await response2.json()
-//   setBrandDD(data2)
-//   console.log("data2",data2)
-//   }
-//   getData()
-//  }, [])
+useEffect(() => {
+  const getData = async()=>{
+  let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
+  let data2 = await response2.json()
+  setBrandDD(data2)
+  console.log("data2",data2)
+  }
+  getData()
+ }, [])
 
   return (
     <>
@@ -173,10 +175,9 @@ expenseType
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={brandDD}
- getOptionLabel={(option) => option}
+      options={data34}
  onChange={(event, newValue) => {
- setBrand(newValue.brand);
+ setBrand(newValue.label);
  }}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Brand" />}
@@ -185,7 +186,7 @@ expenseType
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={subabc}
       sx={{ width: 300 }}
       onChange={(event, newValue)=>{setSubrand(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Sub Brand" />}
@@ -193,7 +194,7 @@ expenseType
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={locationData}
       sx={{ width: 300 }}
       onChange={(event, newValue)=>{setLocation(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Location" />}
@@ -201,7 +202,7 @@ expenseType
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={data12}
       sx={{ width: 300 }}
       onChange={(event, newValue)=>{setDepartment(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Department" />}
@@ -244,8 +245,9 @@ expenseType
 <Autocomplete
  disablePortal
  id="combo-box-demo"
- options={top100Films}
+ options={abc}
  sx={{ width: 300 }}
+ onChange={(event, newValue)=>{setGSTApplicable(newValue.label)}}
  renderInput={(params) => <TextField {...params} label="GST Applicable" />}
  />
  <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
@@ -255,7 +257,7 @@ expenseType
 <Autocomplete
  disablePortal
  id="combo-box-demo"
- options={top100Films}
+ options={paymentMode1}
  sx={{ width: 300 }}
  onChange={(event, newValue)=>{setPaymentMode(newValue.label)}}
  renderInput={(params) => <TextField {...params} label="Payment Mode" />}
@@ -263,7 +265,7 @@ expenseType
  <Autocomplete
  disablePortal
  id="combo-box-demo"
- options={top100Films}
+ options={paymentMode1}
  sx={{ width: 300 }}
  onChange={(event, newValue)=>{setPaymentMethod(newValue.label)}}
  renderInput={(params) => <TextField {...params} label="Payment Method" />}
@@ -301,11 +303,52 @@ expenseType
 export default MainForm ;
 
 const top100Films = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-    { label: 'The Godfather', year: 1972 },
-    { label: 'The Godfather: Part II', year: 1974 },
-    { label: 'The Dark Knight', year: 2008 },
-    { label: '12 Angry Men', year: 1957 },
-    { label: "Schindler's List", year: 1993 },
-    { label: 'Pulp Fiction', year: 1994 },
+    { label: 'The Shawshank Redemption'},
+    { label: 'The Godfather',  },
+    { label: 'The Godfather: Part II', },
+    { label: 'The Dark Knight',  },
+    { label: '12 Angry Men',  },
+    { label: "Schindler's List",  },
+    { label: 'Pulp Fiction'},
 ]
+
+const abc = [
+  { label: 'Yes'},
+  { label: 'No'},
+ 
+ 
+]
+const subabc = [
+  { label: 'Sub Brand 1'},
+  { label: 'Sub Brand 2'},
+  { label: 'Sub Brand 3'},
+  { label: 'Sub Brand 4'},
+  { label: 'Sub Brand 5'},
+ 
+]
+
+const data34 = [
+  { label: 'Pinch' },
+  { label: 'Well served'},
+ ]
+
+ const data12 = [
+  { label: 'Marketing' },
+  { label: 'HR'},
+ ]
+
+ const locationData=[
+  { label: 'Gurugram' },
+  { label: 'Mumbai'},
+ ]
+
+ const paymentMode=[
+  { label: 'Cash' },
+  { label: 'Bank'},
+ ]
+
+ const paymentMode1=[
+  { label: 'Employee' },
+  { label: 'paytm '},
+  { label: 'PhonePay '},
+ ]
