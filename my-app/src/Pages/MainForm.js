@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import BillTableData from '../Component/BillTableData/BillTableData';
+import moment from "moment"
 function MainForm() {
 
   const[billId,setBillID]=useState("")
@@ -42,7 +43,7 @@ const[tDSType,setTDSType]=useState("");
 const[tDSAmount,setTDSAmount]=useState("");
 const[preTaxAmount, setPreTaxAmount]=useState("");
 const[totalAmount , setTotalAmount]=useState("");
-const[invoiceDate,setInvoiceDate]=useState("");
+const[invoiceDate,setInvoiceDate]=useState(null);
 const [gSTApplicable,setGSTApplicable]=useState("");
 const[reportingManager,SetReportingManager]=useState("")
 const[paymentCycle,setPaymentCycle]=useState("")
@@ -58,6 +59,8 @@ const [paymentModeDD,setPaymentModeDD]=useState([]);
 const [paymentMethodDD,setPaymentMethodDD]=useState([]);
 
 
+const newDateinv= moment(invoiceDate).format("DD/MM/YYYY");
+console.log({newDateinv})
 const invbillid =localStorage.getItem("BillID");
 const totelAmountofbill =((+preTaxAmount)+(+gstAmount));
 let navigate = useNavigate();
@@ -101,7 +104,7 @@ paymentCycle
   let response = await axios.post(
   "http://localhost:8082/bill/bill/save", {
   "brand": brand,
-  "catagory": category,
+  "category": category,
   "department": department,
   "email": empEmail,
   "employeeCode": empcode,
@@ -109,7 +112,7 @@ paymentCycle
   "expensesCategory": expenseCategory,
   "expensesType": expenseType,
   "gstAmount": gstAmount,
-  "invoiceDate": invoiceDate,
+  "invoiceDate": newDateinv,
   "invoiceDescription": invoiceDescription,
   "invoiceNumber": invoiceNumber,
   "location": location,
@@ -132,10 +135,9 @@ paymentCycle
   }
   );
   alert("worker save successfully")
-  localStorage.setItem("BillID",response.data.data.invoiceId)
-  {navigate(`/mainform/addItem`)}
+  navigate(`/mainform/addItem/${response.data.data.invoiceId}`)
   localStorage.setItem("InvoiceNumber", invoiceNumber);  
-  localStorage.setItem("InvoiceDate", invoiceDate);  
+  localStorage.setItem("InvoiceDate", newDateinv);  
   localStorage.setItem("EmployeeName", empName);  
   localStorage.setItem("BillID",response.data.data.invoiceId)
   console.log(response)
@@ -143,6 +145,10 @@ paymentCycle
   alert(error)
   }
   }
+
+// const handleSubmit = ()=>{
+//   navigate(`/mainform/addItem/${1234}`)
+// }
 
 // useEffect(() => {
 //   const getData = async()=>{
@@ -155,8 +161,8 @@ paymentCycle
 //  }, [])
 
   return (
-    <>
-    <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap',}}> 
+    <Box sx={{background:"White", minHeight:"700px"}}>
+    <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', justifyContent:"center"}}> 
 
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" onChange={(e) => setEmpCode(e.target.value)}
  value={empcode} />
@@ -351,10 +357,16 @@ paymentCycle
  {/* <TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
  value={paymentStatus} /> */}
     
-      <Button sx={{ width: 300 }} onClick={handleSubmit}  variant="contained" color="success">Add Items</Button>
+
+      
+
     </Box>
-    
-    </>
+
+    <Box  textAlign={"center"}>
+    <Button size='large' sx={{ width:{sm:300, xs:250}, mb:"20px" }} onClick={handleSubmit}  variant="contained" color="success">Add Items</Button>
+    </Box>
+
+    </Box>
   )
 }
 

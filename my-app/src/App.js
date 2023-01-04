@@ -4,6 +4,7 @@ import Navbaar from "./Component/Navbaar/Navbaar";
 import AddItems from "./Component/AddItem/AddItems";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadeDocuments from "./Component/UploadeDocuments/UploadeDocuments";
+import BillTableData from "./Component/BillTableData/BillTableData";
 
 function App() {
 
@@ -12,10 +13,10 @@ function App() {
   <BrowserRouter>
     <Navbaar/>
     <Routes>
+    <Route path="/" element={<BillTableData/>}/>
         <Route path="/mainform" element={<MainForm/>}/>
-        <Route path="/mainform/addItem" element={<AddItems/>}/>
-        <Route path="/uploadeDocuments" element={<UploadeDocuments/>}/>
-        
+        <Route path="/mainform/addItem/:id" element={<AddItems/>}/>
+        <Route path="/addItem/uploadeDocuments/:id" element={<UploadeDocuments/>}/>
     </Routes>
   </BrowserRouter>
   );
