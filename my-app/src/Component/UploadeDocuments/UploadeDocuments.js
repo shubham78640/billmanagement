@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import { useParams } from "react-router";
 function UploadeDocuments() {
   const invbillid = localStorage.getItem("BillID");
-  // const {invoicenumber} = useParams()
+   const {id} = useParams();
   const [invoiceAttachment, setInvoiceAttachment] = useState();
 
   const invNum = localStorage.getItem("InvoiceNumber");
@@ -22,7 +22,7 @@ function UploadeDocuments() {
 
   const handleonclick = async () => {
     try {
-      let response = await axios.post("Put url here", formData);
+      let response = await axios.post(`http://localhost:8082/bill/files/upload/file?invoiceNumber=${id}`, formData);
       alert("Item save successfully");
       localStorage.clear();
       navigate("/mainform");

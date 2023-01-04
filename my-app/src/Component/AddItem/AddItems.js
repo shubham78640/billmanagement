@@ -73,11 +73,11 @@ function AddItems() {
       let response = await axios.post("http://localhost:8082/bill/item/save", {
         amount: amount1,
         amountPaid: totelItemAmount,
-        category: category,
+        categoryItem: category,
         cgst: cgst,
         dateOfInvoice: invDate,
         discount: discount,
-        gstAmount: gsttotelvalue,
+        gstAmountItem: gsttotelvalue,
         igst: igst,
         invoiceNumber: invNum,
         itemCode: itemCode,
@@ -207,10 +207,9 @@ function AddItems() {
             sx={{ width: "300px" }}
             InputLabelProps={{ shrink: true }}
             disabled
-            value={amount1}
+            value={amount1}/>
 
-            // onChange={(e)=>{setAmount(e.target.value)}}
-          />
+        <TextField   label="Rate" size="small" onChange={(e)=>{setRate(e.target.value)}}/>
 
           {/* <TextField label="Delivery Charges"    onChange={(e)=>{setDeliveryCharges(e.target.value)}}/>
 
@@ -328,6 +327,7 @@ function AddItems() {
 export default AddItems;
 
 const top100Films = [
+
   { label: "The Shawshank Redemption", year: 1994 },
   { label: "The Godfather", year: 1972 },
   { label: "The Godfather: Part II", year: 1974 },
@@ -335,9 +335,11 @@ const top100Films = [
   { label: "12 Angry Men", year: 1957 },
   { label: "Schindler's List", year: 1993 },
   { label: "Pulp Fiction", year: 1994 },
+  
 ];
 
 const sGSTDATA = [
+
   { label: "2.5" },
   { label: "6" },
   { label: "9" },
@@ -346,6 +348,7 @@ const sGSTDATA = [
 ];
 
 const cGSTDATA = [
+
   { label: "2.5" },
   { label: "6" },
   { label: "9" },
@@ -354,6 +357,7 @@ const cGSTDATA = [
 ];
 
 const iGSTDATA = [
+
   { label: "5" },
   { label: "12" },
   { label: "18" },
@@ -361,7 +365,8 @@ const iGSTDATA = [
   { label: "0" },
 ];
 
-const tDSDATA = [
+const tDSDATA =[
+
   { label: "0" },
   { label: "1" },
   { label: "2" },
@@ -371,4 +376,7 @@ const tDSDATA = [
   { label: "20" },
   { label: "25" },
   { label: "30" },
-];
+ 
+
+]
+

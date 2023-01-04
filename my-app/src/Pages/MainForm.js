@@ -9,6 +9,8 @@ import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import BillTableData from '../Component/BillTableData/BillTableData';
+import moment from "moment"
 function MainForm() {
 
   const[billId,setBillID]=useState("")
@@ -57,6 +59,8 @@ const [paymentModeDD,setPaymentModeDD]=useState([]);
 const [paymentMethodDD,setPaymentMethodDD]=useState([]);
 
 
+const newDateinv= moment(invoiceDate).format("DD/MM/YYYY");
+console.log({newDateinv})
 const invbillid =localStorage.getItem("BillID");
 const totelAmountofbill =((+preTaxAmount)+(+gstAmount));
 let navigate = useNavigate();
@@ -100,7 +104,7 @@ paymentCycle
   let response = await axios.post(
   "http://localhost:8082/bill/bill/save", {
   "brand": brand,
-  "catagory": category,
+  "category": category,
   "department": department,
   "email": empEmail,
   "employeeCode": empcode,
@@ -108,7 +112,7 @@ paymentCycle
   "expensesCategory": expenseCategory,
   "expensesType": expenseType,
   "gstAmount": gstAmount,
-  "invoiceDate": invoiceDate,
+  "invoiceDate": newDateinv,
   "invoiceDescription": invoiceDescription,
   "invoiceNumber": invoiceNumber,
   "location": location,
@@ -131,9 +135,9 @@ paymentCycle
   }
   );
   alert("worker save successfully")
-  navigate(`/mainform/addItem/${response.data.data.userId}`)
+  navigate(`/mainform/addItem/${response.data.data.invoiceId}`)
   localStorage.setItem("InvoiceNumber", invoiceNumber);  
-  localStorage.setItem("InvoiceDate", invoiceDate);  
+  localStorage.setItem("InvoiceDate", newDateinv);  
   localStorage.setItem("EmployeeName", empName);  
   localStorage.setItem("BillID",response.data.data.invoiceId)
   console.log(response)
@@ -361,7 +365,7 @@ paymentCycle
     <Box  textAlign={"center"}>
     <Button size='large' sx={{ width:{sm:300, xs:250}, mb:"20px" }} onClick={handleSubmit}  variant="contained" color="success">Add Items</Button>
     </Box>
-    
+
     </Box>
   )
 }
@@ -405,8 +409,7 @@ const brand1 = [
   { label: '1 To Zee - DLF Phase 1' },
   { label: 'Gullak Daycare - Chakkarpur'},
   { label: 'Well Served - DLF Phase 3' },
-  { label: 'Well Served - DLF Phase 3'},
-  { label: 'Well Served - Mumbai' },
+  { label: 'Well Served - Rodeo Drive'},
   { label: 'Well Served - Powai'},
   { label: 'CC Office - Manesar' },
   { label: 'RCC - Delhi'},
