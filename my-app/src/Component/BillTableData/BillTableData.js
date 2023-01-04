@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import CsvDownloader from 'react-csv-downloader';
 
 // columns={[
 //     {
@@ -11,7 +10,7 @@ import CsvDownloader from 'react-csv-downloader';
 //     },
 //   ]},
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    // { field: 'invoiceId', headerName: 'ID', width: 90 },
     {
       field: 'employeeName',
       headerName: 'Employee Name',
@@ -167,25 +166,26 @@ function BillTableData() {
       const fetchData = async () => {
         let dataTable = await fetch( 
           "http://localhost:8082/bill/bill/get/data/all"
+       //   "http://localhost:8082/bill/bill/gets/merge"
           );
          let table = await dataTable.json();
          let adminTableData = await table.data;
-         let cityData=  adminTableData;
-         setBillTabledata(adminTableData);
-        console.log(cityData)
+        //  let cityData=  adminTableData;
+         setBillTabledata(adminTableData?adminTableData:"");
+        // console.log(cityData)
       };
       fetchData();
     }, []);
      console.log("tabledata", billtabledata);
   return (
     <>
-<Box sx={{ height: 900, width: '100%' }}>
+<Box p={.5} sx={{ height: 720, width: '100%' }}>
       <DataGrid
         rows={billtabledata}
         columns={columns}
         pageSize={100}
         rowsPerPageOptions={[500]}
-        checkboxSelection
+        // checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
       />

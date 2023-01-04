@@ -1,5 +1,6 @@
 import { Box } from "@mui/system";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbaar() {
   return (
@@ -27,8 +28,8 @@ function Navbaar() {
         />
         <p style={{textAlign:"center", color:"#b04325", fontFamily:"Garamond, serif", fontWeight:"800"}}>pinch</p>
       </Box>
-      <Box pr={2} sx={{ fontWeight: "800" }} color={"#b04325"}>
-        Add Bill
+      <Box pr={2}>
+        <Link onClick={()=>{localStorage.clear()}} style={{color:"#b04325", fontWeight: "800"}} to="/mainform">Add Bill</Link>
       </Box>
     </Box>
   );
