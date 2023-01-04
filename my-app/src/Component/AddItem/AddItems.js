@@ -6,8 +6,9 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useParams,  useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import axios from "axios";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 function AddItems() {
   const [category, setCategory] = useState("");
@@ -107,19 +108,29 @@ function AddItems() {
           padding: { sm: "8px", xs: "40px" },
         }}
       >
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="h4" color="initial">
-            Invoice number:{invNum}
+        <Box sx={{ display: "flex",flexDirection:"column", gap:"10px" }}>
+          <Typography variant="p" color="initial">
+            Invoice number:- {invNum}
           </Typography>
-          <Typography variant="h5" color="initial">
+          <Typography variant="p" color="initial">
             Employee Name:- {invname}
           </Typography>
+          <Typography variant="p" color="initial">
+            Date:- {invDate}
+          </Typography>
         </Box>
-        <Box> Date:- {invDate}</Box>
 
-        <Box sx={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "20px",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            padding: "20px",
+          }}
+        >
           {/* <Autocomplete
-          size="small"
+          
           disablePortal
           options={top100Films}
           sx={{ width: 223 }}
@@ -127,21 +138,20 @@ function AddItems() {
           renderInput={(params) => <TextField  {...params} label="Source" />}
         /> */}
 
-          {/* <TextField   label="Source" size="small" onChange={(e)=>{setSource(e.target.value)}}/> */}
+          {/* <TextField   label="Source"  onChange={(e)=>{setSource(e.target.value)}}/> */}
 
           <TextField
             label="Category"
-            size="small"
+            sx={{ width: "300px" }}
             onChange={(e) => {
               setCategory(e.target.value);
             }}
           />
 
           <Autocomplete
-            size="small"
             disablePortal
             options={top100Films}
-            sx={{ width: 223 }}
+            sx={{ width: "300px" }}
             onChange={(event, newValue) => {
               setItemCode(newValue.label);
             }}
@@ -151,11 +161,10 @@ function AddItems() {
           />
 
           <Autocomplete
-            size="small"
             disablePortal
             id="combo-box-demo"
             options={top100Films}
-            sx={{ width: 223 }}
+            sx={{ width: "300px" }}
             onChange={(event, newValue) => {
               setItemName(newValue.label);
             }}
@@ -164,23 +173,22 @@ function AddItems() {
             )}
           />
 
-          {/* <TextField   label="HSN/SAC Code" size="small" onChange={(e)=>{setHSNCode(e.target.value)}}/> */}
+          {/* <TextField   label="HSN/SAC Code"  onChange={(e)=>{setHSNCode(e.target.value)}}/> */}
           <TextField
             label="Quantity"
-            size="small"
+            sx={{ width: "300px" }}
             onChange={(e) => {
               setQuantity(e.target.value);
             }}
           />
 
-          {/* <TextField   label="Unit" size="small" onChange={(e)=>{setUnit(e.target.value)}}/> */}
+          {/* <TextField   label="Unit"  onChange={(e)=>{setUnit(e.target.value)}}/> */}
 
           <Autocomplete
-            size="small"
             disablePortal
             id="combo-box-demo"
             options={top100Films}
-            sx={{ width: 223 }}
+            sx={{ width: "300px" }}
             onChange={(event, newValue) => {
               setUnit(newValue.label);
             }}
@@ -188,7 +196,7 @@ function AddItems() {
           />
           <TextField
             label="Rate"
-            size="small"
+            sx={{ width: "300px" }}
             onChange={(e) => {
               setRate(e.target.value);
             }}
@@ -196,7 +204,7 @@ function AddItems() {
 
           <TextField
             label="Amount"
-            size="small"
+            sx={{ width: "300px" }}
             InputLabelProps={{ shrink: true }}
             disabled
             value={amount1}
@@ -204,17 +212,16 @@ function AddItems() {
             // onChange={(e)=>{setAmount(e.target.value)}}
           />
 
-          {/* <TextField label="Delivery Charges"   size="small" onChange={(e)=>{setDeliveryCharges(e.target.value)}}/>
+          {/* <TextField label="Delivery Charges"    onChange={(e)=>{setDeliveryCharges(e.target.value)}}/>
 
-        <TextField label="Packaging Charges"   size="small" onChange={(e)=>{setPackaging(e.target.value)}}/> */}
+        <TextField label="Packaging Charges"    onChange={(e)=>{setPackaging(e.target.value)}}/> */}
 
-          {/* <TextField label="SGST" size="small" onChange={(e)=>{setSgst(e.target.value)}}/> */}
+          {/* <TextField label="SGST"  onChange={(e)=>{setSgst(e.target.value)}}/> */}
           <Autocomplete
-            size="small"
+            sx={{ width: "300px" }}
             disablePortal
             id="combo-box-demo"
             options={sGSTDATA}
-            sx={{ width: 223 }}
             onChange={(event, newValue) => {
               setSgst(newValue.label);
             }}
@@ -222,11 +229,10 @@ function AddItems() {
           />
 
           <Autocomplete
-            size="small"
             disablePortal
             id="combo-box-demo"
             options={cGSTDATA}
-            sx={{ width: 223 }}
+            sx={{ width: "300px" }}
             onChange={(event, newValue) => {
               setCgst(newValue.label);
             }}
@@ -234,23 +240,22 @@ function AddItems() {
           />
 
           <Autocomplete
-            size="small"
             disablePortal
             id="combo-box-demo"
             options={iGSTDATA}
-            sx={{ width: 223 }}
+            sx={{ width: "300px" }}
             onChange={(event, newValue) => {
               setIgst(newValue.label);
             }}
             renderInput={(params) => <TextField {...params} label="IGST %" />}
           />
 
-          {/* <TextField label="CGST" size="small" onChange={(e)=>{setCgst(e.target.value)}}/>
+          {/* <TextField label="CGST"  onChange={(e)=>{setCgst(e.target.value)}}/>
 
-        <TextField label="IGST" size="small" onChange={(e)=>{setIgst(e.target.value)}}/> */}
+        <TextField label="IGST"  onChange={(e)=>{setIgst(e.target.value)}}/> */}
           <TextField
             label="GST AMOUNT"
-            size="small"
+            sx={{ width: "300px" }}
             InputLabelProps={{ shrink: true }}
             disabled
             value={gsttotelvalue}
@@ -258,7 +263,7 @@ function AddItems() {
 
           <TextField
             label="Discount"
-            size="small"
+            sx={{ width: "300px" }}
             InputLabelProps={{ shrink: true }}
             onChange={(e) => {
               setDiscount(e.target.value);
@@ -267,18 +272,17 @@ function AddItems() {
 
           <TextField
             label="Redeem"
-            size="small"
+            sx={{ width: "300px" }}
             InputLabelProps={{ shrink: true }}
             onChange={(e) => {
               setRedeem(e.target.value);
             }}
           />
           <Autocomplete
-            size="small"
             disablePortal
             id="combo-box-demo"
             options={tDSDATA}
-            sx={{ width: 223 }}
+            sx={{ width: "300px" }}
             onChange={(event, newValue) => {
               setTDSAmount(newValue.label);
             }}
@@ -286,7 +290,7 @@ function AddItems() {
           />
           <TextField
             label="TDS Amount"
-            size="small"
+            sx={{ width: "300px" }}
             disabled
             InputLabelProps={{ shrink: true }}
             value={tDSAmountTotel}
@@ -294,28 +298,29 @@ function AddItems() {
 
           <TextField
             label="Amount Paid"
-            size="small"
+            sx={{ width: "300px" }}
             InputLabelProps={{ shrink: true }}
-            disabled
+            // disabled
             // onChange={(e)=>{setBillAmount(e.target.value)}}
             value={totelItemAmount}
           />
         </Box>
 
         <Box textAlign={"center"}>
-          <Button onClick={handleSubmit} variant="contained">
+          <Button color="success" size='large' sx={{width:"300px"}} onClick={handleSubmit} variant="contained">
             Add Item
           </Button>
         </Box>
       </Box>
+      {/* <Box mt={5} sx={{ display: "flex", justifyContent:"center"}}>
       <Button
+        endIcon={<CloudUploadIcon/>}
         color="success"
         variant="contained"
-        sx={{ display: "flex", justifyContent: "flex-end" }}
-        onClick={handleonclick}
-      >
-        Uploade Document
+        onClick={handleonclick}>
+          Document
       </Button>
+      </Box> */}
     </>
   );
 }
