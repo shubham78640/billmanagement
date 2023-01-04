@@ -41,7 +41,7 @@ const[tDSType,setTDSType]=useState("");
 const[tDSAmount,setTDSAmount]=useState("");
 const[preTaxAmount, setPreTaxAmount]=useState("");
 const[totalAmount , setTotalAmount]=useState("");
-const[invoiceDate,setInvoiceDate]=useState("");
+const[invoiceDate,setInvoiceDate]=useState(null);
 const [gSTApplicable,setGSTApplicable]=useState("");
 const[reportingManager,SetReportingManager]=useState("")
 const[paymentCycle,setPaymentCycle]=useState("")
@@ -131,8 +131,7 @@ paymentCycle
   }
   );
   alert("worker save successfully")
-  localStorage.setItem("BillID",response.data.data.invoiceId)
-  {navigate(`/mainform/addItem`)}
+  navigate(`/mainform/addItem/${response.data.data.userId}`)
   localStorage.setItem("InvoiceNumber", invoiceNumber);  
   localStorage.setItem("InvoiceDate", invoiceDate);  
   localStorage.setItem("EmployeeName", empName);  
@@ -142,6 +141,10 @@ paymentCycle
   alert(error)
   }
   }
+
+// const handleSubmit = ()=>{
+//   navigate(`/mainform/addItem/${1234}`)
+// }
 
 // useEffect(() => {
 //   const getData = async()=>{
@@ -154,8 +157,8 @@ paymentCycle
 //  }, [])
 
   return (
-    <>
-    <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap',}}> 
+    <Box sx={{background:"White", minHeight:"700px"}}>
+    <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', justifyContent:"center"}}> 
 
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" onChange={(e) => setEmpCode(e.target.value)}
  value={empcode} />
@@ -351,11 +354,15 @@ paymentCycle
  value={paymentStatus} /> */}
     
 
-      <Button sx={{ width: 300 }} onClick={handleSubmit}  variant="contained" color="success">Add Items</Button>
+      
 
     </Box>
+
+    <Box  textAlign={"center"}>
+    <Button size='large' sx={{ width:{sm:300, xs:250}, mb:"20px" }} onClick={handleSubmit}  variant="contained" color="success">Add Items</Button>
+    </Box>
     
-    </>
+    </Box>
   )
 }
 

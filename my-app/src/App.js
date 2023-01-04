@@ -13,8 +13,8 @@ function App() {
     <Navbaar/>
     <Routes>
         <Route path="/mainform" element={<MainForm/>}/>
-        <Route path="/mainform/addItem" element={<AddItems/>}/>
-        <Route path="/uploadeDocuments" element={<UploadeDocuments/>}/>
+        <Route path="/mainform/addItem/:id" element={<AddItems/>}/>
+        <Route path="/addItem/uploadeDocuments/:id" element={<UploadeDocuments/>}/>
     </Routes>
   </BrowserRouter>
   );
