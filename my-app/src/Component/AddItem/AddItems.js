@@ -149,8 +149,24 @@ function AddItems() {
               setCategory(e.target.value);
             }}
           />
+           <TextField
+            label="Item Code"
+            sx={{ width: "300px" }}
+            onChange={(e) => {
+              setItemCode(e.target.value);
+            }}
+          />
 
-          <Autocomplete
+         <TextField
+            label="Item Name"
+            sx={{ width: "300px" }}
+            onChange={(e) => {
+              setItemName(e.target.value);
+            }}
+          />
+
+
+          {/* <Autocomplete
             disablePortal
             options={top100Films}
             sx={{ width: "300px" }}
@@ -160,9 +176,9 @@ function AddItems() {
             renderInput={(params) => (
               <TextField {...params} label="Item Code" />
             )}
-          />
+          /> */}
 
-          <Autocomplete
+          {/* <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={top100Films}
@@ -173,7 +189,7 @@ function AddItems() {
             renderInput={(params) => (
               <TextField {...params} label="Name of Item" />
             )}
-          />
+          /> */}
 
           {/* <TextField   label="HSN/SAC Code"  onChange={(e)=>{setHSNCode(e.target.value)}}/> */}
           <TextField
@@ -186,7 +202,7 @@ function AddItems() {
 
           {/* <TextField   label="Unit"  onChange={(e)=>{setUnit(e.target.value)}}/> */}
 
-          <Autocomplete
+          {/* <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={top100Films}
@@ -195,6 +211,14 @@ function AddItems() {
               setUnit(newValue.label);
             }}
             renderInput={(params) => <TextField {...params} label="Unit" />}
+          /> */}
+
+<TextField
+            label="Unit"
+            sx={{ width: "300px" }}
+            onChange={(e) => {
+              setUnit(e.target.value);
+            }}
           />
           <TextField
             label="Rate"
@@ -211,7 +235,7 @@ function AddItems() {
             disabled
             value={amount1}/>
 
-        <TextField   label="Rate" size="small" onChange={(e)=>{setRate(e.target.value)}}/>
+        {/* <TextField   label="Rate" size="small" onChange={(e)=>{setRate(e.target.value)}}/> */}
 
           {/* <TextField label="Delivery Charges"    onChange={(e)=>{setDeliveryCharges(e.target.value)}}/>
 
