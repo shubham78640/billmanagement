@@ -8,8 +8,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 function MainForm() {
 
+  const[billId,setBillID]=useState("")
 const[empcode,setEmpCode]= useState("");
 const[empName,setEmpName]=useState("");
 const[empEmail,setEmail]=useState("");
@@ -33,7 +35,7 @@ const[ customerCode,setCustomerCode] =useState("");
 const[ customerName,setCustomerName] =useState("");
 const[invoiceDescription,setInvoiceDescription]=useState("");
 const[serviceCategory,setServiceCategory]=useState("");
-const[invoiceAttachment,setInvoiceAttachment]=useState("");
+const [gstAmount,setGSTAmount]=useState("")
 const[paymentStatus,setPaymentStatus]=useState("");
 const[tDSType,setTDSType]=useState("");
 const[tDSAmount,setTDSAmount]=useState("");
@@ -41,6 +43,8 @@ const[preTaxAmount, setPreTaxAmount]=useState("");
 const[totalAmount , setTotalAmount]=useState("");
 const[invoiceDate,setInvoiceDate]=useState("");
 const [gSTApplicable,setGSTApplicable]=useState("");
+const[reportingManager,SetReportingManager]=useState("")
+const[paymentCycle,setPaymentCycle]=useState("")
 const [subbrandDD,setSubBrandDD]=useState([]);
 const [locationDD,setLocationDD]=useState([]);
 const [departmentDD,setDepartmentDD]=useState([]);
@@ -52,11 +56,15 @@ const [gSTApplicableDD,setGSTApplicableDD]=useState([]);
 const [paymentModeDD,setPaymentModeDD]=useState([]);
 const [paymentMethodDD,setPaymentMethodDD]=useState([]);
 
+
+const invbillid =localStorage.getItem("BillID");
+const totelAmountofbill =((+preTaxAmount)+(+gstAmount));
+let navigate = useNavigate();
 const handleSubmit = async()=>{
     alert("hii")
-
   console.log("data ",empcode,
-{  empName,
+{ 
+   empName,
   empEmail,
   invoiceNumber,
   payDirectCardDetails,
@@ -65,10 +73,7 @@ const handleSubmit = async()=>{
   customerName,
   serviceCategory,
   invoiceDescription,
-  invoiceAttachment,
   paymentStatus,
-  tDSType,
-  tDSAmount,
   preTaxAmount,
   totalAmount,
   invoiceDate,
@@ -82,7 +87,11 @@ category,
 subCategory1,
 subCategory2,
 expenseType,
-gSTApplicable
+reportingManagerData,
+gstAmount,
+totelAmountofbill,
+paymentCycle
+
 
 }
   )
@@ -98,16 +107,14 @@ gSTApplicable
   "employeeName": empName,
   "expensesCategory": expenseCategory,
   "expensesType": expenseType,
-  "gstapplicaiton": gSTApplicable,
-  "invoiceAttachment": invoiceAttachment,
+  "gstAmount": gstAmount,
   "invoiceDate": invoiceDate,
   "invoiceDescription": invoiceDescription,
   "invoiceNumber": invoiceNumber,
   "location": location,
   "partnerCode": customerCode,
   "partnerName": customerName,
-  "partnerStatus": paymentStatus,
-  "payDirectCardDetails": payDirectCardDetails,
+  "payDirectCard": payDirectCardDetails,
   "paymentMethod": paymentMethod,
   "paymentMode": paymentMode,
   "preTaxAmount": preTaxAmount,
@@ -115,33 +122,40 @@ gSTApplicable
   "subBrand": subrand,
   "subCatagory1": subCategory1,
   "subCatagory2": subCategory2,
-  "tdsamount": tDSAmount,
-  "tdstpye": tDSType,
-  "totalAmount": totalAmount
+  "totalAmount": totelAmountofbill,
+  "reportingManager": reportingManager,
+  "paymentCycle": paymentCycle,
+  "userType": "ADMIN",
+
+
   }
   );
   alert("worker save successfully")
+  localStorage.setItem("BillID",response.data.data.invoiceId)
+  {navigate(`/mainform/addItem`)}
+  localStorage.setItem("InvoiceNumber", invoiceNumber);  
+  localStorage.setItem("InvoiceDate", invoiceDate);  
+  localStorage.setItem("EmployeeName", empName);  
+  localStorage.setItem("BillID",response.data.data.invoiceId)
   console.log(response)
-  
-  
   } catch (error) {
   alert(error)
   }
   }
 
-useEffect(() => {
-  const getData = async()=>{
-  let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
-  let data2 = await response2.json()
-  setBrandDD(data2)
-  console.log("data2",data2)
-  }
-  getData()
- }, [])
+// useEffect(() => {
+//   const getData = async()=>{
+//   let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
+//   let data2 = await response2.json()
+//   setBrandDD(data2)
+//   console.log("data2",data2)
+//   }
+//   getData()
+//  }, [])
 
   return (
     <>
-    <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', }}> 
+    <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap',}}> 
 
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" onChange={(e) => setEmpCode(e.target.value)}
  value={empcode} />
@@ -152,6 +166,18 @@ useEffect(() => {
 
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)}
  value={empEmail} />
+
+
+<Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={reportingManagerData}
+ onChange={(event, newValue) => {
+ SetReportingManager(newValue.label);
+ }}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Reporting Manager" />}
+    />
 
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Number" variant="outlined"  onChange={(e) => setInvoiceNumber(e.target.value)}
  value={invoiceNumber}
@@ -175,7 +201,7 @@ useEffect(() => {
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={data34}
+      options={brand1}
  onChange={(event, newValue) => {
  setBrand(newValue.label);
  }}
@@ -186,7 +212,7 @@ useEffect(() => {
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={subabc}
+      options={subbrand1}
       sx={{ width: 300 }}
       onChange={(event, newValue)=>{setSubrand(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Sub Brand" />}
@@ -202,7 +228,7 @@ useEffect(() => {
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={data12}
+      options={departmentData}
       sx={{ width: 300 }}
       onChange={(event, newValue)=>{setDepartment(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Department" />}
@@ -210,7 +236,7 @@ useEffect(() => {
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={categoryData}
       sx={{ width: 300 }}
       onChange={(event, newValue)=>{setCategory(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Category" />}
@@ -218,14 +244,14 @@ useEffect(() => {
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={sub_Category1Data}
       sx={{ width: 300 }}onChange={(event, newValue)=>{setSubCategory1(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Sub Category1" />}
     />
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={sub_Category2Data}
       sx={{ width: 300 }}
       onChange={(event, newValue)=>{setSubCategory2(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Sub Category2" />}
@@ -233,31 +259,54 @@ useEffect(() => {
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={top100Films}
+      options={expenseTypedata}
       sx={{ width: 300 }}
       onChange={(event, newValue)=>{setExpenseType(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="Expense Type" />}
     />
+
+{/* <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={expenseTypedata}
+      sx={{ width: 300 }}
+      onChange={(event, newValue)=>{setExpenseType(newValue.label)}}
+      renderInput={(params) => <TextField {...params} label="GST Slab" />}
+    /> */}
    <TextField sx={{ width: 300 }} id="outlined-basic" label="Pre Tax Amount" variant="outlined" onChange={(e) => setPreTaxAmount(e.target.value)}
  value={preTaxAmount} />
-     <TextField sx={{ width: 300 }} id="outlined-basic" label="Total Amount" variant="outlined" onChange={(e) => setTotalAmount(e.target.value)}
- value={totalAmount} />
-<Autocomplete
+  <TextField sx={{ width: 300 }} id="outlined-basic" label="GST Amount" variant="outlined" onChange={(e) => setGSTAmount(e.target.value)}
+ value={gstAmount}/>
+     <TextField sx={{ width: 300 }}  disabled id="outlined-basic" label="Total Amount" variant="outlined"  InputLabelProps={{ shrink: true }} 
+ value={totelAmountofbill} />
+{/* <Autocomplete
  disablePortal
  id="combo-box-demo"
- options={abc}
+ options={gstApplicableData}
  sx={{ width: 300 }}
  onChange={(event, newValue)=>{setGSTApplicable(newValue.label)}}
  renderInput={(params) => <TextField {...params} label="GST Applicable" />}
- />
- <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
- value={tDSType}/>
- <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+ /> */}
+ {/* <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
+ value={tDSType}/> */}
+ {/* <TextField sx={{ width: 300 }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
  value={tDSAmount}/>
+
+<TextField sx={{ width: 300 }} id="outlined-basic" label="Post TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+ value={tDSAmount}/> */}
+
 <Autocomplete
  disablePortal
  id="combo-box-demo"
- options={paymentMode1}
+ options={paymentcycleData}
+ sx={{ width: 300 }}
+ onChange={(event, newValue)=>{setPaymentCycle(newValue.label)}}
+ renderInput={(params) => <TextField {...params} label="Payment Cycle" />}
+ />
+<Autocomplete
+ disablePortal
+ id="combo-box-demo"
+ options={paymentMode1Data}
  sx={{ width: 300 }}
  onChange={(event, newValue)=>{setPaymentMode(newValue.label)}}
  renderInput={(params) => <TextField {...params} label="Payment Mode" />}
@@ -265,15 +314,24 @@ useEffect(() => {
  <Autocomplete
  disablePortal
  id="combo-box-demo"
- options={paymentMode1}
+ options={paymentMethodData}
  sx={{ width: 300 }}
  onChange={(event, newValue)=>{setPaymentMethod(newValue.label)}}
  renderInput={(params) => <TextField {...params} label="Payment Method" />}
  />
  <TextField sx={{ width: 300 }} id="outlined-basic" label="Pay Direct Card Details" variant="outlined" onChange={(e) => setPayDirectCardDetails(e.target.value)}
  value={payDirectCardDetails}/>
- <TextField sx={{ width: 300 }} id="outlined-basic" label="Expense Category" variant="outlined" onChange={(e) => setExpenseCategory(e.target.value)}
- value={expenseCategory}/>
+ {/* <TextField sx={{ width: 300 }} id="outlined-basic" label="Expense Category" variant="outlined" onChange={(e) => setExpenseCategory(e.target.value)}
+ value={expenseCategory}/> */}
+
+<Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={expenseCatdata}
+      sx={{ width: 300 }}
+      onChange={(event, newValue)=>{setExpenseCategory(newValue.label)}}
+      renderInput={(params) => <TextField {...params} label="Expense Category" />}
+    />
  <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Code" variant="outlined" onChange={(e) => setCustomerCode(e.target.value)}
  value={customerCode} />
  <TextField sx={{ width: 300 }} id="outlined-basic" label="Partner/Customer Name" variant="outlined" onChange={(e) => setCustomerName(e.target.value)}
@@ -282,17 +340,18 @@ useEffect(() => {
  value={invoiceDescription} />
  <TextField sx={{ width: 300 }} id="outlined-basic" label="Service Category" variant="outlined" onChange={(e) => setServiceCategory(e.target.value)}
  value={serviceCategory}/>
- <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Attachment" variant="outlined" onChange={(e) => setInvoiceAttachment(e.target.value)}
- value={invoiceAttachment}/>
- <TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
- value={paymentStatus} />
+ {/* <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Attachment" variant="outlined"
+ 
+ //onChange={(e) => setInvoiceAttachment(e.target.value)}
+
+//  value={invoiceAttachment}
+ /> */}
+ {/* <input type="file"  name="file" onChange={changeHandler}/> */}
+ {/* <TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
+ value={paymentStatus} /> */}
     
 
-     {/* <Link to={`/mainform/addItem/${invoiceNumber}`}> */}
-      
       <Button sx={{ width: 300 }} onClick={handleSubmit}  variant="contained" color="success">Add Items</Button>
-      
-      {/* </Link> */}
 
     </Box>
     
@@ -300,55 +359,264 @@ useEffect(() => {
   )
 }
 
-export default MainForm ;
+export default MainForm;
 
-const top100Films = [
-    { label: 'The Shawshank Redemption'},
-    { label: 'The Godfather',  },
-    { label: 'The Godfather: Part II', },
-    { label: 'The Dark Knight',  },
-    { label: '12 Angry Men',  },
-    { label: "Schindler's List",  },
-    { label: 'Pulp Fiction'},
-]
 
-const abc = [
+
+const gstApplicableData = [
   { label: 'Yes'},
   { label: 'No'},
  
  
 ]
-const subabc = [
-  { label: 'Sub Brand 1'},
-  { label: 'Sub Brand 2'},
-  { label: 'Sub Brand 3'},
-  { label: 'Sub Brand 4'},
-  { label: 'Sub Brand 5'},
+const subbrand1 = [
+  { label: 'Pinch'},
+  { label: 'Pinch D2C'},
+  { label: 'Pinch B2B'},
+  { label: 'Well Served'},
+  { label: 'BO'},
+  { label: 'RCC' },
+  { label: 'CARE CREW'},
+  { label: 'Gullak' },
+  { label: '1 To Zee'},
  
 ]
 
-const data34 = [
+const brand1 = [
   { label: 'Pinch' },
   { label: 'Well served'},
- ]
-
- const data12 = [
-  { label: 'Marketing' },
-  { label: 'HR'},
+  { label: '1 To Zee' },
+  { label: 'CARE CREW'},
  ]
 
  const locationData=[
-  { label: 'Gurugram' },
-  { label: 'Mumbai'},
+
+  { label: 'Office - Gurgaon' },
+  { label: 'Office - Mumbai'},
+  { label: 'Office - Bangalore' },
+  { label: 'Office - Lucknow'},
+  { label: '1 To Zee - DLF Phase 1' },
+  { label: 'Gullak Daycare - Chakkarpur'},
+  { label: 'Well Served - DLF Phase 3' },
+  { label: 'Well Served - DLF Phase 3'},
+  { label: 'Well Served - Mumbai' },
+  { label: 'Well Served - Powai'},
+  { label: 'CC Office - Manesar' },
+  { label: 'RCC - Delhi'},
+  { label: 'HQ' },
+
  ]
 
- const paymentMode=[
+ const paymentMode1Data=[
   { label: 'Cash' },
-  { label: 'Bank'},
+  { label: 'Bank Transfer'},
+  { label: 'Debit Card' },
+  { label: 'Credit Card'},
+  { label: 'Mobile Payment' },
+  { label: 'Cheque'},
+
  ]
 
- const paymentMode1=[
+ const paymentcycleData=[
+  { label: '0 Days' },
+  { label: '3 Days' },
+  { label: '7 Days' },
+  { label: '15 Days' },
+  { label: '21 Days' },
+  { label: '30 Days' },
+  { label: '45 Days' },
+  { label: '60 Days' },
+ 
+
+ ]
+
+ const paymentMethodData=[
   { label: 'Employee' },
-  { label: 'paytm '},
-  { label: 'PhonePay '},
+  { label: 'Bank Transfer - Kotak'},
+  { label: 'Bank Transfer - ICICI' },
+  { label: 'Bank Transfer - Employee'},
+  { label: 'Company Card' },
+  { label: 'Employee Debit Card'},
+  { label: 'Business Credit Card' },
+  { label: 'Employee Credit Card'},
+  { label: 'Paytm' },
+  { label: 'PhonePe'},
+  { label: 'Google Pay' },
+  { label: 'BHIM'},
+  { label: 'Company Cheque' },
+  { label: 'Employee Cheque'},
+ ]
+
+ const departmentData=[
+
+  { label: 'Marketing' },
+  { label: 'HR'},
+  { label: 'Admin' },
+  { label: 'Procurement'},
+  { label: 'Training & Audit' },
+  { label: 'Finance'},
+  { label: 'Technology' },
+  { label: 'Operations'},
+
+ ]
+
+ const categoryData =[
+  { label: 'Residents' },
+  { label: 'Owners'},
+  { label: 'Developers' },
+  { label: 'Corporate'},
+  { label: 'Brand' },
+  { label: 'Talent Management'},
+  { label: 'Remuneration' },
+  { label: 'Employee Engagement'},
+  { label: 'Office Utilities' },
+  { label: 'Office Supplies'},
+  { label: 'Repair & Maintenance' },
+  { label: 'Travel Desk'},
+  { label: 'Raw Material' },
+  { label: 'Logistic'},
+  { label: 'Sampling' },
+  { label: 'Infrastructure'},
+  { label: 'Daily Needs' },
+  { label: 'Travel'},
+  { label: 'Fees' },
+  { label: 'Professional Fee'},
+  { label: 'Software' },
+  { label: 'Residents'},
+  { label: 'Owners' },
+  { label: 'Well Served'},
+  { label: '1ToZee' },
+  { label: 'Care Crew'},
+  { label: 'Corporate' },
+  {label:'Partnerships'}
+
+
+ ]
+
+ const sub_Category1Data =[
+  { label: 'Digital Marketing' },
+  { label: 'Print'},
+  { label: 'Influencer Marketing' },
+  { label: 'Event Management'},
+  { label: 'Relationship Marketing' },
+  { label: 'Public Relations'},
+  { label: 'Consultancy Cost' },
+  { label: 'Recruitment Drive'},
+  { label: 'Job Portal' },
+  { label: 'Fees'},
+  { label: 'HRMS' },
+  { label: 'Liasoning'},
+  { label: 'Travel' },
+  { label: 'Food'},
+  { label: 'Rewards & Recognitions' },
+  { label: 'Events'},
+  { label: 'Rental' },
+  { label: 'Electricity'},
+  { label: 'Water' },
+  { label: 'Asset'},
+  { label: 'Refreshments' },
+  { label: 'Uniform'},
+  { label: 'Furniture' },
+  { label: 'Housekeeping Supplies'},
+  { label: 'Toiletries' },
+  { label: 'Courier'},
+  { label: 'Gardening'},
+  { label: 'Fuel' },
+  { label: 'Wear & Tear'},
+  { label: 'Pest Control' },
+  { label: 'Decoration'},
+  { label: 'Tickets' },
+  { label: 'Accomodation'},
+  { label: 'Local Conveyance' },
+  { label: 'Equipment' },
+  { label: 'Kitchen Accessories'},
+  { label: 'Groceries' },
+  { label: 'Fruits & Vegetables'},
+  { label: 'Dairy' },
+  { label: 'Chemicals'},
+  { label: 'Training Essentials' },
+  { label: 'Conveyance'},
+  { label: 'Licence'},
+  { label: 'TDS' },
+  { label: 'GST'},
+  { label: 'PF/ESIC' },
+  { label: 'Tool' },
+  { label: 'Storage'},
+  { label: 'Conceirge'},
+  { label: 'Housekeeping'},
+  { label: 'Food & Nuitrition' },
+  { label: 'Wellness'},
+  { label: 'Care' },
+  { label: 'Experience'},
+  { label: 'Repair & Maintenance' },
+  { label: 'Training'},
+  { label: 'Commission' },
+  { label: 'Field Office'},
+  { label: 'Business Development' },
+  { label: 'Vegetables'},
+  { label: 'Stationary' },
+  { label: 'Toys'},
+  { label: 'Logistics' },
+  { label: 'Packaging'},
+  { label: 'Delivery' },
+ ]
+
+ const sub_Category2Data =[
+  { label: 'SEO' },
+  { label: 'Email'},
+  { label: 'SMS' },
+  { label: 'Whatsapp'},
+  { label: 'Social Media Marketing' },
+  { label: 'Flyers'},
+  { label: 'Newspaper' },
+  { label: 'Standee'},
+  { label: 'Canopy' },
+  { label: 'Promo Table'},
+  { label: 'Freelancers' },
+  { label: 'Sampling'},
+  { label: 'Promoters' },
+  { label: 'Look Walkers'},
+  { label: 'Charity' },
+  { label: 'Media'},
+  { label: 'Radio'},
+  { label: 'Content' },
+  { label: 'Blogs'},
+  { label: 'Property Rent' },
+  { label: 'Equipment Rental'},
+  { label: 'Telecom Rental' },
+  { label: 'Utensils'},
+  { label: 'Electronic' },
+  { label: 'Storage'},
+  { label: 'Apron' },
+  { label: 'Kitchen Dusters'},
+  { label: 'Supply' },
+  { label: 'Demand'},
+  { label: 'Deployment' },
+
+
+ ]
+
+
+ const expenseTypedata =[
+  { label: 'Company' },
+  { label: 'Employee Reimbursement'},
+  { label: 'Billable - Customer' },
+  { label: 'Non Billable - Customer'},
+  { label: 'Partner' },
+
+ ]
+
+ const expenseCatdata =[
+  { label: 'One Time' },
+  { label: 'Recurring'},
+
+ ]
+
+ const reportingManagerData =[
+
+  { label: 'NMS Sir' },
+  { label: 'Ravi Sir'},
+  { label: 'AB Sir' },
+  { label: 'Mayank Sir'},
+  { label: 'Nitin Sir' },
  ]

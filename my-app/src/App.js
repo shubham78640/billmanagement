@@ -3,14 +3,18 @@ import React from "react";
 import Navbaar from "./Component/Navbaar/Navbaar";
 import AddItems from "./Component/AddItem/AddItems";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UploadeDocuments from "./Component/UploadeDocuments/UploadeDocuments";
 
 function App() {
+
+  const invbillid =localStorage.getItem("BillID");
   return (
   <BrowserRouter>
     <Navbaar/>
     <Routes>
         <Route path="/mainform" element={<MainForm/>}/>
-        <Route path="/mainform/addItem/:invoicenumber" element={<AddItems/>}/>
+        <Route path="/mainform/addItem" element={<AddItems/>}/>
+        <Route path="/uploadeDocuments" element={<UploadeDocuments/>}/>
     </Routes>
   </BrowserRouter>
   );
