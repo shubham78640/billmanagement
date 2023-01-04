@@ -147,6 +147,14 @@ const columns = [
         width: 150,
         editable: true,
       },
+
+    //   {
+    //     field: '<button>Add</button>',
+    //     headerName: 'Show Item',
+    //     width: 150,
+    //     editable: true,
+    //     render: billtabledata=><a href='/mainform'></a>
+    //   },
     //   {
     //     field: 'email',
     //     headerName: 'Email',
@@ -191,7 +199,7 @@ function BillTableData() {
         columns={columns}
         pageSize={100}
         rowsPerPageOptions={[500]}
-        // checkboxSelection
+        checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
       />

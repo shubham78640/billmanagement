@@ -22,7 +22,9 @@ function UploadeDocuments() {
 
   const handleonclick = async () => {
     try {
-      let response = await axios.post(`http://localhost:8082/bill/files/upload/file?invoiceNumber=${id}`, formData);
+      let response = await axios.post(`
+      http://localhost:8082/bill/files/upload/file?invoiceId=${id}
+      `, formData);
       alert("Item save successfully");
       localStorage.clear();
       navigate("/mainform");

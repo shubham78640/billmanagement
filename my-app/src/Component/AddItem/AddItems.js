@@ -88,6 +88,8 @@ function AddItems() {
         sgst: sgst,
         tds: tDSAmount,
         tdsAmount: tDSAmountTotel,
+        invoiceId: invbillid,
+
       });
       alert("Item save successfully");
       console.log(response);
