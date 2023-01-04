@@ -119,8 +119,10 @@ console.log("totelAmount",totelItemAmount)
 
 <TextField   label="Category" size="small" onChange={(e)=>{setCategory(e.target.value)}}/>
 
+<TextField   label="Item Code" size="small" onChange={(e)=>{setItemCode(e.target.value)}}/>
+<TextField   label="Name of Item" size="small" onChange={(e)=>{setItemName(e.target.value)}}/>
 
-        <Autocomplete
+        {/* <Autocomplete
           size="small"
           disablePortal
           options={top100Films}
@@ -139,13 +141,13 @@ console.log("totelAmount",totelItemAmount)
           renderInput={(params) => (
             <TextField {...params} label="Name of Item" />
           )}
-        />
+        /> */}
 
 {/* <TextField   label="HSN/SAC Code" size="small" onChange={(e)=>{setHSNCode(e.target.value)}}/> */}
         <TextField label="Quantity" size="small" onChange={(e)=>{setQuantity(e.target.value)}}/>
 
         {/* <TextField   label="Unit" size="small" onChange={(e)=>{setUnit(e.target.value)}}/> */}
-
+{/* 
         <Autocomplete
           size="small"
           disablePortal
@@ -157,9 +159,11 @@ console.log("totelAmount",totelItemAmount)
             <TextField {...params} label="Unit" />
           )}
         />
-        <TextField   label="Rate" size="small" onChange={(e)=>{setRate(e.target.value)}}/>
+         */}
 
-     
+        <TextField   label="Unit" size="small" onChange={(e)=>{setUnit(e.target.value)}}/>
+
+        <TextField   label="Rate" size="small" onChange={(e)=>{setRate(e.target.value)}}/>
 
         <TextField label="Amount" size="small"  InputLabelProps={{ shrink: true }}   disabled  value={amount1} 
 
@@ -254,6 +258,7 @@ console.log("totelAmount",totelItemAmount)
 export default AddItems;
 
 const top100Films = [
+
   { label: "The Shawshank Redemption", year: 1994 },
   { label: "The Godfather", year: 1972 },
   { label: "The Godfather: Part II", year: 1974 },
@@ -261,9 +266,11 @@ const top100Films = [
   { label: "12 Angry Men", year: 1957 },
   { label: "Schindler's List", year: 1993 },
   { label: "Pulp Fiction", year: 1994 },
+  
 ];
 
 const sGSTDATA = [
+
   { label: "2.5" },
   { label: "6" },
   { label: "9" },
@@ -273,6 +280,7 @@ const sGSTDATA = [
 ];
 
 const cGSTDATA = [
+
   { label: "2.5" },
   { label: "6" },
   { label: "9" },
@@ -282,6 +290,7 @@ const cGSTDATA = [
 ];
 
 const iGSTDATA = [
+
   { label: "5" },
   { label: "12" },
   { label: "18" },
@@ -291,6 +300,7 @@ const iGSTDATA = [
 ];
 
 const tDSDATA =[
+
   { label: "0" },
   { label: "1" },
   { label: "2" },
@@ -301,9 +311,6 @@ const tDSDATA =[
   { label: "25" },
   { label: "30" },
  
-
-
-
 
 ]
 

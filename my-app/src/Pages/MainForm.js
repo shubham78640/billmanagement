@@ -9,6 +9,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import BillTableData from '../Component/BillTableData/BillTableData';
 function MainForm() {
 
   const[billId,setBillID]=useState("")
@@ -350,9 +351,7 @@ paymentCycle
  {/* <TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
  value={paymentStatus} /> */}
     
-
       <Button sx={{ width: 300 }} onClick={handleSubmit}  variant="contained" color="success">Add Items</Button>
-
     </Box>
     
     </>
@@ -398,8 +397,7 @@ const brand1 = [
   { label: '1 To Zee - DLF Phase 1' },
   { label: 'Gullak Daycare - Chakkarpur'},
   { label: 'Well Served - DLF Phase 3' },
-  { label: 'Well Served - DLF Phase 3'},
-  { label: 'Well Served - Mumbai' },
+  { label: 'Well Served - Rodeo Drive'},
   { label: 'Well Served - Powai'},
   { label: 'CC Office - Manesar' },
   { label: 'RCC - Delhi'},
