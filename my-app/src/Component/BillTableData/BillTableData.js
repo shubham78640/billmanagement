@@ -26,7 +26,7 @@ const columns = [
     {
       field: 'email',
       headerName: 'Email',
-      width: 110,
+      width: 170,
       editable: true,
     },
 
@@ -37,6 +37,12 @@ const columns = [
         sortable: false,
         width: 160,
 
+      },
+      {
+        field: 'invoiceNumber',
+        headerName: 'Invoice Number',
+        width: 170,
+        editable: true,
       },
     {
         field: 'invoiceDate',
@@ -72,7 +78,7 @@ const columns = [
       {
         field: 'location',
         headerName: 'Location',
-        width: 110,
+        width: 150,
         editable: true,
       },
       {
@@ -84,7 +90,7 @@ const columns = [
       {
         field: 'preTaxAmount',
         headerName: 'Pre Tax Amount',
-        width: 110,
+        width: 170,
         editable: true,
       },
       {
@@ -108,37 +114,37 @@ const columns = [
       {
         field: 'paymentMethod',
         headerName: 'Payment Method',
-        width: 110,
+        width: 170,
         editable: true,
       },
       {
         field: 'payDirectCard',
         headerName: 'Pay Direct Card Details',
-        width: 110,
+        width: 170,
         editable: true,
       },
       {
         field: 'partnerCode',
         headerName: 'Partner/Customer Code',
-        width: 110,
+        width: 190,
         editable: true,
       },
       {
         field: 'partnerName',
         headerName: 'Partner/Customer Name',
-        width: 110,
+        width: 190,
         editable: true,
       },
       {
         field: 'invoiceDescription',
         headerName: 'Invoice Description',
-        width: 110,
+        width: 190,
         editable: true,
       },
       {
         field: 'serviceCategory',
         headerName: 'Service Category',
-        width: 110,
+        width: 150,
         editable: true,
       },
     //   {

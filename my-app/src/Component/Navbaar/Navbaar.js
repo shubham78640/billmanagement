@@ -1,8 +1,10 @@
 import { Box } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 function Navbaar() {
+
+  let navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -16,9 +18,12 @@ function Navbaar() {
       }}
     >
       <Box sx={{marginLeft:{ sm: 4, xs: 1 },  display:"grid", alignItems:"center", justifyContent:"center"}}>
+
         <img
+        onClick={()=>{navigate("/")}}
           style={{
             borderRadius: "50%",
+            cursor:"pointer",
             boxShadow:
               "rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px",
           }}
