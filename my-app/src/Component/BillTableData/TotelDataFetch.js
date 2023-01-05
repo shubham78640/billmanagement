@@ -22,6 +22,15 @@ const columns = [
     //   width: 170,
     //   editable: true,
     // },
+    {
+        field: '',
+        headerName: 'Category Item',
+        description: 'This column has a value getter and is not sortable.',
+        sortable: false,
+        width: 160,
+        renderCell:params=><button onClick={()=>{alert("hii")}}>hii</button>
+        
+      },
 
     {
         field: 'categoryItem',
@@ -29,8 +38,8 @@ const columns = [
         description: 'This column has a value getter and is not sortable.',
         sortable: false,
         width: 160,
+        renderCell:params=><button>hii</button>
         
-
       },
       {
         field: 'invoiceNumber',

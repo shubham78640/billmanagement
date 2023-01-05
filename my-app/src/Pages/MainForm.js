@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import BillTableData from '../Component/BillTableData/BillTableData';
 import moment from "moment"
+
 function MainForm() {
 
   const[billId,setBillID]=useState("")
@@ -38,7 +39,6 @@ const[ customerName,setCustomerName] =useState("");
 const[invoiceDescription,setInvoiceDescription]=useState("");
 const[serviceCategory,setServiceCategory]=useState("");
 const [gstAmount,setGSTAmount]=useState("")
-const[paymentStatus,setPaymentStatus]=useState("");
 const[tDSType,setTDSType]=useState("");
 const[tDSAmount,setTDSAmount]=useState("");
 const[preTaxAmount, setPreTaxAmount]=useState("");
@@ -47,6 +47,12 @@ const[invoiceDate,setInvoiceDate]=useState(null);
 const [gSTApplicable,setGSTApplicable]=useState("");
 const[reportingManager,SetReportingManager]=useState("")
 const[paymentCycle,setPaymentCycle]=useState("")
+const[utr,setUtr]=useState("");
+const[taskId,setTaskId]=useState("");
+const[updatepaidAmount,setUpdatepaidAmount]=useState("");
+const[paymentDate,setpaymentDate]=useState("");
+const[transactionsDetail,setTransactionsDetail]=useState("");
+const[paymentStatus,setPaymentStatus]=useState("");
 const [subbrandDD,setSubBrandDD]=useState([]);
 const [locationDD,setLocationDD]=useState([]);
 const [departmentDD,setDepartmentDD]=useState([]);
@@ -130,6 +136,14 @@ paymentCycle
   "reportingManager": reportingManager,
   "paymentCycle": paymentCycle,
   "userType": "ADMIN",
+  "utr": utr,
+  "taskId": taskId,
+  "paymentStatus": paymentStatus,
+  "paymentDate": paymentDate,
+  "paidAmount": updatepaidAmount,
+  "transactionDetail": transactionsDetail,
+
+
 
 
   }
@@ -152,7 +166,7 @@ paymentCycle
 
 // useEffect(() => {
 //   const getData = async()=>{
-//   let response2 = await fetch(`http://localhost:8082/bill/dropdown/getSubBrand/${"pinch"}`)
+//   let response2 = await fetch(`http://localhost:8082/bill/bill/get/name/email/PINCH1234`)
 //   let data2 = await response2.json()
 //   setBrandDD(data2)
 //   console.log("data2",data2)
@@ -162,10 +176,11 @@ paymentCycle
 
   return (
     <Box sx={{background:"White", minHeight:"700px"}}>
-    <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', justifyContent:"center"}}> 
+    <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', justifyContent:"center" }}> 
 
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Code" variant="outlined" onChange={(e) => setEmpCode(e.target.value)}
- value={empcode} />
+ value={empcode}
+  />
 
     <TextField sx={{ width: 300 }} id="outlined-basic" label="Employee Name" variant="outlined" onChange={(e) => setEmpName(e.target.value)}
  value={empName}
@@ -308,7 +323,7 @@ paymentCycle
  options={paymentcycleData}
  sx={{ width: 300 }}
  onChange={(event, newValue)=>{setPaymentCycle(newValue.label)}}
- renderInput={(params) => <TextField {...params} label="Payment Cycle" />}
+ renderInput={(params) => <TextField {...params} label="Payment Cycle Days" />}
  />
 <Autocomplete
  disablePortal
@@ -347,6 +362,27 @@ paymentCycle
  value={invoiceDescription} />
  <TextField sx={{ width: 300 }} id="outlined-basic" label="Service Category" variant="outlined" onChange={(e) => setServiceCategory(e.target.value)}
  value={serviceCategory}/>
+
+
+<TextField sx={{ width: 300 }} id="outlined-basic" label="UTR" variant="outlined" onChange={(e) => setUtr(e.target.value)}
+ value={utr}/>
+
+<TextField sx={{ width: 300 }} id="outlined-basic" label="Task Id" variant="outlined" onChange={(e) => setTaskId(e.target.value)}
+ value={taskId}/>
+
+
+
+ <TextField  sx={{ width: 300 }} id="outlined-basic" label="Update Paid Amount" variant="outlined" onChange={(e) => setUpdatepaidAmount(e.target.value)}
+ value={updatepaidAmount}/>
+
+<TextField  sx={{ width: 300 }} id="outlined-basic" label="Payment Date" variant="outlined" onChange={(e) => setpaymentDate(e.target.value)}
+
+ value={paymentDate}/>
+ <TextField sx={{ width: 300 }} id="outlined-basic" label="Transactions Detail" variant="outlined" onChange={(e) => setTransactionsDetail(e.target.value)}
+ value={transactionsDetail}/>
+
+<TextField sx={{ width: 300 }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
+ value={paymentStatus}/>
  {/* <TextField sx={{ width: 300 }} id="outlined-basic" label="Invoice Attachment" variant="outlined"
  
  //onChange={(e) => setInvoiceAttachment(e.target.value)}
@@ -428,14 +464,34 @@ const brand1 = [
  ]
 
  const paymentcycleData=[
-  { label: '0 Days' },
-  { label: '3 Days' },
-  { label: '7 Days' },
-  { label: '15 Days' },
-  { label: '21 Days' },
-  { label: '30 Days' },
-  { label: '45 Days' },
-  { label: '60 Days' },
+  { label: '0' },
+  { label: '1' },
+  { label: '2' },
+  { label: '3' },
+  { label: '4' },
+  { label: '5' },
+  { label: '6' },
+  { label: '7' },
+  { label: '8' },
+  { label: '9' },
+  { label: '10' },
+  { label: '11' },
+  { label: '12' },
+  { label: '13 ' },
+  { label: '14' },
+  { label: '15' },
+  { label: '16' },
+  { label: '17' },
+  { label: '18' },
+  { label: ' 19' },
+  { label: '20' },
+  { label: '21' },
+  { label: '22 ' },
+  { label: '30 ' },
+  { label: '45 ' },
+  { label: '60 ' },
+  { label: '75 ' },
+  { label: '90 ' },
  
 
  ]

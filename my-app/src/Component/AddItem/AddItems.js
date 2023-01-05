@@ -5,7 +5,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React,{useState, useEffect} from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -28,8 +28,8 @@ function AddItems() {
   const [gstAmount, setGstAmount] = useState("");
   const { id } = useParams();
   const [tDSAmount, setTDSAmount] = useState("");
+  const[totelItemAmountBB,setTotelItemAmountBB]=useState("");
 
-  console.log({ sgst, cgst, igst });
 
   const invbillid = localStorage.getItem("BillID");
   const invNum = localStorage.getItem("InvoiceNumber");
@@ -49,6 +49,25 @@ function AddItems() {
     (+amount1 * +igst) / 100;
   const totelItemAmount = +amount1 + +gsttotelvalue - +discount - +redeem;
   console.log("totelAmount", totelItemAmount);
+
+
+
+
+useEffect(() => {
+  const getData = async()=>{
+  let response2 = await fetch(`http://localhost:8082/bill/item/get/${id}`)
+  let data2 = await response2.json()
+  setTotelItemAmountBB(data2.data)
+  // console.log("data2",data2)
+  }
+  getData()
+ }, [])
+
+const totelAddItem = totelItemAmountBB.length;
+ console.log("totelItemAmountBB",totelItemAmountBB.length)
+
+
+
   const handleSubmit = async () => {
     console.log({
       // invoicenumber,
@@ -94,6 +113,7 @@ function AddItems() {
       });
       alert("Item save successfully");
       console.log(response);
+      window.location.reload();
     } catch (error) {
       alert(error);
     }
@@ -110,6 +130,7 @@ function AddItems() {
           padding: { sm: "8px", xs: "40px" },
         }}
       >
+       <Box sx={{display:"flex", justifyContent:"space-between", padding:"10px"}}>
         <Box sx={{ display: "flex",flexDirection:"column", gap:"10px" }}>
           <Typography variant="p" color="initial">
             Invoice number:- {invNum}
@@ -121,7 +142,8 @@ function AddItems() {
             Date:- {invDate}
           </Typography>
         </Box>
-
+        <Box sx={{fontSize:"17px",}}>Totel Add Item:- {totelAddItem}</Box>
+        </Box>
         <Box
           sx={{
             display: "flex",

@@ -5,7 +5,8 @@ import AddItems from "./Component/AddItem/AddItems";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadeDocuments from "./Component/UploadeDocuments/UploadeDocuments";
 import BillTableData from "./Component/BillTableData/BillTableData";
-import TotelDataFetch from "./Component/BillTableData/TotelDataFetch";
+import ItemDataTable from "./Component/ItemDataTable/ItemDataTable";
+import PaymentdetailsForm from "./Component/PaymentDetailsForm/PaymentdetailsForm";
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
     <Navbaar/>
     <Routes>
     <Route path="/" element={<BillTableData/>}/>
-    <Route path="/admin" element={<TotelDataFetch/>}/>
+    <Route path="/admin/:id" element={<ItemDataTable/>}/>
+    <Route path="/updatepagment/:id" element={<PaymentdetailsForm/>}/>
         <Route path="/mainform" element={<MainForm/>}/>
         <Route path="/mainform/addItem/:id" element={<AddItems/>}/>
         <Route path="/addItem/uploadeDocuments/:id" element={<UploadeDocuments/>}/>
