@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid,GridEventListener ,useGridApiEventHandler,GridToolbar} from '@mui/x-data-grid';
 import { useParams } from "react-router";
 
 const columns = [
@@ -23,7 +23,6 @@ const columns = [
       width: 170,
       editable: true,
     },
-
     {
         field: 'dateOfInvoice',
         headerName: 'Invoice Date',
@@ -145,7 +144,7 @@ function ItemDataTable() {
   return (
     <>
     {/* <Box>Totel Item:-{billtabledata.length}</Box> */}
-    <Box p={.5} sx={{ height: 720, width: '100%' }}>
+    <Box p={.5}  sx={{ height: 680, width: '100%' }}>
       <DataGrid
         rows={billtabledata}
         columns={columns}
@@ -154,6 +153,7 @@ function ItemDataTable() {
         checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
+        components={{ Toolbar: GridToolbar }}
       />
     </Box>
     

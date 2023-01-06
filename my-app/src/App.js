@@ -15,9 +15,9 @@ function App() {
   <BrowserRouter>
     <Navbaar/>
     <Routes>
-    <Route path="/" element={<BillTableData/>}/>
-    <Route path="/admin/:id" element={<ItemDataTable/>}/>
-    <Route path="/updatepagment/:id" element={<PaymentdetailsForm/>}/>
+     <Route path="/" element={<BillTableData/>}/>
+      <Route path="/admin/:id" element={<ItemDataTable/>}/>
+      <Route path="/updatepagment/:id" element={<PaymentdetailsForm/>}/>
         <Route path="/mainform" element={<MainForm/>}/>
         <Route path="/mainform/addItem/:id" element={<AddItems/>}/>
         <Route path="/addItem/uploadeDocuments/:id" element={<UploadeDocuments/>}/>

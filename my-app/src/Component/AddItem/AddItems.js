@@ -61,11 +61,10 @@ useEffect(() => {
   // console.log("data2",data2)
   }
   getData()
- }, [])
+ }, [totelItemAmountBB])
 
 const totelAddItem = totelItemAmountBB.length;
  console.log("totelItemAmountBB",totelItemAmountBB.length)
-
 
 
   const handleSubmit = async () => {
@@ -113,7 +112,7 @@ const totelAddItem = totelItemAmountBB.length;
       });
       alert("Item save successfully");
       console.log(response);
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       alert(error);
     }
