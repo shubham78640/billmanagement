@@ -266,7 +266,7 @@ function BillTableData() {
 
   return (
     <>
-<Box p={.5} sx={{ height: 680, width: '100%' }}>
+<Box p={.5} sx={{ height: 680, width: '100%', backgroundColor:"#febd55"}}>
       <DataGrid
         rows={billtabledata}
         columns={columns}

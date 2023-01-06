@@ -12,13 +12,16 @@ import Login from "./Pages/Login/Login"
 function App() {
 
   const invbillid =localStorage.getItem("BillID");
+  const userType = localStorage.getItem("User")
+  
+  const status = localStorage.getItem("status")
   return (
   <BrowserRouter>
-    <Navbaar/>
+    {<Navbaar/>}
     <Routes>
-    <Route path="/" element={<BillTableData/>}/>
-    <Route path="/admin/:id" element={<ItemDataTable/>}/>
-    <Route path="/updatepagment/:id" element={<PaymentdetailsForm/>}/>
+    {userType==="ADMIN"&& <Route path="/" element={<BillTableData/>}/>}
+    {userType==="ADMIN"&&<Route path="/admin/:id" element={<ItemDataTable/>}/>}
+    {userType==="ADMIN"&&<Route path="/updatepagment/:id" element={<PaymentdetailsForm/>}/>}
     <Route path="/mainform" element={<MainForm/>}/>
     <Route path="/mainform/addItem/:id" element={<AddItems/>}/>
     <Route path="/addItem/uploadeDocuments/:id" element={<UploadeDocuments/>}/>
