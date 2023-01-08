@@ -73,7 +73,7 @@ const invbillid =localStorage.getItem("BillID");
 const totelAmountofbill =((+preTaxAmount)+(+gstAmount));
 let navigate = useNavigate();
 const handleSubmit = async()=>{
-    alert("hii")
+
   console.log("data ",empcode,
 { 
 empName,
@@ -110,13 +110,14 @@ paymentCycle
  
   try {
   let response = await axios.post(
-  "http://localhost:8082/bill/bill/save", {
+//  "http://localhost:8082/bill/bill/save"
+  "http://13.126.160.155:8088/bill/bill/save", {
   "brand": brand,
   "category": category,
   "department": department,
-  "email": empEmail,
-  "employeeCode": empcode,
-  "employeeName": empName,
+  "email": EMPEMAIL,
+  "employeeCode": EMPCODE,
+  "employeeName": EMPNAME,
   "expensesCategory": expenseCategory,
   "expensesType": expenseType,
   "gstAmount": gstAmount,
@@ -148,12 +149,13 @@ paymentCycle
 
   }
   );
-  alert("worker save successfully")
+  alert("Bill Invoice save successfully")
   navigate(`/mainform/addItem/${response.data.data.invoiceId}`)
   localStorage.setItem("InvoiceNumber", invoiceNumber);  
   localStorage.setItem("InvoiceDate", newDateinv);  
-  localStorage.setItem("EmployeeName", empName);  
+  // localStorage.setItem("EmployeeName", empName);  
   localStorage.setItem("BillID",response.data.data.invoiceId)
+
   console.log(response)
   } catch (error) {
   alert(error)
@@ -199,7 +201,10 @@ useEffect(() => {
 
 }, [brand, paymentMode,department,category, subCategory1])
 
-
+const EMPCODE = localStorage.getItem("employeeCode");
+const EMPNAME = localStorage.getItem("name");
+const  EMPEMAIL = localStorage.getItem("email");
+const EMPSTATUS = localStorage.getItem("status");
 
 console.log(paymentMethod)
 
@@ -207,16 +212,16 @@ console.log(paymentMethod)
     <Box sx={{backgroundColor:"#febd55", minHeight:"900px", maxHeight:"100%"}}>
     <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', justifyContent:"center" }}> 
 
-    <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Employee Code" variant="outlined" onChange={(e) => setEmpCode(e.target.value)}
- value={empcode}
+    <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Employee Code" variant="outlined"  disabled onChange={(e) => setEmpCode(e.target.value)}
+ value={EMPCODE}
   />
 
-    <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Employee Name" variant="outlined" onChange={(e) => setEmpName(e.target.value)}
- value={empName}
+    <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Employee Name" variant="outlined"  disabled onChange={(e) => setEmpName(e.target.value)}
+ value={EMPNAME}
   />
 
-    <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)}
- value={empEmail} />
+    <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Email" variant="outlined" disabled onChange={(e) => setEmail(e.target.value)}
+ value={EMPEMAIL} />
 
 
 <Autocomplete
@@ -316,6 +321,15 @@ console.log(paymentMethod)
       renderInput={(params) => <TextField {...params} label="Expense Type" />}
     />
 
+<Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={expenseCatdata}
+      sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+      onChange={(event, newValue)=>{setExpenseCategory(newValue.label)}}
+      renderInput={(params) => <TextField {...params} label="Expense Category" />}
+    />
+
 {/* <Autocomplete
       disablePortal
       id="combo-box-demo"
@@ -375,18 +389,11 @@ console.log(paymentMethod)
  {/* <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Expense Category" variant="outlined" onChange={(e) => setExpenseCategory(e.target.value)}
  value={expenseCategory}/> */}
 
-<Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={expenseCatdata}
-      sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }}
-      onChange={(event, newValue)=>{setExpenseCategory(newValue.label)}}
-      renderInput={(params) => <TextField {...params} label="Expense Category" />}
-    />
+<TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Partner/Customer Name" variant="outlined" onChange={(e) => setCustomerName(e.target.value)}
+ value={customerName} />
  <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Partner/Customer Code" variant="outlined" onChange={(e) => setCustomerCode(e.target.value)}
  value={customerCode} />
- <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Partner/Customer Name" variant="outlined" onChange={(e) => setCustomerName(e.target.value)}
- value={customerName} />
+
  <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Invoice Description" variant="outlined" onChange={(e) => setInvoiceDescription(e.target.value)}
  value={invoiceDescription} />
  <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Service Category" variant="outlined" onChange={(e) => setServiceCategory(e.target.value)}

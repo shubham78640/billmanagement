@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { DataGrid,GridEventListener ,useGridApiEventHandler,GridToolbar} from '@mui/x-data-grid';
 
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TotelDataFetch from './TotelDataFetch';
 
 
@@ -19,6 +19,8 @@ import TotelDataFetch from './TotelDataFetch';
   
 function BillTableData() {
 
+
+    const[ idMM,setIDMM ]=useState("");
     const handleEvent = (
         params, // GridRowParams
         event // MuiEvent<React.MouseEvent<HTMLElement>>
@@ -27,11 +29,27 @@ function BillTableData() {
        //  navigate(`admin/${params.row.invoiceId}`)
       
        if(params.field==="showItem"){
-     navigate(`admin/${params.row.invoiceId}`)
+     navigate(`/billtable/admin/${params.row.invoiceId}`)
       }
       if(params.field==="updatePayment"){
-        navigate(`/updatepagment/${params.row.invoiceId}`)
+        navigate(`/billtable/updatepagment/${params.row.invoiceId}`)
          }
+         if(params.field==="showBill"){
+            alert("files")
+            setIDMM(params.row.invoiceId)
+            // navigate(`${params.row.invoiceId}`)
+         
+
+//     const getData = async()=>{
+//     let response2 = await fetch(`http://localhost:8082/bill/files/get/file/?invoiceId=P000670171`)
+//     let data2 = await response2.json()
+//     // setTotelItemAmountBB(data2.data)
+//  console.log("data2",data2)
+//     }
+//     getData()
+
+             }
+    
 
       }
 
@@ -217,6 +235,17 @@ function BillTableData() {
             width: 170,
             editable: true,
           },
+          {
+            field: 'showBill',
+            headerName: 'Show Bill',
+            description: 'This column has a value getter and is not sortable.',
+            sortable: false,
+            width: 160,
+            type:"action",
+             renderCell:()=><a style={{color:"blue",fontWeight:"600",cursor:"pointer"}}  
+             href={`http://13.126.160.155:8088/bill/files/get/file/?invoiceId=${idMM}`} target="_blank"
+             >Show Bill</a>
+          }, 
      
           {
             field: 'showItem',
@@ -241,8 +270,6 @@ function BillTableData() {
            
           }, 
     
-    
-
       ];
       
 
@@ -253,7 +280,7 @@ function BillTableData() {
     useEffect(() => {
       const fetchData = async () => {
         let dataTable = await fetch( 
-          "http://localhost:8082/bill/bill/get/data/all"
+          "http://13.126.160.155:8088/bill/bill/get/data/all"
           );
          let table = await dataTable.json();
          let adminTableData = await table.data;

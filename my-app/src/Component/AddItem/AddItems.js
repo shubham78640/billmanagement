@@ -33,13 +33,17 @@ function AddItems() {
   const invbillid = localStorage.getItem("BillID");
   const invNum = localStorage.getItem("InvoiceNumber");
   const invDate = localStorage.getItem("InvoiceDate");
-  const invname = localStorage.getItem("EmployeeName");
+  // const invname = localStorage.getItem("EmployeeName");
   let navigate = useNavigate();
 
   const handleonclick = () => {
     navigate(`/addItem/uploadeDocuments/${id}`);
+    
   };
 
+
+
+  
   const amount1 = +quantity * +rate;
   const tDSAmountTotel = (+amount1 * +tDSAmount) / 100;
   const gsttotelvalue =
@@ -49,15 +53,17 @@ function AddItems() {
   const totelItemAmount = +amount1 + +gsttotelvalue - +discount - +redeem;
   console.log("totelAmount", totelItemAmount);
 
-  useEffect(() => {
-    const getData = async () => {
-      let response2 = await fetch(`http://localhost:8082/bill/item/get/${id}`);
-      let data2 = await response2.json();
-      setTotelItemAmountBB(data2.data);
-      // console.log("data2",data2)
-    };
-    getData();
-  }, []);
+
+  const EMPNAME = localStorage.getItem("name");
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     let response2 = await fetch(`http://localhost:8082/bill/item/get/${id}`);
+  //     let data2 = await response2.json();
+  //     setTotelItemAmountBB(data2.data);
+  //     // console.log("data2",data2)
+  //   };
+  //   getData();
+  // }, []);
 
 
 
@@ -72,7 +78,31 @@ useEffect(() => {
  }, [totelItemAmountBB])
 
 const totelAddItem = totelItemAmountBB.length;
- console.log("totelItemAmountBB",totelItemAmountBB.length)
+ //console.log("totelItemAmountBB",totelItemAmountBB.length)
+
+
+
+//  const handleonclickLogOut=async () => {
+//     console.log({
+
+
+//     });
+
+//     try {
+//       let response = await axios.post("http://13.126.160.155:8088/bill/item/save", {
+//         amount: amount1,
+//       });
+//       alert("Item save successfully");
+//       console.log(response);
+//       // window.location.reload();
+//     } catch (error) {
+//       alert(error);
+//     }
+//   };
+
+
+
+
 
 
   const handleSubmit = async () => {
@@ -96,7 +126,7 @@ const totelAddItem = totelItemAmountBB.length;
     });
 
     try {
-      let response = await axios.post("http://localhost:8082/bill/item/save", {
+      let response = await axios.post("http://13.126.160.155:8088/bill/item/save", {
         amount: amount1,
         amountPaid: totelItemAmount,
         categoryItem: category,
@@ -152,7 +182,7 @@ const totelAddItem = totelItemAmountBB.length;
         <Box sx={{fontSize:"17px",}}>Totel Add Item:- {totelAddItem}</Box>
         </Box> */}
 
-        <Box>
+        <Box sx={{display: "flex",justifyContent:"space-between"}}>
           <Box
             p={2}
             sx={{
@@ -177,7 +207,7 @@ const totelAddItem = totelItemAmountBB.length;
                 {" "}
                 Employee Name:-{" "}
               </span>{" "}
-              {invname || "No-Data"}
+              {EMPNAME || "No-Data"}
             </Typography>
             <Typography variant="p" color="initial">
               <span
@@ -188,6 +218,16 @@ const totelAddItem = totelItemAmountBB.length;
               {invDate || "No-Data"}
             </Typography>
           </Box>
+          {/* <Box>
+            <Box>{totelItemAmountBB.length}</Box>
+          <Button 
+      onClick={handleonclickLogOut}
+      color="success"
+      variant="contained"
+      >
+      logout
+      </Button>
+      </Box> */}
         </Box>
         <Box
           sx={{
@@ -410,7 +450,8 @@ const totelAddItem = totelItemAmountBB.length;
             Add Item
           </Button>
         </Box>
-      {/* <Box mt={5} sx={{ display: "flex", justifyContent:"center"}}>
+      <Box mt={5} sx={{ display: "flex", justifyContent:"center"}}>
+
       <Button
         endIcon={<CloudUploadIcon/>}
         color="success"
@@ -418,7 +459,10 @@ const totelAddItem = totelItemAmountBB.length;
         onClick={handleonclick}>
           Document
       </Button>
-      </Box> */}
+
+      
+
+      </Box>
     </Box>
   );
 }

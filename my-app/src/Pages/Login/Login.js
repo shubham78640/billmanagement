@@ -16,19 +16,34 @@ function Login() {
   const handleSubmit = async () => {
 
     try {
-      let response = await axios.post("http://localhost:8082/bill/login/save",{
+      let response = await axios.post("http://13.126.160.155:8088/bill/login/login",{
         employeeCode:employeeCode,
         password:password
       });
 
       alert(response.data.message);
+       if(response.data.data.userType=="USER"){
+
       navigate("/mainform")
       localStorage.setItem("User", response.data.data.userType)
       localStorage.setItem("employeeCode", response.data.data.employeeCode)
-      localStorage.setItem("name", response.data.data.email)
-      localStorage.setItem("email", response.data.data.employeeName)
-      localStorage.setItem("email", response.data.data.status)
-      console.log(response);
+      localStorage.setItem("email", response.data.data.email)
+      localStorage.setItem("name", response.data.data.employeeName)
+      localStorage.setItem("status", response.data.data.status)
+      console.log(response.data.data.userType);
+      window.location.reload();
+       }
+
+       if(response.data.data.userType=="ADMIN"){
+        navigate("/billtable")
+        localStorage.setItem("User", response.data.data.userType)
+        localStorage.setItem("employeeCode", response.data.data.employeeCode)
+        localStorage.setItem("email", response.data.data.email)
+        localStorage.setItem("name", response.data.data.employeeName)
+        localStorage.setItem("status", response.data.data.status)
+        console.log(response.data.data.userType);
+        window.location.reload();
+         }
     } catch (error) {
       alert(error);
     }
@@ -39,7 +54,6 @@ function Login() {
         <div className="shape"></div>
         <div className="shape"></div>
       </div>
-
       <div className="form">
         <Box
           sx={{

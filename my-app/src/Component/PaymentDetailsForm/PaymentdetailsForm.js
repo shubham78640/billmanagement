@@ -25,15 +25,16 @@ console.log({newUpdatePaymentDate})
 const handlePaymanetUpdate= async ()=>{
 
     try {
-        let response = await axios.put(`http://localhost:8082/bill/bill/update/${id}`, {
+        let response = await axios.put(`http://13.126.160.155:8088/bill/bill/update/${id}`
+            , {
             paidAmount: paidAmount,
             paymentDate: newUpdatePaymentDate,
             paymentStatus: paymentStatus,
             transactionDetail: transactionsDetail,
         });
-        alert("Your Payment Details Update Succesfully");
+        alert("Your Payment Details Update successfully");
         console.log(response);
-           navigate("/")
+           navigate("/billtable")
       } catch (error) {
         alert(error);
       }

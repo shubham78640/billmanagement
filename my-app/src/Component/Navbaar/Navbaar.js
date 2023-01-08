@@ -1,8 +1,35 @@
+import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 function Navbaar() {
+
+const EMPCODE  = localStorage.getItem("employeeCode");
+const EMPNAME = localStorage.getItem("name");
+const EMPEMAIL = localStorage.getItem("email");
+
+  const handleonclickLogOut=async () => {
+    console.log({
+
+
+    });
+ //  main URl=   http://13.126.160.155:8088/bill/login/logout?email=aarti%40thepinchlife.com&employeeCode=10230301
+    try {
+      let response = await axios.post(`http://13.126.160.155:8088/bill/login/logout?email=${EMPEMAIL}&employeeCode=${EMPCODE}`, {
+        email:EMPEMAIL
+      });
+      alert("Logout successfully");
+      console.log(response);
+      localStorage.clear()
+      navigate("/login")
+     
+    } catch (error) {
+      alert(error);
+    }
+  };
+
 
   let navigate = useNavigate();
   return (
@@ -20,7 +47,7 @@ function Navbaar() {
       <Box sx={{marginLeft:{ sm: 4, xs: 1 },  display:"grid", alignItems:"center", justifyContent:"center"}}>
 
         <img
-        onClick={()=>{navigate("/")}}
+        onClick={()=>{navigate("/billtable")}}
           style={{
             borderRadius: "50%",
             cursor:"pointer",
@@ -33,9 +60,16 @@ function Navbaar() {
         />
         <p style={{textAlign:"center", color:"#b04325", fontFamily:"Garamond, serif", fontWeight:"800"}}>pinch</p>
       </Box>
-      <Box pr={2}>
-        <Link onClick={()=>{localStorage.clear()}} style={{color:"#b04325", fontWeight: "800"}} to="/mainform">Add Bill</Link>
-      </Box>
+      <Box sx={{display:"flex", gap:"30px"}}>
+      <Button mt={.8} variant="contained" color="success">
+        <Link 
+        // onClick={()=>{localStorage.clear()}}
+         style={{color:"white", fontWeight: "600"}} to="/mainform">Add Bill</Link>
+      </Button>
+
+     <Button variant="contained" color="success" onClick={handleonclickLogOut}>LOGOUT</Button>
+</Box>
+
     </Box>
   );
 }
