@@ -9,6 +9,7 @@ function Navbaar() {
 const EMPCODE  = localStorage.getItem("employeeCode");
 const EMPNAME = localStorage.getItem("name");
 const EMPEMAIL = localStorage.getItem("email");
+const userType = localStorage.getItem("User")
 
   const handleonclickLogOut=async () => {
     console.log({
@@ -47,7 +48,7 @@ const EMPEMAIL = localStorage.getItem("email");
       <Box sx={{marginLeft:{ sm: 4, xs: 1 },  display:"grid", alignItems:"center", justifyContent:"center"}}>
 
         <img
-        onClick={()=>{navigate("/billtable")}}
+         onClick={()=>{{userType=="ADMIN" && navigate("/billtable")}}}
           style={{
             borderRadius: "50%",
             cursor:"pointer",
