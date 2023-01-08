@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "./login.css";
 import { Box } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const [employeeCode, setEmployeeCode] = useState("")
+  const [password, setPassword] = useState("")
+
+  console.log(employeeCode, password)
+
+  const navigate = useNavigate()
+  
+  
+  const handleSubmit = async () => {
+
+    try {
+      let response = await axios.post("http://localhost:8082/bill/login/save",{
+        employeeCode:employeeCode,
+        password:password
+      });
+
+      alert(response.data.message);
+      navigate("/mainform")
+      localStorage.setItem("User", response.data.data.userType)
+      localStorage.setItem("employeeCode", response.data.data.employeeCode)
+      localStorage.setItem("name", response.data.data.email)
+      localStorage.setItem("email", response.data.data.employeeName)
+      localStorage.setItem("email", response.data.data.status)
+      console.log(response);
+    } catch (error) {
+      alert(error);
+    }
+  };
   return (
     <div className="Body">
       <div className="background">
@@ -10,7 +40,7 @@ function Login() {
         <div className="shape"></div>
       </div>
 
-      <form action="">
+      <div className="form">
         <Box
           sx={{
             mt:"-30px",
@@ -44,13 +74,13 @@ function Login() {
         </Box>
 
         <label for="username">Employee Code</label>
-        <input type="text" placeholder="Employee Code" id="username" />
+        <input onChange={(e)=>{setEmployeeCode(e.target.value)}} type="text" placeholder="Employee Code" id="username" />
 
         <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" />
+        <input onChange={(e)=>{setPassword(e.target.value)}} type="password" placeholder="Password" id="password" />
 
-        <button>Log In</button>
-      </form>
+        <button onClick={handleSubmit}>Log In</button>
+      </div>
     </div>
   );
 }

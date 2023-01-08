@@ -40,7 +40,7 @@ background: linear-gradient(
 right: -30px;
 bottom: -80px;
 }
-form{
+.form{
 height: 520px;
 width: 400px;
 background-color: rgba(255,255,255,0.13);
@@ -54,7 +54,7 @@ border: 2px solid rgba(255,255,255,0.1);
 box-shadow: 0 0 40px rgba(8,7,16,0.6);
 padding: 50px 35px;
 }
-form *{
+.form *{
 font-family: 'Poppins',sans-serif;
 color: #ffffff;
 letter-spacing: 0.5px;
@@ -62,14 +62,14 @@ outline: none;
 border: none;
 }
 
-form label{
+.form label{
 display: block;
 margin-top: 30px;
 font-size: 16px;
 font-weight: 500;
 color:#ef6026;
 }
-input{
+.form input{
 display: block;
 height: 50px;
 width: 100%;
@@ -85,7 +85,7 @@ color:#ef6026;
 color: #ef6026;
 font-weight: 300;
 }
-form button{
+.form button{
 margin-top: 50px;
 width: 100%;
 background-color: #ffffff;

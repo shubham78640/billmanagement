@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import Box from '@mui/material/Box';
-import { DataGrid,GridEventListener ,useGridApiEventHandler} from '@mui/x-data-grid';
+import { DataGrid,GridEventListener ,useGridApiEventHandler,GridToolbar} from '@mui/x-data-grid';
 
 
 import { useNavigate } from 'react-router-dom';
@@ -58,7 +58,7 @@ function BillTableData() {
         {
           field: 'email',
           headerName: 'Email',
-          width: 170,
+          width: 220,
           editable: true,
         },
     
@@ -91,7 +91,7 @@ function BillTableData() {
           {
             field: 'subBrand',
             headerName: 'Sub Brand',
-            width: 110,
+            width: 150,
             editable: true,
           },
     
@@ -116,7 +116,7 @@ function BillTableData() {
           {
             field: 'expensesType',
             headerName: 'Expenses Type',
-            width: 110,
+            width: 150,
             editable: true,
           },
           {
@@ -128,18 +128,18 @@ function BillTableData() {
           {
             field: 'gstAmount',
             headerName: 'GST Amount',
-            width: 110,
+            width: 150,
             editable: true,
           },
           {
             field: 'totalAmount',
             headerName: 'Total Amount',
-            width: 110,
+            width: 150,
             editable: true,
           }, {
             field: 'paymentMode',
             headerName: 'Payment Mode',
-            width: 110,
+            width: 150,
             editable: true,
           },
     
@@ -152,7 +152,7 @@ function BillTableData() {
           {
             field: 'payDirectCard',
             headerName: 'Pay Direct Card Details',
-            width: 170,
+            width: 190,
             editable: true,
           },
           {
@@ -174,28 +174,9 @@ function BillTableData() {
             editable: true,
           },
           {
-            field: 'serviceCategory',
-            headerName: 'Service Category',
-            width: 150,
-            editable: true,
-          },
-          
-          {
-            field: 'transactionDetail',
-            headerName: 'Transaction Detail',
-            width: 150,
-            editable: true,
-          },
-          {
-            field: 'paidAmount',
-            headerName: 'Update Paid Amount',
-            width: 150,
-            editable: true,
-          },
-          {
             field: 'utr',
             headerName: 'URT',
-            width: 110,
+            width: 150,
             editable: true,
           },
           {
@@ -205,15 +186,35 @@ function BillTableData() {
             editable: true,
           },
           {
+            field: 'serviceCategory',
+            headerName: 'Service Category',
+            width: 150,
+            editable: true,
+          },
+          
+          {
+            field: 'transactionDetail',
+            headerName: 'Transaction Detail',
+            width: 170,
+            editable: true,
+          },
+          {
+            field: 'paidAmount',
+            headerName: 'Update Paid Amount',
+            width: 170,
+            editable: true,
+          },
+         
+          {
             field: 'paymentStatus',
             headerName: 'paymentStatus',
-            width: 110,
+            width: 170,
             editable: true,
           },
           {
             field: 'paymentDate',
             headerName: 'paymentDate',
-            width: 110,
+            width: 170,
             editable: true,
           },
      
@@ -261,19 +262,35 @@ function BillTableData() {
       fetchData();
     }, []);
      console.log("tabledata", billtabledata);
+     const [pageSize, setPageSize] = React.useState(5);
+
   return (
     <>
-<Box p={.5} sx={{ height: 720, width: '100%' }}>
+<Box p={.5} sx={{ height: 680, width: '100%', backgroundColor:"#febd55"}}>
       <DataGrid
         rows={billtabledata}
         columns={columns}
+         //====================Old Pagination code==========
         pageSize={100}
         rowsPerPageOptions={[500]}
+        //====================New Pagination code==========
+    //     rowsPerPageOptions={[5, 10, 20]}
+    //     pageSize={pageSize}
+    //    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+ //====================New Pagination Code End==========
+
         // checkboxSelection
         // disableSelectionOnClick
        // experimentalFeatures={{ newEditingApi: true }}    (rows)=>{setid(rows.email}
+       //==============On Row Click event ===================
         //  onRowClick={handleEvent}
+         //==============On Row Click event ===================
+          //==============On Cell Click event ===================
         onCellClick={handleEvent}
+         //============== On cell Click event ===================
+           //============== On Export Csv Click event ===================
+            components={{ Toolbar: GridToolbar }}
+          //==============On Export Csv Click event ===================
       />
     </Box>
 

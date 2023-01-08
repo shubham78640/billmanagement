@@ -59,8 +59,21 @@ function AddItems() {
     getData();
   }, []);
 
-  const totelAddItem = totelItemAmountBB.length;
-  console.log("totelItemAmountBB", totelItemAmountBB.length);
+
+
+useEffect(() => {
+  const getData = async()=>{
+  let response2 = await fetch(`http://localhost:8082/bill/item/get/${id}`)
+  let data2 = await response2.json()
+  setTotelItemAmountBB(data2.data)
+  // console.log("data2",data2)
+  }
+  getData()
+ }, [totelItemAmountBB])
+
+const totelAddItem = totelItemAmountBB.length;
+ console.log("totelItemAmountBB",totelItemAmountBB.length)
+
 
   const handleSubmit = async () => {
     console.log({
@@ -106,7 +119,7 @@ function AddItems() {
       });
       alert("Item save successfully");
       console.log(response);
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       alert(error);
     }
