@@ -24,7 +24,8 @@ const userType = localStorage.getItem("User")
       alert("Logout successfully");
       console.log(response);
       localStorage.clear()
-      navigate("/login")
+      navigate("/")
+      window.location.reload();
      
     } catch (error) {
       alert(error);
