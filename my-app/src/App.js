@@ -14,9 +14,10 @@ function App() {
   const invbillid =localStorage.getItem("BillID");
   const userType = localStorage.getItem("User")
   const status = localStorage.getItem("status")
+  console.log(status)
   return (
   <BrowserRouter>
-    {<Navbaar/>}
+    {status&&<Navbaar/>}
     <Routes>
     {userType==="ADMIN"&& <Route path="/billtable" element={<BillTableData/>}/>}
     {userType==="ADMIN"&&<Route path="/billtable/admin/:id" element={<ItemDataTable/>}/>}
@@ -24,7 +25,7 @@ function App() {
     <Route path="/mainform" element={<MainForm/>}/>
     <Route path="/mainform/addItem/:id" element={<AddItems/>}/>
     <Route path="/addItem/uploadeDocuments/:id" element={<UploadeDocuments/>}/>
-    <Route path="/login" element={<Login/>}/>
+    {!status? <Route path="/" element={<Login/>}/>:<Route path="/login" element={<Login/>}/>}
     </Routes>
   </BrowserRouter>
   );
