@@ -1,5 +1,4 @@
 export const Employee_Name =[
-
     { employee:""},
     { employee:""},
     { employee:""},
@@ -75,7 +74,7 @@ export const paymentModeRelation = [
 export const Department = [
     {
         department:"Marketing",
-        category:["Residents","Owners","Developers","Corporate","Brand"],
+        category:["MKT-Residents","MKT-Owners","MKT-Developers","MKT-Corporate","MKT-Brand"],
     },
     {
         department:"HR",
@@ -105,13 +104,29 @@ export const Department = [
     },
     {
         department:"Operations",
-        category:["Residents","Owners","Developers","Corporate","Partnerships","CARE CREW","Well Served","1 To Zee","Gullak"],
+        category:["OPS-Residents","OPS-Owners","OPS-Developers","OPS-Corporate","OPS-Partnerships","OPS-CARE CREW","OPS-Well Served","OPS-1 To Zee","OPS-Gullak"],
     },
 ]
 
 export const CategoryRelation = [
     {
-        categoryRelation:"Residents",
+        categoryRelation:"MKT-Residents",
+        subCategory1Relation:["Digital Marketing","Print","Influencer Marketing","Event Management","Relationship Marketing", "Public Relations"],
+    },
+    {
+        categoryRelation:"MKT-Owners",
+        subCategory1Relation:["Digital Marketing","Print","Influencer Marketing","Event Management","Relationship Marketing", "Public Relations"],
+    },
+    {
+        categoryRelation:"MKT-Developers",
+        subCategory1Relation:["Digital Marketing","Print","Influencer Marketing","Event Management","Relationship Marketing", "Public Relations"],
+    },
+    {
+        categoryRelation:"MKT-Corporate",
+        subCategory1Relation:["Digital Marketing","Print","Influencer Marketing","Event Management","Relationship Marketing", "Public Relations"],
+    },
+    {
+        categoryRelation:"MKT-Brand",
         subCategory1Relation:["Digital Marketing","Print","Influencer Marketing","Event Management","Relationship Marketing", "Public Relations"],
     },
     {
@@ -167,47 +182,47 @@ export const CategoryRelation = [
 
     },
     {
-        categoryRelation:"Residents",
+        categoryRelation:"OPS-Residents",
         subCategory1Relation:["Business Development"]
 
     },
     {
-        categoryRelation:"Owners",
+        categoryRelation:"OPS-Owners",
         subCategory1Relation:["Conceirge"]
 
     },
     {
-        categoryRelation:"Developers",
+        categoryRelation:"OPS-Developers",
         subCategory1Relation:["Housekeeping"]
 
     },
     {
-        categoryRelation:"Corporate",
+        categoryRelation:"OPS-Corporate",
         subCategory1Relation:["Food & Nuitrition"]
 
     },
     {
-        categoryRelation:"Partnerships",
+        categoryRelation:"OPS-Partnerships",
         subCategory1Relation:["Wellness","Care","Experience","Repare & Maintenance","Traning","Travel","Food"]
 
     },
     {
-        categoryRelation:"CARE CREW",
+        categoryRelation:"OPS-CARE CREW",
         subCategory1Relation:["Travel","Commission","Field Office","Business Development","Food","Stipend"]
 
     },
     {
-        categoryRelation:"1 To Zee",
+        categoryRelation:"OPS-1 To Zee",
         subCategory1Relation:["Business Development","Groceries","Dairy","Vegitables","Stationary","Toys","Food","Utilities","Medicine","Hygiene Product"]
 
     },
     {
-        categoryRelation:"Well Served",
+        categoryRelation:"OPS-Well Served",
         subCategory1Relation:["Groceries","Dairy","Vegitables","Stationary","Food", "Fuel", "Utilities", "Packaging", "Logistics", "Delivery", "Commission"]
 
     },
     {
-        categoryRelation:"Gullak",
+        categoryRelation:"OPS-Gullak",
         subCategory1Relation:["Business Development","Vegetables","Stationary","Toys","Food","Utilities","Medicine","Hygiene Product"]
 
     },

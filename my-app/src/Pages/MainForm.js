@@ -147,7 +147,6 @@ paymentCycle
   "paidAmount": updatepaidAmount,
   "transactionDetail": transactionsDetail,
 
-
   }
   );
   alert("Bill Invoice save successfully")
@@ -214,13 +213,15 @@ console.log(paymentMethod)
     <Box sx={{backgroundColor:"#febd55", minHeight:"900px", maxHeight:"100%"}}>
     <Box p={5} sx={{ display:"flex",gap:"20px" , flexWrap:'wrap', justifyContent:"center" }}> 
 
+    <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Employee Name" variant="outlined"  disabled onChange={(e) => setEmpName(e.target.value)}
+ value={EMPNAME}
+  />
+
     <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Employee Code" variant="outlined"  disabled onChange={(e) => setEmpCode(e.target.value)}
  value={EMPCODE}
   />
 
-    <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Employee Name" variant="outlined"  disabled onChange={(e) => setEmpName(e.target.value)}
- value={EMPNAME}
-  />
+
 
     <TextField sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Email" variant="outlined" disabled onChange={(e) => setEmail(e.target.value)}
  value={EMPEMAIL} />
@@ -778,9 +779,21 @@ const brand1 = [
 
  const reportingManagerData =[
 
-  { label: 'NMS Sir' },
-  { label: 'Ravi Sir'},
-  { label: 'AB Sir' },
-  { label: 'Mayank Sir'},
-  { label: 'Nitin Sir' },
+{ label: 'Nitin Mohan Srivastava'},
+{ label: 'Abhishek'},
+{ label: 'Diksha Tiwari'},
+{ label: 'Divyani'},
+{ label: 'Hitesh Rathour'},
+{ label: 'Mayank Prakash'},
+{ label: 'Rajat Singh Pundir'},
+{ label: 'Ravi Bansal'},
+{ label: 'Renuka'},
+{ label: 'Renuka C'},
+{ label: 'Rishabh Mathur'},
+{ label: 'Rituja'},
+{ label: 'Sohail khan'},
+{ label: 'Vijay Ram'},
+{ label: 'Vineeth Nair'},
+{ label: 'Vishvanath Sisodia'},
+
  ]
