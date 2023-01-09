@@ -365,13 +365,14 @@ const totelAddItem = totelItemAmountBB.length;
             disablePortal
             id="combo-box-demo"
             options={cGSTDATA}
+            disabled
             sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
             // onChange={(event, newValue) => {
             //   setCgst(newValue.label);
             // }}
             value={sgst}
             // setCgst={sgst}
-            renderInput={(params) => <TextField {...params} label="CGST %" />}
+            renderInput={(params) => <TextField  {...params} label="CGST %" />}
           />
 
           <Autocomplete

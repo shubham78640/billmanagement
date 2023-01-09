@@ -30,7 +30,6 @@ const handleonclick = async () => {
 
         axios.post(
             `http://13.126.160.155:8088/bill/files/upload/file?invoiceId=${id}`,
-          //  `http://localhost:8082/bill/files/upload/file?invoiceId=${id}`,
             formData,
             {
                 headers: {
@@ -69,23 +68,24 @@ const handleonclick = async () => {
   return (
     <>
       <Box p={2}>
-        <Box mt={3} sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box sx={{ fontSize: "20px", fontWeight: "600" }}>
+        <Box mt={3} sx={{display:"flex", flexDirection:"column",gap:"12px",fontWeight: "600"}}>
+          <Box sx={{ fontSize: "20px",}}>
             {" "}
             Invoice Number :- {invNum}
           </Box>
 
-          <Box sx={{ fontSize: "18px", fontWeight: "600" }}>
+          <Box sx={{ fontSize: "18px", }}>
             {" "}
             Employee Name :- {EMPNAME}
           </Box>
+          <Box sx={{ fontSize: "18px" }}> Invoice Date :- {invDate}</Box>
         </Box>
-        <Box sx={{ fontSize: "14px" }}> Invoice Date :- {invDate}</Box>
+        
 
-        <Box mt={3}>
-          <input type="file" name="file" onChange={changeHandler} />
+        <Box mt={5}>
+          <input style={{fontSize:"18px", }} type="file" name="file" onChange={changeHandler} />
         </Box>
-        <Box mt={3}>
+        <Box mt={4}>
           <Button
             color="success"
             variant="contained"
