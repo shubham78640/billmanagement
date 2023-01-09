@@ -193,12 +193,12 @@ export const CategoryRelation = [
     },
     {
         categoryRelation:"OPS-Developers",
-        subCategory1Relation:["Housekeeping"]
+        subCategory1Relation:["Housekeeping","Business Development","Conceirge","Food & Nuitrition","Wellness","Care","Experience","Repair & Maintenance","Training","Travel","Food"],
 
     },
     {
         categoryRelation:"OPS-Corporate",
-        subCategory1Relation:["Food & Nuitrition"]
+        subCategory1Relation:["Food & Nuitrition","Business Development","Conceirge","Housekeeping","Wellness","Care","Experience","Repair & Maintenance","Training","Travel","Food"]
 
     },
     {
