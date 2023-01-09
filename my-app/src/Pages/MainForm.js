@@ -67,6 +67,7 @@ const [paymentModeDD,setPaymentModeDD]=useState([]);
 const [paymentMethodDD,setPaymentMethodDD]=useState([]);
 
 let departmentArray = [];
+const newInvoiveNumber = invoiceNumber.toUpperCase();
 
 const newDateinv= moment(invoiceDate).format("DD/MM/YYYY");
 // console.log({newDateinv})
@@ -124,7 +125,7 @@ paymentCycle
   "gstAmount": gstAmount,
   "invoiceDate": newDateinv,
   "invoiceDescription": invoiceDescription,
-  "invoiceNumber": invoiceNumber,
+  "invoiceNumber": newInvoiveNumber,
   "location": location,
   "partnerCode": customerCode,
   "partnerName": customerName,
@@ -161,6 +162,8 @@ paymentCycle
   alert(error)
   }
   }
+
+  
 
 // const handleSubmit = ()=>{
 //   navigate(`/mainform/addItem/${1234}`)
