@@ -146,7 +146,6 @@ paymentCycle
   "paidAmount": updatepaidAmount,
   "transactionDetail": transactionsDetail,
 
-
   }
   );
   alert("Bill Invoice save successfully")
@@ -779,9 +778,21 @@ const brand1 = [
 
  const reportingManagerData =[
 
-  { label: 'NMS Sir' },
-  { label: 'Ravi Sir'},
-  { label: 'AB Sir' },
-  { label: 'Mayank Sir'},
-  { label: 'Nitin Sir' },
+{ label: 'Nitin Mohan Srivastava'},
+{ label: 'Abhishek'},
+{ label: 'Diksha Tiwari'},
+{ label: 'Divyani'},
+{ label: 'Hitesh Rathour'},
+{ label: 'Mayank Prakash'},
+{ label: 'Rajat Singh Pundir'},
+{ label: 'Ravi Bansal'},
+{ label: 'Renuka'},
+{ label: 'Renuka C'},
+{ label: 'Rishabh Mathur'},
+{ label: 'Rituja'},
+{ label: 'Sohail khan'},
+{ label: 'Vijay Ram'},
+{ label: 'Vineeth Nair'},
+{ label: 'Vishvanath Sisodia'},
+
  ]
