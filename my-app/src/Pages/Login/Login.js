@@ -31,7 +31,7 @@ function Login() {
       localStorage.setItem("name", response.data.data.employeeName)
       localStorage.setItem("status", response.data.data.status)
       console.log(response.data.data.userType);
-      window.location.reload();
+      
        }
 
        if(response.data.data.userType=="ADMIN"){
@@ -42,7 +42,7 @@ function Login() {
         localStorage.setItem("name", response.data.data.employeeName)
         localStorage.setItem("status", response.data.data.status)
         console.log(response.data.data.userType);
-        window.location.reload();
+      
          }
     } catch (error) {
       alert(error);
