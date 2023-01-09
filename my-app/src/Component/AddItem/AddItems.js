@@ -38,7 +38,7 @@ function AddItems() {
 
   const handleonclick = () => {
     navigate(`/addItem/uploadeDocuments/${id}`);
-    
+
   };
 
 
@@ -130,7 +130,7 @@ const totelAddItem = totelItemAmountBB.length;
         amount: amount1,
         amountPaid: totelItemAmount,
         categoryItem: category,
-        cgst: cgst,
+        cgst: sgst,
         dateOfInvoice: invDate,
         discount: discount,
         gstAmountItem: gsttotelvalue,
@@ -366,9 +366,11 @@ const totelAddItem = totelItemAmountBB.length;
             id="combo-box-demo"
             options={cGSTDATA}
             sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
-            onChange={(event, newValue) => {
-              setCgst(newValue.label);
-            }}
+            // onChange={(event, newValue) => {
+            //   setCgst(newValue.label);
+            // }}
+            value={sgst}
+            // setCgst={sgst}
             renderInput={(params) => <TextField {...params} label="CGST %" />}
           />
 
