@@ -414,7 +414,7 @@ console.log(paymentMethod)
 
 
 
- <TextField  sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Update Paid Amount" variant="outlined" onChange={(e) => setUpdatepaidAmount(e.target.value)}
+ <TextField  sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Paid Amount" variant="outlined" onChange={(e) => setUpdatepaidAmount(e.target.value)}
  value={updatepaidAmount}/>
 
 <TextField  sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }} id="outlined-basic" label="Payment Date" variant="outlined" onChange={(e) => setpaymentDate(e.target.value)}
@@ -790,13 +790,12 @@ const brand1 = [
 { label: 'Mayank Prakash'},
 { label: 'Rajat Singh Pundir'},
 { label: 'Ravi Bansal'},
-{ label: 'Renuka'},
 { label: 'Renuka C'},
 { label: 'Rishabh Mathur'},
 { label: 'Rituja'},
 { label: 'Sohail khan'},
 { label: 'Vijay Ram'},
 { label: 'Vineeth Nair'},
-{ label: 'Vishvanath Sisodia'},
+{ label: 'Himanshu Shukla'},
 
  ]

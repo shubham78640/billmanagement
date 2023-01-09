@@ -133,7 +133,7 @@ function BillTableData() {
           },
           {
             field: 'expensesType',
-            headerName: 'Expenses Type',
+            headerName: 'Expense Type',
             width: 150,
             editable: true,
           },
@@ -193,7 +193,7 @@ function BillTableData() {
           },
           {
             field: 'utr',
-            headerName: 'URT',
+            headerName: 'UTR',
             width: 150,
             editable: true,
           },
