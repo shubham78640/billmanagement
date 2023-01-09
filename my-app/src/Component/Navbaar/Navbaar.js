@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
 import axios from "axios";
 function Navbaar() {
 
@@ -69,7 +70,7 @@ const userType = localStorage.getItem("User")
          style={{color:"white", fontWeight: "600"}} to="/mainform">Add Bill</Link>
       </Button>
 
-     <Button variant="contained" color="success" onClick={handleonclickLogOut}>LOGOUT</Button>
+     <Button endIcon={<LogoutIcon/>} variant="contained" color="success" onClick={handleonclickLogOut}>LOGOUT</Button>
 </Box>
 
     </Box>

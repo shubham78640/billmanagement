@@ -66,6 +66,7 @@ const [gSTApplicableDD,setGSTApplicableDD]=useState([]);
 const [paymentModeDD,setPaymentModeDD]=useState([]);
 const [paymentMethodDD,setPaymentMethodDD]=useState([]);
 
+let departmentArray = [];
 
 const newDateinv= moment(invoiceDate).format("DD/MM/YYYY");
 // console.log({newDateinv})
@@ -186,6 +187,7 @@ useEffect(() => {
   })
 
   Department.map((item)=>{
+    departmentArray.push(item.department)
     if(item.department===department) setCategoryDD(item.category)
   })
 
@@ -284,9 +286,9 @@ console.log(paymentMethod)
      <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={departmentData}
+      options={departmentArray}
       sx={{ width: 300, backgroundColor:"rgba(251, 251, 251, 0.3)" }}
-      onChange={(event, newValue)=>{setDepartment(newValue.label)}}
+      onChange={(event, newValue)=>{setDepartment(newValue)}}
       renderInput={(params) => <TextField {...params} label="Department" />}
     />
      <Autocomplete
@@ -611,7 +613,6 @@ const brand1 = [
  ]
 
  const departmentData=[
-
   { label: 'Marketing' },
   { label: 'HR'},
   { label: 'Admin' },
