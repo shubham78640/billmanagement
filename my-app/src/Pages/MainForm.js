@@ -617,14 +617,17 @@ const brand1 = [
  ]
 
  const departmentData=[
-  { label: 'Marketing' },
-  { label: 'HR'},
   { label: 'Admin' },
-  { label: 'Procurement'},
-  { label: 'Training & Audit' },
   { label: 'Finance'},
-  { label: 'Technology' },
+  { label: 'HR'},
+  { label: 'Marketing' },
   { label: 'Operations'},
+  { label: 'Procurement'},
+  { label: 'Technology' },
+  { label: 'Training & Audit' },
+ 
+
+
 
  ]
 
