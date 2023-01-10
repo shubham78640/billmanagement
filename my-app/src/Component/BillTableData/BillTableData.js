@@ -1,17 +1,10 @@
 import React,{useState, useEffect} from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid,GridEventListener ,useGridApiEventHandler,GridToolbar} from '@mui/x-data-grid';
-
-
 import { Link, useNavigate } from 'react-router-dom';
 import TotelDataFetch from './TotelDataFetch';
 
-
-
-  
 function BillTableData() {
-
-
     const[ idMM,setIDMM ]=useState("");
     const handleEvent = (
         params, // GridRowParams
@@ -30,12 +23,8 @@ function BillTableData() {
             alert("files")
             setIDMM(params.row.invoiceId)
             // navigate(`${params.row.invoiceId}`)
-
              }
-    
-
       }
-
 
     const columns = [
         {
@@ -250,12 +239,9 @@ function BillTableData() {
             type:"action",
              renderCell:()=><p style={{color:"blue",fontWeight:"600",cursor:"pointer"}}
              >Update Payment</p>
-           
           }, 
-    
       ];
       
-
     let navigate = useNavigate();
     const [billtabledata, setBillTabledata] = useState([]);
     useEffect(() => {
@@ -301,9 +287,6 @@ function BillTableData() {
           //==============On Export Csv Click event ===================
       />
     </Box>
-
-   
-
     </>
   )
 }

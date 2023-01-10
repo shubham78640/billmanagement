@@ -164,8 +164,6 @@ function MainForm() {
     }
   };
 
-
-
   useEffect(() => {
     Brand.map((item) => {
       if (item.brand === brand) setSubBrandDD(item.subBrand);
@@ -580,9 +578,32 @@ function MainForm() {
 
       <Box textAlign={"center"}>
         <Button
-          disabled={invoiceNumber && invoiceDate && brand && subrand && location && department && category && subCategory1 && expenseType && expenseCategory
-           && preTaxAmount && gstAmount && paymentMode && paymentMethod && customerName && customerCode && invoiceDescription
-           && serviceCategory && updatepaidAmount && paymentDate && transactionsDetail && paymentStatus? false : true}
+          disabled={
+            invoiceNumber &&
+            invoiceDate &&
+            brand &&
+            subrand &&
+            location &&
+            department &&
+            category &&
+            subCategory1 &&
+            expenseType &&
+            expenseCategory &&
+            preTaxAmount &&
+            gstAmount &&
+            paymentMode &&
+            paymentMethod &&
+            customerName &&
+            customerCode &&
+            invoiceDescription &&
+            serviceCategory &&
+            updatepaidAmount &&
+            paymentDate &&
+            transactionsDetail &&
+            paymentStatus
+              ? false
+              : true
+          }
           size="large"
           sx={{ width: { sm: 300, xs: 250 }, mb: "20px" }}
           onClick={handleSubmit}
@@ -704,7 +725,6 @@ const paymentcycleData = [
   { label: "58" },
   { label: "59" },
   { label: "60" },
-
   { label: "61" },
   { label: "62" },
   { label: "63" },
@@ -754,147 +774,15 @@ const paymentMethodData = [
   { label: "Employee Cheque" },
 ];
 
-
- const departmentData=[
-  { label: 'Admin' },
-  { label: 'Finance'},
-  { label: 'HR'},
-  { label: 'Marketing' },
-  { label: 'Operations'},
-  { label: 'Procurement'},
-  { label: 'Technology' },
-  { label: 'Training & Audit' },
- 
-
-
-
-  { label: "Developers" },
-  { label: "Corporate" },
-  { label: "Brand" },
-  { label: "Talent Management" },
-  { label: "Remuneration" },
-  { label: "Employee Engagement" },
-  { label: "Office Utilities" },
-  { label: "Office Supplies" },
-  { label: "Repair & Maintenance" },
-  { label: "Travel Desk" },
-  { label: "Raw Material" },
-  { label: "Logistic" },
-  { label: "Sampling" },
-  { label: "Infrastructure" },
-  { label: "Daily Needs" },
-  { label: "Travel" },
-  { label: "Fees" },
-  { label: "Professional Fee" },
-  { label: "Software" },
-  { label: "Residents" },
-  { label: "Owners" },
-  { label: "Well Served" },
-  { label: "1ToZee" },
-  { label: "Care Crew" },
-  { label: "Corporate" },
-  { label: "Partnerships" },
-];
-
-const sub_Category1Data = [
-  { label: "Digital Marketing" },
-  { label: "Print" },
-  { label: "Influencer Marketing" },
-  { label: "Event Management" },
-  { label: "Relationship Marketing" },
-  { label: "Public Relations" },
-  { label: "Consultancy Cost" },
-  { label: "Recruitment Drive" },
-  { label: "Job Portal" },
-  { label: "Fees" },
-  { label: "HRMS" },
-  { label: "Liasoning" },
-  { label: "Travel" },
-  { label: "Food" },
-  { label: "Rewards & Recognitions" },
-  { label: "Events" },
-  { label: "Rental" },
-  { label: "Electricity" },
-  { label: "Water" },
-  { label: "Asset" },
-  { label: "Refreshments" },
-  { label: "Uniform" },
-  { label: "Furniture" },
-  { label: "Housekeeping Supplies" },
-  { label: "Toiletries" },
-  { label: "Courier" },
-  { label: "Gardening" },
-  { label: "Fuel" },
-  { label: "Wear & Tear" },
-  { label: "Pest Control" },
-  { label: "Decoration" },
-  { label: "Tickets" },
-  { label: "Accomodation" },
-  { label: "Local Conveyance" },
-  { label: "Equipment" },
-  { label: "Kitchen Accessories" },
-  { label: "Groceries" },
-  { label: "Fruits & Vegetables" },
-  { label: "Dairy" },
-  { label: "Chemicals" },
-  { label: "Training Essentials" },
-  { label: "Conveyance" },
-  { label: "Licence" },
-  { label: "TDS" },
-  { label: "GST" },
-  { label: "PF/ESIC" },
-  { label: "Tool" },
-  { label: "Storage" },
-  { label: "Conceirge" },
-  { label: "Housekeeping" },
-  { label: "Food & Nuitrition" },
-  { label: "Wellness" },
-  { label: "Care" },
-  { label: "Experience" },
-  { label: "Repair & Maintenance" },
-  { label: "Training" },
-  { label: "Commission" },
-  { label: "Field Office" },
-  { label: "Business Development" },
-  { label: "Vegetables" },
-  { label: "Stationary" },
-  { label: "Toys" },
-  { label: "Logistics" },
-  { label: "Packaging" },
-  { label: "Delivery" },
-];
-
-const sub_Category2Data = [
-  { label: "SEO" },
-  { label: "Email" },
-  { label: "SMS" },
-  { label: "Whatsapp" },
-  { label: "Social Media Marketing" },
-  { label: "Flyers" },
-  { label: "Newspaper" },
-  { label: "Standee" },
-  { label: "Canopy" },
-  { label: "Promo Table" },
-  { label: "Freelancers" },
-  { label: "Sampling" },
-  { label: "Promoters" },
-  { label: "Look Walkers" },
-  { label: "Charity" },
-  { label: "Media" },
-  { label: "Radio" },
-  { label: "Content" },
-  { label: "Blogs" },
-  { label: "Property Rent" },
-  { label: "Equipment Rental" },
-  { label: "Telecom Rental" },
-  { label: "Utensils" },
-  { label: "Electronic" },
-  { label: "Storage" },
-  { label: "Apron" },
-  { label: "Kitchen Dusters" },
-  { label: "Supply" },
-  { label: "Demand" },
-  { label: "Deployment" },
+const departmentData = [
+  { label: "Admin" },
+  { label: "Finance" },
+  { label: "HR" },
+  { label: "Marketing" },
+  { label: "Operations" },
+  { label: "Procurement" },
+  { label: "Technology" },
+  { label: "Training & Audit" },
 ];
 
 const expenseTypedata = [

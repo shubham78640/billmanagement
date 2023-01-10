@@ -115,12 +115,6 @@ const columns = [
     editable: true,
   },
 
-  //   {
-  //     field: 'amountPaid',
-  //     headerName: 'Amount Paid',
-  //     width: 110,
-  //     editable: true,
-  //   },
 ];
 
 function ItemDataTable() {
@@ -129,14 +123,11 @@ function ItemDataTable() {
   useEffect(() => {
     const fetchData = async () => {
       let dataTable = await fetch(
-        //   `http://localhost:8082/bill/item/get/${id}`
         `http://13.126.160.155:8088/bill/item/get/${id}`
       );
       let table = await dataTable.json();
       let adminTableData = await table.data;
-      //  let cityData=  adminTableData;
       setBillTabledata(adminTableData ? adminTableData : "");
-      // console.log(cityData)
     };
     fetchData();
   }, []);

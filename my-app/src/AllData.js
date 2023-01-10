@@ -1,6 +1,4 @@
-
 export const Brand_Name = [{ brand: "" }];
-
 export const Brand = [
   {
     brand: "Pinch",

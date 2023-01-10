@@ -16,11 +16,8 @@ function PaymentdetailsForm() {
   const [paymentStatus, setPaymentStatus] = useState("");
   const [transactionsDetail, setTransactionsDetail] = useState("");
   const [paymentDate, setPaymentDate] = useState(null);
-
   const newUpdatePaymentDate = moment(paymentDate).format("DD/MM/YYYY");
-
   console.log({ newUpdatePaymentDate });
-
   const handlePaymanetUpdate = async () => {
     try {
       let response = await axios.put(

@@ -7,27 +7,42 @@ import UploadeDocuments from "./Component/UploadeDocuments/UploadeDocuments";
 import BillTableData from "./Component/BillTableData/BillTableData";
 import ItemDataTable from "./Component/ItemDataTable/ItemDataTable";
 import PaymentdetailsForm from "./Component/PaymentDetailsForm/PaymentdetailsForm";
-import Login from "./Pages/Login/Login"
+import Login from "./Pages/Login/Login";
 
 function App() {
-
-  const invbillid =localStorage.getItem("BillID");
-  const userType = localStorage.getItem("User")
-  const status = localStorage.getItem("status")
-  console.log(status)
+  const invbillid = localStorage.getItem("BillID");
+  const userType = localStorage.getItem("User");
+  const status = localStorage.getItem("status");
+  console.log(status);
   return (
-  <BrowserRouter>
-    {status&&<Navbaar/>}
-    <Routes>
-    {userType==="ADMIN"&& <Route path="/billtable" element={<BillTableData/>}/>}
-    {userType==="ADMIN"&&<Route path="/billtable/admin/:id" element={<ItemDataTable/>}/>}
-    {userType==="ADMIN"&&<Route path="/billtable/updatepagment/:id" element={<PaymentdetailsForm/>}/>}
-    <Route path="/mainform" element={<MainForm/>}/>
-    <Route path="/mainform/addItem/:id" element={<AddItems/>}/>
-    <Route path="/addItem/uploadeDocuments/:id" element={<UploadeDocuments/>}/>
-    {!status? <Route path="/" element={<Login/>}/>:<Route path="/login" element={<Login/>}/>}
-    </Routes>
-  </BrowserRouter>
+    <BrowserRouter>
+      {status && <Navbaar />}
+      <Routes>
+        {userType === "ADMIN" && (
+          <Route path="/billtable" element={<BillTableData />} />
+        )}
+        {userType === "ADMIN" && (
+          <Route path="/billtable/admin/:id" element={<ItemDataTable />} />
+        )}
+        {userType === "ADMIN" && (
+          <Route
+            path="/billtable/updatepagment/:id"
+            element={<PaymentdetailsForm />}
+          />
+        )}
+        <Route path="/mainform" element={<MainForm />} />
+        <Route path="/mainform/addItem/:id" element={<AddItems />} />
+        <Route
+          path="/addItem/uploadeDocuments/:id"
+          element={<UploadeDocuments />}
+        />
+        {!status ? (
+          <Route path="/" element={<Login />} />
+        ) : (
+          <Route path="/login" element={<Login />} />
+        )}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
