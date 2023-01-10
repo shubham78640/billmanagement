@@ -164,19 +164,7 @@ function MainForm() {
     }
   };
 
-  // const handleSubmit = ()=>{
-  //   navigate(`/mainform/addItem/${1234}`)
-  // }
 
-  // useEffect(() => {
-  //   const getData = async()=>{
-  //   let response2 = await fetch(`http://localhost:8082/bill/bill/get/name/email/PINCH1234`)
-  //   let data2 = await response2.json()
-  //   setBrandDD(data2)
-  //   console.log("data2",data2)
-  //   }
-  //   getData()
-  //  }, [])
 
   useEffect(() => {
     Brand.map((item) => {

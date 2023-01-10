@@ -7,14 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import TotelDataFetch from './TotelDataFetch';
 
 
-// let id = "";
-
-
-
-
- 
-
-
 
   
 function BillTableData() {
@@ -38,15 +30,6 @@ function BillTableData() {
             alert("files")
             setIDMM(params.row.invoiceId)
             // navigate(`${params.row.invoiceId}`)
-         
-
-//     const getData = async()=>{
-//     let response2 = await fetch(`http://localhost:8082/bill/files/get/file/?invoiceId=P000670171`)
-//     let data2 = await response2.json()
-//     // setTotelItemAmountBB(data2.data)
-//  console.log("data2",data2)
-//     }
-//     getData()
 
              }
     
@@ -273,8 +256,6 @@ function BillTableData() {
       ];
       
 
-   
-    
     let navigate = useNavigate();
     const [billtabledata, setBillTabledata] = useState([]);
     useEffect(() => {

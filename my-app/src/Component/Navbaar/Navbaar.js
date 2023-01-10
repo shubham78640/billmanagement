@@ -13,11 +13,7 @@ const EMPEMAIL = localStorage.getItem("email");
 const userType = localStorage.getItem("User")
 
   const handleonclickLogOut=async () => {
-    console.log({
-
-
-    });
- //  main URl=   http://13.126.160.155:8088/bill/login/logout?email=aarti%40thepinchlife.com&employeeCode=10230301
+    console.log({ });
     try {
       let response = await axios.post(`http://13.126.160.155:8088/bill/login/logout?email=${EMPEMAIL}&employeeCode=${EMPCODE}`, {
         email:EMPEMAIL
@@ -66,7 +62,6 @@ const userType = localStorage.getItem("User")
       <Box sx={{display:"flex", gap:"30px"}}>
       <Button mt={.8}  color="success">
         <Link 
-        // onClick={()=>{localStorage.clear()}}
          style={{color:"white", fontWeight: "600", color:"green"}} to="/mainform">Add Bill</Link>
       </Button>
 
