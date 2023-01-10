@@ -156,7 +156,7 @@ const totelAddItem = totelItemAmountBB.length;
   };
 
   return (
-    <Box sx={{backgroundColor:"#febd55", minHeight:"900px", maxHeight:"100%"}}>
+    <Box sx={{backgroundColor:"#f2f2f2", minHeight:"900px", maxHeight:"100%"}}>
       <Box
        
         gap={3}
@@ -251,14 +251,14 @@ const totelAddItem = totelItemAmountBB.length;
 
           <TextField
             label="Category"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setCategory(e.target.value);
             }}
           />
           <TextField
             label="Item Code"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setItemCode(e.target.value);
             }}
@@ -266,7 +266,7 @@ const totelAddItem = totelItemAmountBB.length;
 
           <TextField
             label="Item Name"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setItemName(e.target.value);
             }}
@@ -300,7 +300,7 @@ const totelAddItem = totelItemAmountBB.length;
           {/* <TextField   label="HSN/SAC Code"  onChange={(e)=>{setHSNCode(e.target.value)}}/> */}
           <TextField
             label="Quantity"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setQuantity(e.target.value);
             }}
@@ -321,14 +321,14 @@ const totelAddItem = totelItemAmountBB.length;
 
           <TextField
             label="Unit"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setUnit(e.target.value);
             }}
           />
           <TextField
             label="Rate"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setRate(e.target.value);
             }}
@@ -336,7 +336,7 @@ const totelAddItem = totelItemAmountBB.length;
 
           <TextField
             label="Amount"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             InputLabelProps={{ shrink: true }}
             disabled
             value={amount1}
@@ -353,7 +353,7 @@ const totelAddItem = totelItemAmountBB.length;
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             options={sGSTDATA}
             onChange={(event, newValue) => {
               setSgst(newValue.label);
@@ -366,7 +366,7 @@ const totelAddItem = totelItemAmountBB.length;
             id="combo-box-demo"
             options={cGSTDATA}
             disabled
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             // onChange={(event, newValue) => {
             //   setCgst(newValue.label);
             // }}
@@ -379,7 +379,7 @@ const totelAddItem = totelItemAmountBB.length;
             disablePortal
             id="combo-box-demo"
             options={iGSTDATA}
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(event, newValue) => {
               setIgst(newValue.label);
             }}
@@ -391,7 +391,7 @@ const totelAddItem = totelItemAmountBB.length;
         <TextField label="IGST"  onChange={(e)=>{setIgst(e.target.value)}}/> */}
           <TextField
             label="GST AMOUNT"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             InputLabelProps={{ shrink: true }}
             disabled
             value={gsttotelvalue}
@@ -399,7 +399,7 @@ const totelAddItem = totelItemAmountBB.length;
 
           <TextField
             label="Discount"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             InputLabelProps={{ shrink: true }}
             onChange={(e) => {
               setDiscount(e.target.value);
@@ -408,7 +408,7 @@ const totelAddItem = totelItemAmountBB.length;
 
           <TextField
             label="Redeem"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             InputLabelProps={{ shrink: true }}
             onChange={(e) => {
               setRedeem(e.target.value);
@@ -418,7 +418,7 @@ const totelAddItem = totelItemAmountBB.length;
             disablePortal
             id="combo-box-demo"
             options={tDSDATA}
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(event, newValue) => {
               setTDSAmount(newValue.label);
             }}
@@ -426,7 +426,7 @@ const totelAddItem = totelItemAmountBB.length;
           />
           <TextField
             label="TDS Amount"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             disabled
             InputLabelProps={{ shrink: true }}
             value={tDSAmountTotel}
@@ -434,7 +434,7 @@ const totelAddItem = totelItemAmountBB.length;
 
           <TextField
             label="Amount Paid"
-            sx={{ width: "300px", backgroundColor:"rgba(251, 251, 251, 0.3)" }}
+            sx={{ width: "300px", backgroundColor:"white" }}
             InputLabelProps={{ shrink: true }}
             // disabled
             // onChange={(e)=>{setBillAmount(e.target.value)}}

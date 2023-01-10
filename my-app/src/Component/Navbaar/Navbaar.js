@@ -42,7 +42,7 @@ const userType = localStorage.getItem("User")
         alignItems: "center",
         padding: 1,
         justifyContent: "space-between",
-        backgroundColor: "#fab100",
+        backgroundColor: "rgba(190, 232, 201, 0.6)",
         boxShadow:
           "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
       }}
@@ -64,13 +64,13 @@ const userType = localStorage.getItem("User")
         <p style={{textAlign:"center", color:"#b04325", fontFamily:"Garamond, serif", fontWeight:"800"}}>pinch</p>
       </Box>
       <Box sx={{display:"flex", gap:"30px"}}>
-      <Button mt={.8} variant="contained" color="success">
+      <Button mt={.8}  color="success">
         <Link 
         // onClick={()=>{localStorage.clear()}}
-         style={{color:"white", fontWeight: "600"}} to="/mainform">Add Bill</Link>
+         style={{color:"white", fontWeight: "600", color:"green"}} to="/mainform">Add Bill</Link>
       </Button>
 
-     <Button endIcon={<LogoutIcon/>} variant="contained" color="success" onClick={handleonclickLogOut}>LOGOUT</Button>
+     <Button sx={{color:"green", fontWeight:"800"}} endIcon={<LogoutIcon/>}  color="success" onClick={handleonclickLogOut}></Button>
 </Box>
 
     </Box>
