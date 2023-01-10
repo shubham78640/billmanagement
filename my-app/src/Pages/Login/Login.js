@@ -9,10 +9,7 @@ function Login() {
   const [password, setPassword] = useState("")
 
   console.log(employeeCode, password)
-
   const navigate = useNavigate()
-  
-  
   const handleSubmit = async () => {
 
     try {

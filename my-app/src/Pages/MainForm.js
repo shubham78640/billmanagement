@@ -766,19 +766,19 @@ const paymentMethodData = [
   { label: "Employee Cheque" },
 ];
 
-const departmentData = [
-  { label: "Marketing" },
-  { label: "HR" },
-  { label: "Admin" },
-  { label: "Procurement" },
-  { label: "Training & Audit" },
-  { label: "Finance" },
-  { label: "Technology" },
-  { label: "Operations" },
-];
 
-const categoryData = [
-  { label: "Residents" },
+ const departmentData=[
+  { label: 'Admin' },
+  { label: 'Finance'},
+  { label: 'HR'},
+  { label: 'Marketing' },
+  { label: 'Operations'},
+  { label: 'Procurement'},
+  { label: 'Technology' },
+  { label: 'Training & Audit' },
+ 
+
+
 
   { label: "Developers" },
   { label: "Corporate" },
