@@ -27,6 +27,7 @@ function Login() {
       localStorage.setItem("email", response.data.data.email)
       localStorage.setItem("name", response.data.data.employeeName)
       localStorage.setItem("status", response.data.data.status)
+      localStorage.setItem("reportingManager", response.data.data.reportingManager)
       console.log(response.data.data.userType);
       window.location.reload();
        }
@@ -38,6 +39,7 @@ function Login() {
         localStorage.setItem("email", response.data.data.email)
         localStorage.setItem("name", response.data.data.employeeName)
         localStorage.setItem("status", response.data.data.status)
+        localStorage.setItem("reportingManager", response.data.data.reportingManager)
         console.log(response.data.data.userType);
         window.location.reload();
          }

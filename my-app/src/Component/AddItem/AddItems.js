@@ -250,12 +250,13 @@ const totelAddItem = totelItemAmountBB.length;
           {/* <TextField   label="Source"  onChange={(e)=>{setSource(e.target.value)}}/> */}
 
           <TextField
-            label="Category"
+            label="Item Name"
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
-              setCategory(e.target.value);
+              setItemName(e.target.value);
             }}
           />
+          
           <TextField
             label="Item Code"
             sx={{ width: "300px", backgroundColor:"white" }}
@@ -264,11 +265,13 @@ const totelAddItem = totelItemAmountBB.length;
             }}
           />
 
-          <TextField
-            label="Item Name"
+        
+
+<TextField
+            label="Category"
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
-              setItemName(e.target.value);
+              setCategory(e.target.value);
             }}
           />
 
@@ -379,6 +382,7 @@ const totelAddItem = totelItemAmountBB.length;
             disablePortal
             id="combo-box-demo"
             options={iGSTDATA}
+            disabled={sgst=="0"?false:true}
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(event, newValue) => {
               setIgst(newValue.label);
