@@ -90,44 +90,14 @@ function MainForm() {
     const[customerCodeDD, setCustomerCodeDD] = useState([])
 
   let customerNameDD = [];
+  let paymentModeArray = [];
   const newInvoiveNumber = invoiceNumber.toUpperCase();
 
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
-  // console.log({newDateinv})
   const invbillid = localStorage.getItem("BillID");
   const totelAmountofbill = +preTaxAmount + +gstAmount;
   let navigate = useNavigate();
   const handleSubmit = async () => {
-    console.log("data ", empcode, {
-      empName,
-      empEmail,
-      invoiceNumber,
-      payDirectCardDetails,
-      expenseCategory,
-      customerCode,
-      customerName,
-      serviceCategory,
-      invoiceDescription,
-      paymentStatus,
-      preTaxAmount,
-      totalAmount,
-      invoiceDate,
-      paymentMethod,
-      paymentMode,
-      subrand,
-      brand,
-      location,
-      department,
-      category,
-      subCategory1,
-      subCategory2,
-      expenseType,
-      reportingManagerData,
-      gstAmount,
-      totelAmountofbill,
-      paymentCycle,
-    });
-
     try {
       let response = await axios.post(
         //  "http://localhost:8082/bill/bill/save"
@@ -187,6 +157,7 @@ function MainForm() {
     });
 
     paymentModeRelation.map((item) => {
+      paymentModeArray.push(item.paymentMode)
       if (item.paymentMode === paymentMode)
         setPaymentMethodDD(item.paymentMethod);
     });
@@ -404,7 +375,7 @@ console.log("name", customerName)
           options={expenseTypedata}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setExpenseType(newValue.label);
+            setExpenseType(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params}   required label="Expense Type" />
@@ -417,7 +388,7 @@ console.log("name", customerName)
           options={expenseCatdata}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setExpenseCategory(newValue.label);
+            setExpenseCategory(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params}   required label="Expense Category" />
@@ -460,21 +431,22 @@ console.log("name", customerName)
           InputLabelProps={{ shrink: true }}
           value={totelAmountofbill}
         />
-        {/* <Autocomplete
- disablePortal
- id="combo-box-demo"
- options={gstApplicableData}
- sx={{ width: 300, backgroundColor:"white" }}
- onChange={(event, newValue)=>{setGSTApplicable(newValue.label)}}
- renderInput={(params) => <TextField {...params} label="GST Applicable" />}
- /> */}
-        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
- value={tDSType}/> */}
-        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
- value={tDSAmount}/>
 
-<TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Post TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
- value={tDSAmount}/> */}
+    {/* <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={gstApplicableData}
+        sx={{ width: 300, backgroundColor:"white" }}
+        onChange={(event, newValue)=>{setGSTApplicable(newValue.label)}}
+        renderInput={(params) => <TextField {...params} label="GST Applicable" />}
+        /> */}
+                {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
+        value={tDSType}/> */}
+                {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+        value={tDSAmount}/>
+
+        <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Post TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+        value={tDSAmount}/> */}
 
         <Autocomplete
           disablePortal
@@ -491,10 +463,10 @@ console.log("name", customerName)
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={paymentMode1Data}
+          options={paymentModeArray}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setPaymentMode(newValue.label);
+            setPaymentMode(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params}   required label="Payment Mode" />
@@ -864,14 +836,14 @@ const departmentData = [
 ];
 
 const expenseTypedata = [
-  { label: "Company" },
-  { label: "Employee Reimbursement" },
-  { label: "Billable - Customer" },
-  { label: "Non Billable - Customer" },
-  { label: "Partner" },
+   "Company",
+   "Employee Reimbursement",
+   "Billable - Customer",
+   "Non Billable - Customer",
+   "Partner",
 ];
 
-const expenseCatdata = [{ label: "One Time" }, { label: "Recurring" }];
+const expenseCatdata = ["One Time", "Recurring"];
 
 const reportingManagerData = [
   { label: "Nitin Mohan Srivastava" },
@@ -890,3 +862,5 @@ const reportingManagerData = [
   { label: "Vineeth Nair" },
   { label: "Himanshu Shukla" },
 ];
+
+

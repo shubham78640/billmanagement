@@ -459,7 +459,6 @@ export const SubCategory2Relation = [
 
 
 export const customerRelation = [
-{ customerName: "Partner_Name",  customerCode:"Partner_Code",},
 { customerName: "11 PHARMA",  customerCode:"VD202200001",},
 { customerName: "NEK RAM SHARMA",  customerCode:"VD202200002",},
 { customerName: "RAJNEESH KUMAR SAROJ",  customerCode:"VD202200003",},
