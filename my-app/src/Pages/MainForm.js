@@ -48,6 +48,9 @@ function MainForm() {
   const [expenseType, setExpenseType] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [paymentMode, setPaymentMode] = useState("");
+  const [invoicesgst, setinvoiceSGST] = useState("");
+  const [invoicecgst, setinvoiceCGST] = useState("");
+  const [invoiceigst, setinvoiceIGST] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [brand, setBrand] = React.useState("");
   const [value, setValue] = React.useState(null);
@@ -85,10 +88,8 @@ function MainForm() {
   const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic] =
     useState(true);
     const[customerCodeDD, setCustomerCodeDD] = useState([])
-
   let customerNameDD = [];
   const newInvoiveNumber = invoiceNumber.toUpperCase();
-
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
   // console.log({newDateinv})
   const invbillid = localStorage.getItem("BillID");
@@ -419,6 +420,45 @@ console.log("name", customerName)
           onChange={(e) => setPreTaxAmount(e.target.value)}
           value={preTaxAmount}
         />
+
+{/*         
+<Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            sx={{ width: "300px", backgroundColor:"white" }}
+            options={sGSTDATA}
+            onChange={(event, newValue) => {
+             setinvoiceSGST(newValue.label);
+            }}
+            renderInput={(params) => <TextField  {...params} label="SGST %" />}
+          />
+
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={cGSTDATA}
+            disabled
+            sx={{ width: "300px", backgroundColor:"white" }}
+            // onChange={(event, newValue) => {
+            //   setinvoiceCGST(newValue.label);
+            // }}
+           value={invoicesgst}
+            
+            renderInput={(params) => <TextField   {...params} label="CGST %" />}
+          />
+
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={iGSTDATA}
+            disabled={invoicesgst=="0"?false:true}
+            sx={{ width: "300px", backgroundColor:"white" }}
+            onChange={(event, newValue) => {
+            setinvoiceIGST(newValue.label);
+            }}
+            renderInput={(params) => <TextField  {...params} label="IGST %" />}
+          /> */}
+
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
@@ -890,4 +930,30 @@ const ServiceCategoryDD = [
   { label: "Business consultancy services" },
   { label: "Other sanitation services" },
   { label: "Services provided by restaurant" },
+  { label: "N/A" },
+];
+
+
+const sGSTDATA = [
+  { label: "2.5" },
+  { label: "6" },
+  { label: "9" },
+  { label: "14" },
+  { label: "0" },
+];
+
+const cGSTDATA = [
+  { label: "2.5" },
+  { label: "6" },
+  { label: "9" },
+  { label: "14" },
+  { label: "0" },
+];
+
+const iGSTDATA = [
+  { label: "5" },
+  { label: "12" },
+  { label: "18" },
+  { label: "28" },
+  { label: "0" },
 ];
