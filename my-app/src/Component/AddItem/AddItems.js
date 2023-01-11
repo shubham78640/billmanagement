@@ -304,24 +304,24 @@ const totelAddItem = totelItemAmountBB.length;
 
           {/* <TextField   label="Unit"  onChange={(e)=>{setUnit(e.target.value)}}/> */}
 
-          {/* <Autocomplete
+          <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={top100Films}
-            sx={{ width: "300px" }}
+            options={unitListDD}
+            sx={{ width: "300px",backgroundColor: "white"  }}
             onChange={(event, newValue) => {
-              setUnit(newValue.label);
+              setUnit(newValue);
             }}
             renderInput={(params) => <TextField {...params} label="Unit" />}
-          /> */}
+          />
 
-          <TextField
+          {/* <TextField
             label="Unit"
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setUnit(e.target.value);
             }}
-          />
+          /> */}
           <TextField
             label="Rate"
             sx={{ width: "300px", backgroundColor:"white" }}
