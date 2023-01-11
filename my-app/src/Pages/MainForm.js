@@ -563,7 +563,7 @@ console.log("name", customerName)
           onChange={(e) => setInvoiceDescription(e.target.value)}
           value={invoiceDescription}
         />
-        <TextField
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Service Category"
@@ -571,6 +571,19 @@ console.log("name", customerName)
           required
           onChange={(e) => setServiceCategory(e.target.value)}
           value={serviceCategory}
+        /> */}
+
+         <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={ServiceCategoryDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setServiceCategory(newValue.label);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} required label="Service Category" />
+          )}
         />
 
         <TextField
@@ -868,4 +881,13 @@ const reportingManagerData = [
   { label: "Vijay Ram" },
   { label: "Vineeth Nair" },
   { label: "Himanshu Shukla" },
+];
+
+
+const ServiceCategoryDD = [
+  { label: "Contract staffing services" },
+  { label: "Day care services" },
+  { label: "Business consultancy services" },
+  { label: "Other sanitation services" },
+  { label: "Services provided by restaurant" },
 ];
