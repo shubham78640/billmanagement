@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from "axios";
+import pinch from "../../images/Pinch.png"
 function Navbaar() {
 
 const EMPCODE  = localStorage.getItem("employeeCode");
@@ -48,20 +49,15 @@ const userType = localStorage.getItem("User")
       }}
     >
       <Box sx={{marginLeft:{ sm: 4, xs: 1 },  display:"grid", alignItems:"center", justifyContent:"center"}}>
-
         <img
          onClick={()=>{{userType=="ADMIN" && navigate("/billtable")}}}
           style={{
-            borderRadius: "50%",
             cursor:"pointer",
-            boxShadow:
-              "rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px",
           }}
           width={"50px"}
-          src="https://media.licdn.com/dms/image/C4D0BAQFLfwyhVhoTow/company-logo_200_200/0/1667996664233?e=1678924800&v=beta&t=45r3-39fVU5rmGzZEf0ozbtcfJbY4f4mlvtAUpeuVug"
+          src={pinch}
           alt=""
         />
-        <p style={{textAlign:"center", color:"#b04325", fontFamily:"Garamond, serif", fontWeight:"800"}}>pinch</p>
       </Box>
       <Box sx={{display:"flex", gap:"30px"}}>
       <Button mt={.8}  color="success">
