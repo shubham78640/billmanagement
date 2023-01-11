@@ -212,7 +212,6 @@ function MainForm() {
       }
     })
 
-
   }, [brand, paymentMode, department, category, subCategory1, customerName]);
 
   
