@@ -67,12 +67,13 @@ function MainForm() {
   const [preTaxAmount, setPreTaxAmount] = useState("");
   const [totalAmount, setTotalAmount] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(null);
+  const [paymentDate, setPaymentDate] = useState(null);
   const [gSTApplicable, setGSTApplicable] = useState("");
   const [paymentCycle, setPaymentCycle] = useState("");
   const [utr, setUtr] = useState("");
   const [taskId, setTaskId] = useState("");
   const [updatepaidAmount, setUpdatepaidAmount] = useState("");
-  const [paymentDate, setpaymentDate] = useState("");
+  const [reimbursementpaymentDate, setreimbursementpaymentDate] = useState(null);
   const [transactionsDetail, setTransactionsDetail] = useState("");
   const [paymentStatus, setPaymentStatus] = useState("");
   const [subbrandDD, setSubBrandDD] = useState([]);
@@ -120,7 +121,6 @@ function MainForm() {
       subCategory1,
       subCategory2,
       expenseType,
-      reportingManagerData,
       gstAmount,
       totelAmountofbill,
       paymentCycle,
@@ -329,7 +329,7 @@ console.log("name", customerName)
           options={locationData}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setLocation(newValue.label);
+            setLocation(newValue);
           }}
           renderInput={(params) => <TextField {...params}   required label="Location" />}
         />
@@ -383,7 +383,7 @@ console.log("name", customerName)
           options={expenseTypedata}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setExpenseType(newValue.label);
+            setExpenseType(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params}   required label="Expense Type" />
@@ -396,7 +396,7 @@ console.log("name", customerName)
           options={expenseCatdata}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setExpenseCategory(newValue.label);
+            setExpenseCategory(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params}   required label="Expense Category" />
@@ -428,7 +428,7 @@ console.log("name", customerName)
             sx={{ width: "300px", backgroundColor:"white" }}
             options={sGSTDATA}
             onChange={(event, newValue) => {
-             setinvoiceSGST(newValue.label);
+             setinvoiceSGST(newValue);
             }}
             renderInput={(params) => <TextField  {...params} label="SGST %" />}
           />
@@ -440,10 +440,9 @@ console.log("name", customerName)
             disabled
             sx={{ width: "300px", backgroundColor:"white" }}
             // onChange={(event, newValue) => {
-            //   setinvoiceCGST(newValue.label);
+            //   setinvoiceCGST(newValue);
             // }}
            value={invoicesgst}
-            
             renderInput={(params) => <TextField   {...params} label="CGST %" />}
           />
 
@@ -454,7 +453,7 @@ console.log("name", customerName)
             disabled={invoicesgst=="0"?false:true}
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(event, newValue) => {
-            setinvoiceIGST(newValue.label);
+            setinvoiceIGST(newValue);
             }}
             renderInput={(params) => <TextField  {...params} label="IGST %" />}
           /> */}
@@ -500,12 +499,38 @@ console.log("name", customerName)
           options={paymentcycleData}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setPaymentCycle(newValue.label);
+            setPaymentCycle(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params}  label="Payment Cycle Days" />
           )}
         />
+
+{/* 
+<LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="Payment Date"
+            value={paymentDate}
+            onChange={(newValue) => {
+              setPaymentDate(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField
+                
+                {...params}
+                size="medium"
+                sx={{
+                  width: 300,
+                  backgroundColor: "white",
+                  color: "black",
+                }}
+              />
+            )}
+          />
+        </LocalizationProvider> */}
+
+
+
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -530,13 +555,27 @@ console.log("name", customerName)
             <TextField {...params}   required label="Payment Method" />
           )}
         />
-        <TextField
+
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Pay Direct Card Details"
           variant="outlined"
           onChange={(e) => setPayDirectCardDetails(e.target.value)}
           value={payDirectCardDetails}
+        /> */}
+
+<Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={PayDirectCardDetailsNumberDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setPayDirectCardDetails(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Pay Direct Card Details" />
+          )}
         />
 
         <TextField
@@ -548,6 +587,7 @@ console.log("name", customerName)
           onChange={(e) => setCustomerName(e.target.value)}
           value={customerName}
         />
+
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
@@ -619,7 +659,7 @@ console.log("name", customerName)
           options={ServiceCategoryDD}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setServiceCategory(newValue.label);
+            setServiceCategory(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params} required label="Service Category" />
@@ -658,8 +698,8 @@ console.log("name", customerName)
           id="outlined-basic"
           label="Payment Date"
           variant="outlined"
-          onChange={(e) => setpaymentDate(e.target.value)}
-          value={paymentDate}
+          onChange={(e) => setreimbursementpaymentDate(e.target.value)}
+          value={reimbursementpaymentDate}
         />
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
@@ -678,16 +718,19 @@ console.log("name", customerName)
           onChange={(e) => setPaymentStatus(e.target.value)}
           value={paymentStatus}
         /> */}
-        </ThemeProvider>
-        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Invoice Attachment" variant="outlined"
- 
- //onChange={(e) => setInvoiceAttachment(e.target.value)}
 
-//  value={invoiceAttachment}
- /> */}
+
+        </ThemeProvider>
+
+        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Invoice Attachment" variant="outlined"
+        //onChange={(e) => setInvoiceAttachment(e.target.value)}
+         //  value={invoiceAttachment}
+           /> */}
         {/* <input type="file"  name="file" onChange={changeHandler}/> */}
         {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
- value={paymentStatus} /> */}
+         value={paymentStatus} /> */}
+
+
       </Box>
 
       <Box textAlign={"center"}>
@@ -729,7 +772,6 @@ console.log("name", customerName)
 
 export default MainForm;
 
-const gstApplicableData = [{ label: "Yes" }, { label: "No" }];
 const subbrand1 = [
   { label: "Pinch" },
   { label: "Pinch D2C" },
@@ -750,18 +792,18 @@ const brand1 = [
 ];
 
 const locationData = [
-  { label: "Office - Gurgaon" },
-  { label: "Office - Mumbai" },
-  { label: "Office - Bangalore" },
-  { label: "Office - Lucknow" },
-  { label: "1 To Zee - DLF Phase 1" },
-  { label: "Gullak Daycare - Chakkarpur" },
-  { label: "Well Served - DLF Phase 3" },
-  { label: "Well Served - Rodeo Drive" },
-  { label: "Well Served - Powai" },
-  { label: "CC Office - Manesar" },
-  { label: "RCC - Delhi" },
-  { label: "HQ" },
+  "Office - Gurgaon",
+  "Office - Mumbai",
+  "Office - Bangalore",
+  "Office - Lucknow",
+  "1 To Zee - DLF Phase 1",
+  "Gullak Daycare - Chakkarpur",
+  "Well Served - DLF Phase 3",
+  "Well Served - Rodeo Drive",
+  "Well Served - Powai",
+  "CC Office - Manesar",
+  "RCC - Delhi",
+  "HQ",
 ];
 
 const paymentMode1Data = [
@@ -774,97 +816,97 @@ const paymentMode1Data = [
 ];
 
 const paymentcycleData = [
-  { label: "0" },
-  { label: "1" },
-  { label: "2" },
-  { label: "3" },
-  { label: "4" },
-  { label: "5" },
-  { label: "6" },
-  { label: "7" },
-  { label: "8" },
-  { label: "9" },
-  { label: "10" },
-  { label: "11" },
-  { label: "12" },
-  { label: "13 " },
-  { label: "14" },
-  { label: "15" },
-  { label: "16" },
-  { label: "17" },
-  { label: "18" },
-  { label: "19" },
-  { label: "20" },
-  { label: "21" },
-  { label: "22" },
-  { label: "23" },
-  { label: "24" },
-  { label: "25" },
-  { label: "26" },
-  { label: "27" },
-  { label: "28" },
-  { label: "29" },
-  { label: "30" },
-  { label: "31" },
-  { label: "32" },
-  { label: "33" },
-  { label: "34" },
-  { label: "35" },
-  { label: "36" },
-  { label: "37" },
-  { label: "38" },
-  { label: "39" },
-  { label: "40" },
-  { label: "41" },
-  { label: "42" },
-  { label: "43" },
-  { label: "44" },
-  { label: "45" },
-  { label: "46" },
-  { label: "47" },
-  { label: "48" },
-  { label: "49" },
-  { label: "50" },
-  { label: "51" },
-  { label: "52" },
-  { label: "53" },
-  { label: "54" },
-  { label: "55" },
-  { label: "56" },
-  { label: "57" },
-  { label: "58" },
-  { label: "59" },
-  { label: "60" },
-  { label: "61" },
-  { label: "62" },
-  { label: "63" },
-  { label: "64" },
-  { label: "65" },
-  { label: "66" },
-  { label: "67" },
-  { label: "68" },
-  { label: "69" },
-  { label: "70" },
-  { label: "71" },
-  { label: "72" },
-  { label: "73" },
-  { label: "74" },
-  { label: "75" },
-  { label: "76" },
-  { label: "77" },
-  { label: "78" },
-  { label: "79" },
-  { label: "80" },
-  { label: "81" },
-  { label: "82" },
-  { label: "83" },
-  { label: "84" },
-  { label: "85" },
-  { label: "86" },
-  { label: "87" },
-  { label: "88" },
-  { label: "89" },
-  { label: "90" },
+   "0" ,
+   "1" ,
+   "2" ,
+   "3" ,
+   "4" ,
+   "5" ,
+   "6" ,
+   "7" ,
+   "8" ,
+   "9" ,
+   "10",
+   "11",
+   "12",
+   "13",
+   "14",
+   "15",
+   "16",
+   "17",
+   "18",
+   "19",
+   "20",
+   "21",
+   "22",
+   "23",
+   "24",
+   "25",
+   "26",
+   "27",
+   "28",
+   "29",
+   "30",
+   "31",
+   "32",
+   "33",
+   "34",
+   "35",
+   "36",
+   "37",
+   "38",
+   "39",
+   "40",
+   "41",
+   "42",
+   "43",
+   "44",
+   "45",
+   "46",
+   "47",
+   "48",
+   "49",
+   "50",
+   "51",
+   "52",
+   "53",
+   "54",
+   "55",
+   "56",
+   "57",
+   "58",
+   "59",
+   "60",
+   "61",
+   "62",
+   "63",
+   "64",
+   "65",
+   "66",
+   "67",
+   "68",
+   "69",
+   "70",
+   "71",
+   "72",
+   "73",
+   "74",
+   "75",
+   "76",
+   "77",
+   "78",
+   "79",
+   "80",
+   "81",
+   "82",
+   "83",
+   "84",
+   "85",
+   "86",
+   "87",
+   "88",
+   "89",
+   "90",
 ];
 
 const paymentMethodData = [
@@ -896,64 +938,59 @@ const departmentData = [
 ];
 
 const expenseTypedata = [
-  { label: "Company" },
-  { label: "Employee Reimbursement" },
-  { label: "Billable - Customer" },
-  { label: "Non Billable - Customer" },
-  { label: "Partner" },
+  "Company",
+  "Employee Reimbursement",
+  "Billable - Customer",
+  "Non Billable - Customer",
+  "Partner",
 ];
 
-const expenseCatdata = [{ label: "One Time" }, { label: "Recurring" }];
-
-const reportingManagerData = [
-  { label: "Nitin Mohan Srivastava" },
-  { label: "Abhishek" },
-  { label: "Diksha Tiwari" },
-  { label: "Divyani" },
-  { label: "Hitesh Rathour" },
-  { label: "Mayank Prakash" },
-  { label: "Rajat Singh Pundir" },
-  { label: "Ravi Bansal" },
-  { label: "Renuka C" },
-  { label: "Rishabh Mathur" },
-  { label: "Rituja" },
-  { label: "Sohail khan" },
-  { label: "Vijay Ram" },
-  { label: "Vineeth Nair" },
-  { label: "Himanshu Shukla" },
-];
+const expenseCatdata = ["One Time" , "Recurring"];
 
 
 const ServiceCategoryDD = [
-  { label: "Contract staffing services" },
-  { label: "Day care services" },
-  { label: "Business consultancy services" },
-  { label: "Other sanitation services" },
-  { label: "Services provided by restaurant" },
-  { label: "N/A" },
+   "Contract staffing services",
+   "Day care services",
+   "Business consultancy services",
+   "Other sanitation services",
+   "Services provided by restaurant",
+   "N/A",
 ];
 
 
 const sGSTDATA = [
-  { label: "2.5" },
-  { label: "6" },
-  { label: "9" },
-  { label: "14" },
-  { label: "0" },
+  "2.5",
+  "6",
+  "9",
+  "14",
+  "0",
 ];
 
 const cGSTDATA = [
-  { label: "2.5" },
-  { label: "6" },
-  { label: "9" },
-  { label: "14" },
-  { label: "0" },
+  "2.5",
+  "6",
+  "9",
+  "14",
+  "0",
 ];
 
 const iGSTDATA = [
-  { label: "5" },
-  { label: "12" },
-  { label: "18" },
-  { label: "28" },
-  { label: "0" },
+  "5",
+  "12",
+  "18",
+  "28",
+  "0",
 ];
+
+
+const PayDirectCardDetailsNumberDD=[
+   " 4629525415529329" ,
+    "4629525415529410",
+    "4629525415529402",
+    "4629525415529337",
+    "4629525415529345",
+    "4629525415529311",
+    "4629525415529352",
+    "4629525415529360",
+   "N/A",
+]

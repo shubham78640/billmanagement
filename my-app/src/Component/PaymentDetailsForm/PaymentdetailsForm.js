@@ -99,14 +99,13 @@ function PaymentdetailsForm() {
             value={paymentStatus}
           /> */}
 
-
 <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={paymentStatusDD}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setPaymentStatus(newValue.label);
+            setPaymentStatus(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params}   required label="Payment Status" />
@@ -140,15 +139,9 @@ function PaymentdetailsForm() {
 export default PaymentdetailsForm;
 
 
-
-
-
-
 const paymentStatusDD=[
-
-
-  { label: "Paid" },
-  { label: "Pending" },
-  { label: "Hold" },
-  { label: "Partially Paid" },
+   "Paid" ,
+   "Pending" ,
+   "Hold" ,
+   "Partially Paid" ,
 ]

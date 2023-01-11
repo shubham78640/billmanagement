@@ -266,24 +266,24 @@ function BillTableData() {
          //====================Old Pagination code==========
         pageSize={100}
         rowsPerPageOptions={[500]}
-        //====================New Pagination code==========
-    //     rowsPerPageOptions={[5, 10, 20]}
-    //     pageSize={pageSize}
-    //    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
- //====================New Pagination Code End==========
-
+        //====================New Pagination code============
+        //     rowsPerPageOptions={[5, 10, 20]}
+        //     pageSize={pageSize}
+        //    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+        //====================New Pagination Code End========
         // checkboxSelection
         // disableSelectionOnClick
-       // experimentalFeatures={{ newEditingApi: true }}    (rows)=>{setid(rows.email}
-       //==============On Row Click event ===================
+        // experimentalFeatures={{ newEditingApi: true }}    (rows)=>{setid(rows.email}
+        //==============On Row Click event ===================
         //  onRowClick={handleEvent}
-         //==============On Row Click event ===================
-          //==============On Cell Click event ===================
+        //==============On Row Click event ===================
+        //==============On Cell Click event ==================
         onCellClick={handleEvent}
-         //============== On cell Click event ===================
-           //============== On Export Csv Click event ===================
-            components={{ Toolbar: GridToolbar }}
-          //==============On Export Csv Click event ===================
+        //============== On cell Click event =================
+        //============== On Export Csv Click event ===========
+        components={{ Toolbar: GridToolbar }}
+        //==============On Export Csv Click event ============
+        
       />
     </Box>
     </>

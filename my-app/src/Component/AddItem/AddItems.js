@@ -78,15 +78,9 @@ useEffect(() => {
 
 const totelAddItem = totelItemAmountBB.length;
  //console.log("totelItemAmountBB",totelItemAmountBB.length)
-
-
-
 //  const handleonclickLogOut=async () => {
 //     console.log({
-
-
 //     });
-
 //     try {
 //       let response = await axios.post("http://13.126.160.155:8088/bill/item/save", {
 //         amount: amount1,
@@ -358,7 +352,7 @@ const totelAddItem = totelItemAmountBB.length;
             sx={{ width: "300px", backgroundColor:"white" }}
             options={sGSTDATA}
             onChange={(event, newValue) => {
-              setSgst(newValue.label);
+              setSgst(newValue);
             }}
             renderInput={(params) => <TextField {...params} label="SGST %" />}
           />
@@ -370,7 +364,7 @@ const totelAddItem = totelItemAmountBB.length;
             disabled
             sx={{ width: "300px", backgroundColor:"white" }}
             // onChange={(event, newValue) => {
-            //   setCgst(newValue.label);
+            //   setCgst(newValue);
             // }}
             value={sgst}
             // setCgst={sgst}
@@ -384,7 +378,7 @@ const totelAddItem = totelItemAmountBB.length;
             disabled={sgst=="0"?false:true}
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(event, newValue) => {
-              setIgst(newValue.label);
+              setIgst(newValue);
             }}
             renderInput={(params) => <TextField {...params} label="IGST %" />}
           />
@@ -423,7 +417,7 @@ const totelAddItem = totelItemAmountBB.length;
             options={tDSDATA}
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(event, newValue) => {
-              setTDSAmount(newValue.label);
+              setTDSAmount(newValue);
             }}
             renderInput={(params) => <TextField {...params} label="TDS %" />}
           />
@@ -465,9 +459,6 @@ const totelAddItem = totelItemAmountBB.length;
         onClick={handleonclick}>
           Document
       </Button>
-
-      
-
       </Box>
     </Box>
   );
@@ -475,48 +466,53 @@ const totelAddItem = totelItemAmountBB.length;
 
 export default AddItems;
 
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: "Pulp Fiction", year: 1994 },
-];
+
 
 const sGSTDATA = [
-  { label: "2.5" },
-  { label: "6" },
-  { label: "9" },
-  { label: "14" },
-  { label: "0" },
+   "2.5" ,
+   "6" ,
+   "9" ,
+   "14" ,
+   "0" ,
 ];
 
 const cGSTDATA = [
-  { label: "2.5" },
-  { label: "6" },
-  { label: "9" },
-  { label: "14" },
-  { label: "0" },
+  "2.5",
+  "6",
+  "9",
+  "14",
+  "0",
 ];
 
 const iGSTDATA = [
-  { label: "5" },
-  { label: "12" },
-  { label: "18" },
-  { label: "28" },
-  { label: "0" },
+  "5",
+  "12",
+  "18",
+  "28",
+  "0",
 ];
 
 const tDSDATA = [
-  { label: "0" },
-  { label: "1" },
-  { label: "2" },
-  { label: "5" },
-  { label: "10" },
-  { label: "15" },
-  { label: "20" },
-  { label: "25" },
-  { label: "30" },
+  "0",
+  "1",
+  "2",
+  "5",
+  "10",
+  "15",
+  "20",
+  "25",
+  "30",
 ];
+
+
+const unitListDD=[
+  "kg",
+  "ltr",
+  "pcs",
+  "gm",
+  "mtr",
+  "cm",
+  "km",
+  "sqft",
+  "no."
+]
