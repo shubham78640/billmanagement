@@ -48,7 +48,7 @@ function AddItems() {
   const tDSAmountTotel = (+amount1 * +tDSAmount) / 100;
   const gsttotelvalue =
     (+amount1 * +sgst) / 100 +
-    (+amount1 * +cgst) / 100 +
+    (+amount1 * +sgst) / 100 +
     (+amount1 * +igst) / 100;
   const totelItemAmount = +amount1 + +gsttotelvalue - +discount - +redeem;
   console.log("totelAmount", totelItemAmount);
