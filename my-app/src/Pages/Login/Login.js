@@ -3,6 +3,7 @@ import "./login.css";
 import { Box } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import pinch from "../../images/Pinch.png"
 
 function Login() {
   const [employeeCode, setEmployeeCode] = useState("")
@@ -64,26 +65,13 @@ function Login() {
         >
           <img
             style={{
-              borderRadius: "50%",
               cursor: "pointer",
-              boxShadow:
-                "rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px",
             }}
-            width={"70px"}
-            src="https://media.licdn.com/dms/image/C4D0BAQFLfwyhVhoTow/company-logo_200_200/0/1667996664233?e=1678924800&v=beta&t=45r3-39fVU5rmGzZEf0ozbtcfJbY4f4mlvtAUpeuVug"
+            width={"60px"}
+            src={pinch}
             alt=""
           />
-          <p
-            style={{
-              textAlign: "center",
-              color: "#b04325",
-              fontFamily: "Garamond, serif",
-              fontWeight: "800",
-              fontSize:"17px"
-            }}
-          >
-            pinch
-          </p>
+  
         </Box>
 
         <label for="username">Employee Code</label>
