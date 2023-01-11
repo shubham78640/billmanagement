@@ -90,9 +90,9 @@ function MainForm() {
     useState(true);
     const[customerCodeDD, setCustomerCodeDD] = useState([])
   let customerNameDD = [];
+  let paymentModeArray = [];
   const newInvoiveNumber = invoiceNumber.toUpperCase();
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
-  // console.log({newDateinv})
   const invbillid = localStorage.getItem("BillID");
   const totelAmountofbill = +preTaxAmount + +gstAmount;
   let navigate = useNavigate();
@@ -183,6 +183,7 @@ function MainForm() {
     });
 
     paymentModeRelation.map((item) => {
+      paymentModeArray.push(item.paymentMode)
       if (item.paymentMode === paymentMode)
         setPaymentMethodDD(item.paymentMethod);
     });
@@ -211,7 +212,7 @@ function MainForm() {
   }, [brand, paymentMode, department, category, subCategory1, ]);
 
   
-console.log("name", customerName)
+console.log("name", paymentMode)
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
   const EMPEMAIL = localStorage.getItem("email");
@@ -307,7 +308,7 @@ console.log("name", customerName)
           id="combo-box-demo"
           options={brand1}
           onChange={(event, newValue) => {
-            setBrand(newValue.label);
+            setBrand(newValue);
           }}
           sx={{ width: 300, backgroundColor: "white" }}
           renderInput={(params) => <TextField {...params}   required label="Brand" />}
@@ -477,21 +478,22 @@ console.log("name", customerName)
           InputLabelProps={{ shrink: true }}
           value={totelAmountofbill}
         />
-        {/* <Autocomplete
- disablePortal
- id="combo-box-demo"
- options={gstApplicableData}
- sx={{ width: 300, backgroundColor:"white" }}
- onChange={(event, newValue)=>{setGSTApplicable(newValue.label)}}
- renderInput={(params) => <TextField {...params} label="GST Applicable" />}
- /> */}
-        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
- value={tDSType}/> */}
-        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
- value={tDSAmount}/>
 
-<TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Post TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
- value={tDSAmount}/> */}
+    {/* <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={gstApplicableData}
+        sx={{ width: 300, backgroundColor:"white" }}
+        onChange={(event, newValue)=>{setGSTApplicable(newValue.label)}}
+        renderInput={(params) => <TextField {...params} label="GST Applicable" />}
+        /> */}
+                {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
+        value={tDSType}/> */}
+                {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+        value={tDSAmount}/>
+
+        <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Post TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+        value={tDSAmount}/> */}
 
         <Autocomplete
           disablePortal
@@ -537,7 +539,7 @@ console.log("name", customerName)
           options={paymentMode1Data}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
-            setPaymentMode(newValue.label);
+            setPaymentMode(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params}   required label="Payment Mode" />
@@ -773,22 +775,22 @@ console.log("name", customerName)
 export default MainForm;
 
 const subbrand1 = [
-  { label: "Pinch" },
-  { label: "Pinch D2C" },
-  { label: "Pinch B2B" },
-  { label: "Well Served" },
-  { label: "BO" },
-  { label: "RCC" },
-  { label: "CARE CREW" },
-  { label: "Gullak" },
-  { label: "1 To Zee" },
+   "Pinch",
+   "Pinch D2C",
+   "Pinch B2B",
+   "Well Served",
+   "BO",
+   "RCC",
+   "CARE CREW",
+   "Gullak",
+   "1 To Zee",
 ];
 
 const brand1 = [
-  { label: "Pinch" },
-  { label: "Well Served" },
-  { label: "1 To Zee" },
-  { label: "CARE CREW" },
+   "Pinch",
+   "Well Served",
+   "1 To Zee",
+   "CARE CREW",
 ];
 
 const locationData = [
@@ -807,12 +809,12 @@ const locationData = [
 ];
 
 const paymentMode1Data = [
-  { label: "Cash" },
-  { label: "Bank Transfer" },
-  { label: "Debit Card" },
-  { label: "Credit Card" },
-  { label: "Mobile Payment" },
-  { label: "Cheque" },
+   "Cash" ,
+   "Bank Transfer" ,
+   "Debit Card" ,
+   "Credit Card" ,
+   "Mobile Payment" ,
+   "Cheque" ,
 ];
 
 const paymentcycleData = [
