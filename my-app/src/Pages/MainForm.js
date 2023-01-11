@@ -17,7 +17,23 @@ import {
   Department,
   CategoryRelation,
   SubCategory2Relation,
+  customerRelation
 } from "../AllData";
+import { createTheme, ThemeProvider } from "@mui/material";
+
+
+
+
+
+const theme = createTheme({
+ components: {
+ MuiFormLabel: {
+ styleOverrides: {
+ asterisk: { color: "red" },
+ },
+ },
+ },
+})
 
 function MainForm() {
   const [billId, setBillID] = useState("");
@@ -51,7 +67,7 @@ function MainForm() {
   const [totalAmount, setTotalAmount] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(null);
   const [gSTApplicable, setGSTApplicable] = useState("");
-  const [reportingManager, SetReportingManager] = useState("");
+  // const [reportingManager, SetReportingManager] = useState("");
   const [paymentCycle, setPaymentCycle] = useState("");
   const [utr, setUtr] = useState("");
   const [taskId, setTaskId] = useState("");
@@ -71,8 +87,9 @@ function MainForm() {
   const [paymentMethodDD, setPaymentMethodDD] = useState([]);
   const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic] =
     useState(true);
+    const[customerCodeDD, setCustomerCodeDD] = useState([])
 
-  let departmentArray = [];
+  let customerNameDD = [];
   const newInvoiveNumber = invoiceNumber.toUpperCase();
 
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
@@ -164,20 +181,6 @@ function MainForm() {
     }
   };
 
-  // const handleSubmit = ()=>{
-  //   navigate(`/mainform/addItem/${1234}`)
-  // }
-
-  // useEffect(() => {
-  //   const getData = async()=>{
-  //   let response2 = await fetch(`http://localhost:8082/bill/bill/get/name/email/PINCH1234`)
-  //   let data2 = await response2.json()
-  //   setBrandDD(data2)
-  //   console.log("data2",data2)
-  //   }
-  //   getData()
-  //  }, [])
-
   useEffect(() => {
     Brand.map((item) => {
       if (item.brand === brand) setSubBrandDD(item.subBrand);
@@ -189,7 +192,6 @@ function MainForm() {
     });
 
     Department.map((item) => {
-      departmentArray.push(item.department);
       if (item.department === department) setCategoryDD(item.category);
     });
 
@@ -202,12 +204,24 @@ function MainForm() {
       if (item.subCategory1Relations === subCategory1)
         setSubCategory2DD(item.subCategory2Relations);
     });
-  }, [brand, paymentMode, department, category, subCategory1]);
 
+    customerRelation.map((item)=>{
+      customerNameDD.push(item.customerName)
+      if(item.customerName==customerName){
+        setCustomerCode(item.customerCode)
+      }
+    })
+
+
+  }, [brand, paymentMode, department, category, subCategory1, customerName]);
+
+  
+console.log("name", customerName)
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
   const EMPEMAIL = localStorage.getItem("email");
   const EMPSTATUS = localStorage.getItem("status");
+  const reportingManager = localStorage.getItem("reportingManager");
 
   return (
     <Box
@@ -222,13 +236,14 @@ function MainForm() {
           justifyContent: "center",
         }}
       >
+        <ThemeProvider theme = {theme}>
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Employee Name"
           variant="outlined"
           disabled
-          onChange={(e) => setEmpName(e.target.value)}
+          // onChange={(e) => setEmpName(e.target.value)}
           value={EMPNAME}
         />
 
@@ -238,7 +253,7 @@ function MainForm() {
           label="Employee Code"
           variant="outlined"
           disabled
-          onChange={(e) => setEmpCode(e.target.value)}
+          // onChange={(e) => setEmpCode(e.target.value)}
           value={EMPCODE}
         />
 
@@ -248,11 +263,21 @@ function MainForm() {
           label="Email"
           variant="outlined"
           disabled
-          onChange={(e) => setEmail(e.target.value)}
+          // onChange={(e) => setEmail(e.target.value)}
           value={EMPEMAIL}
         />
 
-        <Autocomplete
+<TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          label="Reporting Manager"
+          variant="outlined"
+          disabled
+          // onChange={(e) => setEmail(e.target.value)}
+          value={reportingManager}
+        />
+
+        {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={reportingManagerData}
@@ -263,15 +288,17 @@ function MainForm() {
           renderInput={(params) => (
             <TextField {...params} label="Reporting Manager" />
           )}
-        />
+        /> */}
 
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
+          required
           label="Invoice Number"
           variant="outlined"
           onChange={(e) => setInvoiceNumber(e.target.value)}
           value={invoiceNumber}
+
         />
 
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -304,7 +331,7 @@ function MainForm() {
             setBrand(newValue.label);
           }}
           sx={{ width: 300, backgroundColor: "white" }}
-          renderInput={(params) => <TextField {...params} label="Brand" />}
+          renderInput={(params) => <TextField {...params}   required label="Brand" />}
         />
 
         <Autocomplete
@@ -315,7 +342,7 @@ function MainForm() {
           onChange={(event, newValue) => {
             setSubrand(newValue);
           }}
-          renderInput={(params) => <TextField {...params} label="Sub Brand" />}
+          renderInput={(params) => <TextField {...params}   required label="Sub Brand" />}
         />
         <Autocomplete
           disablePortal
@@ -325,7 +352,7 @@ function MainForm() {
           onChange={(event, newValue) => {
             setLocation(newValue.label);
           }}
-          renderInput={(params) => <TextField {...params} label="Location" />}
+          renderInput={(params) => <TextField {...params}   required label="Location" />}
         />
         <Autocomplete
           disablePortal
@@ -335,7 +362,7 @@ function MainForm() {
           onChange={(event, newValue) => {
             setDepartment(newValue.label);
           }}
-          renderInput={(params) => <TextField {...params} label="Department" />}
+          renderInput={(params) => <TextField {...params}   required label="Department" />}
         />
         <Autocomplete
           disablePortal
@@ -345,7 +372,7 @@ function MainForm() {
           onChange={(event, newValue) => {
             setCategory(newValue);
           }}
-          renderInput={(params) => <TextField {...params} label="Category" />}
+          renderInput={(params) => <TextField {...params}   required label="Category" />}
         />
         <Autocomplete
           disablePortal
@@ -380,7 +407,7 @@ function MainForm() {
             setExpenseType(newValue.label);
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Expense Type" />
+            <TextField {...params}   required label="Expense Type" />
           )}
         />
 
@@ -393,7 +420,7 @@ function MainForm() {
             setExpenseCategory(newValue.label);
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Expense Category" />
+            <TextField {...params}   required label="Expense Category" />
           )}
         />
 
@@ -410,6 +437,7 @@ function MainForm() {
           id="outlined-basic"
           label="Pre Tax Amount"
           variant="outlined"
+          required
           onChange={(e) => setPreTaxAmount(e.target.value)}
           value={preTaxAmount}
         />
@@ -418,6 +446,7 @@ function MainForm() {
           id="outlined-basic"
           label="GST Amount"
           variant="outlined"
+          required
           onChange={(e) => setGSTAmount(e.target.value)}
           value={gstAmount}
         />
@@ -427,6 +456,7 @@ function MainForm() {
           id="outlined-basic"
           label="Total Amount"
           variant="outlined"
+          required
           InputLabelProps={{ shrink: true }}
           value={totelAmountofbill}
         />
@@ -455,7 +485,7 @@ function MainForm() {
             setPaymentCycle(newValue.label);
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Payment Cycle Days" />
+            <TextField {...params}   required label="Payment Cycle Days" />
           )}
         />
         <Autocomplete
@@ -467,7 +497,7 @@ function MainForm() {
             setPaymentMode(newValue.label);
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Payment Mode" />
+            <TextField {...params}   required label="Payment Mode" />
           )}
         />
         <Autocomplete
@@ -479,7 +509,7 @@ function MainForm() {
             setPaymentMethod(newValue);
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Payment Method" />
+            <TextField {...params}   required label="Payment Method" />
           )}
         />
         <TextField
@@ -493,7 +523,7 @@ function MainForm() {
         {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Expense Category" variant="outlined" onChange={(e) => setExpenseCategory(e.target.value)}
  value={expenseCategory}/> */}
 
-        <TextField
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Partner/Customer Name"
@@ -508,11 +538,48 @@ function MainForm() {
           variant="outlined"
           onChange={(e) => setCustomerCode(e.target.value)}
           value={customerCode}
+        /> */}
+
+          <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={customerNameDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setCustomerName(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params}   required label="Partner/Customer Name" />
+          )}
         />
+
+       {/* <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={customerCodeDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setCustomerCode(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Partner/Customer Code" />
+          )}
+        /> */}
+
+       <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          label="Partner/Customer Code"
+          disabled
+          variant="outlined"
+          onChange={(e) => setCustomerCode(e.target.value)}
+          value={customerCode}
+        /> 
 
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
+          required
           label="Invoice Description"
           variant="outlined"
           onChange={(e) => setInvoiceDescription(e.target.value)}
@@ -523,6 +590,7 @@ function MainForm() {
           id="outlined-basic"
           label="Service Category"
           variant="outlined"
+          required
           onChange={(e) => setServiceCategory(e.target.value)}
           value={serviceCategory}
         />
@@ -545,7 +613,7 @@ function MainForm() {
           value={taskId}
         />
 
-        <TextField
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Paid Amount"
@@ -578,7 +646,8 @@ function MainForm() {
           variant="outlined"
           onChange={(e) => setPaymentStatus(e.target.value)}
           value={paymentStatus}
-        />
+        /> */}
+        </ThemeProvider>
         {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Invoice Attachment" variant="outlined"
  
  //onChange={(e) => setInvoiceAttachment(e.target.value)}
@@ -592,9 +661,27 @@ function MainForm() {
 
       <Box textAlign={"center"}>
         <Button
-          disabled={invoiceNumber && invoiceDate && brand && subrand && location && department && category && subCategory1 && expenseType && expenseCategory
-           && preTaxAmount && gstAmount && paymentMode && paymentMethod && customerName && customerCode && invoiceDescription
-           && serviceCategory && updatepaidAmount && paymentDate && transactionsDetail && paymentStatus? false : true}
+          disabled={
+            invoiceNumber &&
+            invoiceDate &&
+            brand &&
+            subrand &&
+            location &&
+            department &&
+            category &&
+            expenseType &&
+            expenseCategory &&
+            preTaxAmount &&
+            gstAmount &&
+            paymentMode &&
+            paymentMethod &&
+            customerName &&
+            invoiceDescription &&
+            serviceCategory
+           
+              ? false
+              : true
+          }
           size="large"
           sx={{ width: { sm: 300, xs: 250 }, mb: "20px" }}
           onClick={handleSubmit}
@@ -716,7 +803,6 @@ const paymentcycleData = [
   { label: "58" },
   { label: "59" },
   { label: "60" },
-
   { label: "61" },
   { label: "62" },
   { label: "63" },
@@ -766,147 +852,15 @@ const paymentMethodData = [
   { label: "Employee Cheque" },
 ];
 
-
- const departmentData=[
-  { label: 'Admin' },
-  { label: 'Finance'},
-  { label: 'HR'},
-  { label: 'Marketing' },
-  { label: 'Operations'},
-  { label: 'Procurement'},
-  { label: 'Technology' },
-  { label: 'Training & Audit' },
- 
-
-
-
-  { label: "Developers" },
-  { label: "Corporate" },
-  { label: "Brand" },
-  { label: "Talent Management" },
-  { label: "Remuneration" },
-  { label: "Employee Engagement" },
-  { label: "Office Utilities" },
-  { label: "Office Supplies" },
-  { label: "Repair & Maintenance" },
-  { label: "Travel Desk" },
-  { label: "Raw Material" },
-  { label: "Logistic" },
-  { label: "Sampling" },
-  { label: "Infrastructure" },
-  { label: "Daily Needs" },
-  { label: "Travel" },
-  { label: "Fees" },
-  { label: "Professional Fee" },
-  { label: "Software" },
-  { label: "Residents" },
-  { label: "Owners" },
-  { label: "Well Served" },
-  { label: "1ToZee" },
-  { label: "Care Crew" },
-  { label: "Corporate" },
-  { label: "Partnerships" },
-];
-
-const sub_Category1Data = [
-  { label: "Digital Marketing" },
-  { label: "Print" },
-  { label: "Influencer Marketing" },
-  { label: "Event Management" },
-  { label: "Relationship Marketing" },
-  { label: "Public Relations" },
-  { label: "Consultancy Cost" },
-  { label: "Recruitment Drive" },
-  { label: "Job Portal" },
-  { label: "Fees" },
-  { label: "HRMS" },
-  { label: "Liasoning" },
-  { label: "Travel" },
-  { label: "Food" },
-  { label: "Rewards & Recognitions" },
-  { label: "Events" },
-  { label: "Rental" },
-  { label: "Electricity" },
-  { label: "Water" },
-  { label: "Asset" },
-  { label: "Refreshments" },
-  { label: "Uniform" },
-  { label: "Furniture" },
-  { label: "Housekeeping Supplies" },
-  { label: "Toiletries" },
-  { label: "Courier" },
-  { label: "Gardening" },
-  { label: "Fuel" },
-  { label: "Wear & Tear" },
-  { label: "Pest Control" },
-  { label: "Decoration" },
-  { label: "Tickets" },
-  { label: "Accomodation" },
-  { label: "Local Conveyance" },
-  { label: "Equipment" },
-  { label: "Kitchen Accessories" },
-  { label: "Groceries" },
-  { label: "Fruits & Vegetables" },
-  { label: "Dairy" },
-  { label: "Chemicals" },
-  { label: "Training Essentials" },
-  { label: "Conveyance" },
-  { label: "Licence" },
-  { label: "TDS" },
-  { label: "GST" },
-  { label: "PF/ESIC" },
-  { label: "Tool" },
-  { label: "Storage" },
-  { label: "Conceirge" },
-  { label: "Housekeeping" },
-  { label: "Food & Nuitrition" },
-  { label: "Wellness" },
-  { label: "Care" },
-  { label: "Experience" },
-  { label: "Repair & Maintenance" },
-  { label: "Training" },
-  { label: "Commission" },
-  { label: "Field Office" },
-  { label: "Business Development" },
-  { label: "Vegetables" },
-  { label: "Stationary" },
-  { label: "Toys" },
-  { label: "Logistics" },
-  { label: "Packaging" },
-  { label: "Delivery" },
-];
-
-const sub_Category2Data = [
-  { label: "SEO" },
-  { label: "Email" },
-  { label: "SMS" },
-  { label: "Whatsapp" },
-  { label: "Social Media Marketing" },
-  { label: "Flyers" },
-  { label: "Newspaper" },
-  { label: "Standee" },
-  { label: "Canopy" },
-  { label: "Promo Table" },
-  { label: "Freelancers" },
-  { label: "Sampling" },
-  { label: "Promoters" },
-  { label: "Look Walkers" },
-  { label: "Charity" },
-  { label: "Media" },
-  { label: "Radio" },
-  { label: "Content" },
-  { label: "Blogs" },
-  { label: "Property Rent" },
-  { label: "Equipment Rental" },
-  { label: "Telecom Rental" },
-  { label: "Utensils" },
-  { label: "Electronic" },
-  { label: "Storage" },
-  { label: "Apron" },
-  { label: "Kitchen Dusters" },
-  { label: "Supply" },
-  { label: "Demand" },
-  { label: "Deployment" },
+const departmentData = [
+  { label: "Admin" },
+  { label: "Finance" },
+  { label: "HR" },
+  { label: "Marketing" },
+  { label: "Operations" },
+  { label: "Procurement" },
+  { label: "Technology" },
+  { label: "Training & Audit" },
 ];
 
 const expenseTypedata = [

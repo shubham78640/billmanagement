@@ -3,37 +3,33 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import pinch from "../../images/Pinch.png"
 function Navbaar() {
+  const EMPCODE = localStorage.getItem("employeeCode");
+  const EMPNAME = localStorage.getItem("name");
+  const EMPEMAIL = localStorage.getItem("email");
+  const userType = localStorage.getItem("User");
 
-const EMPCODE  = localStorage.getItem("employeeCode");
-const EMPNAME = localStorage.getItem("name");
-const EMPEMAIL = localStorage.getItem("email");
-const userType = localStorage.getItem("User")
-
-  const handleonclickLogOut=async () => {
-    console.log({
-
-
-    });
- //  main URl=   http://13.126.160.155:8088/bill/login/logout?email=aarti%40thepinchlife.com&employeeCode=10230301
+  const handleonclickLogOut = async () => {
+    console.log({});
     try {
-      let response = await axios.post(`http://13.126.160.155:8088/bill/login/logout?email=${EMPEMAIL}&employeeCode=${EMPCODE}`, {
-        email:EMPEMAIL
-      });
+      let response = await axios.post(
+        `http://13.126.160.155:8088/bill/login/logout?email=${EMPEMAIL}&employeeCode=${EMPCODE}`,
+        {
+          email: EMPEMAIL,
+        }
+      );
       alert("Logout successfully");
       console.log(response);
-      localStorage.clear()
-      navigate("/")
+      localStorage.clear();
+      navigate("/");
       window.location.reload();
-     
     } catch (error) {
       alert(error);
     }
   };
-
 
   let navigate = useNavigate();
   return (
@@ -50,7 +46,11 @@ const userType = localStorage.getItem("User")
     >
       <Box sx={{marginLeft:{ sm: 4, xs: 1 },  display:"grid", alignItems:"center", justifyContent:"center"}}>
         <img
-         onClick={()=>{{userType=="ADMIN" && navigate("/billtable")}}}
+          onClick={() => {
+            {
+              userType == "ADMIN" && navigate("/billtable");
+            }
+          }}
           style={{
             cursor:"pointer",
           }}
@@ -59,16 +59,23 @@ const userType = localStorage.getItem("User")
           alt=""
         />
       </Box>
-      <Box sx={{display:"flex", gap:"30px"}}>
-      <Button mt={.8}  color="success">
-        <Link 
-        // onClick={()=>{localStorage.clear()}}
-         style={{color:"white", fontWeight: "600", color:"green"}} to="/mainform">Add Bill</Link>
-      </Button>
+      <Box sx={{ display: "flex", gap: "30px" }}>
+        <Button mt={0.8} color="success">
+          <Link
+            style={{ color: "white", fontWeight: "600", color: "green" }}
+            to="/mainform"
+          >
+            Add Bill
+          </Link>
+        </Button>
 
-     <Button sx={{color:"green", fontWeight:"800"}} endIcon={<LogoutIcon/>}  color="success" onClick={handleonclickLogOut}></Button>
-</Box>
-
+        <Button
+          sx={{ color: "green", fontWeight: "800" }}
+          endIcon={<LogoutIcon />}
+          color="success"
+          onClick={handleonclickLogOut}
+        ></Button>
+      </Box>
     </Box>
   );
 }

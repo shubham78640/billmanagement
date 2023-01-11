@@ -6,84 +6,72 @@ import Box from "@mui/material/Box";
 import { useParams } from "react-router";
 function UploadeDocuments() {
   const invbillid = localStorage.getItem("BillID");
-   const {id} = useParams();
+  const { id } = useParams();
   const [invoiceAttachment, setInvoiceAttachment] = useState();
-
   const invNum = localStorage.getItem("InvoiceNumber");
   const invDate = localStorage.getItem("InvoiceDate");
   const invname = localStorage.getItem("EmployeeName");
-  const formData = new FormData()
+  const formData = new FormData();
   formData.append("document", invoiceAttachment);
   let navigate = useNavigate();
   const changeHandler = (event) => {
-    const imagebase =URL.createObjectURL(event.target.files[0]);
+    const imagebase = URL.createObjectURL(event.target.files[0]);
     setInvoiceAttachment(event.target.files[0]);
-};
+  };
 
-const EMPNAME = localStorage.getItem("name");
+  const EMPNAME = localStorage.getItem("name");
 
-const handleonclick = async () => {
-    if (invoiceAttachment){
+  const handleonclick = async () => {
+    if (invoiceAttachment) {
+      let formData = new FormData();
+      formData.append("file", invoiceAttachment);
 
-        let formData = new FormData();
-        formData.append('file',invoiceAttachment);
-
-        axios.post(
-            `http://13.126.160.155:8088/bill/files/upload/file?invoiceId=${id}`,
-            formData,
-            {
-                headers: {
-                    "Content-type": "multipart/form-data",
-                },                    
-            }
+      axios
+        .post(
+          `http://13.126.160.155:8088/bill/files/upload/file?invoiceId=${id}`,
+          formData,
+          {
+            headers: {
+              "Content-type": "multipart/form-data",
+            },
+          }
         )
-        .then(res => {
-            console.log(`Success` + res.data);
-            alert("uploaded successfully")
-            navigate("/billtable")
+        .then((res) => {
+          console.log(`Success` + res.data);
+          alert("uploaded successfully");
+          navigate("/billtable");
         })
-        .catch(err => {
-            console.log(err);
-        })
-        }
-    // try {
-    //     console.log(formData);
-    //   let response = await axios.post(`
-    //   http://localhost:8082/bill/files/upload/file?invoiceId=${id}
-    //   `,formData, {
-    //     mode: 'no-cors',
-    //     headers: {
-    //         "Content-type": "multipart/form-data",
-    //     },                    
-    //   })
-    //   alert("Item save successfully");
-    //   localStorage.clear();
-    //   navigate("/mainform");
-    //   console.log(response);
-    // } catch (error) {
-    //   alert(error);
-    // }
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
     <>
       <Box p={2}>
-        <Box mt={3} sx={{display:"flex", flexDirection:"column",gap:"12px",fontWeight: "600"}}>
-          <Box sx={{ fontSize: "20px",}}>
-            {" "}
-            Invoice Number :- {invNum}
-          </Box>
+        <Box
+          mt={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            fontWeight: "600",
+          }}
+        >
+          <Box sx={{ fontSize: "20px" }}> Invoice Number :- {invNum}</Box>
 
-          <Box sx={{ fontSize: "18px", }}>
-            {" "}
-            Employee Name :- {EMPNAME}
-          </Box>
+          <Box sx={{ fontSize: "18px" }}> Employee Name :- {EMPNAME}</Box>
           <Box sx={{ fontSize: "18px" }}> Invoice Date :- {invDate}</Box>
         </Box>
-        
 
         <Box mt={5}>
-          <input style={{fontSize:"18px", }} type="file" name="file" onChange={changeHandler} />
+          <input
+            style={{ fontSize: "18px" }}
+            type="file"
+            name="file"
+            onChange={changeHandler}
+          />
         </Box>
         <Box mt={4}>
           <Button
