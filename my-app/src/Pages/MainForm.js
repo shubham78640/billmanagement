@@ -17,7 +17,6 @@ import {
   Department,
   CategoryRelation,
   SubCategory2Relation,
-  customerRelation
 } from "../AllData";
 import { createTheme, ThemeProvider } from "@mui/material";
 
@@ -49,7 +48,9 @@ function MainForm() {
   const [expenseType, setExpenseType] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [paymentMode, setPaymentMode] = useState("");
-  const [] = useState("");
+  const [invoicesgst, setinvoiceSGST] = useState("");
+  const [invoicecgst, setinvoiceCGST] = useState("");
+  const [invoiceigst, setinvoiceIGST] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [brand, setBrand] = React.useState("");
   const [value, setValue] = React.useState(null);
@@ -67,7 +68,6 @@ function MainForm() {
   const [totalAmount, setTotalAmount] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(null);
   const [gSTApplicable, setGSTApplicable] = useState("");
-  // const [reportingManager, SetReportingManager] = useState("");
   const [paymentCycle, setPaymentCycle] = useState("");
   const [utr, setUtr] = useState("");
   const [taskId, setTaskId] = useState("");
@@ -88,11 +88,9 @@ function MainForm() {
   const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic] =
     useState(true);
     const[customerCodeDD, setCustomerCodeDD] = useState([])
-
   let customerNameDD = [];
   let paymentModeArray = [];
   const newInvoiveNumber = invoiceNumber.toUpperCase();
-
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
   const invbillid = localStorage.getItem("BillID");
   const totelAmountofbill = +preTaxAmount + +gstAmount;
@@ -100,7 +98,6 @@ function MainForm() {
   const handleSubmit = async () => {
     try {
       let response = await axios.post(
-        //  "http://localhost:8082/bill/bill/save"
         "http://13.126.160.155:8088/bill/bill/save",
         {
           brand: brand,
@@ -129,7 +126,7 @@ function MainForm() {
           totalAmount: totelAmountofbill,
           reportingManager: reportingManager,
           paymentCycle: paymentCycle,
-          userType: "ADMIN",
+          userType: USERTYPE,
           utr: utr,
           taskId: taskId,
           paymentStatus: paymentStatus,
@@ -142,7 +139,6 @@ function MainForm() {
       navigate(`/mainform/addItem/${response.data.data.invoiceId}`);
       localStorage.setItem("InvoiceNumber", invoiceNumber);
       localStorage.setItem("InvoiceDate", newDateinv);
-      // localStorage.setItem("EmployeeName", empName);
       localStorage.setItem("BillID", response.data.data.invoiceId);
 
       console.log(response);
@@ -176,15 +172,14 @@ function MainForm() {
         setSubCategory2DD(item.subCategory2Relations);
     });
 
-    customerRelation.map((item)=>{
-      customerNameDD.push(item.customerName)
-      if(item.customerName==customerName){
-        setCustomerCode(item.customerCode)
-      }
-    })
+    // customerRelation.map((item)=>{
+    //   customerNameDD.push(item.customerName)
+    //   if(item.customerName==customerName){
+    //     setCustomerCode(item.customerCode)
+    //   }
+    // })
 
-
-  }, [brand, paymentMode, department, category, subCategory1, customerName]);
+  }, [brand, paymentMode, department, category, subCategory1, ]);
 
   
 console.log("name", customerName)
@@ -192,6 +187,7 @@ console.log("name", customerName)
   const EMPNAME = localStorage.getItem("name");
   const EMPEMAIL = localStorage.getItem("email");
   const EMPSTATUS = localStorage.getItem("status");
+  const USERTYPE = localStorage.getItem("User");
   const reportingManager = localStorage.getItem("reportingManager");
 
   return (
@@ -214,7 +210,6 @@ console.log("name", customerName)
           label="Employee Name"
           variant="outlined"
           disabled
-          // onChange={(e) => setEmpName(e.target.value)}
           value={EMPNAME}
         />
 
@@ -224,7 +219,6 @@ console.log("name", customerName)
           label="Employee Code"
           variant="outlined"
           disabled
-          // onChange={(e) => setEmpCode(e.target.value)}
           value={EMPCODE}
         />
 
@@ -234,32 +228,17 @@ console.log("name", customerName)
           label="Email"
           variant="outlined"
           disabled
-          // onChange={(e) => setEmail(e.target.value)}
           value={EMPEMAIL}
         />
 
-<TextField
+        <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Reporting Manager"
           variant="outlined"
           disabled
-          // onChange={(e) => setEmail(e.target.value)}
           value={reportingManager}
         />
-
-        {/* <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={reportingManagerData}
-          onChange={(event, newValue) => {
-            SetReportingManager(newValue.label);
-          }}
-          sx={{ width: 300, backgroundColor: "white" }}
-          renderInput={(params) => (
-            <TextField {...params} label="Reporting Manager" />
-          )}
-        /> */}
 
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
@@ -412,6 +391,45 @@ console.log("name", customerName)
           onChange={(e) => setPreTaxAmount(e.target.value)}
           value={preTaxAmount}
         />
+
+{/*         
+<Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            sx={{ width: "300px", backgroundColor:"white" }}
+            options={sGSTDATA}
+            onChange={(event, newValue) => {
+             setinvoiceSGST(newValue.label);
+            }}
+            renderInput={(params) => <TextField  {...params} label="SGST %" />}
+          />
+
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={cGSTDATA}
+            disabled
+            sx={{ width: "300px", backgroundColor:"white" }}
+            // onChange={(event, newValue) => {
+            //   setinvoiceCGST(newValue.label);
+            // }}
+           value={invoicesgst}
+            
+            renderInput={(params) => <TextField   {...params} label="CGST %" />}
+          />
+
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={iGSTDATA}
+            disabled={invoicesgst=="0"?false:true}
+            sx={{ width: "300px", backgroundColor:"white" }}
+            onChange={(event, newValue) => {
+            setinvoiceIGST(newValue.label);
+            }}
+            renderInput={(params) => <TextField  {...params} label="IGST %" />}
+          /> */}
+
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
@@ -457,7 +475,7 @@ console.log("name", customerName)
             setPaymentCycle(newValue.label);
           }}
           renderInput={(params) => (
-            <TextField {...params}   required label="Payment Cycle Days" />
+            <TextField {...params}  label="Payment Cycle Days" />
           )}
         />
         <Autocomplete
@@ -492,12 +510,11 @@ console.log("name", customerName)
           onChange={(e) => setPayDirectCardDetails(e.target.value)}
           value={payDirectCardDetails}
         />
-        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Expense Category" variant="outlined" onChange={(e) => setExpenseCategory(e.target.value)}
- value={expenseCategory}/> */}
 
-        {/* <TextField
+        <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
+          required
           label="Partner/Customer Name"
           variant="outlined"
           onChange={(e) => setCustomerName(e.target.value)}
@@ -506,13 +523,14 @@ console.log("name", customerName)
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
+          required
           label="Partner/Customer Code"
           variant="outlined"
           onChange={(e) => setCustomerCode(e.target.value)}
           value={customerCode}
-        /> */}
+        />
 
-          <Autocomplete
+          {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={customerNameDD}
@@ -523,7 +541,7 @@ console.log("name", customerName)
           renderInput={(params) => (
             <TextField {...params}   required label="Partner/Customer Name" />
           )}
-        />
+        /> */}
 
        {/* <Autocomplete
           disablePortal
@@ -538,7 +556,7 @@ console.log("name", customerName)
           )}
         /> */}
 
-       <TextField
+       {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Partner/Customer Code"
@@ -546,7 +564,7 @@ console.log("name", customerName)
           variant="outlined"
           onChange={(e) => setCustomerCode(e.target.value)}
           value={customerCode}
-        /> 
+        />  */}
 
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
@@ -557,7 +575,7 @@ console.log("name", customerName)
           onChange={(e) => setInvoiceDescription(e.target.value)}
           value={invoiceDescription}
         />
-        <TextField
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Service Category"
@@ -565,6 +583,19 @@ console.log("name", customerName)
           required
           onChange={(e) => setServiceCategory(e.target.value)}
           value={serviceCategory}
+        /> */}
+
+         <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={ServiceCategoryDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setServiceCategory(newValue.label);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} required label="Service Category" />
+          )}
         />
 
         <TextField
@@ -647,9 +678,10 @@ console.log("name", customerName)
             gstAmount &&
             paymentMode &&
             paymentMethod &&
-            customerName &&
             invoiceDescription &&
-            serviceCategory
+            serviceCategory &&
+            customerCode && 
+            customerName
            
               ? false
               : true
@@ -864,3 +896,36 @@ const reportingManagerData = [
 ];
 
 
+const ServiceCategoryDD = [
+  { label: "Contract staffing services" },
+  { label: "Day care services" },
+  { label: "Business consultancy services" },
+  { label: "Other sanitation services" },
+  { label: "Services provided by restaurant" },
+  { label: "N/A" },
+];
+
+
+const sGSTDATA = [
+  { label: "2.5" },
+  { label: "6" },
+  { label: "9" },
+  { label: "14" },
+  { label: "0" },
+];
+
+const cGSTDATA = [
+  { label: "2.5" },
+  { label: "6" },
+  { label: "9" },
+  { label: "14" },
+  { label: "0" },
+];
+
+const iGSTDATA = [
+  { label: "5" },
+  { label: "12" },
+  { label: "18" },
+  { label: "28" },
+  { label: "0" },
+];

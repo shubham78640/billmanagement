@@ -53,7 +53,6 @@ function AddItems() {
   const totelItemAmount = +amount1 + +gsttotelvalue - +discount - +redeem;
   console.log("totelAmount", totelItemAmount);
 
-
   const EMPNAME = localStorage.getItem("name");
   // useEffect(() => {
   //   const getData = async () => {
@@ -196,7 +195,7 @@ const totelAddItem = totelItemAmountBB.length;
               <span
                 style={{ color: "green", fontSize: "20px", fontWeight: "800" }}
               >
-                Invoice number:-
+                Invoice Number - 
               </span>{" "}
               {invNum || "No-Data"}
             </Typography>
@@ -205,15 +204,15 @@ const totelAddItem = totelItemAmountBB.length;
                 style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
                 {" "}
-                Employee Name:-{" "}
+                Employee Name - {" "}
               </span>{" "}
               {EMPNAME || "No-Data"}
             </Typography>
             <Typography variant="p" color="initial">
               <span
-                style={{ color: "green", fontSize: "16px", fontWeight: "800" }}
+                style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
-                Date:-
+                Date - 
               </span>{" "}
               {invDate || "No-Data"}
             </Typography>
@@ -256,7 +255,7 @@ const totelAddItem = totelItemAmountBB.length;
               setItemName(e.target.value);
             }}
           />
-          
+
           <TextField
             label="Item Code"
             sx={{ width: "300px", backgroundColor:"white" }}
