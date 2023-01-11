@@ -182,7 +182,7 @@ function MainForm() {
   }, [brand, paymentMode, department, category, subCategory1, ]);
 
   
-console.log("name", customerName)
+console.log("name", paymentMode)
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
   const EMPEMAIL = localStorage.getItem("email");
@@ -278,7 +278,7 @@ console.log("name", customerName)
           id="combo-box-demo"
           options={brand1}
           onChange={(event, newValue) => {
-            setBrand(newValue.label);
+            setBrand(newValue);
           }}
           sx={{ width: 300, backgroundColor: "white" }}
           renderInput={(params) => <TextField {...params}   required label="Brand" />}
@@ -481,7 +481,7 @@ console.log("name", customerName)
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={paymentModeArray}
+          options={paymentMode1Data}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
             setPaymentMode(newValue);
@@ -703,22 +703,22 @@ export default MainForm;
 
 const gstApplicableData = [{ label: "Yes" }, { label: "No" }];
 const subbrand1 = [
-  { label: "Pinch" },
-  { label: "Pinch D2C" },
-  { label: "Pinch B2B" },
-  { label: "Well Served" },
-  { label: "BO" },
-  { label: "RCC" },
-  { label: "CARE CREW" },
-  { label: "Gullak" },
-  { label: "1 To Zee" },
+   "Pinch",
+   "Pinch D2C",
+   "Pinch B2B",
+   "Well Served",
+   "BO",
+   "RCC",
+   "CARE CREW",
+   "Gullak",
+   "1 To Zee",
 ];
 
 const brand1 = [
-  { label: "Pinch" },
-  { label: "Well Served" },
-  { label: "1 To Zee" },
-  { label: "CARE CREW" },
+   "Pinch",
+   "Well Served",
+   "1 To Zee",
+   "CARE CREW",
 ];
 
 const locationData = [
@@ -737,12 +737,12 @@ const locationData = [
 ];
 
 const paymentMode1Data = [
-  { label: "Cash" },
-  { label: "Bank Transfer" },
-  { label: "Debit Card" },
-  { label: "Credit Card" },
-  { label: "Mobile Payment" },
-  { label: "Cheque" },
+   "Cash" ,
+   "Bank Transfer" ,
+   "Debit Card" ,
+   "Credit Card" ,
+   "Mobile Payment" ,
+   "Cheque" ,
 ];
 
 const paymentcycleData = [
