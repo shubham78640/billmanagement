@@ -131,13 +131,25 @@ function BillTableData() {
             width: 120,
             editable: true,
           },
-    
           {
-            field: 'paymentMethod',
-            headerName: 'Payment Method',
+            field: 'paymentDate',
+            headerName: 'paymentDate',
+            width: 100,
+            editable: true,
+          },    
+          {
+            field: 'paymentCycle',
+            headerName: 'Payment Cycle',
             width: 120,
             editable: true,
           },
+          {
+            field: 'paymentDate',
+            headerName: 'paymentDate',
+            width: 100,
+            editable: true,
+          },
+
           {
             field: 'payDirectCard',
             headerName: 'Pay Direct Card Details',
@@ -170,7 +182,7 @@ function BillTableData() {
           },
           {
             field: 'taskId',
-            headerName: 'Task Id',
+            headerName: 'Task ID',
             width: 100,
             editable: true,
           },
@@ -196,16 +208,17 @@ function BillTableData() {
          
           {
             field: 'paymentStatus',
-            headerName: 'paymentStatus',
+            headerName: 'Payment Status',
             width: 100,
             editable: true,
           },
           {
-            field: 'paymentDate',
-            headerName: 'paymentDate',
+            field: 'reimbursementDate',
+            headerName: 'Reimbursement Date',
             width: 100,
             editable: true,
           },
+         
           {
             field: 'showBill',
             headerName: 'Show Bill',
