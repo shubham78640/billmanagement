@@ -28,7 +28,7 @@ function AddItems() {
   const [gstAmount, setGstAmount] = useState("");
   const { id } = useParams();
   const [tDSAmount, setTDSAmount] = useState("");
-  const [totelItemAmountBB, setTotelItemAmountBB] = useState("");
+  const [totelItemAmountBB, setTotelItemAmountBB] = useState([]);
 
   const invbillid = localStorage.getItem("BillID");
   const invNum = localStorage.getItem("InvoiceNumber");
@@ -54,30 +54,36 @@ function AddItems() {
   console.log("totelAmount", totelItemAmount);
 
   const EMPNAME = localStorage.getItem("name");
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     let response2 = await fetch(`http://localhost:8082/bill/item/get/${id}`);
-  //     let data2 = await response2.json();
-  //     setTotelItemAmountBB(data2.data);
-  //     // console.log("data2",data2)
-  //   };
-  //   getData();
-  // }, []);
-
-
+  const InvoiceTotelAmount = localStorage.getItem("InvoiceTotelAmount");
 
 useEffect(() => {
   const getData = async()=>{
-  let response2 = await fetch(`http://localhost:8082/bill/item/get/${id}`)
+  let response2 = await fetch(`http://13.126.160.155:8088/bill/item/get/${id}`)
   let data2 = await response2.json()
   setTotelItemAmountBB(data2.data)
   // console.log("data2",data2)
   }
   getData()
- }, [totelItemAmountBB])
+ }, [])
+
+
 
 const totelAddItem = totelItemAmountBB.length;
+
+// const abcd=  totelItemAmountBB.reduce((totel,item)=>{
+//   return totel+ item.amountPaid;
+// },0);
+
+//console.log("abcd",abcd)
+
+const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((prev, curr) => prev + curr, 0);
+
+console.log("1234",INVTOTELAMOUNT)
+
+
  //console.log("totelItemAmountBB",totelItemAmountBB.length)
+
+
 //  const handleonclickLogOut=async () => {
 //     console.log({
 //     });
@@ -118,6 +124,9 @@ const totelAddItem = totelItemAmountBB.length;
       gstAmount,
     });
 
+
+    
+
     try {
       let response = await axios.post("http://13.126.160.155:8088/bill/item/save", {
         amount: amount1,
@@ -140,9 +149,8 @@ const totelAddItem = totelItemAmountBB.length;
         tdsAmount: tDSAmountTotel,
         invoiceId: invbillid,
       });
-      alert("Item save successfully");
       console.log(response);
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       alert(error);
     }
@@ -175,7 +183,7 @@ const totelAddItem = totelItemAmountBB.length;
         <Box sx={{fontSize:"17px",}}>Totel Add Item:- {totelAddItem}</Box>
         </Box> */}
 
-        <Box sx={{display: "flex",justifyContent:"space-between"}}>
+        <Box sx={{display: {sm:"flex", xs:"column"},justifyContent:"space-between"}}>
           <Box
             p={2}
             sx={{
@@ -187,7 +195,7 @@ const totelAddItem = totelItemAmountBB.length;
           >
             <Typography variant="p" color="initial">
               <span
-                style={{ color: "green", fontSize: "20px", fontWeight: "800" }}
+                style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
                 Invoice Number - 
               </span>{" "}
@@ -211,16 +219,45 @@ const totelAddItem = totelItemAmountBB.length;
               {invDate || "No-Data"}
             </Typography>
           </Box>
-          {/* <Box>
-            <Box>{totelItemAmountBB.length}</Box>
-          <Button 
-      onClick={handleonclickLogOut}
-      color="success"
-      variant="contained"
-      >
-      logout
-      </Button>
-      </Box> */}
+
+
+          <Box
+            p={2}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              marginLeft: {  },
+            }}
+          >
+            <Typography variant="p" color="initial">
+              <span
+                style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
+              >
+                Invoice  Totel Amount - 
+              </span>{" "}
+              {InvoiceTotelAmount || "No-Data"}
+            </Typography>
+            <Typography variant="p" color="initial">
+              <span
+                style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
+              >
+                {" "}
+                Item Totel Number - {" "}
+              </span>{" "}
+              {totelAddItem || "No-Data"}
+            </Typography>
+            <Typography variant="p" color="initial">
+              <span
+                style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
+              >
+                Item Totel Amount - 
+              </span>{" "}
+              {INVTOTELAMOUNT || "No-Data"}
+            </Typography>
+          </Box>
+
+
         </Box>
         <Box
           sx={{

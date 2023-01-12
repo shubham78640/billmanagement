@@ -29,25 +29,25 @@ function BillTableData() {
         {
             field: 'invoiceId',
             headerName: ' Invoice Id',
-            width: 150,
+            width: 80,
             editable: true,
           },
         {
           field: 'employeeName',
           headerName: 'Employee Name',
-          width: 150,
+          width: 120,
           editable: true,
         },
         {
           field: 'employeeCode',
           headerName: 'Employee Code',
-          width: 150,
+          width: 80,
           editable: true,
         },
         {
           field: 'email',
           headerName: 'Email',
-          width: 220,
+          width: 120,
           editable: true,
         },
     
@@ -56,154 +56,154 @@ function BillTableData() {
             headerName: 'Reporting Manager',
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
-            width: 160,
+            width: 120,
     
           },
           {
             field: 'invoiceNumber',
             headerName: 'Invoice Number',
-            width: 170,
+            width: 150,
             editable: true,
           },
         {
             field: 'invoiceDate',
             headerName: 'Invoice Date',
-            width: 150,
+            width: 140,
             editable: true,
           },
           {
             field: 'brand',
             headerName: 'Brand',
-            width: 150,
+            width: 100,
             editable: true,
           },
           {
             field: 'subBrand',
             headerName: 'Sub Brand',
-            width: 150,
+            width: 110,
             editable: true,
           },
     
           {
             field: 'subCatagory1',
             headerName: 'Sub Catagory 1',
-            width: 150,
+            width: 140,
             editable: true,
           },
           {
             field: 'subCatagory2',
             headerName: 'Sub Catagory 2',
-            width: 150,
+            width: 140,
             editable: true,
           },
           {
             field: 'location',
             headerName: 'Location',
-            width: 150,
+            width: 140,
             editable: true,
           },
           {
             field: 'expensesType',
             headerName: 'Expense Type',
-            width: 150,
+            width: 140,
             editable: true,
           },
           {
             field: 'preTaxAmount',
             headerName: 'Pre Tax Amount',
-            width: 170,
+            width: 100,
             editable: true,
           },
           {
             field: 'gstAmount',
             headerName: 'GST Amount',
-            width: 150,
+            width: 100,
             editable: true,
           },
           {
             field: 'totalAmount',
             headerName: 'Total Amount',
-            width: 150,
+            width: 100,
             editable: true,
           }, {
             field: 'paymentMode',
             headerName: 'Payment Mode',
-            width: 150,
+            width: 120,
             editable: true,
           },
     
           {
             field: 'paymentMethod',
             headerName: 'Payment Method',
-            width: 170,
+            width: 120,
             editable: true,
           },
           {
             field: 'payDirectCard',
             headerName: 'Pay Direct Card Details',
-            width: 190,
+            width: 140,
             editable: true,
           },
           {
             field: 'partnerCode',
             headerName: 'Partner/Customer Code',
-            width: 190,
+            width: 140,
             editable: true,
           },
           {
             field: 'partnerName',
             headerName: 'Partner/Customer Name',
-            width: 190,
+            width: 140,
             editable: true,
           },
           {
             field: 'invoiceDescription',
             headerName: 'Invoice Description',
-            width: 190,
+            width: 130,
             editable: true,
           },
           {
             field: 'utr',
             headerName: 'UTR',
-            width: 150,
+            width: 100,
             editable: true,
           },
           {
             field: 'taskId',
             headerName: 'Task Id',
-            width: 170,
+            width: 100,
             editable: true,
           },
           {
             field: 'serviceCategory',
             headerName: 'Service Category',
-            width: 150,
+            width: 120,
             editable: true,
           },
           
           {
             field: 'transactionDetail',
             headerName: 'Transaction Detail',
-            width: 170,
+            width: 120,
             editable: true,
           },
           {
             field: 'paidAmount',
             headerName: 'Update Paid Amount',
-            width: 170,
+            width: 100,
             editable: true,
           },
          
           {
             field: 'paymentStatus',
             headerName: 'paymentStatus',
-            width: 170,
+            width: 100,
             editable: true,
           },
           {
             field: 'paymentDate',
             headerName: 'paymentDate',
-            width: 170,
+            width: 100,
             editable: true,
           },
           {
@@ -211,7 +211,7 @@ function BillTableData() {
             headerName: 'Show Bill',
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
-            width: 160,
+            width: 100,
             type:"action",
              renderCell:()=><a style={{color:"blue",fontWeight:"600",cursor:"pointer"}}  
              href={`http://13.126.160.155:8088/bill/files/get/file/?invoiceId=${idMM}`} target="_blank"
@@ -223,7 +223,7 @@ function BillTableData() {
             headerName: 'Items Details',
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
-            width: 160,
+            width: 100,
             type:"action",
              renderCell:()=><p style={{color:"blue",fontWeight:"600",cursor:"pointer"}}
              >Item Details</p>
@@ -234,7 +234,7 @@ function BillTableData() {
             headerName: 'Update Payment',
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
-            width: 160,
+            width: 130,
             type:"action",
              renderCell:()=><p style={{color:"blue",fontWeight:"600",cursor:"pointer"}}
              >Update Payment</p>
@@ -283,7 +283,7 @@ function BillTableData() {
         //============== On Export Csv Click event ===========
         components={{ Toolbar: GridToolbar }}
         //==============On Export Csv Click event ============
-        
+
       />
     </Box>
     </>

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import Button from "@mui/material/Button";
+import {Button, Autocomplete, TextField, Box} from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
@@ -19,9 +16,6 @@ import {
   SubCategory2Relation,
 } from "../AllData";
 import { createTheme, ThemeProvider } from "@mui/material";
-
-
-
 
 
 const theme = createTheme({
@@ -88,11 +82,13 @@ function MainForm() {
   const [paymentMethodDD, setPaymentMethodDD] = useState([]);
   const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic] =
     useState(true);
-    const[customerCodeDD, setCustomerCodeDD] = useState([])
+  const[customerCodeDD, setCustomerCodeDD] = useState([])
   let customerNameDD = [];
   let paymentModeArray = [];
   const newInvoiveNumber = invoiceNumber.toUpperCase();
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
+
+  const newPaymentDate= moment(paymentDate).format("DD/MM/YYYY");
   const invbillid = localStorage.getItem("BillID");
   const totelAmountofbill = +preTaxAmount + +gstAmount;
   let navigate = useNavigate();
@@ -160,7 +156,8 @@ function MainForm() {
           utr: utr,
           taskId: taskId,
           paymentStatus: paymentStatus,
-          paymentDate: paymentDate,
+          paymentDate: newPaymentDate,
+          reimbursementDate: "",
           paidAmount: updatepaidAmount,
           transactionDetail: transactionsDetail,
         }
@@ -170,6 +167,7 @@ function MainForm() {
       localStorage.setItem("InvoiceNumber", invoiceNumber);
       localStorage.setItem("InvoiceDate", newDateinv);
       localStorage.setItem("BillID", response.data.data.invoiceId);
+      localStorage.setItem("InvoiceTotelAmount", response.data.data.totalAmount);
 
       console.log(response);
     } catch (error) {
@@ -211,8 +209,6 @@ function MainForm() {
 
   }, [brand, paymentMode, department, category, subCategory1, ]);
 
-  
-console.log("name", paymentMode)
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
   const EMPEMAIL = localStorage.getItem("email");
@@ -508,8 +504,8 @@ console.log("name", paymentMode)
           )}
         />
 
-{/* 
-<LocalizationProvider dateAdapter={AdapterDateFns}>
+
+{/* <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DesktopDatePicker
             label="Payment Date"
             value={paymentDate}
@@ -529,8 +525,8 @@ console.log("name", paymentMode)
               />
             )}
           />
-        </LocalizationProvider> */}
-
+        </LocalizationProvider>
+ */}
 
 
         <Autocomplete

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
 import { useParams, useNavigate } from "react-router";
-import TextField from "@mui/material/TextField";
-import {Autocomplete,Typography} from "@mui/material";
+import {
+  Autocomplete,
+  Typography,
+  TextField,
+  Box,
+  Button,
+} from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import Button from "@mui/material/Button";
 import moment from "moment";
 import axios from "axios";
 function PaymentdetailsForm() {
@@ -19,18 +22,18 @@ function PaymentdetailsForm() {
   const newUpdatePaymentDate = moment(paymentDate).format("DD/MM/YYYY");
   console.log({ newUpdatePaymentDate });
   const EMPNAME = localStorage.getItem("name");
-  const DATEOFChanges =    moment(new Date()).format("DD/MM/YYYY, h:mm a"); 
+  const DATEOFChanges = moment(new Date()).format("DD/MM/YYYY, h:mm a");
   const handlePaymanetUpdate = async () => {
     try {
       let response = await axios.put(
         `http://13.126.160.155:8088/bill/bill/update/${id}`,
         {
           paidAmount: paidAmount,
-          paymentDate: newUpdatePaymentDate,
+          reimbursementDate: newUpdatePaymentDate,
           paymentStatus: paymentStatus,
           transactionDetail: transactionsDetail,
-          updatedBy: EMPNAME, 
-          updatedAt:DATEOFChanges
+          updatedBy: EMPNAME,
+          updatedAt: DATEOFChanges,
         }
       );
       alert("Your Payment Details Update successfully");
@@ -44,18 +47,21 @@ function PaymentdetailsForm() {
   return (
     <>
       <Box mt={4} p={2}>
-        {/* <h2 style={{}}>Bill Id :- {id}</h2> */}
-
-        <Typography variant="p" color="initial">
-              <span
-                style={{ color: "green", fontSize: "20px", fontWeight: "800", marginLeft:{sm:"5%", xs:"20%"  }}}
-              >
-                Invoice ID - 
-              </span>{" "}
-              {id || "No-Data"}
-            </Typography>
+        <Typography ml={9} mt={2} variant="p" color="initial">
+          <span
+            style={{
+              color: "green",
+              fontSize: "20px",
+              fontWeight: "800",
+              marginLeft: { sm: "5%", xs: "20%" },
+            }}
+          >
+            Invoice ID -
+          </span>{" "}
+          {id || "No-Data"}
+        </Typography>
         <Box
-          mt={4}
+          mt={6}
           sx={{
             display: "flex",
             gap: "30px",
@@ -99,18 +105,18 @@ function PaymentdetailsForm() {
             value={paymentStatus}
           /> */}
 
-<Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={paymentStatusDD}
-          sx={{ width: 300, backgroundColor: "white" }}
-          onChange={(event, newValue) => {
-            setPaymentStatus(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField {...params}   required label="Payment Status" />
-          )}
-        />
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={paymentStatusDD}
+            sx={{ width: 300, backgroundColor: "white" }}
+            onChange={(event, newValue) => {
+              setPaymentStatus(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} required label="Payment Status" />
+            )}
+          />
 
           <TextField
             sx={{ width: 300 }}
@@ -123,6 +129,7 @@ function PaymentdetailsForm() {
 
           <Button
             size="large"
+            mt={4}
             sx={{ width: { sm: 300, xs: 250 }, mb: "20px" }}
             onClick={handlePaymanetUpdate}
             variant="contained"
@@ -138,10 +145,4 @@ function PaymentdetailsForm() {
 
 export default PaymentdetailsForm;
 
-
-const paymentStatusDD=[
-   "Paid" ,
-   "Pending" ,
-   "Hold" ,
-   "Partially Paid" ,
-]
+const paymentStatusDD = ["Paid", "Pending", "Hold", "Partially Paid"];
