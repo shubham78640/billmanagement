@@ -16,14 +16,14 @@ const columns = [
     editable: true,
   },
   {
-    field: "itemName",
+    field: "itemNameCode",
     headerName: "Item Name",
     width: 100,
     editable: true,
   },
   {
-    field: "itemCode",
-    headerName: "Item Code",
+    field: "addNewItem",
+    headerName: "Add New Item",
     width: 100,
     editable: true,
   },

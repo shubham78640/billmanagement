@@ -150,13 +150,13 @@ function BillTableData() {
             editable: true,
           },
           {
-            field: 'partnerCode',
-            headerName: 'Partner/Customer Code',
+            field: 'otherPartner',
+            headerName: 'New Partner/Customer',
             width: 110,
             editable: true,
           },
           {
-            field: 'partnerName',
+            field: 'partnerNameCode',
             headerName: 'Partner/Customer Name',
             width: 120,
             editable: true,

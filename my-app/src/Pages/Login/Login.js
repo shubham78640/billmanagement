@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import pinch from "../../images/Pinch.png";
-
+import core from "../../images/core.png"
 function Login() {
   const [employeeCode, setEmployeeCode] = useState("");
   const [password, setPassword] = useState("");
@@ -55,7 +55,19 @@ function Login() {
     }
   };
   return (
-    <div className="Body">
+    <div className="Body"> 
+
+<Box sx={{marginLeft:{ sm: 0, xs: 1 },  display:"grid", justifyContent:"end"}}>
+        <img
+         
+          style={{
+            cursor:"pointer",
+          }}
+          width={"180px"}
+          src={core}
+          alt=""
+        />
+      </Box>
       <div className="background">
         <div className="shape"></div>
         <div className="shape"></div>

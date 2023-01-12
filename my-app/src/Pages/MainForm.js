@@ -51,7 +51,7 @@ function MainForm() {
   const [brandDD, setBrandDD] = useState([]);
   const [payDirectCardDetails, setPayDirectCardDetails] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
-  const [customerCode, setCustomerCode] = useState("");
+  const [addNewCustomer, setAddNewCustomer] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [invoiceDescription, setInvoiceDescription] = useState("");
   const [serviceCategory, setServiceCategory] = useState("");
@@ -70,6 +70,7 @@ function MainForm() {
   const [reimbursementpaymentDate, setreimbursementpaymentDate] = useState(null);
   const [transactionsDetail, setTransactionsDetail] = useState("");
   const [paymentStatus, setPaymentStatus] = useState("");
+  const[customerNameDD,setCustomerNameDD]=useState([]);
   const [subbrandDD, setSubBrandDD] = useState([]);
   const [locationDD, setLocationDD] = useState([]);
   const [departmentDD, setDepartmentDD] = useState([]);
@@ -83,7 +84,7 @@ function MainForm() {
   const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic] =
     useState(true);
   const[customerCodeDD, setCustomerCodeDD] = useState([])
-  let customerNameDD = [];
+  // let customerNameDD = [];
   let paymentModeArray = [];
   const newInvoiveNumber = invoiceNumber.toUpperCase();
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
@@ -99,7 +100,7 @@ function MainForm() {
       invoiceNumber,
       payDirectCardDetails,
       expenseCategory,
-      customerCode,
+      addNewCustomer,
       customerName,
       serviceCategory,
       invoiceDescription,
@@ -139,8 +140,8 @@ function MainForm() {
           invoiceDescription: invoiceDescription,
           invoiceNumber: newInvoiveNumber,
           location: location,
-          partnerCode: customerCode,
-          partnerName: customerName,
+          otherPartner: addNewCustomer,
+          partnerNameCode: customerName,
           payDirectCard: payDirectCardDetails,
           paymentMethod: paymentMethod,
           paymentMode: paymentMode,
@@ -207,7 +208,16 @@ function MainForm() {
     //   }
     // })
 
-  }, [brand, paymentMode, department, category, subCategory1, ]);
+    const CustomerListData = async()=>{
+      let response = await fetch(`http://13.126.160.155:8088/bill/dropdown/get/partners/`)
+      let data = await response.json()
+      setCustomerNameDD(data.data)
+      }
+    
+      CustomerListData()
+
+  }, [brand, paymentMode, department, category, subCategory1 ]);
+  console.log("bbbbbbbbbbb",customerName)
 
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
@@ -334,6 +344,34 @@ function MainForm() {
           }}
           renderInput={(params) => <TextField {...params}   required label="Location" />}
         />
+
+
+<Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={expenseTypedata}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setExpenseType(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params}   required label="Expense Type" />
+          )}
+        />
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={expenseCatdata}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setExpenseCategory(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params}   required label="Expense Category" />
+          )}
+        />
+
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -378,32 +416,7 @@ function MainForm() {
             <TextField {...params} label="Sub Category2" />
           )}
         />
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={expenseTypedata}
-          sx={{ width: 300, backgroundColor: "white" }}
-          onChange={(event, newValue) => {
-            setExpenseType(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField {...params}   required label="Expense Type" />
-          )}
-        />
-
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={expenseCatdata}
-          sx={{ width: 300, backgroundColor: "white" }}
-          onChange={(event, newValue) => {
-            setExpenseCategory(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField {...params}   required label="Expense Category" />
-          )}
-        />
-
+       
         {/* <Autocomplete
       disablePortal
       id="combo-box-demo"
@@ -465,6 +478,7 @@ function MainForm() {
           label="GST Amount"
           variant="outlined"
           required
+          
           onChange={(e) => setGSTAmount(e.target.value)}
           value={gstAmount}
         />
@@ -498,13 +512,16 @@ function MainForm() {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
+          disabled={expenseType=="Employee Reimbursement"?true:false}
           options={paymentcycleData}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
             setPaymentCycle(newValue);
           }}
           renderInput={(params) => (
-            <TextField {...params}  label="Payment Cycle Days" />
+            <TextField {...params} 
+           
+            label="Payment Cycle Days" />
           )}
         />
 
@@ -513,6 +530,7 @@ function MainForm() {
           <DesktopDatePicker
             label="Payment Date"
             value={paymentDate}
+            disabled={expenseType=="Employee Reimbursement"?true:false}
             onChange={(newValue) => {
               setPaymentDate(newValue);
             }}
@@ -570,6 +588,7 @@ function MainForm() {
 <Autocomplete
           disablePortal
           id="combo-box-demo"
+          disabled={expenseType=="Employee Reimbursement"?true:false}
           options={PayDirectCardDetailsNumberDD}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
@@ -580,7 +599,23 @@ function MainForm() {
           )}
         />
 
-        <TextField
+
+<Autocomplete
+          disablePortal
+          id="combo-box-demo"
+         
+          options={customerNameDD}
+          getOptionLabel={(option) => option.partnerNameCode}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setCustomerName(newValue.partnerNameCode);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} required label="Partner/Customer Name" />
+          )}
+        />
+
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           required
@@ -588,16 +623,16 @@ function MainForm() {
           variant="outlined"
           onChange={(e) => setCustomerName(e.target.value)}
           value={customerName}
-        />
+        /> */}
 
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
-          required
-          label="Partner/Customer Code"
+          disabled={customerName=="others"?false:true}
+          label="Add New Partner/Customer"
           variant="outlined"
-          onChange={(e) => setCustomerCode(e.target.value)}
-          value={customerCode}
+          onChange={(e) => setAddNewCustomer(e.target.value)}
+          value={addNewCustomer}
         />
 
           {/* <Autocomplete
@@ -655,7 +690,7 @@ function MainForm() {
           value={serviceCategory}
         /> */}
 
-         <Autocomplete
+         {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={ServiceCategoryDD}
@@ -666,7 +701,7 @@ function MainForm() {
           renderInput={(params) => (
             <TextField {...params} required label="Service Category" />
           )}
-        />
+        /> */}
 
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
@@ -680,6 +715,7 @@ function MainForm() {
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
+          disabled
           label="Task Id"
           variant="outlined"
           onChange={(e) => setTaskId(e.target.value)}
@@ -752,8 +788,6 @@ function MainForm() {
             paymentMode &&
             paymentMethod &&
             invoiceDescription &&
-            serviceCategory &&
-            customerCode && 
             customerName
            
               ? false
@@ -940,23 +974,23 @@ const departmentData = [
 ];
 
 const expenseTypedata = [
-  "Company",
-  "Employee Reimbursement",
   "Billable - Customer",
   "Non Billable - Customer",
-  "Partner",
+  "Employee Reimbursement",
+  "Company",
 ];
 
-const expenseCatdata = ["One Time" , "Recurring"];
+const expenseCatdata = ["One-Time" , "Recurring"];
 
 
 const ServiceCategoryDD = [
+  "N/A",
    "Contract staffing services",
    "Day care services",
    "Business consultancy services",
    "Other sanitation services",
    "Services provided by restaurant",
-   "N/A",
+  
 ];
 
 
@@ -986,6 +1020,7 @@ const iGSTDATA = [
 
 
 const PayDirectCardDetailsNumberDD=[
+  "N/A",
    " 4629525415529329" ,
     "4629525415529410",
     "4629525415529402",
@@ -994,5 +1029,5 @@ const PayDirectCardDetailsNumberDD=[
     "4629525415529311",
     "4629525415529352",
     "4629525415529360",
-   "N/A",
+ 
 ]

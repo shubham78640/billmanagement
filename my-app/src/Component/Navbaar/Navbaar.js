@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import pinch from "../../images/Pinch.png"
+import core from "../../images/core.png"
 function Navbaar() {
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
@@ -59,7 +60,7 @@ function Navbaar() {
           alt=""
         />
       </Box>
-      <Box sx={{ display: "flex", gap: "30px" }}>
+      <Box sx={{ display: "flex", gap: "10px" }}>
         <Button mt={0.8} color="success">
           <Link
             style={{ color: "white", fontWeight: "600", color: "green" }}
@@ -70,11 +71,24 @@ function Navbaar() {
         </Button>
 
         <Button
+          mr={-5}
           sx={{ color: "green", fontWeight: "800" }}
           endIcon={<LogoutIcon />}
           color="success"
           onClick={handleonclickLogOut}
         ></Button>
+
+       <Box sx={{marginLeft:{ sm: 0, xs: 1 },  display:"grid", alignItems:"center", justifyContent:"center"}}>
+        <img
+         
+          style={{
+            cursor:"pointer",
+          }}
+          width={"130px"}
+          src={core}
+          alt=""
+        />
+      </Box>
       </Box>
     </Box>
   );

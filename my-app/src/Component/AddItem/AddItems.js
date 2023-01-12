@@ -9,7 +9,17 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-
+import { createTheme, ThemeProvider } from "@mui/material";
+const theme = createTheme({
+  components: {
+  MuiFormLabel: {
+  styleOverrides: {
+  asterisk: { color: "red" },
+  },
+  },
+  },
+ })
+ 
 function AddItems() {
   const [category, setCategory] = useState("");
   const [itemName, setItemName] = useState("");
@@ -23,12 +33,13 @@ function AddItems() {
   const [redeem, setRedeem] = useState("");
   const [unit, setUnit] = useState("");
   const [amountPaid, setAmountpaid] = useState("");
-  const [itemCode, setItemCode] = useState("");
+  const [addNewItem, setAddNewItem] = useState("");
   const [hsnCode, setHSNCode] = useState("");
   const [gstAmount, setGstAmount] = useState("");
   const { id } = useParams();
   const [tDSAmount, setTDSAmount] = useState("");
   const [totelItemAmountBB, setTotelItemAmountBB] = useState([]);
+  const [itemNameDD, setItemNameDD] = useState([]);
 
   const invbillid = localStorage.getItem("BillID");
   const invNum = localStorage.getItem("InvoiceNumber");
@@ -38,12 +49,8 @@ function AddItems() {
 
   const handleonclick = () => {
     navigate(`/addItem/uploadeDocuments/${id}`);
-
   };
 
-
-
-  
   const amount1 = +quantity * +rate;
   const tDSAmountTotel = (+amount1 * +tDSAmount) / 100;
   const gsttotelvalue =
@@ -56,31 +63,41 @@ function AddItems() {
   const EMPNAME = localStorage.getItem("name");
   const InvoiceTotelAmount = localStorage.getItem("InvoiceTotelAmount");
 
-useEffect(() => {
-  const getData = async()=>{
-  let response2 = await fetch(`http://13.126.160.155:8088/bill/item/get/${id}`)
-  let data2 = await response2.json()
-  setTotelItemAmountBB(data2.data)
-  // console.log("data2",data2)
-  }
-  getData()
- }, [])
+  useEffect(() => {
+    const getData = async () => {
+      let response2 = await fetch(
+        `http://13.126.160.155:8088/bill/item/get/${id}`
+      );
+      let data2 = await response2.json();
+      setTotelItemAmountBB(data2.data);
+      // console.log("data2",data2)
+    };
+    getData();
+  }, []);
 
+  const totelAddItem = totelItemAmountBB.length;
 
+  const ItemListData = async () => {
+    let response = await fetch(
+      `http://13.126.160.155:8088/bill/dropdown/get/items/`
+    );
+    let data = await response.json();
+    setItemNameDD(data.data);
+  };
 
-const totelAddItem = totelItemAmountBB.length;
+  ItemListData();
 
-// const abcd=  totelItemAmountBB.reduce((totel,item)=>{
-//   return totel+ item.amountPaid;
-// },0);
+  // const abcd=  totelItemAmountBB.reduce((totel,item)=>{
+  //   return totel+ item.amountPaid;
+  // },0);
 
-//console.log("abcd",abcd)
+  //console.log("abcd",abcd)
 
-const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((prev, curr) => prev + curr, 0);
+  const INVTOTELAMOUNT = totelItemAmountBB
+    .map((item) => item.amountPaid)
+    .reduce((prev, curr) => prev + curr, 0);
 
-// console.log("1234",INVTOTELAMOUNT)
-
-
+  // console.log("1234",INVTOTELAMOUNT)
 
   const handleSubmit = async () => {
     console.log({
@@ -89,7 +106,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
       quantity,
       rate,
       amount,
-      itemCode,
+      // itemCode,
       unit,
       sgst,
       cgst,
@@ -101,31 +118,31 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
       gstAmount,
     });
 
-
-    
-
     try {
-      let response = await axios.post("http://13.126.160.155:8088/bill/item/save", {
-        amount: amount1,
-        amountPaid: totelItemAmount,
-        categoryItem: category,
-        cgst: sgst,
-        dateOfInvoice: invDate,
-        discount: discount,
-        gstAmountItem: gsttotelvalue,
-        igst: igst,
-        invoiceNumber: invNum,
-        itemCode: itemCode,
-        itemName: itemName,
-        quantity: quantity,
-        rate: rate,
-        redeemed: redeem,
-        unit: unit,
-        sgst: sgst,
-        tds: tDSAmount,
-        tdsAmount: tDSAmountTotel,
-        invoiceId: invbillid,
-      });
+      let response = await axios.post(
+        "http://13.126.160.155:8088/bill/item/save",
+        {
+          amount: amount1,
+          amountPaid: totelItemAmount,
+          categoryItem: category,
+          cgst: sgst,
+          dateOfInvoice: invDate,
+          discount: discount,
+          gstAmountItem: gsttotelvalue,
+          igst: igst,
+          invoiceNumber: invNum,
+          addNewItem: addNewItem,
+          itemNameCode: itemName,
+          quantity: quantity,
+          rate: rate,
+          redeemed: redeem,
+          unit: unit,
+          sgst: sgst,
+          tds: tDSAmount,
+          tdsAmount: tDSAmountTotel,
+          invoiceId: invbillid,
+        }
+      );
       console.log(response);
       window.location.reload();
     } catch (error) {
@@ -134,9 +151,10 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
   };
 
   return (
-    <Box sx={{backgroundColor:"#f2f2f2", minHeight:"900px", maxHeight:"100%"}}>
+    <Box
+      sx={{ backgroundColor: "#f2f2f2", minHeight: "900px", maxHeight: "100%" }}
+    >
       <Box
-       
         gap={3}
         sx={{
           display: "flex",
@@ -144,7 +162,12 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
           padding: { sm: "8px", xs: "40px" },
         }}
       >
-        <Box sx={{display: {sm:"flex", xs:"column"},justifyContent:"space-between"}}>
+        <Box
+          sx={{
+            display: { sm: "flex", xs: "column" },
+            justifyContent: "space-between",
+          }}
+        >
           <Box
             p={2}
             sx={{
@@ -158,26 +181,26 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
               <span
                 style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
-                Invoice Number - 
+                Invoice Number -
               </span>{" "}
-              {invNum || "No-Data"}
+              {invNum || "No-Invoice Number"}
             </Typography>
             <Typography variant="p" color="initial">
               <span
                 style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
                 {" "}
-                Employee Name - {" "}
+                Employee Name -{" "}
               </span>{" "}
-              {EMPNAME || "No-Data"}
+              {EMPNAME || "No-Name"}
             </Typography>
             <Typography variant="p" color="initial">
               <span
                 style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
-                Date - 
+                Date -
               </span>{" "}
-              {invDate || "No-Data"}
+              {invDate || "No-Date"}
             </Typography>
           </Box>
 
@@ -187,37 +210,36 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
               display: "flex",
               flexDirection: "column",
               gap: "10px",
-              marginLeft: {  },
+              marginRight: {sm:"90px",xs:"0%"},
+              
             }}
           >
             <Typography variant="p" color="initial">
               <span
                 style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
-                Invoice  Totel Amount - 
+                Invoice Total Amount -
               </span>{" "}
-              {InvoiceTotelAmount || "No-Data"}
+              {InvoiceTotelAmount || "0"}
             </Typography>
             <Typography variant="p" color="initial">
               <span
                 style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
                 {" "}
-                Item Totel Number - {" "}
+                Item Total Number -{" "}
               </span>{" "}
-              {totelAddItem || "No-Data"}
+              {totelAddItem || "0"}
             </Typography>
             <Typography variant="p" color="initial">
               <span
                 style={{ color: "green", fontSize: "18px", fontWeight: "800" }}
               >
-                Item Totel Amount - 
+                Item Total Amount -
               </span>{" "}
-              {INVTOTELAMOUNT || "No-Data"}
+              {INVTOTELAMOUNT || "0"}
             </Typography>
           </Box>
-
-
         </Box>
         <Box
           sx={{
@@ -227,41 +249,54 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
             justifyContent: "center",
             padding: "20px",
           }}
-        >
-          {/* <Autocomplete
-          
-          disablePortal
-          options={top100Films}
-          sx={{ width: 223 }}
-          onChange={(event, newValue)=>{setSource(newValue.label)}}
-          renderInput={(params) => <TextField  {...params} label="Source" />}
-        /> */}
+        > <ThemeProvider theme = {theme}>
+          <Autocomplete
+            disablePortal
+            options={itemNameDD}
+            getOptionLabel={(option) => option.itemNameCode}
+            sx={{ width: "300px", backgroundColor: "white" }}
+            onChange={(event, newValue) => {
+              setItemName(newValue.itemNameCode);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} required label="Item Name" />
+            )}
+          />
 
-
-          <TextField
+          {/* <TextField
             label="Item Name"
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setItemName(e.target.value);
             }}
-          />
+          /> */}
 
           <TextField
-            label="Item Code"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            label="Add New Item"
+            disabled={itemName == "others" ? false : true}
+            sx={{ width: "300px", backgroundColor: "white" }}
             onChange={(e) => {
-              setItemCode(e.target.value);
+              setAddNewItem(e.target.value);
             }}
           />
 
-        
-
-<TextField
+          {/* <TextField
             label="Category"
             sx={{ width: "300px", backgroundColor:"white" }}
             onChange={(e) => {
               setCategory(e.target.value);
             }}
+          /> */}
+
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={Category1DropDown}
+            sx={{ width: "300px", backgroundColor: "white" }}
+            onChange={(event, newValue) => {
+              setCategory(newValue);
+            }}
+            renderInput={(params) => <TextField required {...params} label="Category" />}
           />
 
           {/* <Autocomplete
@@ -292,7 +327,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
           {/* <TextField   label="HSN/SAC Code"  onChange={(e)=>{setHSNCode(e.target.value)}}/> */}
           <TextField
             label="Quantity"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             onChange={(e) => {
               setQuantity(e.target.value);
             }}
@@ -304,7 +339,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
             disablePortal
             id="combo-box-demo"
             options={unitListDD}
-            sx={{ width: "300px",backgroundColor: "white"  }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             onChange={(event, newValue) => {
               setUnit(newValue);
             }}
@@ -320,7 +355,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
           /> */}
           <TextField
             label="Rate"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             onChange={(e) => {
               setRate(e.target.value);
             }}
@@ -328,7 +363,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
 
           <TextField
             label="Amount"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             InputLabelProps={{ shrink: true }}
             disabled
             value={amount1}
@@ -345,7 +380,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             options={sGSTDATA}
             onChange={(event, newValue) => {
               setSgst(newValue);
@@ -358,21 +393,21 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
             id="combo-box-demo"
             options={cGSTDATA}
             disabled
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             // onChange={(event, newValue) => {
             //   setCgst(newValue);
             // }}
             value={sgst}
             // setCgst={sgst}
-            renderInput={(params) => <TextField  {...params} label="CGST %" />}
+            renderInput={(params) => <TextField {...params} label="CGST %" />}
           />
 
           <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={iGSTDATA}
-            disabled={sgst=="0"?false:true}
-            sx={{ width: "300px", backgroundColor:"white" }}
+            disabled={sgst == "0" ? false : true}
+            sx={{ width: "300px", backgroundColor: "white" }}
             onChange={(event, newValue) => {
               setIgst(newValue);
             }}
@@ -384,7 +419,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
         <TextField label="IGST"  onChange={(e)=>{setIgst(e.target.value)}}/> */}
           <TextField
             label="GST AMOUNT"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             InputLabelProps={{ shrink: true }}
             disabled
             value={gsttotelvalue}
@@ -392,7 +427,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
 
           <TextField
             label="Discount"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             InputLabelProps={{ shrink: true }}
             onChange={(e) => {
               setDiscount(e.target.value);
@@ -401,7 +436,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
 
           <TextField
             label="Redeem"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             InputLabelProps={{ shrink: true }}
             onChange={(e) => {
               setRedeem(e.target.value);
@@ -411,7 +446,7 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
             disablePortal
             id="combo-box-demo"
             options={tDSDATA}
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             onChange={(event, newValue) => {
               setTDSAmount(newValue);
             }}
@@ -419,42 +454,46 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
           />
           <TextField
             label="TDS Amount"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             disabled
             InputLabelProps={{ shrink: true }}
             value={tDSAmountTotel}
           />
 
           <TextField
+          required
             label="Amount Paid"
-            sx={{ width: "300px", backgroundColor:"white" }}
+            sx={{ width: "300px", backgroundColor: "white" }}
             InputLabelProps={{ shrink: true }}
             // disabled
             // onChange={(e)=>{setBillAmount(e.target.value)}}
             value={totelItemAmount}
           />
+            </ThemeProvider>
         </Box>
-        </Box>
-        <Box textAlign={"center"}>
-          <Button
-            color="success"
-            size="large"
-            sx={{ width:{sm:"300px", xs:"240px"} }}
-            onClick={handleSubmit}
-            variant="contained"
-          >
-            Add Item
-          </Button>
-        </Box>
-      <Box mt={5} sx={{ display: "flex", justifyContent:"center"}}>
-
-      <Button
-        endIcon={<CloudUploadIcon/>}
-        color="success"
-        variant="contained"
-        onClick={handleonclick}>
+      </Box>
+      <Box textAlign={"center"}>
+        <Button
+          disabled={itemName &&totelItemAmount&&category ? false : true}
+          color="success"
+          size="large"
+          sx={{ width: { sm: "300px", xs: "240px" } }}
+          onClick={handleSubmit}
+          variant="contained"
+        >
+          Add Item
+        </Button>
+      </Box>
+      <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
+        <Button
+        disabled={itemName &&totelItemAmount&&category ? true : false}
+          endIcon={<CloudUploadIcon />}
+          color="success"
+          variant="contained"
+          onClick={handleonclick}
+        >
           Document
-      </Button>
+        </Button>
       </Box>
     </Box>
   );
@@ -462,53 +501,88 @@ const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((pr
 
 export default AddItems;
 
+const sGSTDATA = ["2.5", "6", "9", "14", "0"];
 
+const cGSTDATA = ["2.5", "6", "9", "14", "0"];
 
-const sGSTDATA = [
-   "2.5" ,
-   "6" ,
-   "9" ,
-   "14" ,
-   "0" ,
+const iGSTDATA = ["5", "12", "18", "28", "0"];
+
+const tDSDATA = ["0", "1", "2", "5", "10", "15", "20", "25", "30"];
+
+const unitListDD = ["kg", "ltr", "pcs", "gm", "mtr", "cm", "km", "sqft", "no."];
+
+const Category1DropDown = [
+  "Sub Category1",
+  "Digital Marketing",
+  "Print",
+  "Influencer Marketing",
+  "Event Management",
+  "Public Relations",
+  "Relationship Marketing",
+  "Consultancy Cost",
+  "Recruitment Drive",
+  "Job Portal",
+  "Fees",
+  "HRMS",
+  "Liasoning",
+  "Travel",
+  "Food",
+  "Rewards & Recognitions",
+  "Events",
+  "Rental",
+  "Electricity",
+  "Water",
+  "Asset",
+  "Gas",
+  "Refreshments",
+  "Stationary",
+  "Uniform",
+  "Furniture",
+  "Housekeeping Supplies",
+  "Toiletries",
+  "Courier",
+  "Equipments",
+  "Gardening",
+  "Fuel",
+  "Wear & Tear",
+  "Pest Control",
+  "Decoration",
+  "Tickets",
+  "Accomodation",
+  "Local Conveyance",
+  "Equipment",
+  "Furtniture",
+  "Kitchen Accessories",
+  "Groceries",
+  "Fruits & Vegetables",
+  "Dairy",
+  "Chemicals",
+  "Training Essentials",
+  "Conveyance",
+  "Licence",
+  "TDS",
+  "GST",
+  "PF/ESIC",
+  "Tool",
+  "Storage",
+  "Business Development",
+  "Conceirge",
+  "Housekeeping",
+  "Food & Nuitrition",
+  "Wellness",
+  "Care",
+  "Experience",
+  "Repair & Maintenance",
+  "Training",
+  "Commission",
+  "Field Office",
+  "Stipend",
+  "Vegetables",
+  "Toys",
+  "Utilities",
+  "Medicine",
+  "Hygiene Product",
+  "Logistics",
+  "Packaging",
+  "Delivery",
 ];
-
-const cGSTDATA = [
-  "2.5",
-  "6",
-  "9",
-  "14",
-  "0",
-];
-
-const iGSTDATA = [
-  "5",
-  "12",
-  "18",
-  "28",
-  "0",
-];
-
-const tDSDATA = [
-  "0",
-  "1",
-  "2",
-  "5",
-  "10",
-  "15",
-  "20",
-  "25",
-  "30",
-];
-
-
-const unitListDD=[
-  "kg",
-  "ltr",
-  "pcs",
-  "gm",
-  "mtr",
-  "cm",
-  "km",
-  "sqft",
-  "no."
-]
