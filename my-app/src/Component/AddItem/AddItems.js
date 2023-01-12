@@ -78,35 +78,12 @@ const totelAddItem = totelItemAmountBB.length;
 
 const INVTOTELAMOUNT = totelItemAmountBB.map(item => item.amountPaid).reduce((prev, curr) => prev + curr, 0);
 
-console.log("1234",INVTOTELAMOUNT)
-
-
- //console.log("totelItemAmountBB",totelItemAmountBB.length)
-
-
-//  const handleonclickLogOut=async () => {
-//     console.log({
-//     });
-//     try {
-//       let response = await axios.post("http://13.126.160.155:8088/bill/item/save", {
-//         amount: amount1,
-//       });
-//       alert("Item save successfully");
-//       console.log(response);
-//       // window.location.reload();
-//     } catch (error) {
-//       alert(error);
-//     }
-//   };
-
-
-
+// console.log("1234",INVTOTELAMOUNT)
 
 
 
   const handleSubmit = async () => {
     console.log({
-      // invoicenumber,
       category,
       itemName,
       quantity,
@@ -162,27 +139,11 @@ console.log("1234",INVTOTELAMOUNT)
        
         gap={3}
         sx={{
-          // backgroundColor:"#fab100",
           display: "flex",
           flexDirection: "column",
           padding: { sm: "8px", xs: "40px" },
         }}
       >
-        {/* <Box sx={{display:"flex", justifyContent:"space-between", padding:"10px"}}>
-        <Box sx={{ display: "flex",flexDirection:"column", gap:"10px" }}>
-          <Typography variant="p" color="initial">
-            Invoice number:- {invNum}
-          </Typography>
-          <Typography variant="p" color="initial">
-            Employee Name:- {invname}
-          </Typography>
-          <Typography variant="p" color="initial">
-            Date:- {invDate}
-          </Typography>
-        </Box>
-        <Box sx={{fontSize:"17px",}}>Totel Add Item:- {totelAddItem}</Box>
-        </Box> */}
-
         <Box sx={{display: {sm:"flex", xs:"column"},justifyContent:"space-between"}}>
           <Box
             p={2}
@@ -219,7 +180,6 @@ console.log("1234",INVTOTELAMOUNT)
               {invDate || "No-Data"}
             </Typography>
           </Box>
-
 
           <Box
             p={2}
@@ -277,7 +237,6 @@ console.log("1234",INVTOTELAMOUNT)
           renderInput={(params) => <TextField  {...params} label="Source" />}
         /> */}
 
-          {/* <TextField   label="Source"  onChange={(e)=>{setSource(e.target.value)}}/> */}
 
           <TextField
             label="Item Name"

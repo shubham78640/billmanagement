@@ -218,15 +218,19 @@ function MainForm() {
 
   return (
     <Box
-      sx={{ backgroundColor: "#f2f2f2", minHeight: "900px", maxHeight: "100%" }}
+      sx={{ backgroundColor: "#f2f2f2", minHeight: "900px", maxHeight: "100%", alignItems:"center" }}
     >
       <Box
-        p={5}
+     
         sx={{
           display: "flex",
-          gap: "20px",
+          gap: "25px",
           flexWrap: "wrap",
-          justifyContent: "center",
+          padding:{sm:"3%", xs:"2%"},
+          marginLeft:{sm:"3%", xs:"0%"},
+          justifyContent:{sm:"flex-start", xs:"center"}
+          
+         
         }}
       >
         <ThemeProvider theme = {theme}>
@@ -505,7 +509,7 @@ function MainForm() {
         />
 
 
-{/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+<LocalizationProvider dateAdapter={AdapterDateFns}>
           <DesktopDatePicker
             label="Payment Date"
             value={paymentDate}
@@ -526,7 +530,7 @@ function MainForm() {
             )}
           />
         </LocalizationProvider>
- */}
+
 
 
         <Autocomplete
@@ -731,7 +735,7 @@ function MainForm() {
 
       </Box>
 
-      <Box textAlign={"center"}>
+      <Box textAlign={"center"} mt={2}>
         <Button
           disabled={
             invoiceNumber &&

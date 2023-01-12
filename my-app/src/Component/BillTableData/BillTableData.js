@@ -19,7 +19,7 @@ function BillTableData() {
         navigate(`/billtable/updatepagment/${params.row.invoiceId}`)
          }
          if(params.field==="showBill"){
-            alert("files")
+
             setIDMM(params.row.invoiceId)
             // navigate(`${params.row.invoiceId}`)
              }
