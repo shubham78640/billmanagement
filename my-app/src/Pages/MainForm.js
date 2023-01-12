@@ -674,7 +674,6 @@ function MainForm() {
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
-          required
           label="Invoice Description"
           variant="outlined"
           onChange={(e) => setInvoiceDescription(e.target.value)}
@@ -787,7 +786,7 @@ function MainForm() {
             gstAmount &&
             paymentMode &&
             paymentMethod &&
-            invoiceDescription &&
+            
             customerName
            
               ? false

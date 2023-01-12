@@ -57,17 +57,26 @@ function Login() {
   return (
     <div className="Body"> 
 
-<Box sx={{marginLeft:{ sm: 0, xs: 1 },  display:"grid", justifyContent:"end"}}>
-        <img
+ <Box mr={5} mt={2} sx={{marginLeft:{ sm: 0, xs: 1 },  display:"grid", justifyContent:"end"}}>
+        {/* <img
          
           style={{
             cursor:"pointer",
           }}
-          width={"180px"}
+          width={"150px"}
           src={core}
           alt=""
-        />
-      </Box>
+        /> */}
+
+         <img
+            style={{
+              cursor: "pointer",
+            }}
+            width={"60px"}
+            src={pinch}
+            alt=""
+          />
+      </Box> 
       <div className="background">
         <div className="shape"></div>
         <div className="shape"></div>
@@ -81,14 +90,24 @@ function Login() {
             justifyContent: "center",
           }}
         >
-          <img
+          {/* <img
             style={{
               cursor: "pointer",
             }}
             width={"60px"}
             src={pinch}
             alt=""
-          />
+          /> */}
+
+<img
+         
+         style={{
+           cursor:"pointer",
+         }}
+         width={"150px"}
+         src={core}
+         alt=""
+       />
         </Box>
 
         <label for="username">Employee Code</label>
@@ -112,6 +131,7 @@ function Login() {
         />
 
         <button onClick={handleSubmit}>Log In</button>
+       
       </div>
     </div>
   );

@@ -77,6 +77,8 @@ function AddItems() {
 
   const totelAddItem = totelItemAmountBB.length;
 
+
+  useEffect(()=>{
   const ItemListData = async () => {
     let response = await fetch(
       `http://13.126.160.155:8088/bill/dropdown/get/items/`
@@ -87,6 +89,7 @@ function AddItems() {
 
   ItemListData();
 
+},[])
   // const abcd=  totelItemAmountBB.reduce((totel,item)=>{
   //   return totel+ item.amountPaid;
   // },0);
@@ -97,7 +100,7 @@ function AddItems() {
     .map((item) => item.amountPaid)
     .reduce((prev, curr) => prev + curr, 0);
 
-  // console.log("1234",INVTOTELAMOUNT)
+   console.log("1234",itemNameDD)
 
   const handleSubmit = async () => {
     console.log({
@@ -296,7 +299,7 @@ function AddItems() {
             onChange={(event, newValue) => {
               setCategory(newValue);
             }}
-            renderInput={(params) => <TextField required {...params} label="Category" />}
+            renderInput={(params) => <TextField  {...params} label="Category" />}
           />
 
           {/* <Autocomplete
@@ -474,7 +477,7 @@ function AddItems() {
       </Box>
       <Box textAlign={"center"}>
         <Button
-          disabled={itemName &&totelItemAmount&&category ? false : true}
+          disabled={itemName &&totelItemAmount ? false : true}
           color="success"
           size="large"
           sx={{ width: { sm: "300px", xs: "240px" } }}
@@ -486,7 +489,7 @@ function AddItems() {
       </Box>
       <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
         <Button
-        disabled={itemName &&totelItemAmount&&category ? true : false}
+        disabled={itemName &&totelItemAmount ? true : false}
           endIcon={<CloudUploadIcon />}
           color="success"
           variant="contained"
@@ -512,77 +515,55 @@ const tDSDATA = ["0", "1", "2", "5", "10", "15", "20", "25", "30"];
 const unitListDD = ["kg", "ltr", "pcs", "gm", "mtr", "cm", "km", "sqft", "no."];
 
 const Category1DropDown = [
-  "Sub Category1",
-  "Digital Marketing",
-  "Print",
-  "Influencer Marketing",
-  "Event Management",
-  "Public Relations",
-  "Relationship Marketing",
-  "Consultancy Cost",
-  "Recruitment Drive",
-  "Job Portal",
-  "Fees",
-  "HRMS",
-  "Liasoning",
-  "Travel",
-  "Food",
-  "Rewards & Recognitions",
-  "Events",
-  "Rental",
-  "Electricity",
-  "Water",
-  "Asset",
-  "Gas",
-  "Refreshments",
-  "Stationary",
-  "Uniform",
-  "Furniture",
-  "Housekeeping Supplies",
-  "Toiletries",
-  "Courier",
-  "Equipments",
-  "Gardening",
-  "Fuel",
-  "Wear & Tear",
-  "Pest Control",
-  "Decoration",
-  "Tickets",
-  "Accomodation",
-  "Local Conveyance",
-  "Equipment",
-  "Furtniture",
-  "Kitchen Accessories",
-  "Groceries",
-  "Fruits & Vegetables",
+ 
+  "Allowance",
+  "Baby Care",
+  "Bakery",
+  "Christmas Party",
+  "Cleaning & Supplies",
+  "Commission - Card/Wallets",
+  "Commissions - CP",
+  "Consumable",
   "Dairy",
-  "Chemicals",
-  "Training Essentials",
-  "Conveyance",
-  "Licence",
-  "TDS",
-  "GST",
-  "PF/ESIC",
-  "Tool",
-  "Storage",
-  "Business Development",
-  "Conceirge",
-  "Housekeeping",
-  "Food & Nuitrition",
-  "Wellness",
-  "Care",
-  "Experience",
-  "Repair & Maintenance",
-  "Training",
-  "Commission",
-  "Field Office",
-  "Stipend",
-  "Vegetables",
-  "Toys",
-  "Utilities",
-  "Medicine",
-  "Hygiene Product",
+  "Decor",
+  "Delivery Charges",
+  "Diapers",
+  "Digital Marketing",
+  "Discount",
+  "Electricity",
+  "Employee Meal",
+  "Entertainment",
+  "Event",
+  "Facilities - Property",
+  "Facilities Fixed",
+  "Fruits",
+  "Games & Toys",
+  "Gas",
+  "Google Data Studio",
+  "Grocery",
+  "Internet",
   "Logistics",
+  "Maintenance",
+  "Manpower",
+  "Manpower - Fixed",
+  "Manpower - Incentive",
+  "Medicine",
   "Packaging",
-  "Delivery",
+  "Pamphlets_Standee_Hoardings",
+  "Reimbursement",
+  "Rent",
+  "Repair & Maintenance",
+  "Salary",
+  "Stationary",
+  "Support - Comm/WH",
+  "Support - Finance",
+  "Support - Ops Management",
+  "Taxes",
+  "Technology",
+  "Toiletries",
+  "Travel",
+  "Tuition & Fees",
+  "Uniform",
+  "Vegetables",
+  "Water",
 ];
