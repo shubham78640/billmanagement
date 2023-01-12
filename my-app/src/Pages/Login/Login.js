@@ -109,8 +109,8 @@ function Login() {
          alt=""
        />
         </Box>
-
-        <label for="username">Employee Code</label>
+        <Box  mt={4}>
+        {/* <label for="username">Employee Code</label> */}
         <input
           onChange={(e) => {
             setEmployeeCode(e.target.value);
@@ -119,9 +119,10 @@ function Login() {
           placeholder="Employee Code"
           id="username"
         />
-
-        <label for="password">Password</label>
-        <input
+</Box>
+        {/* <label for="password">Password</label> */}
+        <Box mt={4}>
+        <input 
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -129,8 +130,8 @@ function Login() {
           placeholder="Password"
           id="password"
         />
-
-        <button onClick={handleSubmit}>Log In</button>
+</Box>
+        <button  onClick={handleSubmit}>Login</button>
        
       </div>
     </div>
