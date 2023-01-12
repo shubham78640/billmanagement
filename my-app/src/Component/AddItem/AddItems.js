@@ -346,7 +346,7 @@ function AddItems() {
             onChange={(event, newValue) => {
               setUnit(newValue);
             }}
-            renderInput={(params) => <TextField {...params} label="Unit" />}
+            renderInput={(params) => <TextField {...params} label="Unit of measurement" />}
           />
 
           {/* <TextField
@@ -357,7 +357,7 @@ function AddItems() {
             }}
           /> */}
           <TextField
-            label="Rate"
+            label="Item Rate"
             sx={{ width: "300px", backgroundColor: "white" }}
             onChange={(e) => {
               setRate(e.target.value);
@@ -489,13 +489,13 @@ function AddItems() {
       </Box>
       <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
         <Button
-        disabled={itemName &&totelItemAmount ? true : false}
+        // disabled={itemName  ? true : false}
           endIcon={<CloudUploadIcon />}
           color="success"
           variant="contained"
           onClick={handleonclick}
         >
-          Document
+          Upload Invoice
         </Button>
       </Box>
     </Box>
@@ -512,7 +512,7 @@ const iGSTDATA = ["5", "12", "18", "28", "0"];
 
 const tDSDATA = ["0", "1", "2", "5", "10", "15", "20", "25", "30"];
 
-const unitListDD = ["kg", "ltr", "pcs", "gm", "mtr", "cm", "km", "sqft", "no."];
+const unitListDD = ["Kg", "Ltr", "Pcs", "Gm", "Mtr", "Cm", "Km", "Sqft", "Nos","Lump","Month"];
 
 const Category1DropDown = [
  

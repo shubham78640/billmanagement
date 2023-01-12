@@ -91,7 +91,7 @@ function UploadeDocuments() {
             onChange={changeHandler}
           />
           <Box mt={0.5} p={1} sx={{ fontSize: "12px", color: "red" }}>
-            ( Please Uploade Only JPEG, PNG, PDF files Only* )
+            ( Please upload only JPEG, PNG, PDF files only, max allowed size: 2MB* )
           </Box>
         </Box>
         <Box mt={4}>
@@ -101,7 +101,7 @@ function UploadeDocuments() {
             sx={{}}
             onClick={handleonclick}
           >
-            Submit Bill
+            Submit
           </Button>
         </Box>
       </Box>
