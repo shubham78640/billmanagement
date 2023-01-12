@@ -29,13 +29,13 @@ function BillTableData() {
         {
             field: 'invoiceId',
             headerName: ' Invoice Id',
-            width: 80,
+            width: 70,
             editable: true,
           },
         {
           field: 'employeeName',
           headerName: 'Employee Name',
-          width: 120,
+          width: 110,
           editable: true,
         },
         {
@@ -47,7 +47,7 @@ function BillTableData() {
         {
           field: 'email',
           headerName: 'Email',
-          width: 120,
+          width: 110,
           editable: true,
         },
     
@@ -56,19 +56,19 @@ function BillTableData() {
             headerName: 'Reporting Manager',
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
-            width: 120,
+            width: 110,
     
           },
           {
             field: 'invoiceNumber',
             headerName: 'Invoice Number',
-            width: 150,
+            width: 130,
             editable: true,
           },
         {
             field: 'invoiceDate',
             headerName: 'Invoice Date',
-            width: 140,
+            width: 130,
             editable: true,
           },
           {
@@ -140,32 +140,25 @@ function BillTableData() {
           {
             field: 'paymentCycle',
             headerName: 'Payment Cycle',
-            width: 120,
+            width: 70,
             editable: true,
           },
-          {
-            field: 'paymentDate',
-            headerName: 'paymentDate',
-            width: 100,
-            editable: true,
-          },
-
           {
             field: 'payDirectCard',
             headerName: 'Pay Direct Card Details',
-            width: 140,
+            width: 120,
             editable: true,
           },
           {
             field: 'partnerCode',
             headerName: 'Partner/Customer Code',
-            width: 140,
+            width: 110,
             editable: true,
           },
           {
             field: 'partnerName',
             headerName: 'Partner/Customer Name',
-            width: 140,
+            width: 120,
             editable: true,
           },
           {
@@ -177,13 +170,13 @@ function BillTableData() {
           {
             field: 'utr',
             headerName: 'UTR',
-            width: 100,
+            width: 80,
             editable: true,
           },
           {
             field: 'taskId',
             headerName: 'Task ID',
-            width: 100,
+            width: 80,
             editable: true,
           },
           {
@@ -202,14 +195,14 @@ function BillTableData() {
           {
             field: 'paidAmount',
             headerName: 'Update Paid Amount',
-            width: 100,
+            width: 80,
             editable: true,
           },
          
           {
             field: 'paymentStatus',
             headerName: 'Payment Status',
-            width: 100,
+            width: 70,
             editable: true,
           },
           {
