@@ -489,7 +489,7 @@ function AddItems() {
       </Box>
       <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
         <Button
-        // disabled={itemName  ? true : false}
+        disabled={totelAddItem=="0" || itemName  ? true : false}
           endIcon={<CloudUploadIcon />}
           color="success"
           variant="contained"
