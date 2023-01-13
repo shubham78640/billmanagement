@@ -57,12 +57,12 @@ function Login() {
   return (
     <div className="Body">
       <Box
-        mr={5}
-        mt={2}
         sx={{
           marginLeft: { sm: 0, xs: 1 },
           display: "grid",
           justifyContent: "end",
+          mt:{sm:"10px", xs:"10px"},
+          mr:{sm:"20px", xs:"10px"}
         }}
       >
         <img
