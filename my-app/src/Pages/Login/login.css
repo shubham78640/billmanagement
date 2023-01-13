@@ -3,72 +3,40 @@
 *:before,
 *:after{
 padding: 0;
-margin: 0;
 box-sizing: border-box;
 }
 
-.background{
-width: 430px;
-height: 520px;
-position: absolute;
-transform: translate(-50%,-50%);
-left: 50%;
-top: 50%;
+.body{
+    min-width: 100%;
 }
-.background .shape{
-height: 200px;
-width: 200px;
-position: absolute;
-border-radius: 50%;
-}
-.shape:first-child{
-left: -80px;
-top: -80px;
-right: -30px;
-bottom: -80px;
-}
+
+
 .form{
-    height: 520px;
-/* width: 400px;
-margin-left: auto;
-margin-right: auto;
-margin-top: auto;
-margin-bottom: auto;
-padding: 50px 35px;  */
-height: 520px;
-width: 400px;
-background-color: rgba(255,255,255,0.13);
-position: absolute;
-transform: translate(-50%,-50%);
-top: 50%;
-left: 50%;
-border-radius: 10px;
-backdrop-filter: blur(10px);
-padding: 50px 35px;
+margin-top: 50px;
+display: flex;
+flex-direction: column;
+gap: 30px;
+justify-content: center;
+align-items: center;
+padding: 20px;
+
 }
+
 .form *{
 font-family: 'Poppins',sans-serif;
 color: #f2f2f2;
 letter-spacing: 0.5px;
 outline: none;
 border: none;
+
 }
 
-.form label{
-display: block;
-margin-top: 30px;
-font-size: 16px;
-font-weight: 500;
-color:#ef6026;
-}
 .form input{
-display: block;
 height: 50px;
-width: 100%;
+width: 330px;
 background-color:#e8f0fe;
 border-radius: 3px;
 padding: 0 10px;
-margin-top: 8px;
 font-size: 14px;
 font-weight: 500;
 color:#ef6026;
@@ -78,8 +46,7 @@ color: #ef6026;
 font-weight: 300;
 }
 .form button{
-margin-top: 50px;
-width: 100%;
+width: 330px;
 background-color: rgb(187, 187, 187);
 color: #ffffff;
 padding: 15px 0;
@@ -87,6 +54,7 @@ font-size: 18px;
 font-weight: 600;
 border-radius: 5px;
 cursor: pointer;
+
 }
 
 

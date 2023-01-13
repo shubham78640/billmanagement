@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import pinch from "../../images/Pinch.png";
-import core from "../../images/core.png"
+import core from "../../images/core.png";
 function Login() {
   const [employeeCode, setEmployeeCode] = useState("");
   const [password, setPassword] = useState("");
@@ -55,32 +55,26 @@ function Login() {
     }
   };
   return (
-    <div className="Body"> 
-
- <Box mr={5} mt={2} sx={{marginLeft:{ sm: 0, xs: 1 },  display:"grid", justifyContent:"end"}}>
-        {/* <img
-         
+    <div className="Body">
+      <Box
+        mr={5}
+        mt={2}
+        sx={{
+          marginLeft: { sm: 0, xs: 1 },
+          display: "grid",
+          justifyContent: "end",
+        }}
+      >
+        <img
           style={{
-            cursor:"pointer",
+            cursor: "pointer",
           }}
-          width={"150px"}
-          src={core}
+          width={"60px"}
+          src={pinch}
           alt=""
-        /> */}
+        />
+      </Box>
 
-         <img
-            style={{
-              cursor: "pointer",
-            }}
-            width={"60px"}
-            src={pinch}
-            alt=""
-          />
-      </Box> 
-      <div className="background">
-        {/* <div className="shape"></div>
-        <div className="shape"></div> */}
-      </div>
       <div className="form">
         <Box
           sx={{
@@ -90,49 +84,36 @@ function Login() {
             justifyContent: "center",
           }}
         >
-          {/* <img
+          <img
             style={{
               cursor: "pointer",
             }}
-            width={"60px"}
-            src={pinch}
+            width={"150px"}
+            src={core}
             alt=""
-          /> */}
-
-<img
-         
-         style={{
-           cursor:"pointer",
-         }}
-         width={"150px"}
-         src={core}
-         alt=""
-       />
+          />
         </Box>
-        <Box  mt={4}>
-        {/* <label for="username">Employee Code</label> */}
-        <input
-          onChange={(e) => {
-            setEmployeeCode(e.target.value);
-          }}
-          type="text"
-          placeholder="Employee Code"
-          id="username"
-        />
-</Box>
-        {/* <label for="password">Password</label> */}
-        <Box mt={4}>
-        <input 
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          type="password"
-          placeholder="Password"
-          id="password"
-        />
-</Box>
-        <button  onClick={handleSubmit}>Login</button>
-       
+        <Box p={1}>
+          <input
+            onChange={(e) => {
+              setEmployeeCode(e.target.value);
+            }}
+            type="text"
+            placeholder="Employee Code"
+            id="username"
+          />
+        </Box>
+        <Box p={1}>
+          <input
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            type="password"
+            placeholder="Password"
+            id="password"
+          />
+        </Box>
+        <button onClick={handleSubmit}>Login</button>
       </div>
     </div>
   );
