@@ -106,17 +106,17 @@ function ApprovalAdminDataTabel() {
             width: 140,
             editable: true,
           },
-          {
-            field: 'showItem',
-            headerName: '',
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 100,
-            type:"action",
-             renderCell:()=><p style={{color:"blue",fontWeight:"600",cursor:"pointer"}}
-             >Item Details</p>
+        //   {
+        //     field: 'showItem',
+        //     headerName: '',
+        //     description: 'This column has a value getter and is not sortable.',
+        //     sortable: false,
+        //     width: 100,
+        //     type:"action",
+        //      renderCell:()=><p style={{color:"blue",fontWeight:"600",cursor:"pointer"}}
+        //      >Item Details</p>
            
-          }, 
+        //   }, 
           {
             field: 'hodApproval',
             headerName: 'HOD Approval',
