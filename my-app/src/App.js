@@ -8,7 +8,10 @@ import BillTableData from "./Component/BillTableData/BillTableData";
 import ItemDataTable from "./Component/ItemDataTable/ItemDataTable";
 import PaymentdetailsForm from "./Component/PaymentDetailsForm/PaymentdetailsForm";
 import Login from "./Pages/Login/Login";
-
+import ApprovalForm from "./Component/Approval/ApprovalForm";
+import ApprovalUserDataTable from "./Component/Approval/ApprovalDataTabel/ApprovalUserDataTable";
+import ApprovalAdminDataTabel from "./Component/Approval/ApprovalDataTabel/ApprovalAdminDataTabel";
+import InvoiceStatusRemark from "./Component/PaymentDetailsForm/InvoiceStatusRemark/InvoiceStatusRemark";
 function App() {
   const invbillid = localStorage.getItem("BillID");
   const userType = localStorage.getItem("User");
@@ -30,6 +33,12 @@ function App() {
             element={<PaymentdetailsForm />}
           />
         )}
+         {userType === "ADMIN" && (
+          <Route
+            path="/billtable/updatestatusremark/:id"
+            element={<InvoiceStatusRemark />}
+          />
+        )}
         <Route path="/mainform" element={<MainForm />} />
         <Route path="/mainform/addItem/:id" element={<AddItems />} />
         <Route
@@ -41,6 +50,10 @@ function App() {
         ) : (
           <Route path="/login" element={<Login />} />
         )}
+
+<Route path="/approval" element={<ApprovalForm />} />
+<Route path="/approvaluserdatatable" element={<ApprovalUserDataTable />} />
+<Route path="/approvaladmindatatable" element={<ApprovalAdminDataTabel />} />
       </Routes>
     </BrowserRouter>
   );

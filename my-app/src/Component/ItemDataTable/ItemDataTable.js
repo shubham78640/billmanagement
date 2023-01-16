@@ -129,7 +129,7 @@ function ItemDataTable() {
   return (
     <>
       {/* <Box>Totel Item:-{billtabledata.length}</Box> */}
-      <Box p={0.5} sx={{ height: 680, width: "100%" }}>
+      <Box p={0.5} sx={{ height: 680, width: "100%" ,minHeight:"685px"}}>
         <DataGrid
           rows={billtabledata}
           columns={columns}

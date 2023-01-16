@@ -28,6 +28,7 @@ const theme = createTheme({
  },
 })
 
+
 function MainForm() {
   const [billId, setBillID] = useState("");
   const [empcode, setEmpCode] = useState("");
@@ -240,7 +241,6 @@ function MainForm() {
           marginLeft:{sm:"3%", xs:"0%"},
           justifyContent:{sm:"flex-start", xs:"center"}
           
-         
         }}
       >
         <ThemeProvider theme = {theme}>

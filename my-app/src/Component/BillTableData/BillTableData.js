@@ -23,6 +23,10 @@ function BillTableData() {
             setIDMM(params.row.invoiceId)
             // navigate(`${params.row.invoiceId}`)
              }
+
+             if(params.field==="invoiceStatusupdate"){
+              navigate(`/billtable/updatestatusremark/${params.row.invoiceId}`)
+               }
       }
 
     const columns = [
@@ -150,17 +154,18 @@ function BillTableData() {
             editable: true,
           },
           {
-            field: 'otherPartner',
-            headerName: 'New Partner/Customer',
-            width: 110,
-            editable: true,
-          },
-          {
             field: 'partnerNameCode',
             headerName: 'Partner/Customer Name',
             width: 120,
             editable: true,
           },
+          {
+            field: 'otherPartner',
+            headerName: 'New Partner/Customer',
+            width: 110,
+            editable: true,
+          },
+         
           {
             field: 'invoiceDescription',
             headerName: 'Invoice Description',
@@ -213,6 +218,12 @@ function BillTableData() {
           },
          
           {
+            field: 'invoiceStatus',
+            headerName: 'Invoice Status',
+            width: 180,
+            editable: true,
+          },
+          {
             field: 'showBill',
             headerName: 'Show Bill',
             description: 'This column has a value getter and is not sortable.',
@@ -245,6 +256,19 @@ function BillTableData() {
              renderCell:()=><p style={{color:"blue",fontWeight:"600",cursor:"pointer"}}
              >Update Payment</p>
           }, 
+          {
+            field: 'invoiceStatusupdate',
+            headerName: 'Invoice Status',
+            description: 'This column has a value getter and is not sortable.',
+            sortable: false,
+            width: 130,
+            type:"action",
+             renderCell:()=><p style={{color:"blue",fontWeight:"600",cursor:"pointer"}}
+             >Invoice Status</p>
+          }, 
+
+
+         
       ];
       
     let navigate = useNavigate();
@@ -265,7 +289,7 @@ function BillTableData() {
 
   return (
     <>
-<Box p={.5} sx={{ height: 680, width: '100%', backgroundColor:"#f2f2f2", minHeight:"800px", maxHeight:"100%"}}>
+<Box p={.5} sx={{ height: 680, width: '100%', backgroundColor:"#f2f2f2", minHeight:"685px", maxHeight:"100%"}}>
       <DataGrid
         rows={billtabledata}
         columns={columns}
@@ -288,7 +312,9 @@ function BillTableData() {
         //============== On cell Click event =================
         //============== On Export Csv Click event ===========
         components={{ Toolbar: GridToolbar }}
+        
         //==============On Export Csv Click event ============
+        rowHeight={26}
 
       />
     </Box>
