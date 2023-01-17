@@ -111,7 +111,7 @@ function Navbaar() {
           onMouseOver={handleClick}
         >
          
-          <Avatar alt="Remy Sharp"  sx={{ width: 45, height: 45 }} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
+          <Avatar alt="Remy Sharp"  sx={{ width: 45, height: 45, border:"2px solid white"  }} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
 
         </Box>
 
@@ -135,7 +135,7 @@ function Navbaar() {
                 padding: "0px",
               }}
             >
-             <Avatar alt="Remy Sharp" sx={{ width: 60, height: 60 }} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
+             <Avatar alt="Remy Sharp" sx={{ width: 60, height: 60,border:"2px solid #b04225"}} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
 
             </Box>
             <Box
