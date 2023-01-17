@@ -10,34 +10,39 @@ import {
 
 import axios from "axios";
 function InvoiceStatusRemark() {
-    let navigate = useNavigate();
-    const { id } = useParams();
+  let navigate = useNavigate();
+  const { id } = useParams();
 
-    const [statusRemark, setStatusRemark] = useState("");
+  const [statusRemark, setStatusRemark] = useState("");
 
-    const handleInvoiceStatusRemarkUpdate = async () => {
-        try {
-          let response = await axios.put(
-           ` http://13.126.160.155:8088/bill/bill/update/invoiceStatus/${id}`,
-            {
-                invoiceStatus:statusRemark,
-            }
-          );
-          alert("Your Status Remark Update successfully");
-          console.log(response);
-          navigate("/billtable");
-        } catch (error) {
-          alert(error);
+  const handleInvoiceStatusRemarkUpdate = async () => {
+    try {
+      let response = await axios.put(
+        ` http://13.126.160.155:8088/bill/bill/update/invoiceStatus/${id}`,
+        {
+          invoiceStatus: statusRemark,
         }
-      };
-    
+      );
+      alert("Your Status Remark Update successfully");
+      console.log(response);
+      navigate("/billtable");
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <>
-    
-    <Box p={2} m={4}>
-<Box sx={{display:"flex", flexDirection:"column", gap:"50px", alignItems:"center"}}> 
-
-   <TextField
+      <Box p={2} m={4}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "50px",
+            alignItems: "center",
+          }}
+        >
+          <TextField
             sx={{ width: 300 }}
             id="outlined-basic"
             label="Invoice Status Update"
@@ -46,7 +51,7 @@ function InvoiceStatusRemark() {
             value={statusRemark}
           />
 
-   <Button
+          <Button
             size="large"
             mt={4}
             sx={{ width: { sm: 300, xs: 250 }, mb: "20px" }}
@@ -56,10 +61,10 @@ function InvoiceStatusRemark() {
           >
             Update Status
           </Button>
-   </Box>
-   </Box>
+        </Box>
+      </Box>
     </>
-  )
+  );
 }
 
-export default InvoiceStatusRemark
+export default InvoiceStatusRemark;

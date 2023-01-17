@@ -107,7 +107,6 @@ const columns = [
     width: 120,
     editable: true,
   },
-
 ];
 
 function ItemDataTable() {
@@ -128,17 +127,14 @@ function ItemDataTable() {
   console.log("length", billtabledata.length);
   return (
     <>
-      {/* <Box>Totel Item:-{billtabledata.length}</Box> */}
-      <Box p={0.5} sx={{ height: 680, width: "100%" ,minHeight:"685px"}}>
+      <Box p={0.5} sx={{ height: 680, width: "100%", minHeight: "685px" }}>
         <DataGrid
           rows={billtabledata}
           columns={columns}
           pageSize={100}
           rowsPerPageOptions={[500]}
-          // checkboxSelection
-          // disableSelectionOnClick
-          // experimentalFeatures={{ newEditingApi: true }}
           components={{ Toolbar: GridToolbar }}
+          rowHeight={32}
         />
       </Box>
     </>

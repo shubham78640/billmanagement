@@ -12,6 +12,9 @@ import ApprovalForm from "./Component/Approval/ApprovalForm";
 import ApprovalUserDataTable from "./Component/Approval/ApprovalDataTabel/ApprovalUserDataTable";
 import ApprovalAdminDataTabel from "./Component/Approval/ApprovalDataTabel/ApprovalAdminDataTabel";
 import InvoiceStatusRemark from "./Component/PaymentDetailsForm/InvoiceStatusRemark/InvoiceStatusRemark";
+import ApprovalByHOD from "./Component/Approval/ApprovalBy/ApprovalByHOD";
+import ApprovalByFinal from "./Component/Approval/ApprovalBy/ApprovalByFinal";
+import BillDataTableUser from "./Component/BillTableData/BillDataTableUser";
 function App() {
   const invbillid = localStorage.getItem("BillID");
   const userType = localStorage.getItem("User");
@@ -51,9 +54,13 @@ function App() {
           <Route path="/login" element={<Login />} />
         )}
 
-<Route path="/approval" element={<ApprovalForm />} />
+<Route path="/approvalform" element={<ApprovalForm />} />
 <Route path="/approvaluserdatatable" element={<ApprovalUserDataTable />} />
 <Route path="/approvaladmindatatable" element={<ApprovalAdminDataTabel />} />
+<Route path="/approvaladmindatatable/statusbyhod/:id" element={<ApprovalByHOD />} />
+<Route path="/approvaladmindatatable/statusbyadmin/:id" element={<ApprovalByFinal />} />
+<Route path="/billtabledatauser" element={<BillDataTableUser />} />
+
       </Routes>
     </BrowserRouter>
   );
