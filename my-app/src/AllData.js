@@ -356,6 +356,7 @@ export const CategoryRelation = [
       "Medicine",
       "Stationary",
       "Toys",
+      "Travel",
       "Utilities",
       "Vegitables",
     ],
@@ -372,8 +373,10 @@ export const CategoryRelation = [
       "Logistics",
       "Packaging",
       "Stationary",
+      "Travel",
       "Utilities",
       "Vegitables",
+      
     ],
   },
   {
@@ -387,6 +390,7 @@ export const CategoryRelation = [
       "Medicine",
       "Stationary",
       "Toys",
+      "Travel",
       "Utilities",
       "Vegetables",
     ],

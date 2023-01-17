@@ -8,8 +8,14 @@ import BillTableData from "./Component/BillTableData/BillTableData";
 import ItemDataTable from "./Component/ItemDataTable/ItemDataTable";
 import PaymentdetailsForm from "./Component/PaymentDetailsForm/PaymentdetailsForm";
 import Login from "./Pages/Login/Login";
+import ApprovalForm from "./Component/Approval/ApprovalForm";
+import ApprovalUserDataTable from "./Component/Approval/ApprovalDataTabel/ApprovalUserDataTable";
+import ApprovalAdminDataTabel from "./Component/Approval/ApprovalDataTabel/ApprovalAdminDataTabel";
+import InvoiceStatusRemark from "./Component/PaymentDetailsForm/InvoiceStatusRemark/InvoiceStatusRemark";
+import ApprovalByHOD from "./Component/Approval/ApprovalBy/ApprovalByHOD";
+import ApprovalByFinal from "./Component/Approval/ApprovalBy/ApprovalByFinal";
+import BillDataTableUser from "./Component/BillTableData/BillDataTableUser";
 import DashBoard from "./Pages/Dashboard/DashBoard";
-
 function App() {
   const invbillid = localStorage.getItem("BillID");
   const userType = localStorage.getItem("User");
@@ -19,7 +25,7 @@ function App() {
     <BrowserRouter>
       {status && <Navbaar />}
       <Routes>
-      <Route path="/dashboard" element={<DashBoard/>} />
+        <Route path="/dashboard" element={<DashBoard />} />
 
         {userType === "ADMIN" && (
           <Route path="/billtable" element={<BillTableData />} />
@@ -31,6 +37,12 @@ function App() {
           <Route
             path="/billtable/updatepagment/:id"
             element={<PaymentdetailsForm />}
+          />
+        )}
+        {userType === "ADMIN" && (
+          <Route
+            path="/billtable/updatestatusremark/:id"
+            element={<InvoiceStatusRemark />}
           />
         )}
         <Route path="/mainform" element={<MainForm />} />
@@ -45,6 +57,24 @@ function App() {
           <Route path="/login" element={<Login />} />
         )}
 
+        <Route path="/approvalform" element={<ApprovalForm />} />
+        <Route
+          path="/approvaluserdatatable"
+          element={<ApprovalUserDataTable />}
+        />
+        <Route
+          path="/approvaladmindatatable"
+          element={<ApprovalAdminDataTabel />}
+        />
+        <Route
+          path="/approvaladmindatatable/statusbyhod/:id"
+          element={<ApprovalByHOD />}
+        />
+        <Route
+          path="/approvaladmindatatable/statusbyadmin/:id"
+          element={<ApprovalByFinal />}
+        />
+        <Route path="/billtabledatauser" element={<BillDataTableUser />} />
       </Routes>
     </BrowserRouter>
   );
