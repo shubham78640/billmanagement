@@ -8,6 +8,7 @@ import BillTableData from "./Component/BillTableData/BillTableData";
 import ItemDataTable from "./Component/ItemDataTable/ItemDataTable";
 import PaymentdetailsForm from "./Component/PaymentDetailsForm/PaymentdetailsForm";
 import Login from "./Pages/Login/Login";
+import DashBoard from "./Pages/Dashboard/DashBoard";
 
 function App() {
   const invbillid = localStorage.getItem("BillID");
@@ -18,6 +19,8 @@ function App() {
     <BrowserRouter>
       {status && <Navbaar />}
       <Routes>
+      <Route path="/dashboard" element={<DashBoard/>} />
+
         {userType === "ADMIN" && (
           <Route path="/billtable" element={<BillTableData />} />
         )}
@@ -41,6 +44,7 @@ function App() {
         ) : (
           <Route path="/login" element={<Login />} />
         )}
+
       </Routes>
     </BrowserRouter>
   );

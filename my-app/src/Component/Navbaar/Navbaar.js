@@ -1,17 +1,29 @@
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
-import pinch from "../../images/Pinch.png"
-import core from "../../images/core.png"
+import pinch from "../../images/Pinch.png";
+import core from "../../images/core.png";
+import AppsIcon from "@mui/icons-material/Apps";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import styled from "@emotion/styled";
+
+const P = styled("p")({
+  fontWeight: "300",
+  color: "grey",
+  fontFamily: "sans-serif",
+});
+
 function Navbaar() {
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
   const EMPEMAIL = localStorage.getItem("email");
   const userType = localStorage.getItem("User");
+  const AppName = localStorage.getItem("App");
 
   const handleonclickLogOut = async () => {
     console.log({});
@@ -33,6 +45,16 @@ function Navbaar() {
   };
 
   let navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box
       sx={{
@@ -40,55 +62,138 @@ function Navbaar() {
         alignItems: "center",
         padding: 1,
         justifyContent: "space-between",
-        backgroundColor: "rgba(190, 232, 201, 0.6)",
+        backgroundColor: "rgba(190, 232, 201, 1)",
         boxShadow:
           "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
       }}
     >
-      <Box sx={{marginLeft:{ sm: 4, xs: 1 },  display:"grid", alignItems:"center", justifyContent:"center"}}>
+      <Box
+        sx={{
+          marginLeft: { sm: 4, xs: 1 },
+          display: "grid",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <img
           onClick={() => {
-            {
-              userType == "ADMIN" && navigate("/billtable");
-            }
+            AppName === "expense" && userType == "ADMIN"
+              ? navigate("/billTable")
+              : navigate("/dashboard") ||
+            AppName === "expense" && userType == "USER"
+              ? navigate("/mainform")
+              : navigate("/dashboard") 
           }}
           style={{
-            cursor:"pointer",
+            cursor: "pointer",
           }}
           width={"50px"}
           src={pinch}
           alt=""
         />
       </Box>
-      <Box sx={{ display: "flex", gap: "10px" }}>
-        <Button mt={0.8} color="success">
+      <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
+        {/* <Button color="success">
           <Link
             style={{ color: "white", fontWeight: "600", color: "green" }}
-            to="/mainform"
-          >
+            to="/mainform">
             Add Bill
           </Link>
-        </Button>
+        </Button> */}
 
-        <Button
-          mr={-5}
-          sx={{ color: "green", fontWeight: "800" }}
-          endIcon={<LogoutIcon />}
-          color="success"
-          onClick={handleonclickLogOut}
-        ></Button>
-
-       <Box sx={{marginLeft:{ sm: 0, xs: 1 },  display:"grid", alignItems:"center", justifyContent:"center"}}>
-        <img
-         
-          style={{
-            cursor:"pointer",
+        <Box
+          sx={{
+            marginLeft: { sm: 0, xs: 1 },
+            display: "grid",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-          width={"130px"}
-          src={core}
-          alt=""
-        />
-      </Box>
+        >
+          <img
+            style={{ cursor: "pointer" }}
+            width={"130px"}
+            src={core}
+            alt=""
+          />
+        </Box>
+
+        <Box
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onMouseOver={handleClick}
+        >
+          <Avatar sx={{ bgcolor: "#b04225" }}>{EMPNAME[0]}</Avatar>
+        </Box>
+
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <Box sx={{ p: "20px 20px 0px 20px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: "10px",
+                padding: "0px",
+              }}
+            >
+              <Avatar sx={{ bgcolor: "#b04225" }}>{EMPNAME[0]}</Avatar>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: "10px",
+                padding: "15px",
+              }}
+            >
+              <P>{EMPCODE}</P>
+              <P>{EMPNAME}</P>
+              <P>{EMPEMAIL}</P>
+              <P>{userType}</P>
+            </Box>
+            <MenuItem
+              sx={{
+                color: "grey",
+                fontFamily: "sans-serif",
+                fontWeight: "300",
+                p: "10px",
+              }}
+              onClick={() => {
+                handleClose();
+                navigate("/dashboard");
+                localStorage.removeItem('App')
+              }}
+            >
+              <AppsIcon /> &nbsp; dashboard
+            </MenuItem>
+            <MenuItem
+              sx={{
+                color: "grey",
+                fontFamily: "sans-serif",
+                fontWeight: "300",
+                p: "10px",
+              }}
+              onClick={() => {
+                handleClose();
+                handleonclickLogOut();
+              }}
+            >
+              <LogoutIcon /> &nbsp; Logout
+            </MenuItem>
+          </Box>
+        </Menu>
       </Box>
     </Box>
   );

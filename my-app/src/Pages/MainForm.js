@@ -217,7 +217,7 @@ function MainForm() {
       CustomerListData()
 
   }, [brand, paymentMode, department, category, subCategory1 ]);
-  console.log("bbbbbbbbbbb",customerName)
+
 
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");

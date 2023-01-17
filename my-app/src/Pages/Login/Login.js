@@ -20,24 +20,9 @@ function Login() {
           password: password,
         }
       );
-
-      if (response.data.data.userType == "USER") {
-        navigate("/mainform");
-        localStorage.setItem("User", response.data.data.userType);
-        localStorage.setItem("employeeCode", response.data.data.employeeCode);
-        localStorage.setItem("email", response.data.data.email);
-        localStorage.setItem("name", response.data.data.employeeName);
-        localStorage.setItem("status", response.data.data.status);
-        localStorage.setItem(
-          "reportingManager",
-          response.data.data.reportingManager
-        );
-        console.log(response.data.data.userType);
-        window.location.reload();
-      }
-
-      if (response.data.data.userType == "ADMIN") {
-        navigate("/billtable");
+      
+      if (response.data.data.userType == "ADMIN" || response.data.data.userType == "USER") {
+        navigate("/dashboard");
         localStorage.setItem("User", response.data.data.userType);
         localStorage.setItem("employeeCode", response.data.data.employeeCode);
         localStorage.setItem("email", response.data.data.email);
