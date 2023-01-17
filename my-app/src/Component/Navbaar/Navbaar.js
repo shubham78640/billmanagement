@@ -44,6 +44,8 @@ function Navbaar() {
     }
   };
 
+  //http://13.126.160.155:8088/bill/item/get/${EMPCODE}
+
   let navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -108,7 +110,9 @@ function Navbaar() {
           aria-expanded={open ? "true" : undefined}
           onMouseOver={handleClick}
         >
-          <Avatar sx={{ bgcolor: "#b04225" }}>{EMPNAME[0]}</Avatar>
+         
+          <Avatar alt="Remy Sharp"  sx={{ width: 45, height: 45 }} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
+
         </Box>
 
         <Menu
@@ -131,7 +135,8 @@ function Navbaar() {
                 padding: "0px",
               }}
             >
-              <Avatar sx={{ bgcolor: "#b04225" }}>{EMPNAME[0]}</Avatar>
+             <Avatar alt="Remy Sharp" sx={{ width: 60, height: 60 }} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
+
             </Box>
             <Box
               sx={{
