@@ -101,21 +101,6 @@ function Navbaar() {
           </Link>
         </Button> */}
 
-        <Box
-          sx={{
-            marginLeft: { sm: 0, xs: 1 },
-            display: "grid",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            style={{ cursor: "pointer" }}
-            width={"130px"}
-            src={core}
-            alt=""
-          />
-        </Box>
 
         <Box
           aria-controls={open ? "basic-menu" : undefined}
@@ -194,6 +179,22 @@ function Navbaar() {
             </MenuItem>
           </Box>
         </Menu>
+
+        <Box
+          sx={{
+            marginLeft: { sm: 0, xs: 1 },
+            display: "grid",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            style={{ cursor: "pointer" }}
+            width={"130px"}
+            src={core}
+            alt=""
+          />
+        </Box>
       </Box>
     </Box>
   );
