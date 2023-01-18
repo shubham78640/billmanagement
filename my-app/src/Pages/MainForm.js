@@ -229,8 +229,10 @@ function MainForm() {
 
   return (
     <Box
-      sx={{ backgroundColor: "#f2f2f2", minHeight: "900px", maxHeight: "100%", alignItems:"center" }}
+      sx={{ backgroundColor: "#f2f2f2", minHeight: "682px", maxHeight: "100%", alignItems:"center" }}
     >
+{/* <Box p={2} sx={{marginLeft:{sm:"5%",xs:"9%"},   fontWeight:600, fontSize:"18px", color:"green"}}>  Expense Submission Form </Box> */}
+
       <Box
      
         sx={{
@@ -243,8 +245,9 @@ function MainForm() {
           
         }}
       >
+        
         <ThemeProvider theme = {theme}>
-        <TextField
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Employee Name"
@@ -278,7 +281,7 @@ function MainForm() {
           variant="outlined"
           disabled
           value={reportingManager}
-        />
+        /> */}
 
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
