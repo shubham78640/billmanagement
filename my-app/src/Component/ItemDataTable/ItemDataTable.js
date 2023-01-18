@@ -46,10 +46,24 @@ const columns = [
     width: 60,
     editable: true,
   },
+  
+  {
+    field: "unit",
+    headerName: "Unit",
+    width: 80,
+    editable: true,
+  },
+
   {
     field: "rate",
     headerName: "Rate",
     width: 90,
+    editable: true,
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+    width: 120,
     editable: true,
   },
 
@@ -89,22 +103,12 @@ const columns = [
     width: 80,
     editable: true,
   },
+
+
   {
     field: "amountPaid",
     headerName: "Total Amount",
     width: 80,
-    editable: true,
-  },
-  {
-    field: "unit",
-    headerName: "Unit",
-    width: 80,
-    editable: true,
-  },
-  {
-    field: "amount",
-    headerName: "Amount",
-    width: 120,
     editable: true,
   },
 ];
@@ -125,9 +129,22 @@ function ItemDataTable() {
   }, []);
   console.log("tabledata", billtabledata);
   console.log("length", billtabledata.length);
+
+  const INVTOTELAMOUNT = billtabledata
+    .map((item) => item.amountPaid)
+    .reduce((prev, curr) => prev + curr, 0);
+
+   console.log("1234",INVTOTELAMOUNT)
+
+
   return (
     <>
-      <Box p={0.5} sx={{ height: 680, width: "100%", minHeight: "685px" }}>
+
+
+<Box  p={2} sx={{ marginLeft: {sm:"85%", xs:"auto"}, color:"green", fontWeight:600, fontSize:"18px"}}>
+   Totel Amount - {INVTOTELAMOUNT}
+          </Box>
+      <Box p={0.5} sx={{ height: 636, width: "100%", minHeight: "636px" }}>
         <DataGrid
           rows={billtabledata}
           columns={columns}
