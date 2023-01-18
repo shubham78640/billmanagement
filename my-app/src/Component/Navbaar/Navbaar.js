@@ -85,7 +85,7 @@ function Navbaar() {
               ? navigate("/billTable")
               : navigate("/dashboard") ||
             AppName === "expense" && userType == "USER"
-              ? navigate("/mainform")
+              ? navigate("/billtabledatauser")
               : navigate("/dashboard") ||
             AppName === "approval" && userType == "USER"
               ? navigate("/approvaluserdatatable")
