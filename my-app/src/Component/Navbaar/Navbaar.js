@@ -84,6 +84,12 @@ function Navbaar() {
               : navigate("/dashboard") ||
             AppName === "expense" && userType == "USER"
               ? navigate("/mainform")
+              : navigate("/dashboard") ||
+            AppName === "approval" && userType == "USER"
+              ? navigate("/approvaluserdatatable")
+              : navigate("/dashboard") ||
+              AppName === "approval" && userType == "ADMIN"
+              ? navigate("/approvaladmindatatable")
               : navigate("/dashboard") 
           }}
           style={{

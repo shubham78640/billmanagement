@@ -26,54 +26,19 @@ function App() {
       {status && <Navbaar />}
       <Routes>
         <Route path="/dashboard" element={<DashBoard />} />
-
-        {userType === "ADMIN" && (
-          <Route path="/billtable" element={<BillTableData />} />
-        )}
-        {userType === "ADMIN" && (
-          <Route path="/billtable/admin/:id" element={<ItemDataTable />} />
-        )}
-        {userType === "ADMIN" && (
-          <Route
-            path="/billtable/updatepagment/:id"
-            element={<PaymentdetailsForm />}
-          />
-        )}
-        {userType === "ADMIN" && (
-          <Route
-            path="/billtable/updatestatusremark/:id"
-            element={<InvoiceStatusRemark />}
-          />
-        )}
+        {userType === "ADMIN" && (<Route path="/billtable" element={<BillTableData />} />)}
+        {userType === "ADMIN" && (<Route path="/billtable/admin/:id" element={<ItemDataTable />} />)}
+        {userType === "ADMIN" && (<Route path="/billtable/updatepagment/:id" element={<PaymentdetailsForm />}/>)}
+        {userType === "ADMIN" && (<Route path="/billtable/updatestatusremark/:id" element={<InvoiceStatusRemark />}/>)}
         <Route path="/mainform" element={<MainForm />} />
         <Route path="/mainform/addItem/:id" element={<AddItems />} />
-        <Route
-          path="/addItem/uploadeDocuments/:id"
-          element={<UploadeDocuments />}
-        />
-        {!status ? (
-          <Route path="/" element={<Login />} />
-        ) : (
-          <Route path="/login" element={<Login />} />
-        )}
-
+        <Route path="/addItem/uploadeDocuments/:id" element={<UploadeDocuments />}/>
+        {!status ? ( <Route path="/" element={<Login />} /> ) : ( <Route path="/login" element={<Login />} /> )} 
         <Route path="/approvalform" element={<ApprovalForm />} />
-        <Route
-          path="/approvaluserdatatable"
-          element={<ApprovalUserDataTable />}
-        />
-        <Route
-          path="/approvaladmindatatable"
-          element={<ApprovalAdminDataTabel />}
-        />
-        <Route
-          path="/approvaladmindatatable/statusbyhod/:id"
-          element={<ApprovalByHOD />}
-        />
-        <Route
-          path="/approvaladmindatatable/statusbyadmin/:id"
-          element={<ApprovalByFinal />}
-        />
+        <Route path="/approvaluserdatatable" element={<ApprovalUserDataTable />} />
+        <Route path="/approvaladmindatatable" element={<ApprovalAdminDataTabel />} />
+        <Route path="/approvaladmindatatable/statusbyhod/:id" element={<ApprovalByHOD />} />
+        <Route path="/approvaladmindatatable/statusbyadmin/:id" element={<ApprovalByFinal />}/>
         <Route path="/billtabledatauser" element={<BillDataTableUser />} />
       </Routes>
     </BrowserRouter>

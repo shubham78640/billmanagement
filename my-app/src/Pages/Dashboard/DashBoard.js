@@ -31,6 +31,7 @@ const BOX2 = styled(Box)({
 });
 
 function DashBoard() {
+  const userType = localStorage.getItem("User");
   let navigate = useNavigate();
   return (
     <>
@@ -47,7 +48,7 @@ function DashBoard() {
         <BOX2
            sx={{ backgroundColor: "rgba(255, 186, 255, 0.54)"}}
           onClick={() => {
-            navigate("/mainform");
+            userType==="ADMIN"?navigate("/billtable"):navigate("/billtabledatauser")
             localStorage.setItem("App","expense");
           }}>
           <img
@@ -60,8 +61,13 @@ function DashBoard() {
             Expense Management
           </p>
         </BOX2>
+
         <BOX2
         sx={{ backgroundColor: "rgba(93, 236, 255, 0.54)"}}
+        onClick={() => {
+          userType==="ADMIN"?navigate("/approvaladmindatatable"):navigate("/approvaluserdatatable")
+          localStorage.setItem("App","approval");
+        }}
         >
           <img
             width={"110px"}
