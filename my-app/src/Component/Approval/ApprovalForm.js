@@ -302,4 +302,4 @@ const departmentData = [
   "Training & Audit",
 ];
 
-const TypeofPurchase = ["Products", "Services"];
+const TypeofPurchase = ["Product", "Services"];
