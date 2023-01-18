@@ -174,7 +174,7 @@ function ApprovalAdminDataTabel() {
       type: "action",
       renderCell: () => (
         <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
-         HOD Approve Status
+         Approval
         </p>
       ),
     },
@@ -187,7 +187,7 @@ function ApprovalAdminDataTabel() {
       type: "action",
       renderCell: () => (
         <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
-          Final Approve Status
+          Approval
         </p>
       ),
     },
