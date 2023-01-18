@@ -142,7 +142,7 @@ function ItemDataTable() {
 
 
 <Box  p={2} sx={{ marginLeft: {sm:"85%", xs:"auto"}, color:"green", fontWeight:600, fontSize:"18px"}}>
-   Totel Amount - {INVTOTELAMOUNT}
+   Total Amount - {INVTOTELAMOUNT}
           </Box>
       <Box p={0.5} sx={{ height: 636, width: "100%", minHeight: "636px" }}>
         <DataGrid

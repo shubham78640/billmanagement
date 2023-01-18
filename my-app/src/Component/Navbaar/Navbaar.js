@@ -176,7 +176,7 @@ function Navbaar() {
                 localStorage.removeItem('App')
               }}
             >
-              <AppsIcon /> &nbsp; dashboard
+              <AppsIcon /> &nbsp; Dashboard
             </MenuItem>
             <MenuItem
               sx={{

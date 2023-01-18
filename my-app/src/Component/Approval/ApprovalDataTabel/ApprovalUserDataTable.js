@@ -126,7 +126,7 @@ function ApprovalUserDataTable() {
     },
     {
       field: "hodAapprovalDate",
-      headerName: "HOD Aapproval Date",
+      headerName: "HOD Approval Date",
       width: 160,
       editable: true,
     },
@@ -176,7 +176,7 @@ function ApprovalUserDataTable() {
     <Box  p={2} sx={{ marginLeft: {sm:"85%", xs:"auto"}}}>
     <Button  variant="contained" 
     size="small"
-          color="success"   onClick={handleapprovalfrom}>Add Aproval item</Button>
+          color="success"   onClick={handleapprovalfrom}>New Request</Button>
           </Box>
       <Box
         p={0.5}
@@ -195,6 +195,16 @@ function ApprovalUserDataTable() {
           rowsPerPageOptions={[500]}
           components={{ Toolbar: GridToolbar }}
           rowHeight={32}
+          initialState={{
+            sorting: {
+              sortModel: [
+                {
+                  field: 'submissionDate',
+                  sort: 'desc',
+                },
+              ],
+            },
+          }}
         />
       </Box>
     </>

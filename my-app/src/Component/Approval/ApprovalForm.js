@@ -36,6 +36,7 @@ function ApprovalForm() {
   const [approvalFinalDate, setApprovalFinalDate] = useState("Pending");
   const [approvalHODRemark, setApprovalHODRemark] = useState("Pending");
   const [approvalFinalRemark, setApprovalFinalRemark] = useState("Pending");
+  const[paymentTag,setPaymentTag]=useState("");
   useEffect(() => {
     Brand.map((item) => {
       if (item.brand === brand) setSubBrandDD(item.subBrand);
@@ -105,7 +106,13 @@ function ApprovalForm() {
       );
       alert("Approve Request Send Successfully");
       console.log(response);
-      navigate("/approvaluserdatatable")
+      if(USERTYPE==="ADMIN"){
+        navigate("/approvaladmindatatable")
+      }
+      if(USERTYPE==="USER"){
+        navigate("/approvaluserdatatable")
+      }
+    
     } catch (error) {
       alert(error);
     }
@@ -246,14 +253,44 @@ function ApprovalForm() {
             value={provisionAmount}
           />
 
-          <TextField
+          {/* <TextField
             sx={{ width: 300, backgroundColor: "white" }}
             id="outlined-basic"
             label="Remarks"
             variant="outlined"
             onChange={(e) => setApprovalRemarks(e.target.value)}
             value={approvalRemarks}
+          /> */}
+
+
+<Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={paymentMode1Data}
+            sx={{ width: 300, backgroundColor: "white" }}
+            onChange={(event, newValue) => {
+              setApprovalRemarks(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} required label="Payment Mode" />
+            )}
           />
+
+<Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={paymentTagDD}
+            sx={{ width: 300, backgroundColor: "white" }}
+            onChange={(event, newValue) => {
+              setPaymentTag(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} required label="Payment Tag" />
+            )}
+          />
+
+
+
         </ThemeProvider>
       </Box>
 
@@ -265,7 +302,7 @@ function ApprovalForm() {
           sx={{ width: { sm: 300, xs: 250 }, mb: "20px" }}
           onClick={handleSubmit}
         >
-          Submit Request
+          Submit
         </Button>
       </Box>
     </>
@@ -303,3 +340,21 @@ const departmentData = [
 ];
 
 const TypeofPurchase = ["Product", "Services"];
+
+
+const paymentMode1Data = [
+   "Cash" ,
+   "Bank Transfer" ,
+   "Debit Card" ,
+   "Credit Card" ,
+   "Mobile Payment" ,
+   "Cheque" ,
+];
+
+
+const paymentTagDD=[
+
+  "Urgent Payment",
+  "Regular Payment",
+  "Advance Payment",
+]

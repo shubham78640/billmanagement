@@ -135,7 +135,7 @@ function DashboardNavbaar() {
           <P>{EMPCODE}</P>
           <P>{userType}</P>
           </Box>
-        <MenuItem sx={{color:"grey", fontFamily:"sans-serif", fontWeight:"300" ,p:"10px"}} onClick={()=>{navigate("/dashboard"); handleClose()}}><AppsIcon /> &nbsp; dashboard</MenuItem>
+        <MenuItem sx={{color:"grey", fontFamily:"sans-serif", fontWeight:"300" ,p:"10px"}} onClick={()=>{navigate("/dashboard"); handleClose()}}><AppsIcon /> &nbsp; Dashboard</MenuItem>
         <MenuItem sx={{color:"grey", fontFamily:"sans-serif", fontWeight:"300", p:"10px"}} onClick={()=>{handleClose(); handleonclickLogOut()}}><LogoutIcon /> &nbsp; Logout</MenuItem>
         </Box>
       </Menu>
