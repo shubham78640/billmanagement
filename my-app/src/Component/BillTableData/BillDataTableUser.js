@@ -20,7 +20,7 @@ function BillDataTableUser() {
     //  navigate(`admin/${params.row.invoiceId}`)
 
     if (params.field === "showItem") {
-      navigate(`/billtable/admin/${params.row.invoiceId}`);
+      navigate(`/billtabledatauser/user/${params.row.invoiceId}`);
     }
 
     if (params.field === "showBill") {

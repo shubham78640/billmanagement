@@ -40,6 +40,7 @@ function App() {
         <Route path="/approvaladmindatatable/statusbyhod/:id" element={<ApprovalByHOD />} />
         <Route path="/approvaladmindatatable/statusbyadmin/:id" element={<ApprovalByFinal />}/>
         <Route path="/billtabledatauser" element={<BillDataTableUser />} />
+        <Route path="/billtabledatauser/user/:id" element={<ItemDataTable />} />
       </Routes>
     </BrowserRouter>
   );
