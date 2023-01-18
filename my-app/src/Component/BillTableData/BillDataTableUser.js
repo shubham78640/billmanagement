@@ -7,6 +7,7 @@ import {
   GridToolbar,
 } from "@mui/x-data-grid";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function BillDataTableUser() {
 
@@ -244,14 +245,25 @@ function BillDataTableUser() {
 
   return (
     <>
+
+<Box  p={1}  sx={{ marginLeft: {sm:"85%", xs:"auto"}}}>
+     <Button color="success" variant="contained" sx={{width:"170px"}}
+    size="small">
+          <Link 
+            style={{ fontWeight: "600", color:"white" }}
+            to="/mainform">
+            Add Bill
+          </Link>
+        </Button>
+          </Box>
     
     <Box
         p={0.5}
         sx={{
-          height: 680,
+          height: 636,
           width: "100%",
           backgroundColor: "#f2f2f2",
-          minHeight: "685px",
+          minHeight: "636px",
           maxHeight: "100%",
         }}
       >

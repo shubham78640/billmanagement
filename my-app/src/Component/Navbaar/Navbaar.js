@@ -16,6 +16,7 @@ const P = styled("p")({
   fontWeight: "300",
   color: "grey",
   fontFamily: "sans-serif",
+  fontSize:"14px"
 });
 
 function Navbaar() {
@@ -24,6 +25,7 @@ function Navbaar() {
   const EMPEMAIL = localStorage.getItem("email");
   const userType = localStorage.getItem("User");
   const AppName = localStorage.getItem("App");
+  const ReportingManager = localStorage.getItem("reportingManager");
 
   const handleonclickLogOut = async () => {
     console.log({});
@@ -130,7 +132,7 @@ function Navbaar() {
             "aria-labelledby": "basic-button",
           }}
         >
-          <Box sx={{ p: "20px 20px 0px 20px" }}>
+          <Box sx={{ p: "20px 20px 0px 20px", backgroundColor:"" }}>
             <Box
               sx={{
                 display: "flex",
@@ -141,7 +143,7 @@ function Navbaar() {
                 padding: "0px",
               }}
             >
-             <Avatar alt="Remy Sharp" sx={{ width: 60, height: 60,border:"2px solid #b04225"}} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
+             <Avatar alt="Remy Sharp" sx={{ width: 53, height: 53,border:"2px solid white"}} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
 
             </Box>
             <Box
@@ -151,13 +153,15 @@ function Navbaar() {
                 justifyContent: "center",
                 flexDirection: "column",
                 gap: "10px",
-                padding: "15px",
+                padding: "20px",
+               
               }}
             >
-              <P>{EMPCODE}</P>
+              
+              <P style={{fontWeight:700}}>{EMPCODE}</P>
               <P>{EMPNAME}</P>
               <P>{EMPEMAIL}</P>
-              <P>{userType}</P>
+              <P>Manager - {ReportingManager}</P>
             </Box>
             <MenuItem
               sx={{
