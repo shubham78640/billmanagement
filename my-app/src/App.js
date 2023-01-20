@@ -41,6 +41,7 @@ function App() {
     <BrowserRouter>
       {status && <Navbaar />}
       <Routes>
+      <Route path="/dashboard" element={<DashBoard />}/>
         {userType?<Route path="/" element={<DashBoard />}/>:<Route path="/dashboard" element={<DashBoard />}/>}
         {userType === "ADMIN" && (<Route path="/billtable" element={<BillTableData />} />)}
         {userType === "ADMIN" && (<Route path="/billtable/admin/:id" element={<ItemDataTable />} />)}
