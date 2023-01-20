@@ -423,6 +423,7 @@ disabled={paymentStatus==="To be paid"?true:false}
 
        <Autocomplete
           disablePortal
+          disabled={subrand==="Pinch D2C"||subrand==="Pinch B2B"?false:true}
           id="combo-box-demo"
           options={subBrandvalue2}
           sx={{ width: 300, backgroundColor: "white" }}
@@ -528,21 +529,23 @@ disabled={paymentStatus==="To be paid"?true:false}
 
           <Autocomplete
         disablePortal
+      
         id="combo-box-demo"
         options={ApplicableData}
         sx={{ width: 300, backgroundColor:"white" }}
         onChange={(event, newValue)=>{setGSTApplicable(newValue)}}
-        renderInput={(params) => <TextField {...params} label="GST Applicable" />}
+        renderInput={(params) => <TextField   required {...params} label="GST Applicable" />}
         />
 
 
           <Autocomplete
         disablePortal
+       
         id="combo-box-demo"
         options={ApplicableData}
         sx={{ width: 300, backgroundColor:"white" }}
         onChange={(event, newValue)=>{setTDSApplicable(newValue)}}
-        renderInput={(params) => <TextField {...params} label="TDS Applicable" />}
+        renderInput={(params) => <TextField {...params}  required label="TDS Applicable" />}
         />
 
 
@@ -559,6 +562,7 @@ disabled={paymentStatus==="To be paid"?true:false}
 
 <Autocomplete
             disablePortal
+           
             id="combo-box-demo"
             options={tDSDATA}
             disabled={tDSApplicable==="Yes"?false:true}
@@ -923,8 +927,11 @@ disabled={paymentStatus==="To be paid"?true:false}
             preTaxAmount &&
             paymentMode &&
             paymentMethod &&
-            
-            customerName
+            invoiceType&&
+            paymentStatus&&
+            gSTApplicable &&
+            tDSApplicable
+
            
               ? false
               : true

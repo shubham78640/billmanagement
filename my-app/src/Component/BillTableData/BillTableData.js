@@ -408,7 +408,16 @@ function BillTableData() {
     fetchData();
   }, []);
   console.log("tabledata", billtabledata);
-  const [pageSize, setPageSize] = React.useState(5);
+
+  // const [pinnedColumns, setPinnedColumns] = React.useState({
+  //   left: ['invoiceId'],
+  // });
+
+  // const handlePinnedColumnsChange = React.useCallback((updatedPinnedColumns) => {
+  //   setPinnedColumns(updatedPinnedColumns);
+  // }, []);
+
+
 
   return (
     <>
