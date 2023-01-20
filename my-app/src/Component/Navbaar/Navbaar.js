@@ -113,14 +113,12 @@ function Navbaar() {
 
 
         <Box
+          sx={{marginRight:{xs:"-35px"}}}
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
-          onMouseOver={handleClick}
-        >
-         
-          <Avatar alt="Remy Sharp"  sx={{ width: 45, height: 45, border:"2px solid white"  }} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
-
+          onMouseOver={handleClick}>
+            <Avatar alt={EMPNAME[0]}  sx={{ width: 45, height: 45, border:"2px solid white"  }} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
         </Box>
 
         <Menu

@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardNavbaar from "../../Component/Navbaar/DashboardNavbaar";
+import reimbursement from "../../images/icons8-refund-96.png"
 
 function randomColor() {
   let hex = Math.floor(Math.random() * 0xFFFFFF);
@@ -24,10 +25,11 @@ const BOX2 = styled(Box)({
   alignItems: "center",
   justifyContent: "center",
   padding:"10px",
-  "&:hover": {
-    backgroundColor:randomColor(),
-    cursor: "pointer",
-  },
+  // "&:hover": {
+  //   backgroundColor:"#FFF0F5",
+  //   cursor: "pointer",
+  //   boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+  // },
 });
 
 function DashBoard() {
@@ -46,7 +48,10 @@ function DashBoard() {
       >
         {/* Apps list */}
         <BOX2
-           sx={{ backgroundColor: "rgba(255, 186, 255, 0.54)"}}
+           sx={{ 
+           // backgroundColor: "rgba(255, 186, 255, 0.54)",
+           border:"1px solid #FFF0F5",
+          }}
           onClick={() => {
             userType==="ADMIN"?navigate("/billtable"):navigate("/billtabledatauser")
             localStorage.setItem("App","expense");
@@ -63,20 +68,44 @@ function DashBoard() {
         </BOX2>
 
         <BOX2
-        sx={{ backgroundColor: "rgba(93, 236, 255, 0.54)"}}
+           sx={{ 
+            // backgroundColor: "rgba(255, 186, 255, 0.54)",
+            border:"1px solid #FFF0F5",
+           }}
         onClick={() => {
           userType==="ADMIN"?navigate("/approvaladmindatatable"):navigate("/approvaluserdatatable")
           localStorage.setItem("App","approval");
         }}
         >
           <img
-            width={"110px"}
+            width={"100px"}
             style={{ margin:"auto"}}
-            src="https://static.vecteezy.com/system/resources/previews/008/501/624/original/approved-stamp-mark-illustration-free-png.png"
+            src="https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/done-icon.png"
             alt="Expense Managemnet"
           />
           <p style={{ fontWeight: "400", fontFamily: "sans-serif" }}>
             Approval Management
+          </p>
+        </BOX2>
+
+        <BOX2
+           sx={{ 
+            // backgroundColor: "rgba(255, 186, 255, 0.54)",
+            border:"1px solid #FFF0F5",
+           }}
+        onClick={() => {
+          userType==="ADMIN"?navigate("/reimbursementUsertable"):navigate("/reimbursementuserdatatable")
+          localStorage.setItem("App","reimbursement");
+        }}
+        >
+          <img
+            width={"110px"}
+            style={{ margin:"auto"}}
+            src={reimbursement}
+            alt="Expense Managemnet"
+          />
+          <p style={{ fontWeight: "400", fontFamily: "sans-serif" }}>
+            Reimbursement Management
           </p>
         </BOX2>
       </Box>
