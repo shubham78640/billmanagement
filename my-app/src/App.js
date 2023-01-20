@@ -17,6 +17,7 @@ import ApprovalByFinal from "./Component/Approval/ApprovalBy/ApprovalByFinal";
 import BillDataTableUser from "./Component/BillTableData/BillDataTableUser";
 import DashBoard from "./Pages/Dashboard/DashBoard";
 import ApprovalManagerDataTable from "./Component/Approval/ApprovalDataTabel/ApprovalManagerDataTable";
+import Reimbursement from "./Component/ReimbursementForm/Reimbursement";
 function App() {
   useEffect(() => {
   const fetchData = async () => {
@@ -38,7 +39,6 @@ function App() {
     <BrowserRouter>
       {status && <Navbaar />}
       <Routes>
-        <Route path="/reimbursementform" element={<DashBoard />}/>
         {userType?<Route path="/" element={<DashBoard />}/>:<Route path="/dashboard" element={<DashBoard />}/>}
         {userType === "ADMIN" && (<Route path="/billtable" element={<BillTableData />} />)}
         {userType === "ADMIN" && (<Route path="/billtable/admin/:id" element={<ItemDataTable />} />)}
@@ -56,7 +56,7 @@ function App() {
         <Route path="/billtabledatauser" element={<BillDataTableUser />} />
         <Route path="/billtabledatauser/user/:id" element={<ItemDataTable />} />
         <Route path="/approvalmanagerdatatable" element={<ApprovalManagerDataTable />} />
-
+        <Route path="/reimbursementform" element={<Reimbursement/>}/>
       </Routes>
     </BrowserRouter>
   );
