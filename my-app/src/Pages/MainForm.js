@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Autocomplete, TextField, Box } from "@mui/material";
+import {Button, Autocomplete, TextField, Box} from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
@@ -14,19 +14,21 @@ import {
   Department,
   CategoryRelation,
   SubCategory2Relation,
-  subBrand2,
+  subBrand2
 } from "../AllData";
 import { createTheme, ThemeProvider } from "@mui/material";
 
+
 const theme = createTheme({
-  components: {
-    MuiFormLabel: {
-      styleOverrides: {
-        asterisk: { color: "red" },
-      },
-    },
-  },
-});
+ components: {
+ MuiFormLabel: {
+ styleOverrides: {
+ asterisk: { color: "red" },
+ },
+ },
+ },
+})
+
 
 function MainForm() {
   const [billId, setBillID] = useState("");
@@ -66,14 +68,13 @@ function MainForm() {
   const [tDSApplicable, setTDSApplicable] = useState("");
   const [paymentCycle, setPaymentCycle] = useState("");
   const [utr, setUtr] = useState("");
-  const [subBrandCustomerName, setSubBrandCustomerName] = useState("");
+  const[subBrandCustomerName,setSubBrandCustomerName]=useState("");
   const [taskId, setTaskId] = useState("");
   const [updatepaidAmount, setUpdatepaidAmount] = useState("");
-  const [reimbursementpaymentDate, setreimbursementpaymentDate] =
-    useState(null);
+  const [reimbursementpaymentDate, setreimbursementpaymentDate] = useState(null);
   const [transactionsDetail, setTransactionsDetail] = useState("");
   const [paymentStatus, setPaymentStatus] = useState("");
-  const [customerNameDD, setCustomerNameDD] = useState([]);
+  const[customerNameDD,setCustomerNameDD]=useState([]);
   const [subbrandDD, setSubBrandDD] = useState([]);
   const [locationDD, setLocationDD] = useState([]);
   const [departmentDD, setDepartmentDD] = useState([]);
@@ -84,25 +85,25 @@ function MainForm() {
   const [gSTApplicableDD, setGSTApplicableDD] = useState([]);
   const [paymentModeDD, setPaymentModeDD] = useState([]);
   const [paymentMethodDD, setPaymentMethodDD] = useState([]);
-  const [subBrandvalue2, setSubBrandvalue2] = useState([]);
-  const [netAmount, setNetAmount] = useState("");
-  const [approvalID, setApprovalID] = useState("");
+  const [subBrandvalue2,setSubBrandvalue2]=useState([]);
+  const[netAmount,setNetAmount]=useState("");
+  const [approvalID,setApprovalID]=useState("");
   const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic] =
     useState(true);
-  const [customerCodeDD, setCustomerCodeDD] = useState([]);
-  const [invoiceType, setInvoiceType] = useState("");
+  const[customerCodeDD, setCustomerCodeDD] = useState([]);
+  const [invoiceType,setInvoiceType]=useState("");
   // let customerNameDD = [];
   let paymentModeArray = [];
 
   const newInvoiveNumber = invoiceNumber.toUpperCase();
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
 
-  const newPaymentDate = moment(paymentDate).format("DD/MM/YYYY");
+  const newPaymentDate= moment(paymentDate).format("DD/MM/YYYY");
   const invbillid = localStorage.getItem("BillID");
   const totelAmountofbill = +preTaxAmount + +gstAmount;
   const tDSAmountTotel = (+preTaxAmount * +tDSpercentage) / 100;
 
-  const NetAmount = +totelAmountofbill - +tDSAmountTotel;
+  const NetAmount =((+totelAmountofbill)-(+tDSAmountTotel))
   let navigate = useNavigate();
   const handleSubmit = async () => {
     console.log("data ", empcode, {
@@ -131,7 +132,7 @@ function MainForm() {
       gstAmount,
       totelAmountofbill,
       paymentCycle,
-      approvalID,
+      approvalID
     });
 
     try {
@@ -169,16 +170,16 @@ function MainForm() {
           reimbursementDate: "",
           paidAmount: updatepaidAmount,
           transactionDetail: transactionsDetail,
-          customerName: subBrandCustomerName,
-          utrMendatory: utr,
-          gstApplicable: gSTApplicable,
-          tdsApplicable: tDSApplicable,
-          tdsPercentage: tDSpercentage,
-          tdsAmount: tDSAmountTotel,
-          paymentStatus: paymentStatus,
-          invoiceType: invoiceType,
-          netAmount: netAmount,
-          approvalId: approvalID,
+          customerName:subBrandCustomerName ,
+          utrMendatory:   utr,
+         gstApplicable:gSTApplicable,
+         tdsApplicable:tDSApplicable,
+         tdsPercentage:tDSpercentage,
+         tdsAmount:tDSAmountTotel,
+         paymentStatus:paymentStatus,
+         invoiceType:invoiceType,   
+         netAmount: netAmount,
+         approvalId :approvalID,
         }
       );
       alert("Bill Invoice save successfully");
@@ -186,10 +187,7 @@ function MainForm() {
       localStorage.setItem("InvoiceNumber", invoiceNumber);
       localStorage.setItem("InvoiceDate", newDateinv);
       localStorage.setItem("BillID", response.data.data.invoiceId);
-      localStorage.setItem(
-        "InvoiceTotelAmount",
-        response.data.data.totalAmount
-      );
+      localStorage.setItem("InvoiceTotelAmount", response.data.data.totalAmount);
 
       console.log(response);
     } catch (error) {
@@ -203,7 +201,7 @@ function MainForm() {
     });
 
     paymentModeRelation.map((item) => {
-      paymentModeArray.push(item.paymentMode);
+      paymentModeArray.push(item.paymentMode)
       if (item.paymentMode === paymentMode)
         setPaymentMethodDD(item.paymentMethod);
     });
@@ -224,7 +222,7 @@ function MainForm() {
 
     subBrand2.map((item) => {
       if (item.subBrandRelation === subrand)
-        setSubBrandvalue2(item.subBrand2Relation);
+      setSubBrandvalue2(item.subBrand2Relation);
     });
 
     // customerRelation.map((item)=>{
@@ -234,16 +232,16 @@ function MainForm() {
     //   }
     // })
 
-    const CustomerListData = async () => {
-      let response = await fetch(
-        `http://13.126.160.155:8088/bill/dropdown/get/partners/`
-      );
-      let data = await response.json();
-      setCustomerNameDD(data.data);
-    };
+    const CustomerListData = async()=>{
+      let response = await fetch(`http://13.126.160.155:8088/bill/dropdown/get/partners/`)
+      let data = await response.json()
+      setCustomerNameDD(data.data)
+      }
+    
+      CustomerListData()
 
-    CustomerListData();
-  }, [brand, paymentMode, department, category, subCategory1, subrand]);
+  }, [brand, paymentMode, department, category, subCategory1, subrand ]);
+
 
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
@@ -254,27 +252,25 @@ function MainForm() {
 
   return (
     <Box
-      sx={{
-        backgroundColor: "#f2f2f2",
-        minHeight: "682px",
-        maxHeight: "100%",
-        alignItems: "center",
-      }}
+      sx={{ backgroundColor: "#f2f2f2", minHeight: "682px", maxHeight: "100%", alignItems:"center" }}
     >
-      {/* <Box p={2} sx={{marginLeft:{sm:"5%",xs:"9%"},   fontWeight:600, fontSize:"18px", color:"green"}}>  Expense Submission Form </Box> */}
+{/* <Box p={2} sx={{marginLeft:{sm:"5%",xs:"9%"},   fontWeight:600, fontSize:"18px", color:"green"}}>  Expense Submission Form </Box> */}
 
       <Box
+     
         sx={{
           display: "flex",
           gap: "25px",
           flexWrap: "wrap",
-          padding: { sm: "3%", xs: "2%" },
-          marginLeft: { sm: "3%", xs: "0%" },
-          justifyContent: { sm: "flex-start", xs: "center" },
+          padding:{sm:"3%", xs:"2%"},
+          marginLeft:{sm:"3%", xs:"0%"},
+          justifyContent:{sm:"flex-start", xs:"center"}
+          
         }}
       >
-        <ThemeProvider theme={theme}>
-          {/* <TextField
+        
+        <ThemeProvider theme = {theme}>
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Employee Name"
@@ -310,224 +306,218 @@ function MainForm() {
           value={reportingManager}
         /> */}
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={invoiceTypeDD}
-            onChange={(event, newValue) => {
-              setInvoiceType(newValue);
-            }}
-            sx={{ width: 300, backgroundColor: "white" }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Invoice Type" />
-            )}
-          />
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            id="outlined-basic"
-            required
-            label="Invoice Number"
-            variant="outlined"
-            onChange={(e) => setInvoiceNumber(e.target.value)}
-            value={invoiceNumber}
-          />
+<Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={invoiceTypeDD}
+          onChange={(event, newValue) => {
+            setInvoiceType(newValue);
+          }}
+          sx={{ width: 300, backgroundColor: "white" }}
+          renderInput={(params) => <TextField {...params}   required label="Invoice Type" />}
+        />
 
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DesktopDatePicker
-              label="Invoice Date"
-              value={invoiceDate}
-              onChange={(newValue) => {
-                setInvoiceDate(newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  required
-                  {...params}
-                  size="medium"
-                  sx={{
-                    width: 300,
-                    backgroundColor: "white",
-                    color: "black",
-                  }}
-                />
-              )}
-            />
-          </LocalizationProvider>
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={paymentStatusOfInvoice}
-            onChange={(event, newValue) => {
-              setPaymentStatus(newValue);
-            }}
-            sx={{ width: 300, backgroundColor: "white" }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Payment Status" />
-            )}
-          />
+        <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          required
+          label="Invoice Number"
+          variant="outlined"
+          onChange={(e) => setInvoiceNumber(e.target.value)}
+          value={invoiceNumber}
 
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DesktopDatePicker
-              label="Payment Date"
-              value={paymentDate}
-              disabled={paymentStatus === "To be paid" ? true : false}
-              onChange={(newValue) => {
-                setPaymentDate(newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  size="medium"
-                  sx={{
-                    width: 300,
-                    backgroundColor: "white",
-                    color: "black",
-                  }}
-                />
-              )}
-            />
-          </LocalizationProvider>
+        />
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            disabled={paymentStatus === "To be paid" ? true : false}
-            id="outlined-basic"
-            label="UTR (Mandatory)"
-            variant="outlined"
-            onChange={(e) => setUtr(e.target.value)}
-            value={utr}
-          />
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={brand1}
-            onChange={(event, newValue) => {
-              setBrand(newValue);
-            }}
-            sx={{ width: 300, backgroundColor: "white" }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Brand" />
-            )}
-          />
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={subbrandDD}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setSubrand(newValue);
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="Invoice Date"
+            value={invoiceDate}
+            onChange={(newValue) => {
+              setInvoiceDate(newValue);
             }}
             renderInput={(params) => (
-              <TextField {...params} required label="Sub Brand" />
+              <TextField
+                required
+                {...params}
+                size="medium"
+                sx={{
+                  width: 300,
+                  backgroundColor: "white",
+                  color: "black",
+                }}
+              />
             )}
           />
+        </LocalizationProvider>
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={subBrandvalue2}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setSubBrandCustomerName(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Customer Name" />
-            )}
-          />
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={locationData}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setLocation(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Location" />
-            )}
-          />
+   <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={paymentStatusOfInvoice}
+          onChange={(event, newValue) => {
+            setPaymentStatus(newValue);
+          }}
+          sx={{ width: 300, backgroundColor: "white" }}
+          renderInput={(params) => <TextField {...params}   required label="Payment Status" />}
+        />
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={expenseTypedata}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setExpenseType(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Expense Type" />
-            )}
-          />
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={expenseCatdata}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setExpenseCategory(newValue);
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="Payment Date"
+            value={paymentDate}
+disabled={paymentStatus==="To be paid"?true:false}
+            onChange={(newValue) => {
+              setPaymentDate(newValue);
             }}
             renderInput={(params) => (
-              <TextField {...params} required label="Expense Category" />
+              <TextField
+                
+                {...params}
+                size="medium"
+                sx={{
+                  width: 300,
+                  backgroundColor: "white",
+                  color: "black",
+                }}
+              />
             )}
           />
+        </LocalizationProvider>
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={departmentData}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setDepartment(newValue.label);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Department" />
-            )}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={categoryDD}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setCategory(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Category" />
-            )}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={subCategory1DD}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setSubCategory1(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Sub Category1" />
-            )}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={subCategory2DD}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setSubCategory2(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Sub Category2" />
-            )}
-          />
+        <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          disabled={paymentStatus==="To be paid"?true:false}
+          id="outlined-basic"
+          label="UTR (Mandatory)"
+          variant="outlined"
+          onChange={(e) => setUtr(e.target.value)}
+          value={utr}
+        />
+     
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={brand1}
+          onChange={(event, newValue) => {
+            setBrand(newValue);
+          }}
+          sx={{ width: 300, backgroundColor: "white" }}
+          renderInput={(params) => <TextField {...params}   required label="Brand" />}
+        />
 
-          {/* <Autocomplete
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={subbrandDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setSubrand(newValue);
+          }}
+          renderInput={(params) => <TextField {...params}   required label="Sub Brand" />}
+        />
+       
+
+       <Autocomplete
+          disablePortal
+          disabled={subrand==="Pinch D2C"||subrand==="Pinch B2B"?false:true}
+          id="combo-box-demo"
+          options={subBrandvalue2}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setSubBrandCustomerName(newValue);
+          }}
+          renderInput={(params) => <TextField {...params}    label="Customer Name" />}
+        />
+
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={locationData}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setLocation(newValue);
+          }}
+          renderInput={(params) => <TextField {...params}   required label="Location" />}
+        />
+
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={expenseTypedata}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setExpenseType(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params}   required label="Expense Type" />
+          )}
+        />
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={expenseCatdata}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setExpenseCategory(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params}   required label="Expense Category" />
+          )}
+        />
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={departmentData}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setDepartment(newValue.label);
+          }}
+          renderInput={(params) => <TextField {...params}   required label="Department" />}
+        />
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={categoryDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setCategory(newValue);
+          }}
+          renderInput={(params) => <TextField {...params}   required label="Category" />}
+        />
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={subCategory1DD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setSubCategory1(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Sub Category1" />
+          )}
+        />
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={subCategory2DD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setSubCategory2(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Sub Category2" />
+          )}
+        />
+       
+        {/* <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={expenseTypedata}
@@ -536,47 +526,46 @@ function MainForm() {
       renderInput={(params) => <TextField {...params} label="GST Slab" />}
         /> */}
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={ApplicableData}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setGSTApplicable(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="GST Applicable" />
-            )}
-          />
 
           <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={ApplicableData}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setTDSApplicable(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="TDS Applicable" />
-            )}
-          />
+        disablePortal
+      
+        id="combo-box-demo"
+        options={ApplicableData}
+        sx={{ width: 300, backgroundColor:"white" }}
+        onChange={(event, newValue)=>{setGSTApplicable(newValue)}}
+        renderInput={(params) => <TextField   required {...params} label="GST Applicable" />}
+        />
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            id="outlined-basic"
-            label="Pre Tax Amount"
-            variant="outlined"
-            required
-            onChange={(e) => setPreTaxAmount(e.target.value)}
-            value={preTaxAmount}
-          />
 
           <Autocomplete
+        disablePortal
+       
+        id="combo-box-demo"
+        options={ApplicableData}
+        sx={{ width: 300, backgroundColor:"white" }}
+        onChange={(event, newValue)=>{setTDSApplicable(newValue)}}
+        renderInput={(params) => <TextField {...params}  required label="TDS Applicable" />}
+        />
+
+
+        <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          label="Pre Tax Amount"
+          variant="outlined"
+          required
+          onChange={(e) => setPreTaxAmount(e.target.value)}
+          value={preTaxAmount}
+        />
+
+
+<Autocomplete
             disablePortal
+           
             id="combo-box-demo"
             options={tDSDATA}
-            disabled={tDSApplicable === "Yes" ? false : true}
+            disabled={tDSApplicable==="Yes"?false:true}
             sx={{ width: "300px", backgroundColor: "white" }}
             onChange={(event, newValue) => {
               setTDSPercentage(newValue);
@@ -591,7 +580,11 @@ function MainForm() {
             value={tDSAmountTotel}
           />
 
-          {/*         
+
+
+
+
+{/*         
 <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -628,36 +621,38 @@ function MainForm() {
             renderInput={(params) => <TextField  {...params} label="IGST %" />}
           /> */}
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            disabled={gSTApplicable === "Yes" ? false : true}
-            id="outlined-basic"
-            label="GST Amount"
-            variant="outlined"
-            onChange={(e) => setGSTAmount(e.target.value)}
-            value={gstAmount}
-          />
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            disabled
-            id="outlined-basic"
-            label="Total Amount"
-            variant="outlined"
-            required
-            InputLabelProps={{ shrink: true }}
-            value={totelAmountofbill}
-          />
+        <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          disabled={gSTApplicable==="Yes"?false:true}
+          id="outlined-basic"
+          label="GST Amount"
+          variant="outlined"
+          onChange={(e) => setGSTAmount(e.target.value)}
+          value={gstAmount}
+        />
+        <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          disabled
+          id="outlined-basic"
+          label="Total Amount"
+          variant="outlined"
+          required
+          InputLabelProps={{ shrink: true }}
+          value={totelAmountofbill}
+        />
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            id="outlined-basic"
-            label="Net Amount"
-            disabled
-            variant="outlined"
-            // onChange={(e) => setNetAmount(e.target.value)}
-            value={NetAmount}
-          />
-          {/* <Autocomplete
+
+
+<TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          label="Net Amount"
+          disabled
+          variant="outlined"
+          // onChange={(e) => setNetAmount(e.target.value)}
+          value={NetAmount}
+        />
+    {/* <Autocomplete
         disablePortal
         id="combo-box-demo"
         options={gstApplicableData}
@@ -665,15 +660,15 @@ function MainForm() {
         onChange={(event, newValue)=>{setGSTApplicable(newValue.label)}}
         renderInput={(params) => <TextField {...params} label="GST Applicable" />}
         /> */}
-          {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
+                {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
         value={tDSType}/> */}
-          {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
+                {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
         value={tDSAmount}/>
 
         <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Post TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
         value={tDSAmount}/> */}
 
-          {/* <Autocomplete
+        {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
         
@@ -689,32 +684,37 @@ function MainForm() {
           )}
         /> */}
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={paymentMode1Data}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setPaymentMode(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Payment Mode" />
-            )}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={paymentMethodDD}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setPaymentMethod(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Payment Method" />
-            )}
-          />
 
-          {/* <TextField
+
+
+
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={paymentMode1Data}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setPaymentMode(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params}   required label="Payment Mode" />
+          )}
+        />
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={paymentMethodDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setPaymentMethod(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params}   required label="Payment Method" />
+          )}
+        />
+
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Pay Direct Card Details"
@@ -723,34 +723,37 @@ function MainForm() {
           value={payDirectCardDetails}
         /> */}
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={PayDirectCardDetailsNumberDD}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setPayDirectCardDetails(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Pay Direct Card Details" />
-            )}
-          />
+<Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          
+          options={PayDirectCardDetailsNumberDD}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setPayDirectCardDetails(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Pay Direct Card Details" />
+          )}
+        />
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={customerNameDD}
-            getOptionLabel={(option) => option.partnerNameCode}
-            sx={{ width: 300, backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setCustomerName(newValue.partnerNameCode);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Partner/Vendor Name" />
-            )}
-          />
 
-          {/* <TextField
+<Autocomplete
+          disablePortal
+          id="combo-box-demo"
+         
+          options={customerNameDD}
+          getOptionLabel={(option) => option.partnerNameCode}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setCustomerName(newValue.partnerNameCode);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} required label="Partner/Vendor Name" />
+          )}
+        />
+
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           required
@@ -760,15 +763,15 @@ function MainForm() {
           value={customerName}
         /> */}
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            id="outlined-basic"
-            disabled={customerName == "others" ? false : true}
-            label="Add New Partner/Vendor"
-            variant="outlined"
-            onChange={(e) => setAddNewCustomer(e.target.value)}
-            value={addNewCustomer}
-          />
+        <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          disabled={customerName=="others"?false:true}
+          label="Add New Partner/Vendor"
+          variant="outlined"
+          onChange={(e) => setAddNewCustomer(e.target.value)}
+          value={addNewCustomer}
+        />
 
           {/* <Autocomplete
           disablePortal
@@ -783,7 +786,7 @@ function MainForm() {
           )}
         /> */}
 
-          {/* <Autocomplete
+       {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={customerCodeDD}
@@ -796,7 +799,7 @@ function MainForm() {
           )}
         /> */}
 
-          {/* <TextField
+       {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Partner/Customer Code"
@@ -806,15 +809,15 @@ function MainForm() {
           value={customerCode}
         />  */}
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            id="outlined-basic"
-            label="Invoice Description"
-            variant="outlined"
-            onChange={(e) => setInvoiceDescription(e.target.value)}
-            value={invoiceDescription}
-          />
-          {/* <TextField
+        <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          label="Invoice Description"
+          variant="outlined"
+          onChange={(e) => setInvoiceDescription(e.target.value)}
+          value={invoiceDescription}
+        />
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Service Category"
@@ -824,7 +827,7 @@ function MainForm() {
           value={serviceCategory}
         /> */}
 
-          {/* <Autocomplete
+         {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={ServiceCategoryDD}
@@ -837,7 +840,11 @@ function MainForm() {
           )}
         /> */}
 
-          {/* <TextField
+      
+
+     
+
+        {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           label="Paid Amount"
@@ -872,24 +879,26 @@ function MainForm() {
           value={paymentStatus}
         /> */}
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            id="outlined-basic"
-            label="Approval ID"
-            variant="outlined"
-            onChange={(e) => setApprovalID(e.target.value)}
-            value={approvalID}
-          />
+<TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          label="Approval ID"
+          variant="outlined"
+          onChange={(e) => setApprovalID(e.target.value)}
+          value={approvalID}
+        />
 
-          <TextField
-            sx={{ width: 300, backgroundColor: "white" }}
-            id="outlined-basic"
-            disabled
-            label="Task Id"
-            variant="outlined"
-            onChange={(e) => setTaskId(e.target.value)}
-            value={taskId}
-          />
+
+<TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          disabled
+          label="Task Id"
+          variant="outlined"
+          onChange={(e) => setTaskId(e.target.value)}
+          value={taskId}
+        />
+
         </ThemeProvider>
 
         {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Invoice Attachment" variant="outlined"
@@ -899,6 +908,8 @@ function MainForm() {
         {/* <input type="file"  name="file" onChange={changeHandler}/> */}
         {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
          value={paymentStatus} /> */}
+
+
       </Box>
 
       <Box textAlign={"center"} mt={2}>
@@ -916,7 +927,12 @@ function MainForm() {
             preTaxAmount &&
             paymentMode &&
             paymentMethod &&
-            customerName
+            invoiceType&&
+            paymentStatus&&
+            gSTApplicable &&
+            tDSApplicable
+
+           
               ? false
               : true
           }
@@ -936,18 +952,23 @@ function MainForm() {
 export default MainForm;
 
 const subbrand1 = [
-  "Pinch",
-  "Pinch D2C",
-  "Pinch B2B",
-  "Well Served",
-  "BO",
-  "RCC",
-  "CARE CREW",
-  "Gullak",
-  "1 To Zee",
+   "Pinch",
+   "Pinch D2C",
+   "Pinch B2B",
+   "Well Served",
+   "BO",
+   "RCC",
+   "CARE CREW",
+   "Gullak",
+   "1 To Zee",
 ];
 
-const brand1 = ["Pinch", "Well Served", "1 To Zee", "CARE CREW"];
+const brand1 = [
+   "Pinch",
+   "Well Served",
+   "1 To Zee",
+   "CARE CREW",
+];
 
 const locationData = [
   "Office - Gurgaon",
@@ -965,12 +986,12 @@ const locationData = [
 ];
 
 const paymentMode1Data = [
-  "Cash",
-  "Bank Transfer",
-  "Debit Card",
-  "Credit Card",
-  "Mobile Payment",
-  "Cheque",
+   "Cash" ,
+   "Bank Transfer" ,
+   "Debit Card" ,
+   "Credit Card" ,
+   "Mobile Payment" ,
+   "Cheque" ,
 ];
 
 // const paymentcycleData = [
@@ -1101,45 +1122,76 @@ const expenseTypedata = [
   "Company",
 ];
 
-const expenseCatdata = ["One-Time", "Recurring"];
+const expenseCatdata = ["One-Time" , "Recurring"];
+
 
 const ServiceCategoryDD = [
   "N/A",
-  "Contract staffing services",
-  "Day care services",
-  "Business consultancy services",
-  "Other sanitation services",
-  "Services provided by restaurant",
+   "Contract staffing services",
+   "Day care services",
+   "Business consultancy services",
+   "Other sanitation services",
+   "Services provided by restaurant",
+  
 ];
 
-const sGSTDATA = ["2.5", "6", "9", "14", "0"];
 
-const cGSTDATA = ["2.5", "6", "9", "14", "0"];
+const sGSTDATA = [
+  "2.5",
+  "6",
+  "9",
+  "14",
+  "0",
+];
 
-const iGSTDATA = ["5", "12", "18", "28", "0"];
+const cGSTDATA = [
+  "2.5",
+  "6",
+  "9",
+  "14",
+  "0",
+];
 
-const PayDirectCardDetailsNumberDD = [
+const iGSTDATA = [
+  "5",
+  "12",
+  "18",
+  "28",
+  "0",
+];
+
+
+const PayDirectCardDetailsNumberDD=[
   "N/A",
-  " 4629525415529329",
-  "4629525415529410",
-  "4629525415529402",
-  "4629525415529337",
-  "4629525415529345",
-  "4629525415529311",
-  "4629525415529352",
-  "4629525415529360",
-];
+   " 4629525415529329" ,
+    "4629525415529410",
+    "4629525415529402",
+    "4629525415529337",
+    "4629525415529345",
+    "4629525415529311",
+    "4629525415529352",
+    "4629525415529360",
+ 
+]
 
-const paymentStatusOfInvoice = ["Already Paid", "To be paid"];
+const paymentStatusOfInvoice =[
 
-const invoiceTypeDD = [
+  "Already Paid",
+  "To be paid",
+]
+
+const invoiceTypeDD =[
   "Regular Invoice",
   "Advance ",
   "TDS (only for finance use)",
   "GST (only for finance use)",
   "PF/ESIC (only for finance use)",
-];
+  
+
+]
 
 const tDSDATA = ["0", "1", "2", "5", "10", "15", "20", "25", "30"];
 
-const ApplicableData = ["Yes", "No"];
+const ApplicableData=[
+  "Yes","No"
+]

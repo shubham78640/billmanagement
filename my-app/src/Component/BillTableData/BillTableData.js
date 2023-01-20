@@ -101,31 +101,6 @@ function BillTableData() {
       editable: true,
       description:"Payment Status",
     },
- 
-
-    {
-      field: "utrMendatory",
-      headerName: "UTR Mendatory",
-      width: 120,
-      editable: true,
-      description:"UTR Mendatory",
-    },
-
-    {
-      field: "tdsPercentage",
-      headerName: "TDS Percentage",
-      width: 120,
-      editable: true,
-      description:"TDS Percentage",
-    },
-
-    {
-      field: "tdsAmount",
-      headerName: "TDS Amount",
-      width: 120,
-      editable: true,
-      description:"TDS Amount",
-    },
     {
       field: "paymentDate",
       headerName: "Payment Date",
@@ -161,6 +136,30 @@ function BillTableData() {
       width: 80,
       editable: true,
       description:"Sub Catagory 2",
+    },
+
+    {
+      field: "utrMendatory",
+      headerName: "UTR Mendatory",
+      width: 120,
+      editable: true,
+      description:"UTR Mendatory",
+    },
+
+    {
+      field: "tdsPercentage",
+      headerName: "TDS Percentage",
+      width: 120,
+      editable: true,
+      description:"TDS Percentage",
+    },
+
+    {
+      field: "tdsAmount",
+      headerName: "TDS Amount",
+      width: 120,
+      editable: true,
+      description:"TDS Amount",
     },
     {
       field: "location",
@@ -218,15 +217,7 @@ function BillTableData() {
       width: 120,
       editable: true,
       description:"Payment Method",
-    },
-    {
-      field: "paymentDate",
-      headerName: "Payment Date",
-      width: 100,
-      editable: true,
-      description:"Payment Date",
-    },
-   
+    }, 
     {
       field: "payDirectCard",
       headerName: "Pay Direct Card Details",
@@ -408,7 +399,16 @@ function BillTableData() {
     fetchData();
   }, []);
   console.log("tabledata", billtabledata);
-  const [pageSize, setPageSize] = React.useState(5);
+
+  // const [pinnedColumns, setPinnedColumns] = React.useState({
+  //   left: ['invoiceId'],
+  // });
+
+  // const handlePinnedColumnsChange = React.useCallback((updatedPinnedColumns) => {
+  //   setPinnedColumns(updatedPinnedColumns);
+  // }, []);
+
+
 
   return (
     <>
