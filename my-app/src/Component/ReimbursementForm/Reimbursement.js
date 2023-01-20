@@ -1,6 +1,7 @@
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Brand,
   paymentModeRelation,
@@ -11,6 +12,7 @@ import {
 } from "../../AllData";
 
 function Reimbursement() {
+
   const [reimbursementType, setReimbursementType] = useState("");
   const [brand, setBrand] = React.useState("");
   const [subrand, setSubrand] = useState("");
@@ -26,6 +28,8 @@ function Reimbursement() {
   const [petrol, setPetrol] = useState()
   const [driverSal, setDriverSal] = useState("")
   const [grandTotal, setGrandTotal] = useState(null)
+
+  const nevigate = useNavigate()
 
 
   const Regulartotal= (+convenceAmount) + (+food) + (+accomandation) + (+internet) + (+businessExp)
@@ -78,6 +82,7 @@ function Reimbursement() {
         );
 
         alert("Bill Invoice save successfully");
+        nevigate("/reimbursementform/fileupload")
         console.log(response);
         } catch (error) {
             alert(error);
