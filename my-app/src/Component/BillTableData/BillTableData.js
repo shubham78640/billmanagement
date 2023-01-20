@@ -33,36 +33,49 @@ function BillTableData() {
       navigate(`/billtable/updatestatusremark/${params.row.invoiceId}`);
     }
   };
+
+
   const columns = [
     {
       field: "invoiceId",
-      headerName: " Invoice Id",
-      width: 70,
+      headerName: "Invoice Id",
+      width: 100,
       editable: true,
+      description:"Invoice Id",
+    },
+    {
+      field: "invoiceType",
+      headerName: "Invoice Type",
+      width: 100,
+      editable: true,
+      description:"Invoice Type",
     },
     {
       field: "employeeName",
       headerName: "Employee Name",
       width: 110,
       editable: true,
+      description:"Employee Name",
     },
     {
       field: "employeeCode",
       headerName: "Employee Code",
-      width: 80,
+      width: 100,
       editable: true,
+      description:"Employee Code",
     },
     {
       field: "email",
       headerName: "Email",
       width: 110,
       editable: true,
+      description:"Email",
     },
 
     {
       field: "reportingManager",
       headerName: "Reporting Manager",
-      description: "This column has a value getter and is not sortable.",
+      description: "Reporting Manager",
       sortable: false,
       width: 110,
     },
@@ -71,24 +84,68 @@ function BillTableData() {
       headerName: "Invoice Number",
       width: 130,
       editable: true,
+      description:"Invoice Number",
     },
     {
       field: "invoiceDate",
       headerName: "Invoice Date",
       width: 130,
       editable: true,
+      description:"Invoice Date",
+    },
+
+    {
+      field: "paymentStatus",
+      headerName: "Payment Status",
+      width: 120,
+      editable: true,
+      description:"Payment Status",
+    },
+ 
+
+    {
+      field: "utrMendatory",
+      headerName: "UTR Mendatory",
+      width: 120,
+      editable: true,
+      description:"UTR Mendatory",
+    },
+
+    {
+      field: "tdsPercentage",
+      headerName: "TDS Percentage",
+      width: 120,
+      editable: true,
+      description:"TDS Percentage",
+    },
+
+    {
+      field: "tdsAmount",
+      headerName: "TDS Amount",
+      width: 120,
+      editable: true,
+      description:"TDS Amount",
+    },
+    {
+      field: "paymentDate",
+      headerName: "Payment Date",
+      width: 120,
+      editable: true,
+      description:"Payment Date",
     },
     {
       field: "brand",
       headerName: "Brand",
       width: 100,
       editable: true,
+      description:"Brand",
     },
     {
       field: "subBrand",
       headerName: "Sub Brand",
       width: 110,
       editable: true,
+      description:"Sub Brand",
     },
 
     {
@@ -96,78 +153,120 @@ function BillTableData() {
       headerName: "Sub Catagory 1",
       width: 140,
       editable: true,
+      description:"Sub Catagory 1",
     },
     {
       field: "subCatagory2",
       headerName: "Sub Catagory 2",
-      width: 140,
+      width: 80,
       editable: true,
+      description:"Sub Catagory 2",
     },
     {
       field: "location",
       headerName: "Location",
       width: 140,
       editable: true,
+      description:"Location",
     },
     {
       field: "expensesType",
       headerName: "Expense Type",
       width: 140,
       editable: true,
+      description:"Expense Type",
     },
     {
       field: "preTaxAmount",
       headerName: "Pre Tax Amount",
       width: 100,
       editable: true,
+      description:"Pre Tax Amount",
     },
     {
       field: "gstAmount",
       headerName: "GST Amount",
       width: 100,
       editable: true,
+      description:"GST Amount",
     },
     {
       field: "totalAmount",
       headerName: "Total Amount",
       width: 100,
       editable: true,
+      description:"Total Amount",
+    },
+
+    {
+      field: "netAmount",
+      headerName: "Net Amount",
+      width: 100,
+      editable: true,
+      description:"Net Amount",
     },
     {
       field: "paymentMode",
       headerName: "Payment Mode",
       width: 120,
       editable: true,
+      description:"Payment Mode",
+    },
+    {
+      field: "paymentMethod",
+      headerName: "Payment Method",
+      width: 120,
+      editable: true,
+      description:"Payment Method",
     },
     {
       field: "paymentDate",
-      headerName: "paymentDate",
+      headerName: "Payment Date",
       width: 100,
       editable: true,
+      description:"Payment Date",
     },
-    {
-      field: "paymentCycle",
-      headerName: "Payment Cycle",
-      width: 70,
-      editable: true,
-    },
+   
     {
       field: "payDirectCard",
       headerName: "Pay Direct Card Details",
+      width: 150,
+      editable: true,
+      description:"Pay Direct Card Details",
+    },
+    // {
+    //   field: "utr",
+    //   headerName: "UTR",
+    //   width: 120,
+    //   editable: true,
+    // },
+      {
+      field: "tdsApplicable",
+      headerName: "TDS Applicable",
       width: 120,
       editable: true,
+      description:"TDS Applicable",
+    },
+      {
+      field: "gstApplicable",
+      headerName: "GST Applicable",
+      width: 120,
+      editable: true,
+      description:"GST Applicable",
     },
     {
       field: "partnerNameCode",
-      headerName: "Partner/Customer Name",
+      headerName: "Partner/Vendor Name",
       width: 120,
       editable: true,
+      description:"Partner/Vendor Name",
     },
     {
       field: "otherPartner",
-      headerName: "New Partner/Customer",
+      headerName: "New Partner/Vendor",
       width: 110,
       editable: true,
+      description:"New Partner/Vendor",
     },
 
     {
@@ -175,58 +274,67 @@ function BillTableData() {
       headerName: "Invoice Description",
       width: 130,
       editable: true,
+      description:"Invoice Description",
     },
     {
-      field: "utr",
-      headerName: "UTR",
+      field: "approvalId",
+      headerName: "ApprovalId ID",
       width: 80,
       editable: true,
+      description:"ApprovalId ID",
     },
     {
       field: "taskId",
       headerName: "Task ID",
       width: 80,
       editable: true,
+      description:"Task ID",
     },
     {
       field: "serviceCategory",
       headerName: "Service Category",
-      width: 120,
+      width: 80,
       editable: true,
+      description:"Service Category",
     },
-
+    {
+      field: "invoiceStatus",
+      headerName: "Invoice Status",
+      width: 180,
+      editable: true,
+      description:"Invoice Status",
+    },
     {
       field: "transactionDetail",
       headerName: "Transaction Detail",
       width: 120,
       editable: true,
+      description:"Transaction Detail",
     },
     {
       field: "paidAmount",
       headerName: "Update Paid Amount",
       width: 80,
       editable: true,
+      description:"Update Paid Amount",
     },
-
     {
-      field: "paymentStatus",
-      headerName: "Payment Status",
-      width: 70,
+      field: " updatePaymentStatus",
+      headerName: "Update Payment Status",
+      width: 100,
       editable: true,
+      description:"Update Payment Status",
     },
+   
     {
       field: "reimbursementDate",
       headerName: "Reimbursement Date",
       width: 100,
       editable: true,
+      description:"Reimbursement Date",
     },
 
-    {
-      field: "invoiceStatus",
-      headerName: "Invoice Status",
-      width: 180,
-      editable: true,
-    },
+ 
     {
       field: "showBill",
       headerName: "Show Bill",
@@ -351,6 +459,16 @@ function BillTableData() {
           components={{ Toolbar: GridToolbar }}
           //==============On Export Csv Click event ============
           rowHeight={26}
+          initialState={{
+            sorting: {
+              sortModel: [
+                {
+                  field: 'submissionDate',
+                  sort: 'desc',
+                },
+              ],
+            },
+          }}
         />
       </Box>
     </>

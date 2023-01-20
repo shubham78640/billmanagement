@@ -87,6 +87,30 @@ function ApprovalUserDataTable() {
       width: 140,
       editable: true,
     },
+     {
+        field: "paymentMode",
+        headerName: "Payment Mode",
+        width: 140,
+        editable: true,
+      },
+      {
+        field: "paymentMethod",
+        headerName: "Payment Method",
+        width: 140,
+        editable: true,
+      },
+      {
+        field: "paymentTags",
+        headerName: "payment Tag",
+        width: 140,
+        editable: true,
+      },
+      {
+        field: "urgentPaymentRemarks",
+        headerName: "Urgent Payment Remarks",
+        width: 140,
+        editable: true,
+      },
     {
       field: "purchaseDescription",
       headerName: "Purchase Description",
@@ -148,6 +172,32 @@ function ApprovalUserDataTable() {
       width: 160,
       editable: true,
     },
+        {
+        field: "paymentStatus",
+        headerName: "Payment Status",
+        width: 140,
+        editable: true,
+      },
+    {
+        field: "paidAmount",
+        headerName: "Paid Amount",
+        width: 140,
+        editable: true,
+      },
+      {
+        field: "transactionDetails",
+        headerName: "Transaction Details",
+        width: 140,
+        editable: true,
+      },
+    
+      {
+        field: "rembursementPaymentDate",
+        headerName: "Rembursement Payment Date",
+        width: 140,
+        editable: true,
+      },
+      
   ];
 
   let navigate = useNavigate();

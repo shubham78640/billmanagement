@@ -26,14 +26,19 @@ function ApprovalAdminDataTabel() {
         navigate(`/approvaladmindatatable/statusbyhod/${params.row.approvalId}`);
       }
    
+    if (params.field === "approvalpaymentupdate") {
+        navigate(`/approvaladmindatatable/updatepayment/${params.row.approvalId}`);
+      }
+
   };
 
-
+  const ReportingManager = localStorage.getItem("reportingManager");
   const columns = [
     {
       field: "approvalId",
       headerName: " Approval Id",
-      width: 70,
+      initialWidth:100,
+    //   width: 70,
       editable: true,
     },
     {
@@ -57,7 +62,6 @@ function ApprovalAdminDataTabel() {
     {
       field: "reportingManager",
       headerName: "Reporting Manager",
-      description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 110,
     },
@@ -106,6 +110,30 @@ function ApprovalAdminDataTabel() {
       editable: true,
     },
     {
+        field: "paymentMode",
+        headerName: "Payment Mode",
+        width: 140,
+        editable: true,
+      },
+      {
+        field: "paymentMethod",
+        headerName: "Payment Method",
+        width: 140,
+        editable: true,
+      },
+      {
+        field: "paymentTags",
+        headerName: "payment Tag",
+        width: 140,
+        editable: true,
+      },
+      {
+        field: "urgentPaymentRemarks",
+        headerName: "Urgent Payment Remarks",
+        width: 140,
+        editable: true,
+      },
+    {
       field: "purchaseDescription",
       headerName: "Purchase Description",
       width: 140,
@@ -129,6 +157,7 @@ function ApprovalAdminDataTabel() {
       width: 140,
       editable: true,
     },
+    
     {
       field: "hodApproval",
       headerName: "HOD Approval",
@@ -165,6 +194,33 @@ function ApprovalAdminDataTabel() {
       width: 160,
       editable: true,
     },
+
+    {
+        field: "paymentStatus",
+        headerName: "Payment Status",
+        width: 140,
+        editable: true,
+      },
+    {
+        field: "paidAmount",
+        headerName: "Paid Amount",
+        width: 140,
+        editable: true,
+      },
+      {
+        field: "transactionDetails",
+        headerName: "Transaction Details",
+        width: 140,
+        editable: true,
+      },
+    
+      {
+        field: "rembursementPaymentDate",
+        headerName: "Rembursement Payment Date",
+        width: 140,
+        editable: true,
+      },
+      
   {
       field: "hodapproveStatus",
       headerName: "HOD Approval",
@@ -191,6 +247,21 @@ function ApprovalAdminDataTabel() {
         </p>
       ),
     },
+
+    {
+        field: "approvalpaymentupdate",
+        headerName: "Payment Approval",
+        description: "This column has a value getter and is not sortable.",
+        sortable: false,
+        width: 162,
+        type: "action",
+        renderCell: () => (
+          <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
+            Approval Payment 
+          </p>
+        ),
+      },
+  
 
   ];
 
@@ -228,6 +299,10 @@ function ApprovalAdminDataTabel() {
           backgroundColor: "#f2f2f2",
           minHeight: "620px",
           maxHeight: "100%",
+        //   '& .MuiDataGrid-cell--editable': {
+        //     bgcolor: (theme) =>
+        //     'green',
+        //   },
         }}
       >
         <DataGrid
@@ -247,7 +322,14 @@ function ApprovalAdminDataTabel() {
                 },
               ],
             },
+            // filter: {
+            //     filterModel: {
+            //       items: [{ columnField: 'reportingManager', operatorValue: '=', value: 'ReportingManager' }],
+            //     },
+            //   },
+          
           }}
+        //   isCellEditable={(params) => (params.row.hodApproval === "") }
         />
       </Box>
     </>

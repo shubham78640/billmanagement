@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from "moment";
-import { Brand } from "../../AllData";
+import { Brand, paymentModeRelation } from "../../AllData";
 
 const theme = createTheme({
   components: {
@@ -37,11 +37,25 @@ function ApprovalForm() {
   const [approvalHODRemark, setApprovalHODRemark] = useState("Pending");
   const [approvalFinalRemark, setApprovalFinalRemark] = useState("Pending");
   const[paymentTag,setPaymentTag]=useState("");
+  const [paymentMethodDD,setPaymentMethodDD]=useState([]);
+  const [paymentMode,setPaymentMode]=useState("");
+  const [paymentMethod,setPaymentMethod]=useState("");
+  const [urgentPaymentRemarks,setUrgentPaymentRemarks]=useState("")
+
+  let paymentModeArray = [];
   useEffect(() => {
     Brand.map((item) => {
       if (item.brand === brand) setSubBrandDD(item.subBrand);
     });
-  }, [brand]);
+
+
+    paymentModeRelation.map((item) => {
+      paymentModeArray.push(item.paymentMode)
+      if (item.paymentMode === paymentMode)
+        setPaymentMethodDD(item.paymentMethod);
+    });
+
+  }, [brand, paymentMode]);
 
   const EMPCODE = localStorage.getItem("employeeCode");
   const EMPNAME = localStorage.getItem("name");
@@ -49,6 +63,7 @@ function ApprovalForm() {
   const EMPSTATUS = localStorage.getItem("status");
   const USERTYPE = localStorage.getItem("User");
   const reportingManager = localStorage.getItem("reportingManager");
+  const ReportingManagerID = localStorage.getItem("reportingManagerID");
 
   let currentDate = new Date();
   const newAproximatePurchaseDate = moment(aproximatePurchaseDate).format(
@@ -94,6 +109,7 @@ function ApprovalForm() {
           purchaseDate: newAproximatePurchaseDate,
           purchaseDescription: purchaseDescription,
           reportingManager: reportingManager,
+          reportingManagerId: ReportingManagerID,
           subBrand: subrand,
           submissionDate: newApprovalFormSubmitDate,
           typeOfPurchase: approvalTypeofPurchase,
@@ -102,6 +118,14 @@ function ApprovalForm() {
           approvalRemarks: approvalRemarks,
           finalApproval: approvalFinal,
           hodApproval: approvalHOD,
+  paidAmount:"" ,
+  paymentMethod:paymentMethod ,
+  paymentMode:paymentMode ,
+  paymentStatus:"" ,
+  paymentTags:paymentTag ,
+  rembursementPaymentDate: "",
+  transactionDetails:"" ,
+  urgentPaymentRemarks: urgentPaymentRemarks,
         }
       );
       alert("Approve Request Send Successfully");
@@ -269,12 +293,27 @@ function ApprovalForm() {
             options={paymentMode1Data}
             sx={{ width: 300, backgroundColor: "white" }}
             onChange={(event, newValue) => {
-              setApprovalRemarks(newValue);
+              setPaymentMode(newValue);
             }}
             renderInput={(params) => (
               <TextField {...params} required label="Payment Mode" />
             )}
           />
+
+
+<Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={paymentMethodDD}
+            sx={{ width: 300, backgroundColor: "white" }}
+            onChange={(event, newValue) => {
+              setPaymentMethod(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} required label="Payment Method" />
+            )}
+          />
+
 
 <Autocomplete
             disablePortal
@@ -287,6 +326,16 @@ function ApprovalForm() {
             renderInput={(params) => (
               <TextField {...params} required label="Payment Tag" />
             )}
+          />
+
+            <TextField
+            sx={{ width: 300, backgroundColor: "white" }}
+            id="outlined-basic"
+            disabled={paymentTag==="Urgent Payment"?false:true}
+            label="Urgent Payment Remarks"
+            variant="outlined"
+            onChange={(e) => setUrgentPaymentRemarks(e.target.value)}
+            value={urgentPaymentRemarks}
           />
 
 

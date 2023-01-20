@@ -32,6 +32,10 @@ function Login() {
           "reportingManager",
           response.data.data.reportingManager
         );
+        localStorage.setItem(
+          "reportingManagerID",
+          response.data.data.reportingManagerId
+        );
         console.log(response.data.data.userType);
         window.location.reload();
       }

@@ -12,41 +12,41 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 import axios from "axios";
-function PaymentdetailsForm() {
-  let navigate = useNavigate();
-  const { id } = useParams();
-  const [paidAmount, setPaidAmount] = useState("");
-  const [updatepaymentStatus, setUpdatePaymentStatus] = useState("");
-  const [transactionsDetail, setTransactionsDetail] = useState("");
-  const [paymentDate, setPaymentDate] = useState(null);
-  const newUpdatePaymentDate = moment(paymentDate).format("DD/MM/YYYY");
-  console.log({ newUpdatePaymentDate });
-  const EMPNAME = localStorage.getItem("name");
-  const DATEOFChanges = moment(new Date()).format("DD/MM/YYYY, h:mm a");
-  const handlePaymanetUpdate = async () => {
-    try {
-      let response = await axios.put(
-        `http://13.126.160.155:8088/bill/bill/update/${id}`,
-        {
-          paidAmount: paidAmount,
-          reimbursementDate: newUpdatePaymentDate,
-          updatePaymentStatus: updatepaymentStatus,
-          transactionDetail: transactionsDetail,
-          updatedBy: EMPNAME,
-          updatedAt: DATEOFChanges,
-        }
-      );
-      alert("Your Payment Details Update successfully");
-      console.log(response);
-      navigate("/billtable");
-    } catch (error) {
-      alert(error);
-    }
-  };
 
+function ApprovalPaymentPage() {
+    let navigate = useNavigate();
+    const { id } = useParams();
+    const [approvepaidAmount, setApprovePaidAmount] = useState("");
+    const [approvepaymentStatus, setApprovePaymentStatus] = useState("");
+    const [approvetransactionsDetail, setApproveTransactionsDetail] = useState("");
+    const [approvepaymentDate, setApprovePaymentDate] = useState(null);
+    const newUpdatePaymentDate = moment(approvepaymentDate).format("DD/MM/YYYY");
+    console.log({ newUpdatePaymentDate });
+    const EMPNAME = localStorage.getItem("name");
+    const DATEOFChanges = moment(new Date()).format("DD/MM/YYYY, h:mm a");
+    const handlePaymanetUpdate = async () => {
+      try {
+        let response = await axios.put(
+          `http://13.126.160.155:8088/bill/purchaseApproval/update/paymentStatus/${id}`,
+          {
+            paidAmount: approvepaidAmount,
+            paymentStatus: approvepaymentStatus,
+            reimbursementPaymentDate: newUpdatePaymentDate,
+            transactionDetail: approvetransactionsDetail
+          }
+        );
+        alert("Your Payment Details Update successfully");
+        console.log(response);
+        navigate("/approvaladmindatatable");
+      } catch (error) {
+        alert(error);
+      }
+    };
+  
   return (
     <>
-      <Box mt={4} p={2}>
+
+    <Box mt={4} p={2}>
         <Typography ml={9} mt={2} variant="p" color="initial">
           <span
             style={{
@@ -56,7 +56,7 @@ function PaymentdetailsForm() {
               marginLeft: { sm: "5%", xs: "20%" },
             }}
           >
-            Invoice ID -
+            Approval ID -
           </span>{" "}
           {id || "No-Data"}
         </Typography>
@@ -74,16 +74,16 @@ function PaymentdetailsForm() {
             id="outlined-basic"
             label="Paid Amount"
             variant="outlined"
-            onChange={(e) => setPaidAmount(e.target.value)}
-            value={paidAmount}
+            onChange={(e) => setApprovePaidAmount(e.target.value)}
+            value={approvepaidAmount}
           />
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
               label="Reimbursement Payment Date"
-              value={paymentDate}
+              value={approvepaymentDate}
               onChange={(newValue) => {
-                setPaymentDate(newValue);
+                setApprovePaymentDate(newValue);
               }}
               renderInput={(params) => (
                 <TextField
@@ -111,7 +111,7 @@ function PaymentdetailsForm() {
             options={paymentStatusDD}
             sx={{ width: 300, backgroundColor: "white" }}
             onChange={(event, newValue) => {
-              setUpdatePaymentStatus(newValue);
+                setApprovePaymentStatus(newValue);
             }}
             renderInput={(params) => (
               <TextField {...params} required label="Payment Status" />
@@ -121,10 +121,11 @@ function PaymentdetailsForm() {
           <TextField
             sx={{ width: 300 }}
             id="outlined-basic"
-            label="Transactions Detail"
+            required
+            label="Transactions/UTR Detail"
             variant="outlined"
-            onChange={(e) => setTransactionsDetail(e.target.value)}
-            value={transactionsDetail}
+            onChange={(e) => setApproveTransactionsDetail(e.target.value)}
+            value={approvetransactionsDetail}
           />
 
           <Button
@@ -139,10 +140,11 @@ function PaymentdetailsForm() {
           </Button>
         </Box>
       </Box>
+    
     </>
-  );
+  )
 }
 
-export default PaymentdetailsForm;
+export default ApprovalPaymentPage
 
 const paymentStatusDD = ["Paid", "Pending", "Hold", "Partially Paid"];

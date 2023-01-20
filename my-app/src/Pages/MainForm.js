@@ -14,6 +14,7 @@ import {
   Department,
   CategoryRelation,
   SubCategory2Relation,
+  subBrand2
 } from "../AllData";
 import { createTheme, ThemeProvider } from "@mui/material";
 
@@ -58,14 +59,16 @@ function MainForm() {
   const [serviceCategory, setServiceCategory] = useState("");
   const [gstAmount, setGSTAmount] = useState("");
   const [tDSType, setTDSType] = useState("");
-  const [tDSAmount, setTDSAmount] = useState("");
+  const [tDSpercentage, setTDSPercentage] = useState("");
   const [preTaxAmount, setPreTaxAmount] = useState("");
   const [totalAmount, setTotalAmount] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(null);
   const [paymentDate, setPaymentDate] = useState(null);
   const [gSTApplicable, setGSTApplicable] = useState("");
+  const [tDSApplicable, setTDSApplicable] = useState("");
   const [paymentCycle, setPaymentCycle] = useState("");
   const [utr, setUtr] = useState("");
+  const[subBrandCustomerName,setSubBrandCustomerName]=useState("");
   const [taskId, setTaskId] = useState("");
   const [updatepaidAmount, setUpdatepaidAmount] = useState("");
   const [reimbursementpaymentDate, setreimbursementpaymentDate] = useState(null);
@@ -82,17 +85,25 @@ function MainForm() {
   const [gSTApplicableDD, setGSTApplicableDD] = useState([]);
   const [paymentModeDD, setPaymentModeDD] = useState([]);
   const [paymentMethodDD, setPaymentMethodDD] = useState([]);
+  const [subBrandvalue2,setSubBrandvalue2]=useState([]);
+  const[netAmount,setNetAmount]=useState("");
+  const [approvalID,setApprovalID]=useState("");
   const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic] =
     useState(true);
-  const[customerCodeDD, setCustomerCodeDD] = useState([])
+  const[customerCodeDD, setCustomerCodeDD] = useState([]);
+  const [invoiceType,setInvoiceType]=useState("");
   // let customerNameDD = [];
   let paymentModeArray = [];
+
   const newInvoiveNumber = invoiceNumber.toUpperCase();
   const newDateinv = moment(invoiceDate).format("DD/MM/YYYY");
 
   const newPaymentDate= moment(paymentDate).format("DD/MM/YYYY");
   const invbillid = localStorage.getItem("BillID");
   const totelAmountofbill = +preTaxAmount + +gstAmount;
+  const tDSAmountTotel = (+preTaxAmount * +tDSpercentage) / 100;
+
+  const NetAmount =((+totelAmountofbill)-(+tDSAmountTotel))
   let navigate = useNavigate();
   const handleSubmit = async () => {
     console.log("data ", empcode, {
@@ -105,7 +116,6 @@ function MainForm() {
       customerName,
       serviceCategory,
       invoiceDescription,
-      paymentStatus,
       preTaxAmount,
       totalAmount,
       invoiceDate,
@@ -122,6 +132,7 @@ function MainForm() {
       gstAmount,
       totelAmountofbill,
       paymentCycle,
+      approvalID
     });
 
     try {
@@ -153,15 +164,22 @@ function MainForm() {
           subCatagory2: subCategory2,
           totalAmount: totelAmountofbill,
           reportingManager: reportingManager,
-          paymentCycle: paymentCycle,
           userType: USERTYPE,
-          utr: utr,
           taskId: taskId,
-          paymentStatus: paymentStatus,
           paymentDate: newPaymentDate,
           reimbursementDate: "",
           paidAmount: updatepaidAmount,
           transactionDetail: transactionsDetail,
+          customerName:subBrandCustomerName ,
+          utrMendatory:   utr,
+         gstApplicable:gSTApplicable,
+         tdsApplicable:tDSApplicable,
+         tdsPercentage:tDSpercentage,
+         tdsAmount:tDSAmountTotel,
+         paymentStatus:paymentStatus,
+         invoiceType:invoiceType,   
+         netAmount: netAmount,
+         approvalId :approvalID,
         }
       );
       alert("Bill Invoice save successfully");
@@ -202,6 +220,11 @@ function MainForm() {
         setSubCategory2DD(item.subCategory2Relations);
     });
 
+    subBrand2.map((item) => {
+      if (item.subBrandRelation === subrand)
+      setSubBrandvalue2(item.subBrand2Relation);
+    });
+
     // customerRelation.map((item)=>{
     //   customerNameDD.push(item.customerName)
     //   if(item.customerName==customerName){
@@ -217,7 +240,7 @@ function MainForm() {
     
       CustomerListData()
 
-  }, [brand, paymentMode, department, category, subCategory1 ]);
+  }, [brand, paymentMode, department, category, subCategory1, subrand ]);
 
 
   const EMPCODE = localStorage.getItem("employeeCode");
@@ -283,6 +306,19 @@ function MainForm() {
           value={reportingManager}
         /> */}
 
+
+<Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={invoiceTypeDD}
+          onChange={(event, newValue) => {
+            setInvoiceType(newValue);
+          }}
+          sx={{ width: 300, backgroundColor: "white" }}
+          renderInput={(params) => <TextField {...params}   required label="Invoice Type" />}
+        />
+
+
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
@@ -316,6 +352,52 @@ function MainForm() {
           />
         </LocalizationProvider>
 
+
+   <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={paymentStatusOfInvoice}
+          onChange={(event, newValue) => {
+            setPaymentStatus(newValue);
+          }}
+          sx={{ width: 300, backgroundColor: "white" }}
+          renderInput={(params) => <TextField {...params}   required label="Payment Status" />}
+        />
+
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="Payment Date"
+            value={paymentDate}
+disabled={paymentStatus==="To be paid"?true:false}
+            onChange={(newValue) => {
+              setPaymentDate(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField
+                
+                {...params}
+                size="medium"
+                sx={{
+                  width: 300,
+                  backgroundColor: "white",
+                  color: "black",
+                }}
+              />
+            )}
+          />
+        </LocalizationProvider>
+
+        <TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          disabled={paymentStatus==="To be paid"?true:false}
+          id="outlined-basic"
+          label="UTR (Mandatory)"
+          variant="outlined"
+          onChange={(e) => setUtr(e.target.value)}
+          value={utr}
+        />
+     
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -337,6 +419,20 @@ function MainForm() {
           }}
           renderInput={(params) => <TextField {...params}   required label="Sub Brand" />}
         />
+       
+
+       <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={subBrandvalue2}
+          sx={{ width: 300, backgroundColor: "white" }}
+          onChange={(event, newValue) => {
+            setSubBrandCustomerName(newValue);
+          }}
+          renderInput={(params) => <TextField {...params}    label="Customer Name" />}
+        />
+
+
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -349,7 +445,7 @@ function MainForm() {
         />
 
 
-<Autocomplete
+        <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={expenseTypedata}
@@ -428,6 +524,28 @@ function MainForm() {
       onChange={(event, newValue)=>{setExpenseType(newValue.label)}}
       renderInput={(params) => <TextField {...params} label="GST Slab" />}
         /> */}
+
+
+          <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={ApplicableData}
+        sx={{ width: 300, backgroundColor:"white" }}
+        onChange={(event, newValue)=>{setGSTApplicable(newValue)}}
+        renderInput={(params) => <TextField {...params} label="GST Applicable" />}
+        />
+
+
+          <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={ApplicableData}
+        sx={{ width: 300, backgroundColor:"white" }}
+        onChange={(event, newValue)=>{setTDSApplicable(newValue)}}
+        renderInput={(params) => <TextField {...params} label="TDS Applicable" />}
+        />
+
+
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
@@ -437,6 +555,30 @@ function MainForm() {
           onChange={(e) => setPreTaxAmount(e.target.value)}
           value={preTaxAmount}
         />
+
+
+<Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={tDSDATA}
+            disabled={tDSApplicable==="Yes"?false:true}
+            sx={{ width: "300px", backgroundColor: "white" }}
+            onChange={(event, newValue) => {
+              setTDSPercentage(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} label="TDS %" />}
+          />
+          <TextField
+            label="TDS Amount"
+            sx={{ width: "300px", backgroundColor: "white" }}
+            disabled
+            InputLabelProps={{ shrink: true }}
+            value={tDSAmountTotel}
+          />
+
+
+
+
 
 {/*         
 <Autocomplete
@@ -477,11 +619,10 @@ function MainForm() {
 
         <TextField
           sx={{ width: 300, backgroundColor: "white" }}
+          disabled={gSTApplicable==="Yes"?false:true}
           id="outlined-basic"
           label="GST Amount"
           variant="outlined"
-          required
-          
           onChange={(e) => setGSTAmount(e.target.value)}
           value={gstAmount}
         />
@@ -496,6 +637,17 @@ function MainForm() {
           value={totelAmountofbill}
         />
 
+
+
+<TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          label="Net Amount"
+          disabled
+          variant="outlined"
+          // onChange={(e) => setNetAmount(e.target.value)}
+          value={NetAmount}
+        />
     {/* <Autocomplete
         disablePortal
         id="combo-box-demo"
@@ -512,10 +664,10 @@ function MainForm() {
         <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Post TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
         value={tDSAmount}/> */}
 
-        <Autocomplete
+        {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
-          disabled={expenseType=="Employee Reimbursement"?true:false}
+        
           options={paymentcycleData}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
@@ -526,31 +678,10 @@ function MainForm() {
            
             label="Payment Cycle Days" />
           )}
-        />
+        /> */}
 
 
-<LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DesktopDatePicker
-            label="Payment Date"
-            value={paymentDate}
-            disabled={expenseType=="Employee Reimbursement"?true:false}
-            onChange={(newValue) => {
-              setPaymentDate(newValue);
-            }}
-            renderInput={(params) => (
-              <TextField
-                
-                {...params}
-                size="medium"
-                sx={{
-                  width: 300,
-                  backgroundColor: "white",
-                  color: "black",
-                }}
-              />
-            )}
-          />
-        </LocalizationProvider>
+
 
 
 
@@ -591,7 +722,7 @@ function MainForm() {
 <Autocomplete
           disablePortal
           id="combo-box-demo"
-          disabled={expenseType=="Employee Reimbursement"?true:false}
+          
           options={PayDirectCardDetailsNumberDD}
           sx={{ width: 300, backgroundColor: "white" }}
           onChange={(event, newValue) => {
@@ -614,7 +745,7 @@ function MainForm() {
             setCustomerName(newValue.partnerNameCode);
           }}
           renderInput={(params) => (
-            <TextField {...params} required label="Partner/Customer Name" />
+            <TextField {...params} required label="Partner/Vendor Name" />
           )}
         />
 
@@ -632,7 +763,7 @@ function MainForm() {
           sx={{ width: 300, backgroundColor: "white" }}
           id="outlined-basic"
           disabled={customerName=="others"?false:true}
-          label="Add New Partner/Customer"
+          label="Add New Partner/Vendor"
           variant="outlined"
           onChange={(e) => setAddNewCustomer(e.target.value)}
           value={addNewCustomer}
@@ -705,24 +836,9 @@ function MainForm() {
           )}
         /> */}
 
-        <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          label="UTR"
-          variant="outlined"
-          onChange={(e) => setUtr(e.target.value)}
-          value={utr}
-        />
+      
 
-        <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          disabled
-          label="Task Id"
-          variant="outlined"
-          onChange={(e) => setTaskId(e.target.value)}
-          value={taskId}
-        />
+     
 
         {/* <TextField
           sx={{ width: 300, backgroundColor: "white" }}
@@ -759,6 +875,25 @@ function MainForm() {
           value={paymentStatus}
         /> */}
 
+<TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          label="Approval ID"
+          variant="outlined"
+          onChange={(e) => setApprovalID(e.target.value)}
+          value={approvalID}
+        />
+
+
+<TextField
+          sx={{ width: 300, backgroundColor: "white" }}
+          id="outlined-basic"
+          disabled
+          label="Task Id"
+          variant="outlined"
+          onChange={(e) => setTaskId(e.target.value)}
+          value={taskId}
+        />
 
         </ThemeProvider>
 
@@ -786,7 +921,6 @@ function MainForm() {
             expenseType &&
             expenseCategory &&
             preTaxAmount &&
-            gstAmount &&
             paymentMode &&
             paymentMethod &&
             
@@ -853,99 +987,99 @@ const paymentMode1Data = [
    "Cheque" ,
 ];
 
-const paymentcycleData = [
-   "0" ,
-   "1" ,
-   "2" ,
-   "3" ,
-   "4" ,
-   "5" ,
-   "6" ,
-   "7" ,
-   "8" ,
-   "9" ,
-   "10",
-   "11",
-   "12",
-   "13",
-   "14",
-   "15",
-   "16",
-   "17",
-   "18",
-   "19",
-   "20",
-   "21",
-   "22",
-   "23",
-   "24",
-   "25",
-   "26",
-   "27",
-   "28",
-   "29",
-   "30",
-   "31",
-   "32",
-   "33",
-   "34",
-   "35",
-   "36",
-   "37",
-   "38",
-   "39",
-   "40",
-   "41",
-   "42",
-   "43",
-   "44",
-   "45",
-   "46",
-   "47",
-   "48",
-   "49",
-   "50",
-   "51",
-   "52",
-   "53",
-   "54",
-   "55",
-   "56",
-   "57",
-   "58",
-   "59",
-   "60",
-   "61",
-   "62",
-   "63",
-   "64",
-   "65",
-   "66",
-   "67",
-   "68",
-   "69",
-   "70",
-   "71",
-   "72",
-   "73",
-   "74",
-   "75",
-   "76",
-   "77",
-   "78",
-   "79",
-   "80",
-   "81",
-   "82",
-   "83",
-   "84",
-   "85",
-   "86",
-   "87",
-   "88",
-   "89",
-   "90",
-];
+// const paymentcycleData = [
+//    "0" ,
+//    "1" ,
+//    "2" ,
+//    "3" ,
+//    "4" ,
+//    "5" ,
+//    "6" ,
+//    "7" ,
+//    "8" ,
+//    "9" ,
+//    "10",
+//    "11",
+//    "12",
+//    "13",
+//    "14",
+//    "15",
+//    "16",
+//    "17",
+//    "18",
+//    "19",
+//    "20",
+//    "21",
+//    "22",
+//    "23",
+//    "24",
+//    "25",
+//    "26",
+//    "27",
+//    "28",
+//    "29",
+//    "30",
+//    "31",
+//    "32",
+//    "33",
+//    "34",
+//    "35",
+//    "36",
+//    "37",
+//    "38",
+//    "39",
+//    "40",
+//    "41",
+//    "42",
+//    "43",
+//    "44",
+//    "45",
+//    "46",
+//    "47",
+//    "48",
+//    "49",
+//    "50",
+//    "51",
+//    "52",
+//    "53",
+//    "54",
+//    "55",
+//    "56",
+//    "57",
+//    "58",
+//    "59",
+//    "60",
+//    "61",
+//    "62",
+//    "63",
+//    "64",
+//    "65",
+//    "66",
+//    "67",
+//    "68",
+//    "69",
+//    "70",
+//    "71",
+//    "72",
+//    "73",
+//    "74",
+//    "75",
+//    "76",
+//    "77",
+//    "78",
+//    "79",
+//    "80",
+//    "81",
+//    "82",
+//    "83",
+//    "84",
+//    "85",
+//    "86",
+//    "87",
+//    "88",
+//    "89",
+//    "90",
+// ];
 
 const paymentMethodData = [
   { label: "Employee" },
@@ -978,7 +1112,6 @@ const departmentData = [
 const expenseTypedata = [
   "Billable - Customer",
   "Non Billable - Customer",
-  "Employee Reimbursement",
   "Company",
 ];
 
@@ -1032,4 +1165,26 @@ const PayDirectCardDetailsNumberDD=[
     "4629525415529352",
     "4629525415529360",
  
+]
+
+const paymentStatusOfInvoice =[
+
+  "Already Paid",
+  "To be paid",
+]
+
+const invoiceTypeDD =[
+  "Regular Invoice",
+  "Advance ",
+  "TDS (only for finance use)",
+  "GST (only for finance use)",
+  "PF/ESIC (only for finance use)",
+  
+
+]
+
+const tDSDATA = ["0", "1", "2", "5", "10", "15", "20", "25", "30"];
+
+const ApplicableData=[
+  "Yes","No"
 ]
