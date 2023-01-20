@@ -1,5 +1,5 @@
 import MainForm from "./Pages/MainForm";
-import React from "react";
+import React, { useEffect } from "react";
 import Navbaar from "./Component/Navbaar/Navbaar";
 import AddItems from "./Component/AddItem/AddItems";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -19,6 +19,18 @@ import DashBoard from "./Pages/Dashboard/DashBoard";
 import ApprovalManagerDataTable from "./Component/Approval/ApprovalDataTabel/ApprovalManagerDataTable";
 import ApprovalPaymentPage from "./Component/Approval/ApprovalPaymantPage/ApprovalPaymentPage";
 function App() {
+  useEffect(() => {
+  const fetchData = async () => {
+      let dataTable = await fetch(
+        "http://13.126.160.155:8088/bill/purchaseApproval/get/purchase/reportingManager/A004592036"
+      );
+      let table = await dataTable.json();
+      let adminTableData = await table.data;
+      console.log("data is:", adminTableData)
+    };
+    fetchData();
+
+  }, []);
   const invbillid = localStorage.getItem("BillID");
   const userType = localStorage.getItem("User");
   const status = localStorage.getItem("status");
@@ -27,7 +39,8 @@ function App() {
     <BrowserRouter>
       {status && <Navbaar />}
       <Routes>
-        <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/reimbursementform" element={<DashBoard />}/>
+        {userType?<Route path="/" element={<DashBoard />}/>:<Route path="/dashboard" element={<DashBoard />}/>}
         {userType === "ADMIN" && (<Route path="/billtable" element={<BillTableData />} />)}
         {userType === "ADMIN" && (<Route path="/billtable/admin/:id" element={<ItemDataTable />} />)}
         {userType === "ADMIN" && (<Route path="/billtable/updatepagment/:id" element={<PaymentdetailsForm />}/>)}
