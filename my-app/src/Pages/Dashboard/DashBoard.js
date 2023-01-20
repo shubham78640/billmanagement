@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardNavbaar from "../../Component/Navbaar/DashboardNavbaar";
-import reimbursement from "../../images/icons8-refund-96.png"
 
 function randomColor() {
   let hex = Math.floor(Math.random() * 0xFFFFFF);
@@ -25,11 +24,11 @@ const BOX2 = styled(Box)({
   alignItems: "center",
   justifyContent: "center",
   padding:"10px",
-  // "&:hover": {
-  //   backgroundColor:"#FFF0F5",
-  //   cursor: "pointer",
-  //   boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-  // },
+  "&:hover": {
+    backgroundColor:"#FFF0F5",
+    cursor: "pointer",
+    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+  },
 });
 
 function DashBoard() {
@@ -94,14 +93,14 @@ function DashBoard() {
             border:"1px solid #FFF0F5",
            }}
         onClick={() => {
-          userType==="ADMIN"?navigate("/reimbursementUsertable"):navigate("/reimbursementuserdatatable")
-          localStorage.setItem("App","reimbursement");
+          userType==="ADMIN"?navigate("/reimbursementform"):navigate("/reimbursementuserdatatable")
+          localStorage.setItem("App","approval");
         }}
         >
           <img
             width={"110px"}
-            style={{ margin:"auto"}}
-            src={reimbursement}
+            style={{ margin:"auto", borderRadius:"50%"}}
+            src="https://t4.ftcdn.net/jpg/02/59/53/59/360_F_259535979_3wA5XTavoeh39PjoriJ1X6dXo5VtI4lC.jpg"
             alt="Expense Managemnet"
           />
           <p style={{ fontWeight: "400", fontFamily: "sans-serif" }}>
