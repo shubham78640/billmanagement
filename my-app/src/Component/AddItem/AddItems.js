@@ -141,8 +141,8 @@ function AddItems() {
           redeemed: redeem,
           unit: unit,
           sgst: sgst,
-          tds: tDSAmount,
-          tdsAmount: tDSAmountTotel,
+          // tds: tDSAmount,
+          // tdsAmount: tDSAmountTotel,
           invoiceId: invbillid,
         }
       );
@@ -445,7 +445,7 @@ function AddItems() {
               setRedeem(e.target.value);
             }}
           />
-          <Autocomplete
+          {/* <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={tDSDATA}
@@ -461,7 +461,7 @@ function AddItems() {
             disabled
             InputLabelProps={{ shrink: true }}
             value={tDSAmountTotel}
-          />
+          /> */}
 
           <TextField
           required
@@ -512,7 +512,7 @@ const iGSTDATA = ["5", "12", "18", "28", "0"];
 
 const tDSDATA = ["0", "1", "2", "5", "10", "15", "20", "25", "30"];
 
-const unitListDD = ["Kg", "Ltr", "Pcs", "Gm", "Mtr", "Cm", "Km", "Sqft", "Nos","Lump","Month"];
+const unitListDD = ["Kg", "Ltr", "Pcs", "Gm", "Mtr", "Cm", "Km", "Sqft", "Nos","Lumpsum","Month"];
 
 const Category1DropDown = [
  

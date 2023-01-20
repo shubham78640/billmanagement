@@ -33,11 +33,19 @@ function BillTableData() {
       navigate(`/billtable/updatestatusremark/${params.row.invoiceId}`);
     }
   };
+
+
   const columns = [
     {
       field: "invoiceId",
       headerName: " Invoice Id",
       width: 70,
+      editable: true,
+    },
+    {
+      field: "invoiceType",
+      headerName: "Invoice Type",
+      width: 100,
       editable: true,
     },
     {
@@ -78,6 +86,41 @@ function BillTableData() {
       width: 130,
       editable: true,
     },
+
+    {
+      field: "paymentStatus",
+      headerName: "Payment Status",
+      width: 120,
+      editable: true,
+    },
+ 
+
+    {
+      field: "utrMendatory",
+      headerName: "UTR Mendatory",
+      width: 120,
+      editable: true,
+    },
+
+    {
+      field: "tdsPercentage",
+      headerName: "TDS Percentage",
+      width: 120,
+      editable: true,
+    },
+
+    {
+      field: "tdsAmount",
+      headerName: "TDS Amount",
+      width: 120,
+      editable: true,
+    },
+    {
+      field: "paymentDate",
+      headerName: "Payment Date",
+      width: 120,
+      editable: true,
+    },
     {
       field: "brand",
       headerName: "Brand",
@@ -100,7 +143,7 @@ function BillTableData() {
     {
       field: "subCatagory2",
       headerName: "Sub Catagory 2",
-      width: 140,
+      width: 80,
       editable: true,
     },
     {
@@ -133,9 +176,22 @@ function BillTableData() {
       width: 100,
       editable: true,
     },
+
+    {
+      field: "netAmount",
+      headerName: "Net Amount",
+      width: 100,
+      editable: true,
+    },
     {
       field: "paymentMode",
       headerName: "Payment Mode",
+      width: 120,
+      editable: true,
+    },
+    {
+      field: "paymentMethod",
+      headerName: "Payment Method",
       width: 120,
       editable: true,
     },
@@ -145,15 +201,28 @@ function BillTableData() {
       width: 100,
       editable: true,
     },
-    {
-      field: "paymentCycle",
-      headerName: "Payment Cycle",
-      width: 70,
-      editable: true,
-    },
+   
     {
       field: "payDirectCard",
       headerName: "Pay Direct Card Details",
+      width: 150,
+      editable: true,
+    },
+    // {
+    //   field: "utr",
+    //   headerName: "UTR",
+    //   width: 120,
+    //   editable: true,
+    // },
+      {
+      field: "tdsApplicable",
+      headerName: "TDS Applicable",
+      width: 120,
+      editable: true,
+    },
+      {
+      field: "gstApplicable",
+      headerName: "GST Applicable",
       width: 120,
       editable: true,
     },
@@ -176,9 +245,15 @@ function BillTableData() {
       width: 130,
       editable: true,
     },
+    // {
+    //   field: "paymentCycle",
+    //   headerName: "Payment Cycle",
+    //   width: 100,
+    //   editable: true,
+    // },
     {
-      field: "utr",
-      headerName: "UTR",
+      field: "approvalId",
+      headerName: "ApprovalId ID",
       width: 80,
       editable: true,
     },
@@ -191,10 +266,15 @@ function BillTableData() {
     {
       field: "serviceCategory",
       headerName: "Service Category",
-      width: 120,
+      width: 80,
       editable: true,
     },
-
+    {
+      field: "invoiceStatus",
+      headerName: "Invoice Status",
+      width: 180,
+      editable: true,
+    },
     {
       field: "transactionDetail",
       headerName: "Transaction Detail",
@@ -207,13 +287,13 @@ function BillTableData() {
       width: 80,
       editable: true,
     },
-
     {
-      field: "paymentStatus",
-      headerName: "Payment Status",
-      width: 70,
+      field: " updatePaymentStatus",
+      headerName: " Update Payment Status",
+      width: 100,
       editable: true,
     },
+   
     {
       field: "reimbursementDate",
       headerName: "Reimbursement Date",
@@ -221,12 +301,7 @@ function BillTableData() {
       editable: true,
     },
 
-    {
-      field: "invoiceStatus",
-      headerName: "Invoice Status",
-      width: 180,
-      editable: true,
-    },
+ 
     {
       field: "showBill",
       headerName: "Show Bill",
@@ -351,6 +426,16 @@ function BillTableData() {
           components={{ Toolbar: GridToolbar }}
           //==============On Export Csv Click event ============
           rowHeight={26}
+          initialState={{
+            sorting: {
+              sortModel: [
+                {
+                  field: 'submissionDate',
+                  sort: 'desc',
+                },
+              ],
+            },
+          }}
         />
       </Box>
     </>

@@ -192,15 +192,16 @@ function ApprovalManagerDataTable() {
     //     </p>
     //   ),
     // },
-
   ];
 
+
+  const ReportingManagerID = localStorage.getItem("reportingManagerID");
   let navigate = useNavigate();
   const [approvalManagerDatatabledata, setApprovalManagerDatatabledata] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       let dataTable = await fetch(
-        "http://13.126.160.155:8088/bill/purchaseApproval/get/data/all/purchase/approval"
+        `http://13.126.160.155:8088/bill/purchaseApproval/get/purchase/reportingManager/${ReportingManagerID}`
       );
       let table = await dataTable.json();
       let adminTableData = await table.data;
@@ -214,9 +215,6 @@ function ApprovalManagerDataTable() {
   }
 
   console.log("tabledataManager", approvalManagerDatatabledata);
-
-
-
 
   return (
     <>
