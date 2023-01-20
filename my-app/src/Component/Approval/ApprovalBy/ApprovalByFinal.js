@@ -96,6 +96,6 @@ const updatefinalStatusDD =[
 
     "Accept",
     "Reject",
-    "Disscuss"
+    "Discuss"
 
 ]

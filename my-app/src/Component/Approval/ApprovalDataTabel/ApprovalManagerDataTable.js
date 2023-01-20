@@ -8,26 +8,26 @@ import {
 } from "@mui/x-data-grid";
 import { Link, useNavigate } from "react-router-dom";
 
-function ApprovalAdminDataTabel() {
+
+function ApprovalManagerDataTable() {
 
 
-     const handleEvent = (
+         const handleEvent = (
     params, // GridRowParams
     event // MuiEvent<React.MouseEvent<HTMLElement>>
     // GridCallbackDetails
   ) => {
     //  navigate(`admin/${params.row.invoiceId}`)
 
-    if (params.field === "finalapproveStatus") {
-      navigate(`/approvaladmindatatable/statusbyadmin/${params.row.approvalId}`);
-    }
+    // if (params.field === "finalapproveStatus") {
+    //   navigate(`/approvaladmindatatable/statusbyadmin/${params.row.approvalId}`);
+    // }
 
     if (params.field === "hodapproveStatus") {
         navigate(`/approvaladmindatatable/statusbyhod/${params.row.approvalId}`);
       }
    
   };
-
 
   const columns = [
     {
@@ -143,59 +143,60 @@ function ApprovalAdminDataTabel() {
     },
     {
       field: "hodAapprovalDate",
-      headerName: "HOD Approval Date",
+      headerName: "HOD Aapproval Date",
       width: 160,
       editable: true,
     },
-    {
-      field: "finalApproval",
-      headerName: "Final Approval",
-      width: 140,
-      editable: true,
-    },
-    {
-      field: "finalRemarks",
-      headerName: "Final Remarks",
-      width: 140,
-      editable: true,
-    },
-    {
-      field: "finalApprovalDate",
-      headerName: "Final Approval Date",
-      width: 160,
-      editable: true,
-    },
+    // {
+    //   field: "finalApproval",
+    //   headerName: "Final Approval",
+    //   width: 140,
+    //   editable: true,
+    // },
+    // {
+    //   field: "finalRemarks",
+    //   headerName: "Final Remarks",
+    //   width: 140,
+    //   editable: true,
+    // },
+    // {
+    //   field: "finalApprovalDate",
+    //   headerName: "Final Approval Date",
+    //   width: 160,
+    //   editable: true,
+    // },
   {
       field: "hodapproveStatus",
-      headerName: "HOD Approval",
+      headerName: "Approval",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 162,
       type: "action",
       renderCell: () => (
         <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
-         Approval
+        Approval
         </p>
       ),
     },
-      {
-      field: "finalapproveStatus",
-      headerName: "Final Approval",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 162,
-      type: "action",
-      renderCell: () => (
-        <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
-          Approval
-        </p>
-      ),
-    },
+
+    //   {
+    //   field: "finalapproveStatus",
+    //   headerName: "Final Approve Status",
+    //   description: "This column has a value getter and is not sortable.",
+    //   sortable: false,
+    //   width: 162,
+    //   type: "action",
+    //   renderCell: () => (
+    //     <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
+    //       Final Approve Status
+    //     </p>
+    //   ),
+    // },
 
   ];
 
   let navigate = useNavigate();
-  const [approvalAdminDatatabledata, setApprovalAdminDatatabledata] = useState([]);
+  const [approvalManagerDatatabledata, setApprovalManagerDatatabledata] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       let dataTable = await fetch(
@@ -203,7 +204,7 @@ function ApprovalAdminDataTabel() {
       );
       let table = await dataTable.json();
       let adminTableData = await table.data;
-      setApprovalAdminDatatabledata(adminTableData ? adminTableData : "");
+      setApprovalManagerDatatabledata(adminTableData ? adminTableData : "");
     };
     fetchData();
   }, []);
@@ -212,13 +213,19 @@ function ApprovalAdminDataTabel() {
     navigate("/approvalform")
   }
 
-  console.log("tabledata", approvalAdminDatatabledata);
+  console.log("tabledataManager", approvalManagerDatatabledata);
+
+
+
+
   return (
     <>
-     <Box  p={2} sx={{ marginLeft: {sm:"85%", xs:"auto"}}}>
+    
+    
+         <Box  p={2} sx={{ marginLeft: {sm:"85%", xs:"auto"}}}>
     <Button  variant="contained" 
     size="small"
-          color="success"   onClick={handleapprovalfrom}>New Request</Button>
+          color="success"   onClick={handleapprovalfrom}>Add Aproval item</Button>
           </Box>
       <Box
         p={0.5}
@@ -231,27 +238,18 @@ function ApprovalAdminDataTabel() {
         }}
       >
         <DataGrid
-          rows={approvalAdminDatatabledata}
+          rows={approvalManagerDatatabledata}
           columns={columns}
           pageSize={100}
           rowsPerPageOptions={[500]}
           components={{ Toolbar: GridToolbar }}
           rowHeight={28}
           onCellClick={handleEvent}
-          initialState={{
-            sorting: {
-              sortModel: [
-                {
-                  field: 'submissionDate',
-                  sort: 'desc',
-                },
-              ],
-            },
-          }}
         />
       </Box>
+    
     </>
-  );
+  )
 }
 
-export default ApprovalAdminDataTabel;
+export default ApprovalManagerDataTable

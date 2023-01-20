@@ -93,6 +93,6 @@ const updatehodStatusDD =[
 
     "Accept",
     "Reject",
-    "Disscuss"
+    "Discuss"
 
 ]

@@ -304,16 +304,19 @@ function BillTableData() {
 
   return (
     <>
-        <Box  p={1}  sx={{ marginLeft: {sm:"85%", xs:"auto"}}}>
-     <Button color="success" variant="contained" sx={{width:"170px"}}
-    size="small">
-          <Link 
-            style={{ fontWeight: "600", color:"white" }}
-            to="/mainform">
+      <Box p={1} sx={{ marginLeft: { sm: "85%", xs: "auto" } }}>
+        <Link style={{ fontWeight: "600", color: "white" }} to="/mainform">
+          {" "}
+          <Button
+            color="success"
+            variant="contained"
+            sx={{ width: "170px" }}
+            size="small"
+          >
             Add Bill
-          </Link>
-        </Button>
-          </Box>
+          </Button>
+        </Link>
+      </Box>
       <Box
         p={0.5}
         sx={{

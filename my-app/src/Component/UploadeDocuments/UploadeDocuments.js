@@ -19,7 +19,7 @@ function UploadeDocuments() {
   };
 
   const EMPNAME = localStorage.getItem("name");
-
+  const USERTYPE = localStorage.getItem("User");
   const handleonclick = async () => {
     if (invoiceAttachment) {
       let formData = new FormData();
@@ -38,7 +38,13 @@ function UploadeDocuments() {
         .then((res) => {
           console.log(`Success` + res.data);
           alert("uploaded successfully");
+          if(USERTYPE==="ADMIN"){
           navigate("/billtable");
+          }
+if(USERTYPE==="USER"){
+  navigate("/billtabledatauser");
+}
+
         })
         .catch((err) => {
           console.log(err);
