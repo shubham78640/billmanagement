@@ -21,6 +21,8 @@ import Reimbursement from "./Component/ReimbursementForm/Reimbursement";
 import ApprovalPaymentPage from "./Component/Approval/ApprovalPaymantPage/ApprovalPaymentPage";
 import ReimbursementAdminTable from "./Component/ReimbursementForm/ReimbursementTable/ReimbursementAdminTable";
 import ReimbursementUserTable from "./Component/ReimbursementForm/ReimbursementTable/ReimbursementUserTable";
+import FileUpload from "./Component/ReimbursementForm/FileUpload";
+
 
 function App() {
   useEffect(() => {
@@ -65,6 +67,8 @@ function App() {
         <Route path="/reimbursementadmindatatable" element={<ReimbursementAdminTable/>}/>
         <Route path="/reimbursementuserdatatable" element={<ReimbursementUserTable/>}/>
         <Route path="/reimbursementform" element={<Reimbursement/>}/>
+        <Route path="/reimbursementform/fileupload" element={<FileUpload/>}/>
+
       </Routes>
     </BrowserRouter>
   );
