@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Box, Button} from "@mui/material";
+import Box from "@mui/material/Box";
 import {
   DataGrid,
   GridEventListener,
@@ -7,19 +7,24 @@ import {
   GridToolbar,
 } from "@mui/x-data-grid";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
-function ApprovalAdminDataTabel() {
+function ReimbursementAdminTable() {
 
-
-     const handleEvent = (
+ const [idMM, setIDMM] = useState("");
+  const handleEvent = (
     params, // GridRowParams
     event // MuiEvent<React.MouseEvent<HTMLElement>>
     // GridCallbackDetails
   ) => {
     //  navigate(`admin/${params.row.invoiceId}`)
 
-    if (params.field === "finalapproveStatus") {
-      navigate(`/approvaladmindatatable/statusbyadmin/${params.row.approvalId}`);
+    if (params.field === "updatePayment") {
+      navigate(`/billtable/updatepagment/${params.row.invoiceId}`);
+    }
+    if (params.field === "showBill") {
+      setIDMM(params.row.invoiceId);
+      // navigate(`${params.row.invoiceId}`)
     }
 
     if (params.field === "hodapproveStatus") {
@@ -29,16 +34,14 @@ function ApprovalAdminDataTabel() {
     if (params.field === "approvalpaymentupdate") {
         navigate(`/approvaladmindatatable/updatepayment/${params.row.approvalId}`);
       }
-
   };
 
-  const ReportingManager = localStorage.getItem("reportingManager");
-  const columns = [
+
+    const columns = [
     {
       field: "approvalId",
       headerName: " Approval Id",
-      width:100,
-    //   width: 70,
+     width:100,
       editable: true,
     },
     {
@@ -220,6 +223,24 @@ function ApprovalAdminDataTabel() {
         width: 140,
         editable: true,
       },
+
+         {
+      field: "showBill",
+      headerName: "Show Bill",
+      description: "Bill.",
+      sortable: false,
+      width: 100,
+      type: "action",
+      renderCell: () => (
+        <a
+          style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}
+          href={`http://13.126.160.155:8088/bill/files/get/file/?invoiceId=${idMM}`}
+          target="_blank"
+        >
+          Show Bill
+        </a>
+      ),
+    },
       
   {
       field: "hodapproveStatus",
@@ -261,79 +282,65 @@ function ApprovalAdminDataTabel() {
           </p>
         ),
       },
-  
 
   ];
 
+
   let navigate = useNavigate();
-  const [approvalAdminDatatabledata, setApprovalAdminDatatabledata] = useState([]);
+  const [reimbursementbilltabledata, setReimbursementBillTabledata] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       let dataTable = await fetch(
-        "http://13.126.160.155:8088/bill/purchaseApproval/get/data/all/purchase/approval"
+        "http://13.126.160.155:8088/bill/bill/get/data/all"
       );
       let table = await dataTable.json();
       let adminTableData = await table.data;
-      setApprovalAdminDatatabledata(adminTableData ? adminTableData : "");
+      setReimbursementBillTabledata(adminTableData ? adminTableData : "");
     };
     fetchData();
   }, []);
+  console.log("tabledata", reimbursementbilltabledata);
 
-  const handleapprovalfrom =()=>{
-    navigate("/approvalform")
-  }
-
-  console.log("tabledata", approvalAdminDatatabledata);
   return (
     <>
-     <Box  p={2} sx={{ marginLeft: {sm:"85%", xs:"auto"}}}>
-    <Button  variant="contained" 
-    size="small"
-          color="success"   onClick={handleapprovalfrom}>New Request</Button>
-          </Box>
+    
+          <Box p={1} sx={{ marginLeft: { sm: "85%", xs: "auto" } }}>
+        <Link style={{ fontWeight: "600", color: "white" }} to="/mainform">
+          {" "}
+          <Button
+            color="success"
+            variant="contained"
+            sx={{ width: "170px" }}
+            size="small"
+          >
+        New Request
+          </Button>
+        </Link>
+      </Box>
       <Box
         p={0.5}
         sx={{
-          height: 620,
+          height: 636,
           width: "100%",
           backgroundColor: "#f2f2f2",
-          minHeight: "620px",
+          minHeight: "636px",
           maxHeight: "100%",
-        //   '& .MuiDataGrid-cell--editable': {
-        //     bgcolor: (theme) =>
-        //     'green',
-        //   },
         }}
       >
         <DataGrid
-          rows={approvalAdminDatatabledata}
+          rows={reimbursementbilltabledata}
           columns={columns}
           pageSize={100}
           rowsPerPageOptions={[500]}
-          components={{ Toolbar: GridToolbar }}
-          rowHeight={28}
           onCellClick={handleEvent}
-          initialState={{
-            sorting: {
-              sortModel: [
-                {
-                  field: 'submissionDate',
-                  sort: 'desc',
-                },
-              ],
-            },
-            // filter: {
-            //     filterModel: {
-            //       items: [{ columnField: 'reportingManager', operatorValue: '=', value: 'ReportingManager' }],
-            //     },
-            //   },
-          
-          }}
-        //   isCellEditable={(params) => (params.row.hodApproval === "") }
+          components={{ Toolbar: GridToolbar }}
+          rowHeight={26}
+
         />
       </Box>
+    
     </>
-  );
+  )
 }
 
-export default ApprovalAdminDataTabel;
+export default ReimbursementAdminTable

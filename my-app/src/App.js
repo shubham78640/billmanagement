@@ -19,6 +19,8 @@ import DashBoard from "./Pages/Dashboard/DashBoard";
 import ApprovalManagerDataTable from "./Component/Approval/ApprovalDataTabel/ApprovalManagerDataTable";
 import Reimbursement from "./Component/ReimbursementForm/Reimbursement";
 import ApprovalPaymentPage from "./Component/Approval/ApprovalPaymantPage/ApprovalPaymentPage";
+import ReimbursementAdminTable from "./Component/ReimbursementForm/ReimbursementTable/ReimbursementAdminTable";
+import ReimbursementUserTable from "./Component/ReimbursementForm/ReimbursementTable/ReimbursementUserTable";
 
 function App() {
   useEffect(() => {
@@ -60,6 +62,8 @@ function App() {
         <Route path="/billtabledatauser" element={<BillDataTableUser />} />
         <Route path="/billtabledatauser/user/:id" element={<ItemDataTable />} />
         <Route path="/approvalmanagerdatatable" element={<ApprovalManagerDataTable />} />
+        <Route path="/reimbursementadmindatatable" element={<ReimbursementAdminTable/>}/>
+        <Route path="/reimbursementuserdatatable" element={<ReimbursementUserTable/>}/>
         <Route path="/reimbursementform" element={<Reimbursement/>}/>
       </Routes>
     </BrowserRouter>
