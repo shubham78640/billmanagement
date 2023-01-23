@@ -31,6 +31,13 @@ function BillDataTableUser() {
 
   const columns = [
     {
+      field: "isReimbursement",
+      headerName: "Is Reimbursement?",
+      width: 100,
+      editable: true,
+      description:"Reimbursement",
+    },
+    {
       field: "invoiceId",
       headerName: " Invoice Id",
       width: 70,
