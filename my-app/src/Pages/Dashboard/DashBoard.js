@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { Box } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardNavbaar from "../../Component/Navbaar/DashboardNavbaar";
 
 function randomColor() {
   let hex = Math.floor(Math.random() * 0xFFFFFF);
@@ -66,7 +65,7 @@ function DashBoard() {
           </p>
         </BOX2>
 
-        <BOX2
+        {/* <BOX2
            sx={{ 
             // backgroundColor: "rgba(255, 186, 255, 0.54)",
             border:"1px solid #FFF0F5",
@@ -85,9 +84,9 @@ function DashBoard() {
           <p style={{ fontWeight: "400", fontFamily: "sans-serif" }}>
             Approval Management
           </p>
-        </BOX2>
+        </BOX2> */}
 
-        <BOX2
+        {/* <BOX2
            sx={{ 
             // backgroundColor: "rgba(255, 186, 255, 0.54)",
             border:"1px solid #FFF0F5",
@@ -106,7 +105,7 @@ function DashBoard() {
           <p style={{ fontWeight: "400", fontFamily: "sans-serif" }}>
             Reimbursement Management
           </p>
-        </BOX2>
+        </BOX2> */}
       </Box>
     </BOX1>
     </>

@@ -11,7 +11,7 @@ import AppsIcon from "@mui/icons-material/Apps";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import styled from "@emotion/styled";
-
+import { MasterAPI } from "../../AllData";
 const P = styled("p")({
   fontWeight: "300",
   color: "grey",
@@ -31,7 +31,7 @@ function Navbaar() {
     console.log({});
     try {
       let response = await axios.post(
-        `http://13.126.160.155:8088/bill/login/logout?email=${EMPEMAIL}&employeeCode=${EMPCODE}`,
+        `${MasterAPI}/bill/login/logout?email=${EMPEMAIL}&employeeCode=${EMPCODE}`,
         {
           email: EMPEMAIL,
         }

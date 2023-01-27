@@ -1,4 +1,7 @@
 export const Brand_Name = [{ brand: "" }];
+
+export const MasterAPI = "http://15.207.88.155:8088";
+
 export const Brand = [
   {
     brand: "Pinch",
@@ -124,7 +127,7 @@ export const paymentModeRelation = [
   },
   {
     paymentMode: "Mobile Payment",
-    paymentMethod: ["Paytm", "PhonePe", "Google Pay", "BHIM"],
+    paymentMethod: ["Paytm-Employee", "PhonePe-Employee", "Google Pay-Employee", "BHIM-Employee"],
   },
   {
     paymentMode: "Cheque",

@@ -10,6 +10,7 @@ import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { MasterAPI } from "../../AllData";
 const theme = createTheme({
   components: {
   MuiFormLabel: {
@@ -19,7 +20,7 @@ const theme = createTheme({
   },
   },
  })
- 
+
 function AddItems() {
   const [category, setCategory] = useState("");
   const [itemName, setItemName] = useState("");
@@ -66,7 +67,7 @@ function AddItems() {
   useEffect(() => {
     const getData = async () => {
       let response2 = await fetch(
-        `http://13.126.160.155:8088/bill/item/get/${id}`
+        `${MasterAPI}/bill/item/get/${id}`
       );
       let data2 = await response2.json();
       setTotelItemAmountBB(data2.data);
@@ -81,7 +82,7 @@ function AddItems() {
   useEffect(()=>{
   const ItemListData = async () => {
     let response = await fetch(
-      `http://13.126.160.155:8088/bill/dropdown/get/items/`
+      `${MasterAPI}/bill/dropdown/get/items/`
     );
     let data = await response.json();
     setItemNameDD(data.data);
@@ -109,7 +110,6 @@ function AddItems() {
       quantity,
       rate,
       amount,
-      // itemCode,
       unit,
       sgst,
       cgst,
@@ -123,7 +123,7 @@ function AddItems() {
 
     try {
       let response = await axios.post(
-        "http://13.126.160.155:8088/bill/item/save",
+        `${MasterAPI}/bill/item/save`,
         {
           amount: amount1,
           amountPaid: totelItemAmount,
@@ -141,8 +141,6 @@ function AddItems() {
           redeemed: redeem,
           unit: unit,
           sgst: sgst,
-          // tds: tDSAmount,
-          // tdsAmount: tDSAmountTotel,
           invoiceId: invbillid,
         }
       );
@@ -282,15 +280,6 @@ function AddItems() {
               setAddNewItem(e.target.value);
             }}
           />
-
-          {/* <TextField
-            label="Category"
-            sx={{ width: "300px", backgroundColor:"white" }}
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }}
-          /> */}
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -372,14 +361,6 @@ function AddItems() {
             value={amount1}
           />
 
-          {/* <TextField   label="Rate" size="small" onChange={(e)=>{setRate(e.target.value)}}/> */}
-
-          {/* <TextField label="Delivery Charges"    onChange={(e)=>{setDeliveryCharges(e.target.value)}}/>
-
-        <TextField label="Packaging Charges"    onChange={(e)=>{setPackaging(e.target.value)}}/> */}
-
-          {/* <TextField label="SGST"  onChange={(e)=>{setSgst(e.target.value)}}/> */}
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -417,9 +398,6 @@ function AddItems() {
             renderInput={(params) => <TextField {...params} label="IGST %" />}
           />
 
-          {/* <TextField label="CGST"  onChange={(e)=>{setCgst(e.target.value)}}/>
-
-        <TextField label="IGST"  onChange={(e)=>{setIgst(e.target.value)}}/> */}
           <TextField
             label="GST AMOUNT"
             sx={{ width: "300px", backgroundColor: "white" }}
@@ -477,7 +455,7 @@ function AddItems() {
       </Box>
       <Box textAlign={"center"}>
         <Button
-          disabled={itemName &&totelItemAmount ? false : true}
+          disabled={ totelItemAmount ? false : true}
           color="success"
           size="large"
           sx={{ width: { sm: "300px", xs: "240px" } }}
@@ -489,7 +467,7 @@ function AddItems() {
       </Box>
       <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
         <Button
-        disabled={totelAddItem=="0" || itemName  ? true : false}
+        disabled={totelAddItem=="0"  ? true : false}
           endIcon={<CloudUploadIcon />}
           color="success"
           variant="contained"

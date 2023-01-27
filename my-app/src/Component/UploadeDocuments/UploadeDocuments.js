@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography, Box } from "@mui/material";
 import { useParams } from "react-router";
+import { MasterAPI } from "../../AllData";
 function UploadeDocuments() {
   const invbillid = localStorage.getItem("BillID");
   const { id } = useParams();
@@ -27,7 +28,7 @@ function UploadeDocuments() {
 
       axios
         .post(
-          `http://13.126.160.155:8088/bill/files/upload/file?invoiceId=${id}`,
+          `${MasterAPI}/bill/files/upload/file?invoiceId=${id}`,
           formData,
           {
             headers: {

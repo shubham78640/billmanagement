@@ -12,6 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 import axios from "axios";
+import { MasterAPI } from "../../AllData";
 function PaymentdetailsForm() {
   let navigate = useNavigate();
   const { id } = useParams();
@@ -26,7 +27,7 @@ function PaymentdetailsForm() {
   const handlePaymanetUpdate = async () => {
     try {
       let response = await axios.put(
-        `http://13.126.160.155:8088/bill/bill/update/${id}`,
+        `${MasterAPI}/bill/bill/update/${id}`,
         {
           paidAmount: paidAmount,
           reimbursementDate: newUpdatePaymentDate,
@@ -80,7 +81,7 @@ function PaymentdetailsForm() {
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
-              label="Reimbursement Payment Date"
+              label="Payment Date"
               value={paymentDate}
               onChange={(newValue) => {
                 setPaymentDate(newValue);

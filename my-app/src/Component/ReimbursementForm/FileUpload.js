@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography, Box } from "@mui/material";
 import { useParams } from "react-router";
+import { MasterAPI } from "../../AllData";
 
 
 function FileUpload() {
@@ -30,7 +31,7 @@ function FileUpload() {
 
       axios
         .post(
-          `http://13.126.160.155:8088/bill/reimbursement/upload/file?employeeCode=${EMPCODE}`,
+          `${MasterAPI}/bill/reimbursement/upload/file?employeeCode=${EMPCODE}`,
           formData,
           {
             headers: {

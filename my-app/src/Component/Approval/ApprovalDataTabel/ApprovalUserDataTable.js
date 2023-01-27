@@ -8,6 +8,7 @@ import {
 } from "@mui/x-data-grid";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { MasterAPI } from "../../../AllData";
 
 function ApprovalUserDataTable() {
   const EMPCODE = localStorage.getItem("employeeCode");
@@ -212,7 +213,7 @@ function ApprovalUserDataTable() {
   useEffect(() => {
     const fetchData = async () => {
       let dataTable = await fetch(
-        `http://13.126.160.155:8088/bill/purchaseApproval/get/data/purchase/approval/employeeCode?employeeCode=${EMPCODE}`
+        `${MasterAPI}/bill/purchaseApproval/get/data/purchase/approval/employeeCode?employeeCode=${EMPCODE}`
       );
       let table = await dataTable.json();
       let adminTableData = await table.data;

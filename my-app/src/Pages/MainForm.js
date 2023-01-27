@@ -15,6 +15,7 @@ import {
   CategoryRelation,
   SubCategory2Relation,
   subBrand2,
+  MasterAPI,
 } from "../AllData";
 import { createTheme, ThemeProvider } from "@mui/material";
 
@@ -136,9 +137,8 @@ function MainForm() {
 
     try {
       let response = await axios.post(
-        "http://13.126.160.155:8088/bill/bill/save",
+       `${MasterAPI}/bill/bill/save`,
         {
-          isReimbursement:reimbirsment,
           brand: brand,
           category: category,
           department: department,
@@ -237,7 +237,7 @@ function MainForm() {
 
     const CustomerListData = async () => {
       let response = await fetch(
-        `http://13.126.160.155:8088/bill/dropdown/get/partners/`
+        `${MasterAPI}/bill/dropdown/get/partners/`
       );
       let data = await response.json();
       setCustomerNameDD(data.data);
@@ -276,7 +276,7 @@ function MainForm() {
       >
         <ThemeProvider theme={theme}>
 
-          <FormControl sx={{ minWidth: 300, width: 300, bgcolor:"white" }} >
+          {/* <FormControl sx={{ minWidth: 300, width: 300, bgcolor:"white" }} >
             <InputLabel id="demo-select-small" required>
             Is Reimbursement?
             </InputLabel>
@@ -293,7 +293,7 @@ function MainForm() {
                 <MenuItem key={"YES"} value={"YES"}>YES</MenuItem>
                 <MenuItem key={"NO"} value={"NO"}>NO</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
 
           <Autocomplete
             disablePortal
@@ -355,7 +355,7 @@ function MainForm() {
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
-              label="Payment Date"
+              label="Paid Payment Date"
               value={paymentDate}
               disabled={paymentStatus === "To be paid" ? true : false}
               onChange={(newValue) => {
@@ -729,6 +729,7 @@ function MainForm() {
             id="combo-box-demo"
             options={customerNameDD}
             getOptionLabel={(option) => option.partnerNameCode}
+            //getOptionLabel={(option) => option.partnerNameCode?option.partnerNameCode:""}
             sx={{ width: 300, backgroundColor: "white" }}
             onChange={(event, newValue) => {
               setCustomerName(newValue.partnerNameCode);
@@ -964,99 +965,6 @@ const paymentMode1Data = [
   "Cheque",
 ];
 
-// const paymentcycleData = [
-//    "0" ,
-//    "1" ,
-//    "2" ,
-//    "3" ,
-//    "4" ,
-//    "5" ,
-//    "6" ,
-//    "7" ,
-//    "8" ,
-//    "9" ,
-//    "10",
-//    "11",
-//    "12",
-//    "13",
-//    "14",
-//    "15",
-//    "16",
-//    "17",
-//    "18",
-//    "19",
-//    "20",
-//    "21",
-//    "22",
-//    "23",
-//    "24",
-//    "25",
-//    "26",
-//    "27",
-//    "28",
-//    "29",
-//    "30",
-//    "31",
-//    "32",
-//    "33",
-//    "34",
-//    "35",
-//    "36",
-//    "37",
-//    "38",
-//    "39",
-//    "40",
-//    "41",
-//    "42",
-//    "43",
-//    "44",
-//    "45",
-//    "46",
-//    "47",
-//    "48",
-//    "49",
-//    "50",
-//    "51",
-//    "52",
-//    "53",
-//    "54",
-//    "55",
-//    "56",
-//    "57",
-//    "58",
-//    "59",
-//    "60",
-//    "61",
-//    "62",
-//    "63",
-//    "64",
-//    "65",
-//    "66",
-//    "67",
-//    "68",
-//    "69",
-//    "70",
-//    "71",
-//    "72",
-//    "73",
-//    "74",
-//    "75",
-//    "76",
-//    "77",
-//    "78",
-//    "79",
-//    "80",
-//    "81",
-//    "82",
-//    "83",
-//    "84",
-//    "85",
-//    "86",
-//    "87",
-//    "88",
-//    "89",
-//    "90",
-// ];
 
 const paymentMethodData = [
   { label: "Employee" },
@@ -1103,11 +1011,6 @@ const ServiceCategoryDD = [
   "Services provided by restaurant",
 ];
 
-const sGSTDATA = ["2.5", "6", "9", "14", "0"];
-
-const cGSTDATA = ["2.5", "6", "9", "14", "0"];
-
-const iGSTDATA = ["5", "12", "18", "28", "0"];
 
 const PayDirectCardDetailsNumberDD = [
   "N/A",

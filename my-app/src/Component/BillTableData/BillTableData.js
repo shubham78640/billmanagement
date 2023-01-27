@@ -8,6 +8,7 @@ import {
 } from "@mui/x-data-grid";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { MasterAPI } from "../../AllData";
 
 function BillTableData() {
   const [idMM, setIDMM] = useState("");
@@ -36,13 +37,7 @@ function BillTableData() {
 
 
   const columns = [
-    {
-      field: "isReimbursement",
-      headerName: "Is Reimbursement?",
-      width: 100,
-      editable: true,
-      description:"Reimbursement",
-    },
+ 
     {
       field: "invoiceId",
       headerName: "Invoice Id",
@@ -317,7 +312,7 @@ function BillTableData() {
       description:"Update Paid Amount",
     },
     {
-      field: " updatePaymentStatus",
+      field: "updatePaymentStatus",
       headerName: "Update Payment Status",
       width: 100,
       editable: true,
@@ -343,7 +338,7 @@ function BillTableData() {
       renderCell: () => (
         <a
           style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}
-          href={`http://13.126.160.155:8088/bill/files/get/file/?invoiceId=${idMM}`}
+          href={`${MasterAPI}/bill/files/get/file/?invoiceId=${idMM}`}
           target="_blank"
         >
           Show Bill
@@ -380,7 +375,7 @@ function BillTableData() {
     {
       field: "invoiceStatusupdate",
       headerName: "Invoice Status",
-      description: "This column has a value getter and is not sortable.",
+      description: "This is For Admin Use Only",
       sortable: false,
       width: 130,
       type: "action",
@@ -397,7 +392,7 @@ function BillTableData() {
   useEffect(() => {
     const fetchData = async () => {
       let dataTable = await fetch(
-        "http://13.126.160.155:8088/bill/bill/get/data/all"
+       `${MasterAPI}/bill/bill/get/data/all`,
       );
       let table = await dataTable.json();
       let adminTableData = await table.data;

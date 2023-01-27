@@ -7,7 +7,7 @@ import {
   GridToolbar,
 } from "@mui/x-data-grid";
 import { useParams } from "react-router";
-
+import { MasterAPI } from "../../AllData";
 const columns = [
   {
     field: "invoiceNumber",
@@ -119,7 +119,7 @@ function ItemDataTable() {
   useEffect(() => {
     const fetchData = async () => {
       let dataTable = await fetch(
-        `http://13.126.160.155:8088/bill/item/get/${id}`
+        `${MasterAPI}/bill/item/get/${id}`
       );
       let table = await dataTable.json();
       let adminTableData = await table.data;

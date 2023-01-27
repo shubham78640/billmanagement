@@ -8,7 +8,7 @@ import {
 } from "@mui/x-data-grid";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-
+import { MasterAPI } from "../../AllData";
 function BillDataTableUser() {
   const [idMM, setIDMM] = useState("");
 
@@ -208,7 +208,7 @@ function BillDataTableUser() {
       renderCell: () => (
         <a
           style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}
-          href={`http://13.126.160.155:8088/bill/files/get/file/?invoiceId=${idMM}`}
+          href={`${MasterAPI}/bill/files/get/file/?invoiceId=${idMM}`}
           target="_blank"
         >
           Show Bill

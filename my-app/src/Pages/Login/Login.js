@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import pinch from "../../images/Pinch.png";
 import core from "../../images/core.png";
+import { MasterAPI } from "../../AllData";
 function Login() {
   const [employeeCode, setEmployeeCode] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +15,7 @@ function Login() {
   const handleSubmit = async () => {
     try {
       let response = await axios.post(
-        "http://13.126.160.155:8088/bill/login/login",
+        `${MasterAPI}/bill/login/login`,
         {
           employeeCode: employeeCode,
           password: password,

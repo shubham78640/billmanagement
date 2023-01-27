@@ -7,7 +7,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-
+import { MasterAPI } from "../../../AllData";
 import axios from "axios";
 function InvoiceStatusRemark() {
   let navigate = useNavigate();
@@ -18,7 +18,7 @@ function InvoiceStatusRemark() {
   const handleInvoiceStatusRemarkUpdate = async () => {
     try {
       let response = await axios.put(
-        ` http://13.126.160.155:8088/bill/bill/update/invoiceStatus/${id}`,
+        `${MasterAPI}/bill/bill/update/invoiceStatus/${id}`,
         {
           invoiceStatus: statusRemark,
         }
@@ -42,13 +42,26 @@ function InvoiceStatusRemark() {
             alignItems: "center",
           }}
         >
-          <TextField
+          {/* <TextField
             sx={{ width: 300 }}
             id="outlined-basic"
             label="Invoice Status Update"
             variant="outlined"
             onChange={(e) => setStatusRemark(e.target.value)}
             value={statusRemark}
+          /> */}
+
+       <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={invoiceStatusDropDown}
+            sx={{ width: 300, backgroundColor: "white" }}
+            onChange={(event, newValue) => {
+              setStatusRemark(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} required label=" Invoice Status Update" />
+            )}
           />
 
           <Button
@@ -68,3 +81,10 @@ function InvoiceStatusRemark() {
 }
 
 export default InvoiceStatusRemark;
+
+
+const invoiceStatusDropDown=
+[
+  "Accept",
+  "Reject"
+]
