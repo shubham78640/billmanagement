@@ -479,10 +479,10 @@ function BillTableData() {
             },
           }}
           getCellClassName={(params) => {
-            if ( params.value == "Reject") {
+            if ( params.value === "Reject") {
               return 'paid';
             }
-            return params.value =="Already Paid" ? 'paid' : 'tobepaid';
+            return params.value ==="Already Paid" ? 'paid' : 'tobepaid';
           }}
         />
       </Box>
