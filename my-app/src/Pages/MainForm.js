@@ -178,7 +178,7 @@ function MainForm() {
           tdsAmount: tDSAmountTotel,
           paymentStatus: paymentStatus,
           invoiceType: invoiceType,
-          netAmount: netAmount,
+          netAmount: NetAmount,
           approvalId: approvalID,
         }
       );
@@ -798,6 +798,7 @@ function MainForm() {
           <TextField
             sx={{ width: 300, backgroundColor: "white" }}
             id="outlined-basic"
+            required
             label="Invoice Description"
             variant="outlined"
             onChange={(e) => setInvoiceDescription(e.target.value)}
@@ -908,7 +909,9 @@ function MainForm() {
             invoiceType &&
             paymentStatus &&
             gSTApplicable &&
-            tDSApplicable
+            tDSApplicable&&
+            customerName&&
+            invoiceDescription
               ? false
               : true
           }

@@ -490,7 +490,7 @@ const iGSTDATA = ["5", "12", "18", "28", "0"];
 
 const tDSDATA = ["0", "1", "2", "5", "10", "15", "20", "25", "30"];
 
-const unitListDD = ["Kg", "Ltr", "Pcs", "Gm", "Mtr", "Cm", "Km", "Sqft", "Nos","Lumpsum","Month"];
+const unitListDD = ["Kg", "Ltr", "Pcs", "Gm", "Mtr", "Cm", "Km", "Sqft", "Nos","Lumpsum","Month","Pkt","Pair","Bottle"];
 
 const Category1DropDown = [
  

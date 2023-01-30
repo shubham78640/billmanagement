@@ -111,6 +111,20 @@ function BillTableData() {
       description:"Payment Date",
     },
     {
+      field: "paymentMode",
+      headerName: "Payment Mode",
+      width: 120,
+      editable: true,
+      description:"Payment Mode",
+    },
+    {
+      field: "paymentMethod",
+      headerName: "Payment Method",
+      width: 120,
+      editable: true,
+      description:"Payment Method",
+    }, 
+    {
       field: "brand",
       headerName: "Brand",
       width: 100,
@@ -206,20 +220,7 @@ function BillTableData() {
       editable: true,
       description:"Net Amount",
     },
-    {
-      field: "paymentMode",
-      headerName: "Payment Mode",
-      width: 120,
-      editable: true,
-      description:"Payment Mode",
-    },
-    {
-      field: "paymentMethod",
-      headerName: "Payment Method",
-      width: 120,
-      editable: true,
-      description:"Payment Method",
-    }, 
+  
     {
       field: "payDirectCard",
       headerName: "Pay Direct Card Details",
@@ -236,21 +237,21 @@ function BillTableData() {
       {
       field: "tdsApplicable",
       headerName: "TDS Applicable",
-      width: 120,
+      width: 100,
       editable: true,
       description:"TDS Applicable",
     },
       {
       field: "gstApplicable",
       headerName: "GST Applicable",
-      width: 120,
+      width: 100,
       editable: true,
       description:"GST Applicable",
     },
     {
       field: "partnerNameCode",
       headerName: "Partner/Vendor Name",
-      width: 120,
+      width: 190,
       editable: true,
       description:"Partner/Vendor Name",
     },
@@ -293,7 +294,7 @@ function BillTableData() {
     {
       field: "invoiceStatus",
       headerName: "Invoice Status",
-      width: 180,
+      width: 100,
       editable: true,
       description:"Invoice Status",
     },
@@ -321,17 +322,15 @@ function BillTableData() {
    
     {
       field: "reimbursementDate",
-      headerName: "Reimbursement Date",
+      headerName: "Payment Date",
       width: 100,
       editable: true,
-      description:"Reimbursement Date",
+      description:"Payment Date",
     },
-
- 
     {
       field: "showBill",
       headerName: "Show Bill",
-      description: "This column has a value getter and is not sortable.",
+      description: "For Show Your Bill",
       sortable: false,
       width: 100,
       type: "action",
@@ -349,7 +348,7 @@ function BillTableData() {
     {
       field: "showItem",
       headerName: "Items Details",
-      description: "This column has a value getter and is not sortable.",
+      description: "This column for Show Your Item List.",
       sortable: false,
       width: 100,
       type: "action",
@@ -362,7 +361,7 @@ function BillTableData() {
     {
       field: "updatePayment",
       headerName: "Update Payment",
-      description: "This column has a value getter and is not sortable.",
+      description: "You can update Your Payment here.",
       sortable: false,
       width: 130,
       type: "action",
@@ -435,15 +434,14 @@ function BillTableData() {
           backgroundColor: "#f2f2f2",
           minHeight: "636px",
           maxHeight: "100%",
-          // '& .cold': {
-          //   backgroundColor: '#b9d5ff91',
-          //   color: '#1a3e72',
-          // },
-          // '& .hot': {
-          //   backgroundColor: 'red',
-          //   color: 'white',
-           
-          // },
+          '& .tobepaid': {
+            // backgroundColor: '#E2E2E2',
+            color: '#1a3e72',
+          },
+          '& .paid': {
+            backgroundColor: '#DD6464',
+            color: '#EFEFEF', 
+          },
         }}
       >
         <DataGrid
@@ -480,12 +478,12 @@ function BillTableData() {
               ],
             },
           }}
-          // getCellClassName={(params) => {
-          //   if ( params.value == null) {
-          //     return 'cold';
-          //   }
-          //   return params.value =="Already Paid" ? 'hot' : 'cold';
-          // }}
+          getCellClassName={(params) => {
+            if ( params.value == "Reject") {
+              return 'paid';
+            }
+            return params.value =="Already Paid" ? 'paid' : 'tobepaid';
+          }}
         />
       </Box>
     </>
