@@ -269,6 +269,7 @@ function BillDataTableUser() {
           backgroundColor: "#f2f2f2",
           minHeight: "636px",
           maxHeight: "100%",
+       
         }}
       >
         <DataGrid
@@ -295,6 +296,7 @@ function BillDataTableUser() {
           components={{ Toolbar: GridToolbar }}
           //==============On Export Csv Click event ============
           rowHeight={26}
+        
         />
       </Box>
     </>

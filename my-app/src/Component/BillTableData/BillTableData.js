@@ -435,6 +435,15 @@ function BillTableData() {
           backgroundColor: "#f2f2f2",
           minHeight: "636px",
           maxHeight: "100%",
+          // '& .cold': {
+          //   backgroundColor: '#b9d5ff91',
+          //   color: '#1a3e72',
+          // },
+          // '& .hot': {
+          //   backgroundColor: 'red',
+          //   color: 'white',
+           
+          // },
         }}
       >
         <DataGrid
@@ -471,6 +480,12 @@ function BillTableData() {
               ],
             },
           }}
+          // getCellClassName={(params) => {
+          //   if ( params.value == null) {
+          //     return 'cold';
+          //   }
+          //   return params.value =="Already Paid" ? 'hot' : 'cold';
+          // }}
         />
       </Box>
     </>
