@@ -7,6 +7,7 @@ import {
   GridToolbar,
 } from "@mui/x-data-grid";
 import { Link, useNavigate } from "react-router-dom";
+import { MasterAPI } from "../../../AllData";
 
 function ApprovalAdminDataTabel() {
 
@@ -270,7 +271,7 @@ function ApprovalAdminDataTabel() {
   useEffect(() => {
     const fetchData = async () => {
       let dataTable = await fetch(
-        "http://13.126.160.155:8088/bill/purchaseApproval/get/data/all/purchase/approval"
+        `${MasterAPI}/bill/purchaseApproval/get/data/all/purchase/approval`
       );
       let table = await dataTable.json();
       let adminTableData = await table.data;

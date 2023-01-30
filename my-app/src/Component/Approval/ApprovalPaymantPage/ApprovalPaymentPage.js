@@ -12,6 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 import axios from "axios";
+import { MasterAPI } from "../../../AllData";
 
 function ApprovalPaymentPage() {
     let navigate = useNavigate();
@@ -27,7 +28,7 @@ function ApprovalPaymentPage() {
     const handlePaymanetUpdate = async () => {
       try {
         let response = await axios.put(
-          `http://13.126.160.155:8088/bill/purchaseApproval/update/paymentStatus/${id}`,
+          `${MasterAPI}/bill/purchaseApproval/update/paymentStatus/${id}`,
           {
             paidAmount: approvepaidAmount,
             paymentStatus: approvepaymentStatus,

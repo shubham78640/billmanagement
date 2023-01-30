@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from "moment";
-import { Brand, paymentModeRelation } from "../../AllData";
+import { Brand, MasterAPI, paymentModeRelation } from "../../AllData";
 
 const theme = createTheme({
   components: {
@@ -93,7 +93,7 @@ function ApprovalForm() {
     });
     try {
       let response = await axios.post(
-        "http://13.126.160.155:8088/bill/purchaseApproval/save/purchase",
+        `${MasterAPI}/bill/purchaseApproval/save/purchase`,
         {
           brand: brand,
           department: department,

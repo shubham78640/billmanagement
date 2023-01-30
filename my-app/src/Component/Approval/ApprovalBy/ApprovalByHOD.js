@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import moment from "moment";
 import axios from "axios";
+import { MasterAPI } from "../../../AllData";
 function ApprovalByHOD() {
 
     let navigate = useNavigate();
@@ -24,7 +25,7 @@ function ApprovalByHOD() {
     const handleHODStatusUpdate = async () => {
         try {
           let response = await axios.put(
-            `http://13.126.160.155:8088/bill/purchaseApproval/update/hod?approvalId=${id}`,
+            `${MasterAPI}/bill/purchaseApproval/update/hod?approvalId=${id}`,
             {
                 hodAapprovalDate:DATEOFChangesHODUpdate ,
                 hodApproval: updatehodStatus,
