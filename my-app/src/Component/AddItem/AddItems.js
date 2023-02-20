@@ -13,13 +13,13 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { MasterAPI } from "../../AllData";
 const theme = createTheme({
   components: {
-  MuiFormLabel: {
-  styleOverrides: {
-  asterisk: { color: "red" },
+    MuiFormLabel: {
+      styleOverrides: {
+        asterisk: { color: "red" },
+      },
+    },
   },
-  },
-  },
- })
+});
 
 function AddItems() {
   const [category, setCategory] = useState("");
@@ -66,42 +66,30 @@ function AddItems() {
 
   useEffect(() => {
     const getData = async () => {
-      let response2 = await fetch(
-        `${MasterAPI}/bill/item/get/${id}`
-      );
+      let response2 = await fetch(`${MasterAPI}/bill/item/get/${id}`);
       let data2 = await response2.json();
       setTotelItemAmountBB(data2.data);
-      // console.log("data2",data2)
     };
     getData();
   }, []);
 
   const totelAddItem = totelItemAmountBB.length;
 
+  useEffect(() => {
+    const ItemListData = async () => {
+      let response = await fetch(`${MasterAPI}/bill/dropdown/get/items/`);
+      let data = await response.json();
+      setItemNameDD(data.data);
+    };
 
-  useEffect(()=>{
-  const ItemListData = async () => {
-    let response = await fetch(
-      `${MasterAPI}/bill/dropdown/get/items/`
-    );
-    let data = await response.json();
-    setItemNameDD(data.data);
-  };
-
-  ItemListData();
-
-},[])
-  // const abcd=  totelItemAmountBB.reduce((totel,item)=>{
-  //   return totel+ item.amountPaid;
-  // },0);
-
-  //console.log("abcd",abcd)
+    ItemListData();
+  }, []);
 
   const INVTOTELAMOUNT = totelItemAmountBB
     .map((item) => item.amountPaid)
     .reduce((prev, curr) => prev + curr, 0);
 
-   console.log("1234",itemNameDD)
+  console.log("1234", itemNameDD);
 
   const handleSubmit = async () => {
     console.log({
@@ -122,28 +110,25 @@ function AddItems() {
     });
 
     try {
-      let response = await axios.post(
-        `${MasterAPI}/bill/item/save`,
-        {
-          amount: amount1,
-          amountPaid: totelItemAmount,
-          categoryItem: category,
-          cgst: sgst,
-          dateOfInvoice: invDate,
-          discount: discount,
-          gstAmountItem: gsttotelvalue,
-          igst: igst,
-          invoiceNumber: invNum,
-          addNewItem: addNewItem,
-          itemNameCode: itemName,
-          quantity: quantity,
-          rate: rate,
-          redeemed: redeem,
-          unit: unit,
-          sgst: sgst,
-          invoiceId: invbillid,
-        }
-      );
+      let response = await axios.post(`${MasterAPI}/bill/item/save`, {
+        amount: amount1,
+        amountPaid: totelItemAmount,
+        categoryItem: category,
+        cgst: sgst,
+        dateOfInvoice: invDate,
+        discount: discount,
+        gstAmountItem: gsttotelvalue,
+        igst: igst,
+        invoiceNumber: invNum,
+        addNewItem: addNewItem,
+        itemNameCode: itemName,
+        quantity: quantity,
+        rate: rate,
+        redeemed: redeem,
+        unit: unit,
+        sgst: sgst,
+        invoiceId: invbillid,
+      });
       console.log(response);
       window.location.reload();
     } catch (error) {
@@ -211,8 +196,7 @@ function AddItems() {
               display: "flex",
               flexDirection: "column",
               gap: "10px",
-              marginRight: {sm:"90px",xs:"0%"},
-              
+              marginRight: { sm: "90px", xs: "0%" },
             }}
           >
             <Typography variant="p" color="initial">
@@ -250,212 +234,148 @@ function AddItems() {
             justifyContent: "center",
             padding: "20px",
           }}
-        > <ThemeProvider theme = {theme}>
-          <Autocomplete
-            disablePortal
-            options={itemNameDD}
-            getOptionLabel={(option) => option.itemNameCode}
-            sx={{ width: "300px", backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setItemName(newValue.itemNameCode);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} required label="Item Name" />
-            )}
-          />
+        >
+          {" "}
+          <ThemeProvider theme={theme}>
+            <Autocomplete
+              disablePortal
+              options={itemNameDD}
+              getOptionLabel={(option) => option.itemNameCode}
+              sx={{ width: "300px", backgroundColor: "white" }}
+              onChange={(event, newValue) => {
+                setItemName(newValue.itemNameCode);
+              }}
+              renderInput={(params) => (
+                <TextField {...params} required label="Item Name" />
+              )}
+            />
+            <TextField
+              label="Add New Item"
+              disabled={itemName == "others" ? false : true}
+              sx={{ width: "300px", backgroundColor: "white" }}
+              onChange={(e) => {
+                setAddNewItem(e.target.value);
+              }}
+            />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={Category1DropDown}
+              sx={{ width: "300px", backgroundColor: "white" }}
+              onChange={(event, newValue) => {
+                setCategory(newValue);
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Category" />
+              )}
+            />
 
-          {/* <TextField
-            label="Item Name"
-            sx={{ width: "300px", backgroundColor:"white" }}
-            onChange={(e) => {
-              setItemName(e.target.value);
-            }}
-          /> */}
+            <TextField
+              label="Quantity"
+              sx={{ width: "300px", backgroundColor: "white" }}
+              onChange={(e) => {
+                setQuantity(e.target.value);
+              }}
+            />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={unitListDD}
+              sx={{ width: "300px", backgroundColor: "white" }}
+              onChange={(event, newValue) => {
+                setUnit(newValue);
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Unit of measurement" />
+              )}
+            />
+            <TextField
+              label="Item Rate"
+              sx={{ width: "300px", backgroundColor: "white" }}
+              onChange={(e) => {
+                setRate(e.target.value);
+              }}
+            />
 
-          <TextField
-            label="Add New Item"
-            disabled={itemName == "others" ? false : true}
-            sx={{ width: "300px", backgroundColor: "white" }}
-            onChange={(e) => {
-              setAddNewItem(e.target.value);
-            }}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={Category1DropDown}
-            sx={{ width: "300px", backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setCategory(newValue);
-            }}
-            renderInput={(params) => <TextField  {...params} label="Category" />}
-          />
+            <TextField
+              label="Amount"
+              sx={{ width: "300px", backgroundColor: "white" }}
+              InputLabelProps={{ shrink: true }}
+              disabled
+              value={amount1}
+            />
 
-          {/* <Autocomplete
-            disablePortal
-            options={top100Films}
-            sx={{ width: "300px" }}
-            onChange={(event, newValue) => {
-              setItemCode(newValue.label);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Item Code" />
-            )}
-          /> */}
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              sx={{ width: "300px", backgroundColor: "white" }}
+              options={sGSTDATA}
+              onChange={(event, newValue) => {
+                setSgst(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} label="SGST %" />}
+            />
 
-          {/* <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={top100Films}
-            sx={{ width: "300px" }}
-            onChange={(event, newValue) => {
-              setItemName(newValue.label);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Name of Item" />
-            )}
-          /> */}
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={cGSTDATA}
+              disabled
+              sx={{ width: "300px", backgroundColor: "white" }}
+              value={sgst}
+              renderInput={(params) => <TextField {...params} label="CGST %" />}
+            />
 
-          {/* <TextField   label="HSN/SAC Code"  onChange={(e)=>{setHSNCode(e.target.value)}}/> */}
-          <TextField
-            label="Quantity"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            onChange={(e) => {
-              setQuantity(e.target.value);
-            }}
-          />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={iGSTDATA}
+              disabled={sgst == "0" ? false : true}
+              sx={{ width: "300px", backgroundColor: "white" }}
+              onChange={(event, newValue) => {
+                setIgst(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} label="IGST %" />}
+            />
 
-          {/* <TextField   label="Unit"  onChange={(e)=>{setUnit(e.target.value)}}/> */}
+            <TextField
+              label="GST AMOUNT"
+              sx={{ width: "300px", backgroundColor: "white" }}
+              InputLabelProps={{ shrink: true }}
+              disabled
+              value={gsttotelvalue}
+            />
 
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={unitListDD}
-            sx={{ width: "300px", backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setUnit(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} label="Unit of measurement" />}
-          />
+            <TextField
+              label="Discount"
+              sx={{ width: "300px", backgroundColor: "white" }}
+              InputLabelProps={{ shrink: true }}
+              onChange={(e) => {
+                setDiscount(e.target.value);
+              }}
+            />
 
-          {/* <TextField
-            label="Unit"
-            sx={{ width: "300px", backgroundColor:"white" }}
-            onChange={(e) => {
-              setUnit(e.target.value);
-            }}
-          /> */}
-          <TextField
-            label="Item Rate"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            onChange={(e) => {
-              setRate(e.target.value);
-            }}
-          />
-
-          <TextField
-            label="Amount"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            InputLabelProps={{ shrink: true }}
-            disabled
-            value={amount1}
-          />
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            options={sGSTDATA}
-            onChange={(event, newValue) => {
-              setSgst(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} label="SGST %" />}
-          />
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={cGSTDATA}
-            disabled
-            sx={{ width: "300px", backgroundColor: "white" }}
-            // onChange={(event, newValue) => {
-            //   setCgst(newValue);
-            // }}
-            value={sgst}
-            // setCgst={sgst}
-            renderInput={(params) => <TextField {...params} label="CGST %" />}
-          />
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={iGSTDATA}
-            disabled={sgst == "0" ? false : true}
-            sx={{ width: "300px", backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setIgst(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} label="IGST %" />}
-          />
-
-          <TextField
-            label="GST AMOUNT"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            InputLabelProps={{ shrink: true }}
-            disabled
-            value={gsttotelvalue}
-          />
-
-          <TextField
-            label="Discount"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            InputLabelProps={{ shrink: true }}
-            onChange={(e) => {
-              setDiscount(e.target.value);
-            }}
-          />
-
-          <TextField
-            label="Redeem"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            InputLabelProps={{ shrink: true }}
-            onChange={(e) => {
-              setRedeem(e.target.value);
-            }}
-          />
-          {/* <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={tDSDATA}
-            sx={{ width: "300px", backgroundColor: "white" }}
-            onChange={(event, newValue) => {
-              setTDSAmount(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} label="TDS %" />}
-          />
-          <TextField
-            label="TDS Amount"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            disabled
-            InputLabelProps={{ shrink: true }}
-            value={tDSAmountTotel}
-          /> */}
-
-          <TextField
-          required
-            label="Amount Paid"
-            sx={{ width: "300px", backgroundColor: "white" }}
-            InputLabelProps={{ shrink: true }}
-            // disabled
-            // onChange={(e)=>{setBillAmount(e.target.value)}}
-            value={totelItemAmount}
-          />
-            </ThemeProvider>
+            <TextField
+              label="Redeem"
+              sx={{ width: "300px", backgroundColor: "white" }}
+              InputLabelProps={{ shrink: true }}
+              onChange={(e) => {
+                setRedeem(e.target.value);
+              }}
+            />
+            <TextField
+              required
+              label="Amount Paid"
+              sx={{ width: "300px", backgroundColor: "white" }}
+              InputLabelProps={{ shrink: true }}
+              value={totelItemAmount}
+            />
+          </ThemeProvider>
         </Box>
       </Box>
       <Box textAlign={"center"}>
         <Button
-          disabled={ totelItemAmount ? false : true}
+          disabled={totelItemAmount ? false : true}
           color="success"
           size="large"
           sx={{ width: { sm: "300px", xs: "240px" } }}
@@ -467,7 +387,7 @@ function AddItems() {
       </Box>
       <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
         <Button
-        disabled={totelAddItem=="0"  ? true : false}
+          disabled={totelAddItem == "0" ? true : false}
           endIcon={<CloudUploadIcon />}
           color="success"
           variant="contained"
@@ -490,10 +410,25 @@ const iGSTDATA = ["5", "12", "18", "28", "0"];
 
 const tDSDATA = ["0", "1", "2", "5", "10", "15", "20", "25", "30"];
 
-const unitListDD = ["Kg", "Ltr", "Pcs", "Gm", "Mtr", "Cm", "Km", "Sqft", "Nos","Lumpsum","Month","Pkt","Pair","Bottle","Set"];
+const unitListDD = [
+  "Kg",
+  "Ltr",
+  "Pcs",
+  "Gm",
+  "Mtr",
+  "Cm",
+  "Km",
+  "Sqft",
+  "Nos",
+  "Lumpsum",
+  "Month",
+  "Pkt",
+  "Pair",
+  "Bottle",
+  "Set",
+];
 
 const Category1DropDown = [
- 
   "Allowance",
   "Baby Care",
   "Bakery",
@@ -546,4 +481,3 @@ const Category1DropDown = [
   "Vegetables",
   "Water",
 ];
-

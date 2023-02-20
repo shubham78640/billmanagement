@@ -23,9 +23,8 @@ export const Brand = [
 
 export const subBrand2 = [
   {
-    subBrandRelation:"Pinch D2C",
-    subBrand2Relation:[
-    
+    subBrandRelation: "Pinch D2C",
+    subBrand2Relation: [
       "CC20220001 - Khushboo Chawla",
       "CC20220002 - Deepali Gupta",
       "CC20220003 - Robin Arora",
@@ -89,21 +88,17 @@ export const subBrand2 = [
       "CC20220065 - SIDCO Shivalik Apartments RWA",
       "CC20220066 - Sakshi Ajmera",
       "CC20220070 - Gaurav Agrawal",
-    
-  ]
+    ],
   },
   {
-    subBrandRelation:"Pinch B2B",
-    subBrand2Relation:[
-
-
-
-     " CC20220067 - Sidco Shivalik, Manesar",
-"CC20220068 - Ompee International School, Manesar",
-"CC20220069 - Belvedere Towers, Gurgaon",
-    ]
-  }
-]
+    subBrandRelation: "Pinch B2B",
+    subBrand2Relation: [
+      " CC20220067 - Sidco Shivalik, Manesar",
+      "CC20220068 - Ompee International School, Manesar",
+      "CC20220069 - Belvedere Towers, Gurgaon",
+    ],
+  },
+];
 
 export const paymentModeRelation = [
   {
@@ -128,7 +123,12 @@ export const paymentModeRelation = [
   },
   {
     paymentMode: "Mobile Payment",
-    paymentMethod: ["Paytm-Employee", "PhonePe-Employee", "Google Pay-Employee", "BHIM-Employee"],
+    paymentMethod: [
+      "Paytm-Employee",
+      "PhonePe-Employee",
+      "Google Pay-Employee",
+      "BHIM-Employee",
+    ],
   },
   {
     paymentMode: "Cheque",
@@ -144,7 +144,7 @@ export const Department = [
       "Office Supplies",
       "Repair & Maintenance",
       "Travel Desk",
-      "Brokerage"
+      "Brokerage",
     ],
   },
   {
@@ -475,7 +475,6 @@ export const CategoryRelation = [
       "Travel",
       "Utilities",
       "Vegitables",
-      
     ],
   },
   {

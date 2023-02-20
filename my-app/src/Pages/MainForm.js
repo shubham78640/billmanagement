@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Button, Autocomplete, TextField, Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  Button,
+  Autocomplete,
+  TextField,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
@@ -88,8 +97,9 @@ function MainForm() {
   const [subBrandvalue2, setSubBrandvalue2] = useState([]);
   const [netAmount, setNetAmount] = useState("");
   const [approvalID, setApprovalID] = useState("");
-  const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic]=useState(true);
-  const [reimbirsment,setReimbirsment] = useState("")
+  const [buttonActiveInectiveLogic, setButtonActiveInectiveLogic] =
+    useState(true);
+  const [reimbirsment, setReimbirsment] = useState("");
   const [customerCodeDD, setCustomerCodeDD] = useState([]);
   const [invoiceType, setInvoiceType] = useState("");
   // let customerNameDD = [];
@@ -136,52 +146,49 @@ function MainForm() {
     });
 
     try {
-      let response = await axios.post(
-       `${MasterAPI}/bill/bill/save`,
-        {
-          brand: brand,
-          category: category,
-          department: department,
-          email: EMPEMAIL,
-          employeeCode: EMPCODE,
-          employeeName: EMPNAME,
-          expensesCategory: expenseCategory,
-          expensesType: expenseType,
-          gstAmount: gstAmount,
-          invoiceDate: newDateinv,
-          invoiceDescription: invoiceDescription,
-          invoiceNumber: newInvoiveNumber,
-          location: location,
-          otherPartner: addNewCustomer,
-          partnerNameCode: customerName,
-          payDirectCard: payDirectCardDetails,
-          paymentMethod: paymentMethod,
-          paymentMode: paymentMode,
-          preTaxAmount: preTaxAmount,
-          serviceCategory: serviceCategory,
-          subBrand: subrand,
-          subCatagory1: subCategory1,
-          subCatagory2: subCategory2,
-          totalAmount: totelAmountofbill,
-          reportingManager: reportingManager,
-          userType: USERTYPE,
-          taskId: taskId,
-          paymentDate: newPaymentDate,
-          reimbursementDate: "",
-          paidAmount: updatepaidAmount,
-          transactionDetail: transactionsDetail,
-          customerName: subBrandCustomerName,
-          utrMendatory: utr,
-          gstApplicable: gSTApplicable,
-          tdsApplicable: tDSApplicable,
-          tdsPercentage: tDSpercentage,
-          tdsAmount: tDSAmountTotel,
-          paymentStatus: paymentStatus,
-          invoiceType: invoiceType,
-          netAmount: NetAmount,
-          approvalId: approvalID,
-        }
-      );
+      let response = await axios.post(`${MasterAPI}/bill/bill/save`, {
+        brand: brand,
+        category: category,
+        department: department,
+        email: EMPEMAIL,
+        employeeCode: EMPCODE,
+        employeeName: EMPNAME,
+        expensesCategory: expenseCategory,
+        expensesType: expenseType,
+        gstAmount: gstAmount,
+        invoiceDate: newDateinv,
+        invoiceDescription: invoiceDescription,
+        invoiceNumber: newInvoiveNumber,
+        location: location,
+        otherPartner: addNewCustomer,
+        partnerNameCode: customerName,
+        payDirectCard: payDirectCardDetails,
+        paymentMethod: paymentMethod,
+        paymentMode: paymentMode,
+        preTaxAmount: preTaxAmount,
+        serviceCategory: serviceCategory,
+        subBrand: subrand,
+        subCatagory1: subCategory1,
+        subCatagory2: subCategory2,
+        totalAmount: totelAmountofbill,
+        reportingManager: reportingManager,
+        userType: USERTYPE,
+        taskId: taskId,
+        paymentDate: newPaymentDate,
+        reimbursementDate: "",
+        paidAmount: updatepaidAmount,
+        transactionDetail: transactionsDetail,
+        customerName: subBrandCustomerName,
+        utrMendatory: utr,
+        gstApplicable: gSTApplicable,
+        tdsApplicable: tDSApplicable,
+        tdsPercentage: tDSpercentage,
+        tdsAmount: tDSAmountTotel,
+        paymentStatus: paymentStatus,
+        invoiceType: invoiceType,
+        netAmount: NetAmount,
+        approvalId: approvalID,
+      });
       alert("Bill Invoice save successfully");
       navigate(`/mainform/addItem/${response.data.data.invoiceId}`);
       localStorage.setItem("InvoiceNumber", invoiceNumber);
@@ -236,9 +243,7 @@ function MainForm() {
     // })
 
     const CustomerListData = async () => {
-      let response = await fetch(
-        `${MasterAPI}/bill/dropdown/get/partners/`
-      );
+      let response = await fetch(`${MasterAPI}/bill/dropdown/get/partners/`);
       let data = await response.json();
       setCustomerNameDD(data.data);
     };
@@ -275,26 +280,6 @@ function MainForm() {
         }}
       >
         <ThemeProvider theme={theme}>
-
-          {/* <FormControl sx={{ minWidth: 300, width: 300, bgcolor:"white" }} >
-            <InputLabel id="demo-select-small" required>
-            Is Reimbursement?
-            </InputLabel>
-            <Select
-              sx={{ width: "100%" }}
-              labelId="demo-select-small"
-              id="demo-select-small"
-              // value={whatsappAvailable}
-              label="Is Reimbursement?"
-              onChange={(e) => {
-                setReimbirsment(e.target.value);
-              }}
-            >
-                <MenuItem key={"YES"} value={"YES"}>YES</MenuItem>
-                <MenuItem key={"NO"} value={"NO"}>NO</MenuItem>
-            </Select>
-          </FormControl> */}
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -514,16 +499,6 @@ function MainForm() {
               <TextField {...params} label="Sub Category2" />
             )}
           />
-
-          {/* <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={expenseTypedata}
-      sx={{ width: 300, backgroundColor:"white" }}
-      onChange={(event, newValue)=>{setExpenseType(newValue.label)}}
-      renderInput={(params) => <TextField {...params} label="GST Slab" />}
-        /> */}
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -536,7 +511,6 @@ function MainForm() {
               <TextField required {...params} label="GST Applicable" />
             )}
           />
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -549,7 +523,6 @@ function MainForm() {
               <TextField {...params} required label="TDS Applicable" />
             )}
           />
-
           <TextField
             sx={{ width: 300, backgroundColor: "white" }}
             id="outlined-basic"
@@ -559,7 +532,6 @@ function MainForm() {
             onChange={(e) => setPreTaxAmount(e.target.value)}
             value={preTaxAmount}
           />
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -578,44 +550,6 @@ function MainForm() {
             InputLabelProps={{ shrink: true }}
             value={tDSAmountTotel}
           />
-
-          {/*         
-<Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            sx={{ width: "300px", backgroundColor:"white" }}
-            options={sGSTDATA}
-            onChange={(event, newValue) => {
-             setinvoiceSGST(newValue);
-            }}
-            renderInput={(params) => <TextField  {...params} label="SGST %" />}
-          />
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={cGSTDATA}
-            disabled
-            sx={{ width: "300px", backgroundColor:"white" }}
-            // onChange={(event, newValue) => {
-            //   setinvoiceCGST(newValue);
-            // }}
-           value={invoicesgst}
-            renderInput={(params) => <TextField   {...params} label="CGST %" />}
-          />
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={iGSTDATA}
-            disabled={invoicesgst=="0"?false:true}
-            sx={{ width: "300px", backgroundColor:"white" }}
-            onChange={(event, newValue) => {
-            setinvoiceIGST(newValue);
-            }}
-            renderInput={(params) => <TextField  {...params} label="IGST %" />}
-          /> */}
-
           <TextField
             sx={{ width: 300, backgroundColor: "white" }}
             disabled={gSTApplicable === "Yes" ? false : true}
@@ -645,38 +579,6 @@ function MainForm() {
             // onChange={(e) => setNetAmount(e.target.value)}
             value={NetAmount}
           />
-          {/* <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={gstApplicableData}
-        sx={{ width: 300, backgroundColor:"white" }}
-        onChange={(event, newValue)=>{setGSTApplicable(newValue.label)}}
-        renderInput={(params) => <TextField {...params} label="GST Applicable" />}
-        /> */}
-          {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Type" variant="outlined" onChange={(e) => setTDSType(e.target.value)}
-        value={tDSType}/> */}
-          {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
-        value={tDSAmount}/>
-
-        <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Post TDS Amount" variant="outlined" onChange={(e) => setTDSAmount(e.target.value)}
-        value={tDSAmount}/> */}
-
-          {/* <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-        
-          options={paymentcycleData}
-          sx={{ width: 300, backgroundColor: "white" }}
-          onChange={(event, newValue) => {
-            setPaymentCycle(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField {...params} 
-           
-            label="Payment Cycle Days" />
-          )}
-        /> */}
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -701,16 +603,6 @@ function MainForm() {
               <TextField {...params} required label="Payment Method" />
             )}
           />
-
-          {/* <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          label="Pay Direct Card Details"
-          variant="outlined"
-          onChange={(e) => setPayDirectCardDetails(e.target.value)}
-          value={payDirectCardDetails}
-        /> */}
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -739,16 +631,6 @@ function MainForm() {
             )}
           />
 
-          {/* <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          required
-          label="Partner/Customer Name"
-          variant="outlined"
-          onChange={(e) => setCustomerName(e.target.value)}
-          value={customerName}
-        /> */}
-
           <TextField
             sx={{ width: 300, backgroundColor: "white" }}
             id="outlined-basic"
@@ -759,42 +641,6 @@ function MainForm() {
             value={addNewCustomer}
           />
 
-          {/* <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={customerNameDD}
-          sx={{ width: 300, backgroundColor: "white" }}
-          onChange={(event, newValue) => {
-            setCustomerName(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField {...params}   required label="Partner/Customer Name" />
-          )}
-        /> */}
-
-          {/* <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={customerCodeDD}
-          sx={{ width: 300, backgroundColor: "white" }}
-          onChange={(event, newValue) => {
-            setCustomerCode(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField {...params} label="Partner/Customer Code" />
-          )}
-        /> */}
-
-          {/* <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          label="Partner/Customer Code"
-          disabled
-          variant="outlined"
-          onChange={(e) => setCustomerCode(e.target.value)}
-          value={customerCode}
-        />  */}
-
           <TextField
             sx={{ width: 300, backgroundColor: "white" }}
             id="outlined-basic"
@@ -804,63 +650,6 @@ function MainForm() {
             onChange={(e) => setInvoiceDescription(e.target.value)}
             value={invoiceDescription}
           />
-          {/* <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          label="Service Category"
-          variant="outlined"
-          required
-          onChange={(e) => setServiceCategory(e.target.value)}
-          value={serviceCategory}
-        /> */}
-
-          {/* <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={ServiceCategoryDD}
-          sx={{ width: 300, backgroundColor: "white" }}
-          onChange={(event, newValue) => {
-            setServiceCategory(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField {...params} required label="Service Category" />
-          )}
-        /> */}
-
-          {/* <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          label="Paid Amount"
-          variant="outlined"
-          onChange={(e) => setUpdatepaidAmount(e.target.value)}
-          value={updatepaidAmount}
-        />
-
-        <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          label="Payment Date"
-          variant="outlined"
-          onChange={(e) => setreimbursementpaymentDate(e.target.value)}
-          value={reimbursementpaymentDate}
-        />
-        <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          label="Transactions Detail"
-          variant="outlined"
-          onChange={(e) => setTransactionsDetail(e.target.value)}
-          value={transactionsDetail}
-        />
-
-        <TextField
-          sx={{ width: 300, backgroundColor: "white" }}
-          id="outlined-basic"
-          label="Payment Status"
-          variant="outlined"
-          onChange={(e) => setPaymentStatus(e.target.value)}
-          value={paymentStatus}
-        /> */}
 
           <TextField
             sx={{ width: 300, backgroundColor: "white" }}
@@ -881,14 +670,6 @@ function MainForm() {
             value={taskId}
           />
         </ThemeProvider>
-
-        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Invoice Attachment" variant="outlined"
-        //onChange={(e) => setInvoiceAttachment(e.target.value)}
-         //  value={invoiceAttachment}
-           /> */}
-        {/* <input type="file"  name="file" onChange={changeHandler}/> */}
-        {/* <TextField sx={{ width: 300, backgroundColor:"white" }} id="outlined-basic" label="Payment Status" variant="outlined" onChange={(e) => setPaymentStatus(e.target.value)}
-         value={paymentStatus} /> */}
       </Box>
 
       <Box textAlign={"center"} mt={2}>
@@ -909,8 +690,8 @@ function MainForm() {
             invoiceType &&
             paymentStatus &&
             gSTApplicable &&
-            tDSApplicable&&
-            customerName&&
+            tDSApplicable &&
+            customerName &&
             invoiceDescription
               ? false
               : true
@@ -968,7 +749,6 @@ const paymentMode1Data = [
   "Cheque",
 ];
 
-
 const paymentMethodData = [
   { label: "Employee" },
   { label: "Bank Transfer - Kotak" },
@@ -1013,7 +793,6 @@ const ServiceCategoryDD = [
   "Other sanitation services",
   "Services provided by restaurant",
 ];
-
 
 const PayDirectCardDetailsNumberDD = [
   "N/A",

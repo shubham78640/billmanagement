@@ -379,7 +379,6 @@ function ApprovalAdminDataTabel() {
           if ( params.value === "Discuss") {
             return 'discuss';
           }
-          // return params.value ==="Reject" ?  'accept': 'reject';
         }}
         
         experimentalFeatures={{ newEditingApi: true }}

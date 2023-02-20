@@ -468,16 +468,16 @@ function BillTableData() {
           components={{ Toolbar: GridToolbar }}
           //==============On Export Csv Click event ============
           rowHeight={26}
-          initialState={{
-            sorting: {
-              sortModel: [
-                {
-                  field: 'submissionDate',
-                  sort: 'desc',
-                },
-              ],
-            },
-          }}
+          // initialState={{
+          //   sorting: {
+          //     sortModel: [
+          //       {
+          //         field: 'submissionDate',
+          //         sort: 'desc',
+          //       },
+          //     ],
+          //   },
+          // }}
           getCellClassName={(params) => {
             if ( params.value === "Reject") {
               return 'paid';
