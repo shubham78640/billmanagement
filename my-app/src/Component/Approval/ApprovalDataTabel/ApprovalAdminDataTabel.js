@@ -37,71 +37,82 @@ function ApprovalAdminDataTabel() {
   const columns = [
     {
       field: "approvalId",
-      headerName: " Approval Id",
-      width:100,
-    //   width: 70,
+      headerName: "Approval Id",
+      width:120,
       editable: true,
+      description:"",
     },
     {
       field: "employeeName",
       headerName: "Employee Name",
       width: 110,
       editable: true,
+      description:"",
     },
     {
       field: "employeeCode",
       headerName: "Employee Code",
       width: 80,
       editable: true,
+      description:"",
     },
     {
       field: "email",
       headerName: "Email",
       width: 110,
+      type: "text",
       editable: true,
+      description:"Email",
     },
     {
       field: "reportingManager",
       headerName: "Reporting Manager",
-      sortable: false,
+      sortable: true,
       width: 110,
+      description:"Reporting Manager",
     },
 
     {
       field: "brand",
       headerName: "Brand",
-      width: 100,
+      width: 80,
       editable: true,
+      description:"Brand",
     },
     {
       field: "subBrand",
       headerName: "Sub Brand",
-      width: 110,
+      width: 100,
       editable: true,
+      description:"Sub Brand",
     },
     {
       field: "department",
       headerName: "Department",
       width: 130,
       editable: true,
+      description:"Department",
     },
     {
       field: "location",
       headerName: "Location",
       width: 140,
       editable: true,
+      description:"Location",
     },
     {
       field: "provisionAmount",
       headerName: "Provision Amount",
       width: 130,
       editable: true,
+      description:"Provision Amount",
     },
     {
       field: "typeOfPurchase",
       headerName: "Type Of Purchase",
       width: 140,
       editable: true,
+      description:"Type Of Purchase",
     },
 
     {
@@ -109,54 +120,63 @@ function ApprovalAdminDataTabel() {
       headerName: "Reason Of Purchase",
       width: 140,
       editable: true,
+      description:"Reason Of Purchase",
     },
     {
         field: "paymentMode",
         headerName: "Payment Mode",
         width: 140,
         editable: true,
+        description:"Payment Mode",
       },
       {
         field: "paymentMethod",
         headerName: "Payment Method",
         width: 140,
         editable: true,
+        description:"Payment Method",
       },
       {
         field: "paymentTags",
-        headerName: "payment Tag",
+        headerName: "Payment Tag",
         width: 140,
         editable: true,
+        description:"Payment Tag",
       },
       {
         field: "urgentPaymentRemarks",
         headerName: "Urgent Payment Remarks",
         width: 140,
         editable: true,
+        description:"Urgent Payment Remarks",
       },
     {
       field: "purchaseDescription",
       headerName: "Purchase Description",
       width: 140,
       editable: true,
+      description:"Purchase Description",
     },
     {
       field: "purchaseDate",
       headerName: "Purchase Date",
       width: 140,
       editable: true,
+      description:"Purchase Date",
     },
     {
       field: "submissionDate",
       headerName: "Submission Date",
       width: 140,
       editable: true,
+      description:"Submission Date",
     },
     {
       field: "approvalRemarks",
       headerName: "Approval Remarks",
       width: 140,
       editable: true,
+      description:"Approval Remarks",
     },
     
     {
@@ -164,36 +184,42 @@ function ApprovalAdminDataTabel() {
       headerName: "HOD Approval",
       width: 140,
       editable: true,
+      description:"HOD Approval Status",
     },
     {
       field: "hodRemarks",
       headerName: "HOD Remarks",
       width: 140,
       editable: true,
+      description:"HOD Remarks",
     },
     {
       field: "hodAapprovalDate",
       headerName: "HOD Approval Date",
       width: 160,
       editable: true,
+      description:"HOD Approval Date",
     },
     {
       field: "finalApproval",
       headerName: "Final Approval",
       width: 140,
       editable: true,
+      description:"Final Approval Status",
     },
     {
       field: "finalRemarks",
       headerName: "Final Remarks",
       width: 140,
       editable: true,
+      description:"Final Remarks",
     },
     {
       field: "finalApprovalDate",
       headerName: "Final Approval Date",
       width: 160,
       editable: true,
+      description:"Final Approval Date",
     },
 
     {
@@ -201,18 +227,21 @@ function ApprovalAdminDataTabel() {
         headerName: "Payment Status",
         width: 140,
         editable: true,
+        description:"Payment Status",
       },
     {
         field: "paidAmount",
         headerName: "Paid Amount",
         width: 140,
         editable: true,
+        description:"Paid Amount",
       },
       {
         field: "transactionDetails",
         headerName: "Transaction Details",
         width: 140,
         editable: true,
+        description:"Transaction Details",
       },
     
       {
@@ -220,14 +249,15 @@ function ApprovalAdminDataTabel() {
         headerName: "Rembursement Payment Date",
         width: 140,
         editable: true,
+        description:"Rembursement Payment Date",
       },
       
   {
       field: "hodapproveStatus",
       headerName: "HOD Approval",
-      description: "This column has a value getter and is not sortable.",
+      description: "HOD Approval",
       sortable: false,
-      width: 162,
+      width: 145,
       type: "action",
       renderCell: () => (
         <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
@@ -238,9 +268,9 @@ function ApprovalAdminDataTabel() {
       {
       field: "finalapproveStatus",
       headerName: "Final Approval",
-      description: "This column has a value getter and is not sortable.",
+      description: "Final Approval",
       sortable: false,
-      width: 162,
+      width: 145,
       type: "action",
       renderCell: () => (
         <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
@@ -252,9 +282,9 @@ function ApprovalAdminDataTabel() {
     {
         field: "approvalpaymentupdate",
         headerName: "Payment Approval",
-        description: "This column has a value getter and is not sortable.",
+        description: "Payment Approval",
         sortable: false,
-        width: 162,
+        width: 157,
         type: "action",
         renderCell: () => (
           <p style={{ color: "blue", fontWeight: "600", cursor: "pointer" }}>
@@ -300,10 +330,18 @@ function ApprovalAdminDataTabel() {
           backgroundColor: "#f2f2f2",
           minHeight: "620px",
           maxHeight: "100%",
-        //   '& .MuiDataGrid-cell--editable': {
-        //     bgcolor: (theme) =>
-        //     'green',
-        //   },
+          '& .discuss': {
+            backgroundColor: '#fff44f',
+            color: '#1a3e72',
+          },
+          '& .accept': {
+            backgroundColor: '#3CB371',
+            color: '#EFEFEF', 
+          },
+          '& .reject': {
+             backgroundColor: '#DD6464',
+            color: '#EFEFEF',
+          },
         }}
       >
         <DataGrid
@@ -331,6 +369,20 @@ function ApprovalAdminDataTabel() {
           
           }}
         //   isCellEditable={(params) => (params.row.hodApproval === "") }
+        getCellClassName={(params) => {
+          if ( params.value === "Reject") {
+            return 'reject';
+          }
+          if ( params.value === "Accept") {
+            return 'accept';
+          }
+          if ( params.value === "Discuss") {
+            return 'discuss';
+          }
+          // return params.value ==="Reject" ?  'accept': 'reject';
+        }}
+        
+        experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     </>

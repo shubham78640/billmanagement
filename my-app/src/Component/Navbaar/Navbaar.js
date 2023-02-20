@@ -45,11 +45,7 @@ function Navbaar() {
       alert(error);
     }
   };
-
-  //http://13.126.160.155:8088/bill/item/get/${EMPCODE}
-
   let navigate = useNavigate();
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -118,7 +114,7 @@ function Navbaar() {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onMouseOver={handleClick}>
-            <Avatar alt={EMPNAME[0]}  sx={{ width: 45, height: 45, border:"2px solid white"  }} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
+            <Avatar alt={EMPNAME[0]}  sx={{ width: 45, height: 45, border:"2px solid white"  }} src={`${MasterAPI}/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
         </Box>
 
         <Menu
@@ -141,7 +137,7 @@ function Navbaar() {
                 padding: "0px",
               }}
             >
-             <Avatar alt="Remy Sharp" sx={{ width: 53, height: 53,border:"2px solid white"}} src={`http://13.126.160.155:8088/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
+             <Avatar alt="Remy Sharp" sx={{ width: 53, height: 53,border:"2px solid white"}} src={`${MasterAPI}/bill/profile/get/profile/?employeeCode=${EMPCODE}`} />
 
             </Box>
             <Box

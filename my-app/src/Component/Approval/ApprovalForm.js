@@ -250,6 +250,7 @@ function ApprovalForm() {
             <DesktopDatePicker
               label="Aproximate Purchase Date"
               value={aproximatePurchaseDate}
+              disablePast
               onChange={(newValue) => {
                 setAproximatePurchaseDate(newValue);
               }}
