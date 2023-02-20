@@ -435,7 +435,6 @@ function BillTableData() {
           minHeight: "636px",
           maxHeight: "100%",
           '& .tobepaid': {
-            // backgroundColor: '#E2E2E2',
             color: '#1a3e72',
           },
           '& .paid': {

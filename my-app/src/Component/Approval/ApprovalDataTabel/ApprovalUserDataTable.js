@@ -49,7 +49,6 @@ function ApprovalUserDataTable() {
       width: 110,
       
     },
-
     {
       field: "brand",
       headerName: "Brand",

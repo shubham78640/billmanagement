@@ -28,7 +28,6 @@ function BillDataTableUser() {
       // navigate(`${params.row.invoiceId}`)
     }
   };
-
   const columns = [
     {
       field: "invoiceId",

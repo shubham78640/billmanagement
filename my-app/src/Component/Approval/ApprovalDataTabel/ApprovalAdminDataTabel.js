@@ -17,8 +17,6 @@ function ApprovalAdminDataTabel() {
     event // MuiEvent<React.MouseEvent<HTMLElement>>
     // GridCallbackDetails
   ) => {
-    //  navigate(`admin/${params.row.invoiceId}`)
-
     if (params.field === "finalapproveStatus") {
       navigate(`/approvaladmindatatable/statusbyadmin/${params.row.approvalId}`);
     }
@@ -360,13 +358,7 @@ function ApprovalAdminDataTabel() {
                   sort: 'desc',
                 },
               ],
-            },
-            // filter: {
-            //     filterModel: {
-            //       items: [{ columnField: 'reportingManager', operatorValue: '=', value: 'ReportingManager' }],
-            //     },
-            //   },
-          
+            },   
           }}
         //   isCellEditable={(params) => (params.row.hodApproval === "") }
         getCellClassName={(params) => {
