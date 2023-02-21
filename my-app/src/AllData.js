@@ -1,6 +1,6 @@
 export const Brand_Name = [{ brand: "" }];
 
-export const MasterAPI = "http://api.pinch.co.in:8088";
+export const MasterAPI = "https://api.pinch.co.in:8443";
 
 export const Brand = [
   {
